@@ -1,10 +1,12 @@
 /* Luna Sleep service worker. Bump VERSION whenever index.html changes so installed copies refresh. */
-const VERSION='luna-sleep-v4';
+const VERSION='luna-sleep-v5';
 const CORE=['./','index.html','manifest.webmanifest','icon-192.png','icon-512.png','maskable-512.png','apple-touch-icon.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(VERSION).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==VERSION).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{const r=e.request;if(r.method!=='GET')return;const u=new URL(r.url);
  const ok=u.origin===location.origin||u.hostname==='fonts.googleapis.com'||u.hostname==='fonts.gstatic.com';if(!ok)return;
+ if(r.mode==='navigate'||u.pathname.endsWith('/index.html')||u.pathname.endsWith('/')){
+  e.respondWith(caches.open(VERSION).then(async c=>{try{const res=await fetch(r,{cache:'no-store'});if(res&&res.status===200)c.put(r,res.clone());return res}catch(err){return (await c.match(r,{ignoreSearch:true}))||(await c.match('index.html'))||Response.error()}}));return}
  e.respondWith(caches.open(VERSION).then(async c=>{const hit=await c.match(r,{ignoreSearch:true});
   const net=fetch(r).then(res=>{if(res&&(res.status===200||res.type==='opaque'))c.put(r,res.clone());return res}).catch(()=>hit);
   return hit||net}))});

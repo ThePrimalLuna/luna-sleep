@@ -532,6 +532,9 @@ html[data-skin="Black"]{--selc:#ffffff}
 .helpbox{display:grid;gap:8px}.helpbox textarea{width:100%;box-sizing:border-box;min-height:84px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;resize:vertical}.helpbox .chk{display:flex;gap:8px;align-items:center;font-size:13px}.helpbox .fine{margin:0;font-size:12px;color:var(--mute)}
 .aboutbox{display:grid;gap:8px}.aboutbox p{margin:0}
 .aboutdlg{position:relative;max-width:640px;width:100%;background:var(--surface);color:var(--ink);border-radius:18px;padding:20px 18px 22px;display:grid;gap:12px;outline:0;margin:auto 0}.aboutdlg h2{margin:0;font-size:26px}.aboutdlg p{margin:0;line-height:1.55}.linkbtn{background:none;border:0;padding:0;font:inherit;color:var(--tw-gold,var(--accent));text-decoration:underline;cursor:pointer}#about{z-index:110}
+.foot{margin-top:26px;padding:16px 0 96px;border-top:1px solid var(--line);display:grid;gap:10px;justify-items:center;text-align:center}.footbtns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}.foot .fine{margin:0;font-size:12px;color:var(--mute)}
+.sosfab{touch-action:none;cursor:grab;-webkit-user-select:none;user-select:none}.sosfab.dragging{cursor:grabbing;transition:none}
+#help-dlg,#io-dlg{z-index:110}#io-dlg textarea{width:100%;box-sizing:border-box}
 </style>
 
 <div class="wrap">
@@ -546,9 +549,6 @@ html[data-skin="Black"]{--selc:#ffffff}
       <button type="button" class="btn" id="adult-btn" aria-pressed="false"></button>
       <button type="button" class="btn" id="trig-btn" aria-pressed="false"></button>
       <button type="button" class="btn" id="inst-btn" hidden>Install app</button>
-      <button type="button" class="btn" id="den-open">Welcome and safety</button>
-      <button type="button" class="btn" id="about-open">About this app</button>
-      <a class="btn" id="pat-link" href="https://www.patreon.com/PrimalLunaSleep" target="_blank" rel="noopener noreferrer">Join on Patreon &#8599;</a>
       <div class="seg" role="group" aria-label="View mode">
         <button type="button" id="m-listener" aria-pressed="true">Listener view</button>
         <button type="button" id="m-tinker" aria-pressed="false">Tinker mode</button>
@@ -565,7 +565,7 @@ html[data-skin="Black"]{--selc:#ffffff}
   </div>
 
   <div class="backup-nag" id="nag" hidden></div>
-  <button type="button" class="sosfab" id="sos-open" aria-haspopup="dialog" aria-label="Emergency Exit" title="Emergency Exit"><b>Emergency Exit</b><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M9 2h6v7h7v6h-7v7H9v-7H2V9h7z"/></svg></button>
+  <button type="button" class="sosfab" id="sos-open" aria-haspopup="dialog" aria-label="Emergency Exit" title="Emergency Exit (drag to move)"><b>Emergency Exit</b><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M9 2h6v7h7v6h-7v7H9v-7H2V9h7z"/></svg></button>
   <div class="tabs" role="tablist" id="tabs"></div>
   <div class="main">
     <div class="col" id="view"></div>
@@ -573,33 +573,16 @@ html[data-skin="Black"]{--selc:#ffffff}
     <aside class="side" id="side" aria-live="polite"></aside>
   </div>
 
-  <section class="io helpbox" id="help">
-    <h2 style="font-size:18px">Help and bug reports</h2>
-    <p class="note">Something not working, or a part of the app that confuses you? Tell me and I will look into it.</p>
-    <textarea id="bug-text" rows="4" maxlength="2000" aria-label="Describe the problem" placeholder="What happened? What were you doing, and what did you expect to see?"></textarea>
-    <label class="chk"><input type="checkbox" id="bug-ctx"> Include my device and browser info (helps me fix it)</label>
-    <div class="acts">
-      <button type="button" class="btn primary" id="bug-send" hidden>Send bug report</button>
-      <a class="btn" id="bug-patreon" href="https://www.patreon.com/PrimalLunaSleep" target="_blank" rel="noopener noreferrer">Message me on Patreon &#8599;</a>
-      <span id="bug-msg" class="mono" style="font-size:12px;color:var(--mute)"></span>
+  <footer class="foot" id="foot">
+    <div class="footbtns">
+      <button type="button" class="btn" id="den-open">Welcome and safety</button>
+      <button type="button" class="btn" id="about-open">About this app</button>
+      <button type="button" class="btn" id="help-open">Help and bug reports</button>
+      <button type="button" class="btn" id="io-open">Save and restore</button>
+      <a class="btn" id="pat-link" href="https://www.patreon.com/PrimalLunaSleep" target="_blank" rel="noopener noreferrer">Join on Patreon &#8599;</a>
     </div>
-    <p class="fine">Reports go to the creator only. Please do not include anything personal you do not want to share.</p>
-  </section>
-
-  <section class="io" id="io">
-    <h2 style="font-size:18px">Save and restore</h2>
-    <p class="note">Your progress, saved ideas and any tinkering stay in this browser and this device only. Clearing your browser data erases them, and they do not move to another phone or computer by themselves. Save a backup file now and then, and restore it anywhere.</p>
-    <textarea id="io-text" aria-label="Backup text" spellcheck="false"></textarea>
-    <div class="acts">
-      <button type="button" class="btn primary" id="io-save">Save backup file</button>
-      <label class="btn" for="io-file" style="cursor:pointer">Restore from file</label><input type="file" id="io-file" accept=".json,application/json,text/plain" hidden>
-      <button type="button" class="btn" id="io-copy">Copy backup text</button>
-      <button type="button" class="btn" id="io-load">Restore from text</button>
-      <button type="button" class="btn" id="io-reset">Reset my progress</button>
-      <button type="button" class="btn" id="io-reset-edits" hidden>Reset all edits</button>
-      <span id="io-msg" class="mono" style="font-size:12px;color:var(--mute)"></span>
-    </div>
-  </section>
+    <p class="fine">The Emergency Exit button can be dragged anywhere on the screen. <button type="button" class="linkbtn" id="sos-reset">Put it back</button></p>
+  </footer>
 </div>
 
 
@@ -656,6 +639,38 @@ html[data-skin="Black"]{--selc:#ffffff}
     <button type="button" class="denenter" id="den-enter" disabled>Enter the Den</button>
     <p class="denfoot">You can reread this any time from &ldquo;Welcome and safety&rdquo; at the top of the app.</p>
   </div>
+</div>
+<div class="sos" id="help-dlg" role="dialog" aria-modal="true" aria-labelledby="help-h" hidden>
+  <div class="aboutdlg helpbox" id="help-dlg-box" tabindex="-1">
+    <button type="button" class="btn sosx" id="help-close">Close</button>
+    <h2 id="help-h">Help and bug reports</h2>
+    <p class="note">Something not working, or a part of the app that confuses you? Tell me and I will look into it.</p>
+    <textarea id="bug-text" rows="4" maxlength="2000" aria-label="Describe the problem" placeholder="What happened? What were you doing, and what did you expect to see?"></textarea>
+    <label class="chk"><input type="checkbox" id="bug-ctx"> Include my device and browser info (helps me fix it)</label>
+    <div class="acts">
+      <button type="button" class="btn primary" id="bug-send" hidden>Send bug report</button>
+      <a class="btn" id="bug-patreon" href="https://www.patreon.com/PrimalLunaSleep" target="_blank" rel="noopener noreferrer">Message me on Patreon &#8599;</a>
+      <span id="bug-msg" class="mono" style="font-size:12px;color:var(--mute)"></span>
+    </div>
+    <p class="fine">Reports go to the creator only. Please do not include anything personal you do not want to share.</p>
+    </div>
+</div>
+<div class="sos" id="io-dlg" role="dialog" aria-modal="true" aria-labelledby="io-h" hidden>
+  <div class="aboutdlg " id="io-dlg-box" tabindex="-1">
+    <button type="button" class="btn sosx" id="io-close">Close</button>
+    <h2 id="io-h">Save and restore</h2>
+    <p class="note">Your progress, saved ideas and any tinkering stay in this browser and this device only. Clearing your browser data erases them, and they do not move to another phone or computer by themselves. Save a backup file now and then, and restore it anywhere.</p>
+    <textarea id="io-text" aria-label="Backup text" spellcheck="false"></textarea>
+    <div class="acts">
+      <button type="button" class="btn primary" id="io-save">Save backup file</button>
+      <label class="btn" for="io-file" style="cursor:pointer">Restore from file</label><input type="file" id="io-file" accept=".json,application/json,text/plain" hidden>
+      <button type="button" class="btn" id="io-copy">Copy backup text</button>
+      <button type="button" class="btn" id="io-load">Restore from text</button>
+      <button type="button" class="btn" id="io-reset">Reset my progress</button>
+      <button type="button" class="btn" id="io-reset-edits" hidden>Reset all edits</button>
+      <span id="io-msg" class="mono" style="font-size:12px;color:var(--mute)"></span>
+    </div>
+    </div>
 </div>
 <div class="sos" id="about" role="dialog" aria-modal="true" aria-labelledby="about-h" hidden>
   <div class="aboutdlg" id="about-box" tabindex="-1">
@@ -819,7 +834,7 @@ function renderChrome(){
 }
 function renderNag(){const n=$('nag');const heard=Object.keys(S.done).length+Object.keys(S.kdone||{}).length+S.ideas.length;
   const stale=!S.lastBackup||Date.now()-S.lastBackup>14*864e5;
-  if(heard>=5&&stale&&!S.nagHide){n.hidden=false;n.textContent='';n.append(el('span',null,'You have '+heard+' things saved in this browser only. Save a backup file so you never lose them.'),btn('Save backup',()=>{$('io').scrollIntoView({behavior:'smooth'});$('io-save').focus()},'small primary'),btn('Later',()=>{S.nagHide=true;render()},'small'))}else n.hidden=true}
+  if(heard>=5&&stale&&!S.nagHide){n.hidden=false;n.textContent='';n.append(el('span',null,'You have '+heard+' things saved in this browser only. Save a backup file so you never lose them.'),btn('Save backup',()=>{$('io-open').click()},'small primary'),btn('Later',()=>{S.nagHide=true;render()},'small'))}else n.hidden=true}
 const TAIL=' Headphones, never while driving or operating machinery. Entertainment and somatic regulation, not medical advice.';
 const ALBUM_NOTE={
 White:['White · The Foundation','Ten short tracks of 13 to 16 minutes, all out now. Hear all ten before anything else unlocks. Every one is Standard consent, so this is the gentlest place to start, and several double as the off-ramps you come back to after heavier tracks.'],
@@ -1482,6 +1497,27 @@ function close(){ab.hidden=true;if($('den').hidden)document.body.style.overflow=
 $('about-open').onclick=open;$('about-open2').onclick=open;$('about-close').onclick=close;
 ab.addEventListener('click',e=>{if(e.target===ab)close()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!ab.hidden){e.stopPropagation();close()}},true)})();
+
+(function(){[['help-dlg','help-open','help-close','help-box'],['io-dlg','io-open','io-close','io-box']].forEach(([d,o,c])=>{const dl=$(d);let from=null;
+function open(){from=document.activeElement;dl.hidden=false;document.body.style.overflow='hidden';dl.scrollTop=0;$(d+'-box').scrollTop=0;$(d+'-box').focus()}
+function close(){dl.hidden=true;if($('den').hidden&&$('about').hidden)document.body.style.overflow='';if(from&&from.focus)try{from.focus()}catch(e){}}
+$(o).onclick=open;$(c).onclick=close;dl.addEventListener('click',e=>{if(e.target===dl)close()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!dl.hidden){e.stopPropagation();close()}},true)})})();
+(function(){const f=$('sos-open'),PK='lunaSleep.sosPos';let pos=null,drag=null,moved=false;
+try{pos=JSON.parse(localStorage.getItem(PK)||'null')}catch(e){}
+function lim(){return{w:Math.max(0,innerWidth-f.offsetWidth-6),h:Math.max(0,innerHeight-f.offsetHeight-6)}}
+function put(x,y){const L=lim();x=Math.min(L.w,Math.max(6,x));y=Math.min(L.h,Math.max(6,y));f.style.left=x+'px';f.style.top=y+'px';f.style.right='auto';f.style.bottom='auto';return{x,y}}
+function apply(){if(!pos)return;const L=lim();put(pos.fx*L.w,pos.fy*L.h)}
+function keep(x,y){const L=lim();pos={fx:L.w?x/L.w:0,fy:L.h?y/L.h:0};try{localStorage.setItem(PK,JSON.stringify(pos))}catch(e){}}
+f.addEventListener('pointerdown',e=>{if(e.button>0)return;const r=f.getBoundingClientRect();drag={id:e.pointerId,sx:e.clientX,sy:e.clientY,ox:r.left,oy:r.top};moved=false;try{f.setPointerCapture(e.pointerId)}catch(_){}});
+f.addEventListener('pointermove',e=>{if(!drag||e.pointerId!==drag.id)return;const dx=e.clientX-drag.sx,dy=e.clientY-drag.sy;if(!moved&&Math.hypot(dx,dy)<8)return;moved=true;f.classList.add('dragging');put(drag.ox+dx,drag.oy+dy)});
+function end(e){if(!drag||e.pointerId!==drag.id)return;drag=null;f.classList.remove('dragging');if(moved){const r=f.getBoundingClientRect();keep(r.left,r.top)}}
+f.addEventListener('pointerup',end);f.addEventListener('pointercancel',end);
+f.addEventListener('click',e=>{if(moved){e.stopImmediatePropagation();e.preventDefault();moved=false}},true);
+f.addEventListener('keydown',e=>{const d={ArrowLeft:[-24,0],ArrowRight:[24,0],ArrowUp:[0,-24],ArrowDown:[0,24]}[e.key];if(!d||!e.shiftKey)return;e.preventDefault();const r=f.getBoundingClientRect();const p=put(r.left+d[0],r.top+d[1]);keep(p.x,p.y)});
+addEventListener('resize',apply);apply();
+$('sos-reset').onclick=()=>{pos=null;try{localStorage.removeItem(PK)}catch(e){}f.style.left=f.style.top=f.style.bottom=f.style.right=''};
+})();
 (function(){const den=$('den'),ack=$('den-ack'),go=$('den-enter');let from=null;const K='lunaSleep.denAck';
 (function(){const s=$('den-stars');let h='';const r=(a,b)=>(a+Math.random()*(b-a)).toFixed(1);
   for(let i=0;i<9;i++)h+='<span class="sh" style="--x:'+r(15,105)+'%;--d:'+r(2.4,4.2)+'s;--w:'+r(0,9)+'s"></span>';
@@ -1511,6 +1547,16 @@ window.addEventListener('appinstalled',()=>{btn.hidden=true});
 btn.onclick=async()=>{if(dp){dp.prompt();try{await dp.userChoice}catch(e){}dp=null;return}
  const m=ios?'On iPhone or iPad: tap the Share button in Safari, then "Add to Home Screen".':'On Android: open the browser menu (the three dots) and choose "Install app" or "Add to Home screen". On a computer: use the install icon in the address bar.';
  let n=document.getElementById('inst-help');if(!n){n=document.createElement('p');n.id='inst-help';n.className='note';btn.closest('.topr').parentNode.insertAdjacentElement('afterend',n)}n.textContent=m;n.hidden=false}})();
-if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
+if('serviceWorker' in navigator){window.addEventListener('load',()=>{
+ const had=!!navigator.serviceWorker.controller;let shown=false;
+ function bar(){if(shown)return;shown=true;const d=document.createElement('div');d.setAttribute('role','status');
+  d.style.cssText='position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:120;max-width:92vw;display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center;padding:10px 14px;border-radius:12px;border:1px solid var(--line,#444);background:var(--surface,#161a2e);color:var(--ink,#fff);box-shadow:0 6px 22px rgba(0,0,0,.4)';
+  const s=document.createElement('span');s.textContent='Luna Sleep was updated.';const b=document.createElement('button');b.type='button';b.className='btn primary';b.textContent='Reload to see it';b.onclick=()=>location.reload();
+  const l=document.createElement('button');l.type='button';l.className='btn';l.textContent='Later';l.onclick=()=>d.remove();d.append(s,b,l);document.body.append(d)}
+ navigator.serviceWorker.addEventListener('controllerchange',()=>{if(had)bar()});
+ navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(reg=>{
+  const chk=()=>{try{reg.update()}catch(e){}};chk();
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')chk()});
+  setInterval(chk,60*60*1000)}).catch(()=>{})})}
 </script>
 </body></html>
