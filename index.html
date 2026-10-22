@@ -535,7 +535,7 @@ html[data-skin="Black"]{--selc:#ffffff}
 .aboutdlg{position:relative;max-width:640px;width:100%;background:var(--surface);color:var(--ink);border-radius:18px;padding:20px 18px 22px;display:grid;gap:12px;outline:0;margin:auto 0}.aboutdlg h2{margin:0;font-size:26px}.aboutdlg p{margin:0;line-height:1.55}.linkbtn{background:none;border:0;padding:0;font:inherit;color:var(--tw-gold,var(--accent));text-decoration:underline;cursor:pointer}#about{z-index:110}
 .foot{margin-top:26px;padding:16px 0 96px;border-top:1px solid var(--line);display:grid;gap:10px;justify-items:center;text-align:center}.footbtns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}.foot .fine{margin:0;font-size:12px;color:var(--mute)}
 .sosfab{touch-action:none;cursor:grab;-webkit-user-select:none;user-select:none}.sosfab.dragging{cursor:grabbing;transition:none}
-#help-dlg,#io-dlg,#new-dlg{z-index:110}#new-dlg h3{margin:14px 0 4px}#new-dlg ul{margin:0;padding-left:20px;display:grid;gap:6px}#io-dlg textarea{width:100%;box-sizing:border-box}
+#help-dlg,#io-dlg,#new-dlg,#set-dlg{z-index:110}#set-dlg .setrow{padding:12px 0;border-top:1px solid var(--line);display:grid;gap:8px;justify-items:start}#set-dlg .setrow h3{margin:0}#set-theme .themebar{flex-wrap:wrap}#set-theme select{min-width:240px;max-width:100%}#set-dlg .setrow .note{margin:0}html.calm *,html.calm *::before,html.calm *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}html.calm .denstars{display:none}#new-dlg h3{margin:14px 0 4px}#new-log h3:first-child{margin-top:4px}#new-log ul{margin:0}#new-dlg ul{margin:0;padding-left:20px;display:grid;gap:6px}#io-dlg textarea{width:100%;box-sizing:border-box}
 .lane.X{border:1px solid var(--line);background:var(--surface2)}.lane.X .chain{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 .customp .paths{margin:0}.customed{gap:10px}.customed input[type=text],.customed input[type=search]{width:100%;box-sizing:border-box;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit}.cgrp{border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--surface2)}.cgrp summary{cursor:pointer;font-weight:600}.clist{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:4px 12px;margin-top:8px}.cit{display:flex;gap:6px;align-items:baseline;font-size:13px;min-width:0}.cit .id{font-family:var(--f-mono,monospace);font-size:11px;color:var(--mute);flex:0 0 auto}.cit[hidden]{display:none}
 .foot{order:20}
@@ -549,10 +549,7 @@ html[data-skin="Black"]{--selc:#ffffff}
       <p>Your guide to the whole Luna Sleep catalog. See what to play next, search every track, try color combinations, and build sessions of your own.</p>
     </div>
     <div class="topr">
-      <div class="themebar"><label for="theme-sel">Theme</label><select id="theme-sel"></select></div>
-      <button type="button" class="btn" id="adult-btn" aria-pressed="false"></button>
-      <button type="button" class="btn" id="trig-btn" aria-pressed="false"></button>
-      <button type="button" class="btn" id="inst-btn" hidden>Install app</button>
+      <button type="button" class="btn" id="set-open">&#9881; Settings</button>
       <div class="seg" role="group" aria-label="View mode">
         <button type="button" id="m-listener" aria-pressed="true">Listener view</button>
         <button type="button" id="m-tinker" aria-pressed="false">Tinker mode</button>
@@ -662,26 +659,26 @@ html[data-skin="Black"]{--selc:#ffffff}
     <p class="fine">Reports go to the creator only. Please do not include anything personal you do not want to share.</p>
     </div>
 </div>
+<div class="sos" id="set-dlg" role="dialog" aria-modal="true" aria-labelledby="set-h" hidden>
+  <div class="aboutdlg helpbox" id="set-dlg-box" tabindex="-1">
+    <button type="button" class="btn sosx" id="set-close">Close</button>
+    <h2 id="set-h">Settings</h2>
+    <p class="note">These save on this device only.</p>
+    <div class="setrow"><h3>Theme</h3><p class="note">Colors the app to match an album, or follows your device's light and dark setting.</p><div id="set-theme"><div class="themebar"><label for="theme-sel">Theme</label><select id="theme-sel"></select></div></div></div>
+    <div class="setrow"><h3>Adult content</h3><p class="note">SFW hides the adult tracks, paths and identities. NSFW shows them. You must be 18 or older to turn it on.</p><div id="set-adult"><button type="button" class="btn" id="adult-btn" aria-pressed="false"></button></div></div>
+    <div class="setrow"><h3>Trigger words</h3><p class="note">Hidden keeps the trigger words for tracks that are not out yet under wraps. Shown reveals them.</p><div id="set-trig"><button type="button" class="btn" id="trig-btn" aria-pressed="false"></button>
+      <button type="button" class="btn" id="inst-btn" hidden>Install app</button></div></div>
+    <div class="setrow"><h3>Motion</h3><label class="chk"><input type="checkbox" id="set-calm"> Reduce motion. Stops the animated backgrounds and transitions.</label></div>
+    <div class="setrow"><h3>What's new</h3><label class="chk"><input type="checkbox" id="set-newopt"> Don't show What's new when I open the app.</label></div>
+    <div class="setrow"><h3>Emergency Exit</h3><p class="note">The button can be dragged anywhere. If it ends up somewhere awkward, put it back in its original spot.</p><button type="button" class="btn" id="set-sosreset">Put the Emergency Exit button back</button></div>
+  </div>
+</div>
 <div class="sos" id="new-dlg" role="dialog" aria-modal="true" aria-labelledby="new-h" hidden>
   <div class="aboutdlg helpbox" id="new-dlg-box" tabindex="-1">
     <button type="button" class="btn sosx" id="new-close">Close</button>
     <h2 id="new-h">What's new</h2>
-    <h3>October 22, 2026</h3>
-    <ul>
-      <li>Join the Discord button added at the bottom of the page.</li>
-      <li>Build a session now has Listen links for each track, plus a button that copies your list with links, to help you make a Spotify playlist.</li>
-      <li>Notes explaining that Spotify episodes need your Patreon linked to Spotify.</li>
-      <li>This What's new page.</li>
-    </ul>
-    <h3>Earlier in October</h3>
-    <ul>
-      <li>Your Path has new paths: Submissive (was Red), Obedient Wolf, SFW and NSFW (was Full). The order is Calm, Focus, Submissive, Balanced, Obedient Wolf, SFW, NSFW.</li>
-      <li>Build your own path with no restrictions. It saves on your device and in your backups.</li>
-      <li>The Emergency Exit button can be dragged anywhere, so it never blocks the screen.</li>
-      <li>Welcome and safety, About this app, Help and bug reports, Save and restore and Join on Patreon moved to the bottom. Help and Save and restore are now pop-ups.</li>
-      <li>Notes and bug reports can be sent straight to me from the web or installed app.</li>
-      <li>The installed app checks for updates when you open it and tells you when a new version is ready.</li>
-    </ul>
+    <p class="note">Every change to the app, newest first. Scroll to see older ones.</p>
+    <div id="new-log" tabindex="0" role="region" aria-label="Change log" style="max-height:52vh;overflow:auto;padding-right:6px"></div>
     <label class="chk" style="margin-top:14px"><input type="checkbox" id="new-opt"> Don't show this when I open the app. I can still find it at the bottom of the page.</label>
   </div>
 </div>
@@ -1593,12 +1590,14 @@ $('about-open').onclick=open;$('about-open2').onclick=open;$('about-close').oncl
 ab.addEventListener('click',e=>{if(e.target===ab)close()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!ab.hidden){e.stopPropagation();close()}},true)})();
 
-(function(){[['help-dlg','help-open','help-close','help-box'],['io-dlg','io-open','io-close','io-box'],['new-dlg','new-open','new-close','new-box']].forEach(([d,o,c])=>{const dl=$(d);let from=null;
+(function(){[['help-dlg','help-open','help-close','help-box'],['io-dlg','io-open','io-close','io-box'],['new-dlg','new-open','new-close','new-box'],['set-dlg','set-open','set-close','set-box']].forEach(([d,o,c])=>{const dl=$(d);let from=null;
 function open(){from=document.activeElement;dl.hidden=false;document.body.style.overflow='hidden';dl.scrollTop=0;$(d+'-box').scrollTop=0;$(d+'-box').focus()}
 function close(){dl.hidden=true;if($('den').hidden&&$('about').hidden)document.body.style.overflow='';if(from&&from.focus)try{from.focus()}catch(e){}}
 $(o).onclick=open;$(c).onclick=close;dl.addEventListener('click',e=>{if(e.target===dl)close()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!dl.hidden){e.stopPropagation();close()}},true)})})();
-(function(){const NK='lunaSleep.newSeen',NV='2026-10-22',dot=$('new-dot'),ob=$('new-open');let seen='';try{seen=localStorage.getItem(NK)||''}catch(e){}
+(function(){const LOG=[{"d": "October 22, 2026", "i": ["Swiping back, or pressing the back button, now closes the open menu or track panel instead of leaving the app.", "A Settings menu holds the theme, the adult content toggle, trigger words, reduced motion and more.", "Join the Discord button added at the bottom of the page.", "Build a session now has Listen links for each track, plus a button that copies your list with links, to help you make a Spotify playlist.", "Notes explaining that Spotify episodes need your Patreon linked to Spotify.", "This What's new log. It opens when you open the app unless you turn that off in Settings, and it keeps every change."]}, {"d": "Earlier in October 2026", "i": ["Your Path has new paths: Submissive (was Red), Obedient Wolf, SFW and NSFW (was Full). The order is Calm, Focus, Submissive, Balanced, Obedient Wolf, SFW, NSFW.", "Build your own path with no restrictions. It saves on your device and in your backups.", "The Emergency Exit button can be dragged anywhere, so it never blocks the screen.", "Welcome and safety, About this app, Help and bug reports, Save and restore and Join on Patreon moved to the bottom. Help and Save and restore are now pop-ups.", "Notes and bug reports can be sent straight to me from the web or installed app.", "The installed app checks for updates when you open it and tells you when a new version is ready."]}],LOGV='2026-10-22c';
+const lg=$('new-log');LOG.forEach(g=>{const h=document.createElement('h3');h.textContent=g.d;const u=document.createElement('ul');g.i.forEach(t=>{const l=document.createElement('li');l.textContent=t;u.append(l)});lg.append(h,u)});
+const NK='lunaSleep.newSeen',NV=LOGV,dot=$('new-dot'),ob=$('new-open');let seen='';try{seen=localStorage.getItem(NK)||''}catch(e){}
 if(seen!==NV)dot.hidden=false;ob.addEventListener('click',()=>{dot.hidden=true;try{localStorage.setItem(NK,NV)}catch(e){}})})();
 (function(){const f=$('sos-open'),PK='lunaSleep.sosPos';let pos=null,drag=null,moved=false;
 try{pos=JSON.parse(localStorage.getItem(PK)||'null')}catch(e){}
@@ -1633,6 +1632,23 @@ if(!seen)open(true);
 (function(){const OK='lunaSleep.newOptOut',cb=$('new-opt');let out=false;try{out=localStorage.getItem(OK)==='1'}catch(e){}
 cb.checked=out;cb.onchange=()=>{try{if(cb.checked)localStorage.setItem(OK,'1');else localStorage.removeItem(OK)}catch(e){}};
 if(!out&&$('den').hidden)setTimeout(()=>$('new-open').click(),400)})();
+(function(){const CK='lunaSleep.calm',OK='lunaSleep.newOptOut',calm=$('set-calm'),no=$('set-newopt');
+const rd=k=>{try{return localStorage.getItem(k)==='1'}catch(e){return false}},wr=(k,v)=>{try{if(v)localStorage.setItem(k,'1');else localStorage.removeItem(k)}catch(e){}};
+const ap=()=>document.documentElement.classList.toggle('calm',rd(CK));ap();
+calm.checked=rd(CK);calm.onchange=()=>{wr(CK,calm.checked);ap()};
+no.checked=rd(OK);no.onchange=()=>{wr(OK,no.checked);$('new-opt').checked=no.checked};
+$('set-open').addEventListener('click',()=>{calm.checked=rd(CK);no.checked=rd(OK)});
+$('new-opt').addEventListener('change',()=>{no.checked=$('new-opt').checked});
+$('set-sosreset').onclick=()=>$('sos-reset').click()})();
+(function(){const DL=[['sos','sos-close'],['new-dlg','new-close'],['set-dlg','set-close'],['help-dlg','help-close'],['io-dlg','io-close'],['about','about-close']];
+let depth=0,ignore=0;const narrow=()=>window.matchMedia('(max-width:980px)').matches;
+const count=()=>DL.filter(([d])=>{const e=$(d);return e&&!e.hidden}).length+((S.sel&&narrow())?1:0);
+function sync(){const n=count();try{while(depth<n){history.pushState({luna:depth+1},'');depth++}
+ if(depth>n){depth=n;ignore++;history.go(-1)}}catch(e){}}
+function closeTop(){for(const [d,c] of DL){const e=$(d);if(e&&!e.hidden){$(c).click();return}}if(S.sel){S.sel=null;render()}}
+window.addEventListener('popstate',()=>{if(ignore>0){ignore--;return}if(depth>0){depth--;closeTop();sync()}});
+const mo=new MutationObserver(sync);DL.forEach(([d])=>{const e=$(d);if(e)mo.observe(e,{attributes:true,attributeFilter:['hidden']})});
+const _r=render;render=function(){const r=_r.apply(this,arguments);sync();return r}})();
 render();
 </script>
 
