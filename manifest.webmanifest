@@ -1,0 +1,35 @@
+{
+ "name": "Luna Sleep",
+ "short_name": "Luna Sleep",
+ "description": "Your guide to the whole Luna Sleep catalog.",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "orientation": "any",
+ "background_color": "#0b0e1c",
+ "theme_color": "#0b0e1c",
+ "categories": [
+  "health",
+  "lifestyle"
+ ],
+ "icons": [
+  {
+   "src": "icons/icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "icons/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "icons/maskable-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ]
+}
