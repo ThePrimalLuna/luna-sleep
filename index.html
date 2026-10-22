@@ -535,6 +535,8 @@ html[data-skin="Black"]{--selc:#ffffff}
 .foot{margin-top:26px;padding:16px 0 96px;border-top:1px solid var(--line);display:grid;gap:10px;justify-items:center;text-align:center}.footbtns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}.foot .fine{margin:0;font-size:12px;color:var(--mute)}
 .sosfab{touch-action:none;cursor:grab;-webkit-user-select:none;user-select:none}.sosfab.dragging{cursor:grabbing;transition:none}
 #help-dlg,#io-dlg{z-index:110}#io-dlg textarea{width:100%;box-sizing:border-box}
+.lane.X{border:1px solid var(--line);background:var(--surface2)}.lane.X .chain{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.customp .paths{margin:0}.customed{gap:10px}.customed input[type=text],.customed input[type=search]{width:100%;box-sizing:border-box;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit}.cgrp{border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--surface2)}.cgrp summary{cursor:pointer;font-weight:600}.clist{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:4px 12px;margin-top:8px}.cit{display:flex;gap:6px;align-items:baseline;font-size:13px;min-width:0}.cit .id{font-family:var(--f-mono,monospace);font-size:11px;color:var(--mute);flex:0 0 auto}.cit[hidden]{display:none}
 </style>
 
 <div class="wrap">
@@ -702,17 +704,22 @@ const CAT={"tracks":[{"id":"B-01","title":"THE TETHER","pillar":"Blue","trig":"H
 const SK=['safe','exit','after','use','flags','labels'];
 CAT.tracks.forEach(t=>{SK.forEach(k=>{t[k]=CAT.st[t[k]]})});
 const PATHS=[
-  {k:'Calm',d:'Blue only. Sleep and co-regulation.'},
-  {k:'Focus',d:'Green only. Work and task blocks. Best in the daytime.'},
-  {k:'Balanced',d:'Blue + Green. Regulate at night, build by day.'},
-  {k:'Full',d:'Blue + Green + Red. Adults who opt in.'},
-  {k:'Red',d:'Red only. Adults who opt in.'}
+  {k:'Calm',n:'Calm path',d:'Blue only. Sleep and co-regulation.'},
+  {k:'Focus',n:'Focus path',d:'Green only. Work and task blocks. Best in the daytime.'},
+  {k:'Red',n:'Submissive path',d:'Red only. Adults who opt in.'},
+  {k:'Balanced',n:'Balanced path',d:'Blue + Green. Regulate at night, build by day.'},
+  {k:'Wolf',n:'Obedient Wolf path',d:'Red and Black, plus the NSFW identities and Shatterings. Adults who opt in.'},
+  {k:'SFW',n:'SFW path',d:'Everything SFW: Blue + Green, plus the SFW identities, stories and Shatterings.'},
+  {k:'Full',n:'NSFW path',d:'Everything: Blue + Green + Red, plus every identity, story and Shattering. Adults who opt in.'}
 ];
+const ADULT_PATHS=['Full','Red','Wolf'];
+const PNAME=k=>{const c=S.custom.find(c=>'c:'+c.id===k);return c?c.name:(PATHS.find(p=>p.k===k)||{n:k+' path'}).n};
 const PIL={B:'Blue · heart / oxytocin',G:'Green · prefrontal',R:'Red · limbic (opt-in)'};
 const KEY='lunaNeuroMap.v2';
-let S={tab:'home',path:'Balanced',notes:{},done:{},kdone:{},edits:{},ideas:[],seq:[],fullOk:false,mode:'listener',sel:null,pend:null};
-try{const x=JSON.parse(localStorage.getItem(KEY)||localStorage.getItem('lunaNeuroMap.v1')||'null');if(x&&typeof x==='object')S=Object.assign(S,x,{mode:'listener',sel:null,pend:null,tab:'home'})}catch(e){}
-function save(){try{localStorage.setItem(KEY,JSON.stringify({path:S.path,done:S.done,kdone:S.kdone,edits:S.edits,ideas:S.ideas,seq:S.seq,notes:S.notes,fullOk:S.fullOk,showTrig:!!S.showTrig,identity:S.identity||'',welcomed:S.welcomed,lastBackup:S.lastBackup}))}catch(e){}}
+let S={tab:'home',path:'Balanced',custom:[],cedit:false,notes:{},done:{},kdone:{},edits:{},ideas:[],seq:[],fullOk:false,mode:'listener',sel:null,pend:null};
+try{const x=JSON.parse(localStorage.getItem(KEY)||localStorage.getItem('lunaNeuroMap.v1')||'null');if(x&&typeof x==='object')S=Object.assign(S,x,{mode:'listener',sel:null,pend:null,tab:'home',cedit:false})}catch(e){}
+if(!Array.isArray(S.custom))S.custom=[];if(/^c:/.test(S.path||'')&&!S.custom.some(c=>'c:'+c.id===S.path))S.path='Balanced';
+function save(){try{localStorage.setItem(KEY,JSON.stringify({path:S.path,done:S.done,kdone:S.kdone,edits:S.edits,ideas:S.ideas,seq:S.seq,notes:S.notes,fullOk:S.fullOk,showTrig:!!S.showTrig,identity:S.identity||'',welcomed:S.welcomed,lastBackup:S.lastBackup,custom:S.custom}))}catch(e){}}
 // view-only filter state (not saved)
 const F={q:'',cat:'',col:'',sub:'',cons:'',tier:'',sleep:'',maxI:5,sort:'date',shown:48};
 const CF={sub:'recipes',q:'',level:'',col:'',cons:'',time:'',maxI:5,maxM:999,heard:false,sort:'ready'};
@@ -781,7 +788,12 @@ function status(id){
   if(k&&!kHeard(k))return 'locked';
   return depIds(r).every(d=>S.done[d])?'ready':'locked';
 }
-const onPath=id=>S.path==='Red'?pil(id)==='R':get(id)[S.path]==='Y';
+const isCust=()=>/^c:/.test(S.path||'');const curCust=()=>S.custom.find(c=>'c:'+c.id===S.path);
+const custVis=id=>{const c=curCust();if(!c||!c.ids.includes(id))return false;const t=TI[id];return !t||adultOK()||!isAdultT(t)};
+const onPath=id=>isCust()?custVis(id):(S.path==='Red'||S.path==='Wolf')?pil(id)==='R':S.path==='SFW'?get(id).Balanced==='Y':get(id)[S.path]==='Y';
+const XG=[['Identities',['Awen Identity Wave'],'Rose, Azure and Prism identity waves.'],['Stories',['Anthology Set','Companion Walk','Master Finale'],'Anthology sets, Companion Walks and the Master Finale.'],['Shatterings',['Station Zero (Gold)','Untitled 2027 Gold'],'The annual Gold events. Each has its own content warnings.']];
+function onPathX(t){const p=S.path;if(isCust())return custVis(t.id);if(p==='Full')return true;if(p==='SFW')return !isAdultT(t);
+  if(p==='Wolf')return /^Black/.test(t.pillar||'')||t.rating==='NSFW'||t.rating==='Gold';return false}
 const dotsEl=n=>{const d=el('span','dots');for(let i=1;i<=5;i++)d.append(el('i',i<=n?'on':''));return d};
 const adultOK=()=>!!S.fullOk;
 function goNSFW(){S.fullOk=true;S.pend=null;S.pendPath=null;save();render()}
@@ -860,15 +872,50 @@ function render(){
 }
 
 // ================= MAP =================
+const CGROUPS=()=>{const g={};Object.keys(TI).map(tinfo).filter(t=>t&&t.cat!=='Foundation (out now)').forEach(t=>{const k=t.cat==='Trigger Hardware'?(t.pillar||'').split(' ')[0]+' triggers':t.cat==='Awen Identity Wave'?'Identity · '+t.pillar:/Gold/.test(t.cat)?'Shattering · '+t.cat:t.cat+' · '+(t.pillar||'').replace(/ \(.*\)/,'');(g[k]=g[k]||[]).push(t)});
+  const rank=k=>/triggers$/.test(k)?1:/^Identity/.test(k)?2:/^Shattering/.test(k)?4:3;
+  return Object.keys(g).sort((a,b)=>rank(a)-rank(b)).map(k=>[k,g[k].sort((a,b)=>a.id<b.id?-1:1)])};
+function customBar(){
+  const s=el('section','kern customp');const h=el('div','kh');const left=el('div');
+  left.append(el('h3',null,'Your own paths'),el('small',null,'Build a path from any tracks you like, in any mix. Saved on this device only, and included in your backup file.'));h.append(left);s.append(h);
+  const row=el('div','paths');
+  S.custom.forEach(c=>{const b=el('button','path');b.type='button';b.setAttribute('aria-pressed',String(S.path==='c:'+c.id));b.append(el('b',null,c.name),el('span',null,c.ids.length+' track'+(c.ids.length===1?'':'s')));b.onclick=()=>{S.path='c:'+c.id;S.cedit=false;S.pend=null;save();render()};row.append(b)});
+  row.append(btn('+ New path',()=>{const id=Date.now().toString(36);S.custom.push({id,name:'My path '+(S.custom.length+1),ids:[]});S.path='c:'+id;S.cedit=true;save();render()},'primary'));
+  s.append(row);
+  const c=curCust();
+  if(c){const a=el('div','acts');a.append(btn(S.cedit?'Done editing':'Edit path',()=>{S.cedit=!S.cedit;render()},S.cedit?'primary':''));s.append(a)}
+  return s}
+function customEditor(){
+  const c=curCust();const box=el('section','kern customed');
+  const nm=el('input');nm.type='text';nm.value=c.name;nm.maxLength=40;nm.setAttribute('aria-label','Path name');nm.oninput=()=>{c.name=nm.value.trim()||'My path';save()};
+  const nl=el('label',null,'Path name ');nl.append(nm);box.append(nl);
+  const cnt=el('p','note');const upd=()=>{cnt.textContent=c.ids.length+' track'+(c.ids.length===1?'':'s')+' on this path.'+(adultOK()?'':' NSFW tracks show up here when you switch to NSFW mode.')};upd();box.append(cnt);
+  const q=el('input');q.type='search';q.placeholder='Filter by title or ID';q.setAttribute('aria-label','Filter tracks');box.append(q);
+  const items=[];
+  CGROUPS().forEach(([k,ts])=>{const vis=ts.filter(t=>adultOK()||!isAdultT(t));if(!vis.length)return;
+    const d=el('details','cgrp');const sm=el('summary',null,k+' ('+vis.length+')');d.append(sm);
+    const acts=el('div','acts');acts.append(btn('Add all',()=>{vis.forEach(t=>{if(!c.ids.includes(t.id))c.ids.push(t.id)});items.forEach(x=>{if(vis.includes(x.t))x.cb.checked=true});save();upd()},'small'),btn('Clear group',()=>{c.ids=c.ids.filter(i=>!vis.some(t=>t.id===i));items.forEach(x=>{if(vis.includes(x.t))x.cb.checked=false});save();upd()},'small'));d.append(acts);
+    const ul=el('div','clist');
+    vis.forEach(t=>{const lb=el('label','cit');const cb=el('input');cb.type='checkbox';cb.checked=c.ids.includes(t.id);cb.onchange=()=>{if(cb.checked){if(!c.ids.includes(t.id))c.ids.push(t.id)}else c.ids=c.ids.filter(i=>i!==t.id);save();upd()};lb.append(cb,el('span','id',t.id),el('span',null,t.title));ul.append(lb);items.push({t,cb,lb,d})});
+    d.append(ul);box.append(d)});
+  q.oninput=()=>{const s=q.value.trim().toLowerCase();items.forEach(x=>{x.lb.hidden=!!s&&!(x.t.id+' '+x.t.title).toLowerCase().includes(s)});document.querySelectorAll('.customed details').forEach(d=>{if(s)d.open=true})};
+  const a=el('div','acts');a.append(btn('Done',()=>{S.cedit=false;render()},'primary'),btn(delArm?'Tap again to delete':'Delete this path',()=>{if(!delArm){delArm=true;render();return}delArm=false;S.custom=S.custom.filter(x=>x!==c);S.path='Balanced';S.cedit=false;save();render()},'small'));box.append(a);
+  return box}
+let delArm=false;
 function viewMap(v){
   if(!S.welcomed){const w=el('div','welcome');w.append(el('b',null,'New here? Three quick steps'));const ol=el('ol');['Pick a path below. Calm is Blue only, for sleep and co-regulation. Start there if you are unsure.','Tap any track to see what it does, how to use it safely, and how to come back down. Tap Close, press Esc, or tap outside the panel to dismiss it.','Mark tracks as heard to unlock what comes next. Press / anytime to search the whole library.'].forEach(t=>ol.append(el('li',null,t)));const r=el('div','row');r.append(btn('Got it',()=>{S.welcomed=true;save();render()},'primary'),el('span','note','Always listen with headphones, sitting or lying down, never while driving. Not medical advice.'));w.append(ol,r);v.append(w)}
   v.append(foundCard());
   const pb=el('div','paths');pb.setAttribute('role','group');pb.setAttribute('aria-label','Listener path');
   PATHS.forEach(p=>{const b=el('button','path');b.type='button';b.setAttribute('aria-pressed',String(S.path===p.k));
-    b.append(el('b',null,p.k+' path'),el('span',null,p.d));
-    b.onclick=()=>{if((p.k==='Full'||p.k==='Red')&&!S.fullOk){S.fullOk=true;S.pend=null;S.path=p.k;save();render()}else{S.pend=null;S.path=p.k;save();render()}};pb.append(b)});
+    b.append(el('b',null,p.n),el('span',null,p.d));
+    b.onclick=()=>{if(ADULT_PATHS.includes(p.k)&&!S.fullOk){S.fullOk=true;S.pend=null;S.path=p.k;save();render()}else{S.pend=null;S.path=p.k;save();render()}};pb.append(b)});
   v.append(pb);
+  v.append(customBar());
+  if(isCust()&&S.cedit){v.append(customEditor());return}
+  if(isCust()&&!(curCust()||{ids:[]}).ids.length)v.append(el('p','note','This path is empty. Choose Edit path to pick the tracks you want on it.'));
   if(S.path==='Red'){const rn=el('p','note','Red only shows the Red lane. Red tracks are meant to be wrapped in Blue, so play a Blue track before and after, never mix Red with Green, and keep the Emergency Stop button in reach. Hear the tracks each one asks for first.');v.append(rn)}
+  if(S.path==='Wolf')v.append(el('p','note','The Obedient Wolf path shows the Red lane, the Black albums, and the NSFW identities and Shatterings. Wrap Red in Blue, never mix Red with Green, and keep the Emergency Exit in reach.'));
+  if(S.path==='SFW')v.append(el('p','note','The SFW path shows Blue and Green plus the identities, stories and Shatterings that are safe in SFW mode.'));
   v.append(nextStrip());
   const groups=DATA.kernels.map(k=>({key:k.key,k}));groups.push({key:'Add-on shelf',k:null});
   groups.forEach(g=>{
@@ -882,11 +929,19 @@ function viewMap(v){
     ['B','G','R'].forEach(c=>{
       const lane=el('div','lane '+c);lane.append(el('h4',null,PIL[c]));
       const ids=rows.filter(id=>pil(id)===c&&onPath(id));
-      if(!ids.length){lane.append(el('div','empty',c==='R'&&S.path!=='Full'&&S.path!=='Red'?'Hidden on this path':(rows.some(id=>pil(id)===c)?'Not on this path':'No tracks in this lane')))}
+      if(!ids.length){lane.append(el('div','empty',c==='R'&&!ADULT_PATHS.includes(S.path)&&!isCust()?'Hidden on this path':(rows.some(id=>pil(id)===c)?'Not on this path':'No tracks in this lane')))}
       else{const ch=el('div','chain');ids.forEach((id,i)=>{if(i)ch.append(el('span','arr','→'));ch.append(chipFor(id))});lane.append(ch)}
       lanes.append(lane)});
     box.append(h,lanes);v.append(box);
   });
+  if(['SFW','Full','Wolf'].includes(S.path)||isCust())XG.forEach(([name,cats,desc])=>{
+    const ts=Object.keys(TI).map(tinfo).filter(t=>t&&cats.includes(t.cat)&&onPathX(t));
+    const box=el('section','kern');const h=el('div','kh');const left=el('div');left.append(el('h3',null,name),el('small',null,desc));h.append(left);box.append(h);
+    const lanes=el('div','lanes');
+    if(!ts.length)lanes.append(el('div','empty','Nothing here on this path yet.'));
+    else{const by={};ts.forEach(t=>{const k=name==='Identities'?t.pillar:name==='Stories'?t.cat+' · '+(t.pillar||'').replace(/ \(.*\)/,''):t.cat;(by[k]=by[k]||[]).push(t.id)});
+      Object.keys(by).forEach(k=>{const lane=el('div','lane X');lane.append(el('h4',null,k));const ch=el('div','chain');by[k].sort().forEach((id,i)=>{if(i)ch.append(el('span','arr','→'));ch.append(chipFor(id))});lane.append(ch);lanes.append(lane)})}
+    box.append(lanes);v.append(box)});
 }
 function nextStrip(){
   const n=el('div','next');
@@ -902,7 +957,7 @@ function nextStrip(){
     else{n.append(el('span','empty','Nothing is open yet. Mark the kernel track you have heard:'));
       un.slice(0,5).forEach(k=>{n.append(btn(k.name,()=>{S.done[KEY2SKU[k.key]]=true;save();render()},'small'))})}
   }
-  n.append(el('span','prog',done+' of '+vis.length+' done on '+S.path));
+  n.append(el('span','prog',done+' of '+vis.length+' done on '+PNAME(S.path)));
   return n;
 }
 
@@ -1452,7 +1507,7 @@ $('m-tinker').onclick=()=>{S.mode='tinker';render()};
   send.disabled=true;msg.textContent='Sending...';const ok=await sendFeedback('BUG REPORT',body);send.disabled=false;
   if(ok){msg.textContent='Sent. Thank you.';ta.value=''}else msg.textContent='Could not send right now. Please message me on Patreon instead.'}})();
 $('trig-btn').onclick=()=>{S.showTrig=!S.showTrig;UNW=null;save();render()};
-$('adult-btn').onclick=()=>{if(S.fullOk){S.fullOk=false;if(S.path==='Full'||S.path==='Red')S.path='Balanced';save();render()}else{goNSFW()}};
+$('adult-btn').onclick=()=>{if(S.fullOk){S.fullOk=false;if(ADULT_PATHS.includes(S.path))S.path='Balanced';save();render()}else{goNSFW()}};
 $('gate-yes').onclick=()=>{S.fullOk=true;if(S.pend==='path')S.path=S.pendPath||'Full';S.pend=null;S.pendPath=null;save();render()};
 $('gate-no').onclick=()=>{S.pend=null;render()};
 
@@ -1472,10 +1527,11 @@ function sosClose(){$('sos').hidden=true;document.body.style.overflow='';try{sos
 $('sos-open').onclick=sosOpen;$('sos-close').onclick=sosClose;
 $('sos').addEventListener('click',e=>{if(e.target.id==='sos')sosClose()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('sos').hidden){e.stopPropagation();sosClose()}},true);
-function backup(){return JSON.stringify({app:'luna-sleep',v:2,saved:new Date().toISOString(),path:S.path,done:S.done,kdone:S.kdone,edits:S.edits,ideas:S.ideas,seq:S.seq,notes:S.notes||{},identity:S.identity||''})}
+function backup(){return JSON.stringify({app:'luna-sleep',v:2,saved:new Date().toISOString(),path:S.path,done:S.done,kdone:S.kdone,edits:S.edits,ideas:S.ideas,seq:S.seq,notes:S.notes||{},custom:S.custom||[],identity:S.identity||''})}
 function markBackup(){S.lastBackup=Date.now();save();render()}
 function doRestore(txt,msg){try{const x=JSON.parse(txt);
-  if(!x||typeof x!=='object')throw 0;S.path=['Calm','Focus','Balanced'].includes(x.path)||((x.path==='Full'||x.path==='Red')&&S.fullOk)?x.path:S.path;
+  if(!x||typeof x!=='object')throw 0;S.custom=Array.isArray(x.custom)?x.custom.filter(c=>c&&typeof c.id==='string'&&Array.isArray(c.ids)).map(c=>({id:c.id.slice(0,24),name:String(c.name||'My path').slice(0,40),ids:c.ids.filter(i=>typeof i==='string')})):S.custom;S.cedit=false;
+  S.path=['Calm','Focus','Balanced','SFW'].includes(x.path)||(ADULT_PATHS.includes(x.path)&&S.fullOk)||(/^c:/.test(x.path||'')&&S.custom.some(c=>'c:'+c.id===x.path))?x.path:S.path;
   S.identity=IDENT[x.identity]?x.identity:'';S.done=x.done||{};S.kdone=x.kdone||{};S.edits=x.edits||{};S.ideas=Array.isArray(x.ideas)?x.ideas:[];S.seq=Array.isArray(x.seq)?x.seq:[];S.notes=(x.notes&&typeof x.notes==='object')?x.notes:{};S.lastBackup=Date.now();save();render();msg.textContent='Restored. '+Object.keys(S.done).length+' tracks marked heard.'}catch(e){msg.textContent='That does not look like a valid backup.'}}
 let DL=null;(async()=>{try{DL=window.claude&&window.claude.use?await window.claude.use('downloads'):null}catch(e){DL=null}})();
 $('io-save').onclick=async()=>{const msg=$('io-msg');const t=$('io-text');t.value=backup();
@@ -1535,6 +1591,8 @@ if(!seen)open(true);
 
 render();
 </script>
+
+<!-- build 2026-10-21b -->
 
 <script>
 (function(){const btn=document.getElementById('inst-btn');if(!btn)return;let dp=null;
