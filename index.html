@@ -528,6 +528,10 @@ html[data-skin="Black"]{--selc:#ffffff}
 .subh{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:22px 0 8px;padding-bottom:6px;border-bottom:2px solid var(--accent);font-size:17px}.subh small{font-weight:400;color:var(--mute);font-size:12.5px}
 .headsbox{display:block;border:1.5px solid #d6455d;background:color-mix(in srgb,#d6455d 12%,var(--surface));border-radius:8px;padding:9px 11px;font-weight:600;color:var(--ink)}.headsgrp{margin:0 0 10px;font-size:14px}
 .idsub{display:flex;align-items:baseline;gap:10px;margin:14px 0 2px;padding-bottom:4px;border-bottom:1.5px solid var(--accent);font-size:15px}.idsub:first-child{margin-top:4px}.idsub small{font-weight:400;color:var(--mute);font-size:12px}
+.mynotes{display:grid;gap:6px;margin:12px 0;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--surface2)}.mynotes label{font-weight:600}.mynotes textarea{width:100%;box-sizing:border-box;min-height:84px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;resize:vertical}.mynotes .fine{margin:0;font-size:12px;color:var(--mute)}
+.helpbox{display:grid;gap:8px}.helpbox textarea{width:100%;box-sizing:border-box;min-height:84px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;resize:vertical}.helpbox .chk{display:flex;gap:8px;align-items:center;font-size:13px}.helpbox .fine{margin:0;font-size:12px;color:var(--mute)}
+.aboutbox{display:grid;gap:8px}.aboutbox p{margin:0}
+.aboutdlg{position:relative;max-width:640px;width:100%;background:var(--surface);color:var(--ink);border-radius:18px;padding:20px 18px 22px;display:grid;gap:12px;outline:0;margin:auto 0}.aboutdlg h2{margin:0;font-size:26px}.aboutdlg p{margin:0;line-height:1.55}.linkbtn{background:none;border:0;padding:0;font:inherit;color:var(--tw-gold,var(--accent));text-decoration:underline;cursor:pointer}#about{z-index:110}
 </style>
 
 <div class="wrap">
@@ -543,6 +547,7 @@ html[data-skin="Black"]{--selc:#ffffff}
       <button type="button" class="btn" id="trig-btn" aria-pressed="false"></button>
       <button type="button" class="btn" id="inst-btn" hidden>Install app</button>
       <button type="button" class="btn" id="den-open">Welcome and safety</button>
+      <button type="button" class="btn" id="about-open">About this app</button>
       <a class="btn" id="pat-link" href="https://www.patreon.com/PrimalLunaSleep" target="_blank" rel="noopener noreferrer">Join on Patreon &#8599;</a>
       <div class="seg" role="group" aria-label="View mode">
         <button type="button" id="m-listener" aria-pressed="true">Listener view</button>
@@ -567,6 +572,19 @@ html[data-skin="Black"]{--selc:#ffffff}
     <div class="scrim" id="scrim" hidden></div>
     <aside class="side" id="side" aria-live="polite"></aside>
   </div>
+
+  <section class="io helpbox" id="help">
+    <h2 style="font-size:18px">Help and bug reports</h2>
+    <p class="note">Something not working, or a part of the app that confuses you? Tell me and I will look into it.</p>
+    <textarea id="bug-text" rows="4" maxlength="2000" aria-label="Describe the problem" placeholder="What happened? What were you doing, and what did you expect to see?"></textarea>
+    <label class="chk"><input type="checkbox" id="bug-ctx"> Include my device and browser info (helps me fix it)</label>
+    <div class="acts">
+      <button type="button" class="btn primary" id="bug-send" hidden>Send bug report</button>
+      <a class="btn" id="bug-patreon" href="https://www.patreon.com/PrimalLunaSleep" target="_blank" rel="noopener noreferrer">Message me on Patreon &#8599;</a>
+      <span id="bug-msg" class="mono" style="font-size:12px;color:var(--mute)"></span>
+    </div>
+    <p class="fine">Reports go to the creator only. Please do not include anything personal you do not want to share.</p>
+  </section>
 
   <section class="io" id="io">
     <h2 style="font-size:18px">Save and restore</h2>
@@ -597,7 +615,9 @@ html[data-skin="Black"]{--selc:#ffffff}
     <section class="dencard safe"><h2>A safe space</h2>
       <p>The Den is a place to rest, soften and explore at your own pace. Nobody here is judged for who they are, how they sleep, or what they need. You set the pace, you can leave at any moment, and nothing in here is ever asked of you that you have not chosen. Trans, nonbinary and queer listeners are welcome as they are.</p></section>
     <section class="dencard"><h2>Made by one person</h2>
-      <p>Luna Sleep is the work of a single creator, The Primal Luna. Every track is written, voiced, recorded, edited, mixed, produced and released by one person, with no studio or team behind it. That is why it is small, personal and slow to grow, and why the release schedule is steady rather than rushed.</p></section>
+      <p>Luna Sleep is the work of a single creator, The Primal Luna. Every track is written, voiced, recorded, edited, mixed, produced and released by one person, with no studio or team behind it. That is why it is small, personal and slow to grow, and why the release schedule is steady rather than rushed.</p>
+      <p>Every script, every word you hear and every sound is handcrafted by one person. The only part of Luna Sleep that uses AI is this app. <button type="button" class="linkbtn" id="about-open2">About this app</button> has more on how AI was used.</p>
+    </section>
     <section class="dencard"><h2>What Luna Sleep is</h2>
       <p>A catalog of hypnotic audio for the Pack, organised into colour albums: Foundation to start, Triggers (Blue, Green, Red), Identity (Rose, Prism, Azure), Stories (Silver, Purple, Black), and the yearly Gold Shatterings. This app is your guide: what to play next, a library of every track, combos, and sessions of your own.</p></section>
     <section class="dencard"><h2>Who can listen</h2>
@@ -637,6 +657,15 @@ html[data-skin="Black"]{--selc:#ffffff}
     <p class="denfoot">You can reread this any time from &ldquo;Welcome and safety&rdquo; at the top of the app.</p>
   </div>
 </div>
+<div class="sos" id="about" role="dialog" aria-modal="true" aria-labelledby="about-h" hidden>
+  <div class="aboutdlg" id="about-box" tabindex="-1">
+    <button type="button" class="btn sosx" id="about-close">Close</button>
+    <h2 id="about-h">About this app</h2>
+    <p>The audio is made by one person: every script, the voice, the recording, the editing, the mixing and the production. None of it uses AI. <b>This app is the only part of Luna Sleep that uses AI.</b></p>
+    <p><b>How much.</b> Claude, an AI assistant made by Anthropic, wrote the app&#8217;s code and layout, and helped word its guides, descriptions and safety text from the creator&#8217;s own ideas and materials. The creator decided what the app does, supplied all of the content (the catalog, the schedule, the safety framework and the track information), reviewed it and approved every change. The app does not use AI while you are using it.</p>
+    <p><b>Why Anthropic.</b> Out of the AI assistants available, its values were the closest match to the creator&#8217;s own at this point in time. The creator also respects the work professional developers do, and plans to hire one for this app when they are able to support a developer the way they deserve.</p>
+  </div>
+</div>
 <div class="sos" id="sos" role="dialog" aria-modal="true" aria-labelledby="sos-h" hidden>
   <div class="sosbox" id="sos-box" tabindex="-1">
     <button type="button" class="btn sosx" id="sos-close">I am okay, close</button>
@@ -666,9 +695,9 @@ const PATHS=[
 ];
 const PIL={B:'Blue · heart / oxytocin',G:'Green · prefrontal',R:'Red · limbic (opt-in)'};
 const KEY='lunaNeuroMap.v2';
-let S={tab:'home',path:'Balanced',done:{},kdone:{},edits:{},ideas:[],seq:[],fullOk:false,mode:'listener',sel:null,pend:null};
+let S={tab:'home',path:'Balanced',notes:{},done:{},kdone:{},edits:{},ideas:[],seq:[],fullOk:false,mode:'listener',sel:null,pend:null};
 try{const x=JSON.parse(localStorage.getItem(KEY)||localStorage.getItem('lunaNeuroMap.v1')||'null');if(x&&typeof x==='object')S=Object.assign(S,x,{mode:'listener',sel:null,pend:null,tab:'home'})}catch(e){}
-function save(){try{localStorage.setItem(KEY,JSON.stringify({path:S.path,done:S.done,kdone:S.kdone,edits:S.edits,ideas:S.ideas,seq:S.seq,fullOk:S.fullOk,showTrig:!!S.showTrig,identity:S.identity||'',welcomed:S.welcomed,lastBackup:S.lastBackup}))}catch(e){}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify({path:S.path,done:S.done,kdone:S.kdone,edits:S.edits,ideas:S.ideas,seq:S.seq,notes:S.notes,fullOk:S.fullOk,showTrig:!!S.showTrig,identity:S.identity||'',welcomed:S.welcomed,lastBackup:S.lastBackup}))}catch(e){}}
 // view-only filter state (not saved)
 const F={q:'',cat:'',col:'',sub:'',cons:'',tier:'',sleep:'',maxI:5,sort:'date',shown:48};
 const CF={sub:'recipes',q:'',level:'',col:'',cons:'',time:'',maxI:5,maxM:999,heard:false,sort:'ready'};
@@ -698,6 +727,9 @@ const idsIn=s=>(String(s||'').match(/SKU \d\d|\b(?:RO|BL|SZ|UG|[BGRSAWP])-\d\d\b
 const fmtDate=s=>{if(!s)return'';const d=new Date(s+'T12:00:00');return isNaN(d)?s:d.toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'})};
 const released=s=>s&&new Date(s+'T23:59:59')<=new Date();
 const REAL=()=>S.mode==='tinker';
+const FEEDBACK={url:'https://docs.google.com/forms/d/e/1FAIpQLScMTeNRLhx8oQdJJTxxx4MDMGhXSlcFpLlR_Dz7dh6s4PlKRw/formResponse',track:'entry.379324787',note:'entry.700085051'};
+async function sendFeedback(label,text){try{const f=new FormData();f.append(FEEDBACK.track,label);f.append(FEEDBACK.note,text);await fetch(FEEDBACK.url,{method:'POST',mode:'no-cors',body:f});return true}catch(e){return false}}
+const sendNote=(id,title,text)=>sendFeedback(id+' '+title,text);
 const isTrig=w=>w&&!/^Week|^Wave/.test(w);
 function hideTrig(id){if(REAL()||S.showTrig)return false;const r=base[id];return !!(r&&isTrig(r.Trigger)&&!released(r['Release Date']))}
 let UNW=null;
@@ -800,7 +832,7 @@ Azure:['Azure · The Amarok identity series','21-minute trances with no story, b
 Prism:['Prism · The Wolfie identity series','21-minute trances with no story about fluidity and the dissolving of binaries. Some tracks loosen your sense of identity, so keep AWAKE and your human name ready and plan a grounding track afterward. SKU 05 THE PACK works well. This is not medical care and does not replace professional support.'],
 Purple:['Purple · The anthologies','Long, safe-harbor listening in 60-minute anthologies plus a 135-minute finale. SFW, rated G to PG, Standard consent, Pack Member tier. For the finale, plan the full 2 hours 15 minutes and have water ready.'],
 Black:['Black · The dark anthologies','60-minute NSFW erotic and psychological horror anthologies plus a 135-minute finale. 18+ only, private, consenting adults, Heightened consent. The horror is somatic, not graphic, with simulated stress and restriction. Plan the full time, have water ready, and say HUMAN to stop at any point.'],
-Gold:['Gold · Station Zero and Untitled 2027 Gold','Important heads up for Station Zero: from SZ-06 through SZ-10 it uses real audio of Atka, the creator\'s late service dog, including recordings of her labored breathing. It gets louder and harder to ignore with each track and is at its height in SZ-10, Tír na nÓg, which also includes a recording of the creator singing to her. Two 13-day Gold albums on the same schedule, one track a day from Dec 20 to Jan 1: Station Zero (Dec 2026) and Untitled 2027 Gold (Dec 2027, details to be announced), included with Pack Member and up, or you can buy the tracks individually or bundled in the Patreon store. Each is an annual Shattering told as story, working through grief and hard chapters of the creator\'s own life. Psychological horror at Heightened consent, with sudden or sharp intensity. It is best experienced awake, in the daytime or early evening. Every Gold track ends with a grounding exit ramp in its last 2 minutes, so let it finish, and do not stack a second Gold track the same night.']
+Gold:['Gold · The Shatterings','A Shattering is Luna Sleep\'s annual Gold event: one story told across 13 daily tracks, one a day from Dec 20 to Jan 1. Each year, Luna works through grief and a hard chapter of the creator\'s own life, written and recorded by hand by the creator alone, with no templates, as a kind of audio memoir. It uses horror and folklore to give what happened a shape you can face, name and put down, and you take part as a witness, not a patient. It is psychological horror at Heightened consent, with sudden or sharp intensity, so it is best experienced awake, in the daytime or early evening. Gold events are included with Pack Member and up, or you can buy the tracks individually or bundled in the Patreon store. Some tracks carry heads-ups about real recorded audio, so read each track\'s warnings first. Every Gold track ends with a grounding exit ramp in its last 2 minutes, so let it finish, and do not stack a second Gold track the same night. Headphones, never while driving or operating machinery. Entertainment and somatic regulation, not medical advice.'],
 };
 function renderTopNote(){const n=$('topnote');if(!n)return;if(!n.dataset.def)n.dataset.def=n.textContent;const a=S.tab==='cat'&&F.col&&ALBUM_NOTE[F.col];n.textContent='';n.classList.toggle('albumnote',!!a);if(a){n.append(el('b',null,a[0]+'. '),document.createTextNode(a[1]+TAIL))}else n.textContent='';n.hidden=!a}
 function applySkin(){const re=/^(White|Blue|Green|Red|Silver|Rose|Prism|Azure|Purple|Black|Gold)$/;const sel=document.getElementById('theme-sel');const v=sel?sel.value:'';const k=re.test(v)?v:(re.test(F.col||'')?F.col:'');const h=document.documentElement;if(k){h.setAttribute('data-skin',k);h.setAttribute('data-album',k)}else{h.removeAttribute('data-skin');h.removeAttribute('data-album')}}
@@ -898,7 +930,7 @@ function tcard(t){
   m.append(el('span',null,t.cat.replace(' (out now)','')),t.rt?el('span',null,t.rt):'',t.inten!==''?dotsEl(t.inten):'');
   c.append(m);
   const m2=el('div','meta');
-  m2.append(albumTag(t),...(t.heads?[el('span','pill warn','\u26A0 Real audio of Atka')]:[]),...(pairTag(t)?[pairTag(t)]:[]),...(lockedByFound(t.id)?[el('span','pill lockpill','\uD83D\uDD12 Foundation first')]:[]),...(spotLink(t,'pill spot')?[spotLink(t,'pill spot')]:[]),el('span','pill'+(isAdultT(t)?' warn':''),t.consent),...(t.sleep?[el('span','pill '+(t.sleep==='Yes'?'bedyes':'bedno'),t.sleep==='Yes'?'Great for bed':'Better awake')]:[]),el('span',null,(released(t.date)?'Out now · ':'Releases ')+fmtDate(t.date)));
+  m2.append(albumTag(t),...(S.notes&&S.notes[t.id]?[el('span','pill','\u270E Notes')]:[]),...(t.heads?[el('span','pill warn','\u26A0 Real audio of Atka')]:[]),...(pairTag(t)?[pairTag(t)]:[]),...(lockedByFound(t.id)?[el('span','pill lockpill','\uD83D\uDD12 Foundation first')]:[]),...(spotLink(t,'pill spot')?[spotLink(t,'pill spot')]:[]),el('span','pill'+(isAdultT(t)?' warn':''),t.consent),...(t.sleep?[el('span','pill '+(t.sleep==='Yes'?'bedyes':'bedno'),t.sleep==='Yes'?'Great for bed':'Better awake')]:[]),el('span',null,(released(t.date)?'Out now · ':'Releases ')+fmtDate(t.date)));
   c.append(m2);
   return c;
 }
@@ -975,7 +1007,7 @@ function identGuide(v,key){
    u.append(el('p',null,'This series is written for '+II.who+', and anyone else who wants to explore it. The ten Foundation tracks build the Little Wolf, a blank and protected starting point. The identity series is where that starting point takes a name of its own.'));d.append(u);g.append(d)}
   g.append(mk('Where to start',['Hear all ten White Foundation tracks first. Nothing in this series unlocks before that.','Begin at Wave 1 and go in order. Give each track a full listen and let it settle before the next.','Standard and Notice tracks are the gentle ones. The NSFW and Heightened waves are optional, 18+, and you never have to take them. You can follow the whole arc with only the gentle tracks.','There is no rush. Some people stay with one wave for a while, and that is fine.']));
   g.append(mk('Before you listen',['Be somewhere private and safe, sitting or lying down, with headphones and water within reach.','Decide your way out first: say AWAKE and your human name, and you come back. HUMAN works too.','Pick a time when you can spend a few quiet minutes afterward.']));
-  g.append(mk('Afterward',['Say AWAKE and your human name. Drink some water. Name 3 things you can see and 3 you can touch.','Write one line: what felt most like you? What do you want to carry into your day?','If you want to keep going, wait until you feel steady. Moving between identities in one sitting is not recommended.']));
+  g.append(mk('Afterward',['Say AWAKE and your human name. Drink some water. Name 3 things you can see and 3 you can touch.','Write a line or two: how did it make you feel, and what felt most like you? Every track has an optional notes box if you want to keep it.','If you want to keep going, wait until you feel steady. Moving between identities in one sitting is not recommended.']));
   const care=el('div','lockban');care.append(el('b',null,'Please read. '),document.createTextNode('This is identity conditioning for entertainment and self-exploration. It is not medical gender-affirming care and does not replace professional support or the people who know you. '+(key==='Prism'?'Some Prism tracks dissolve your sense of identity on purpose, so keep AWAKE and your human name ready and play SKU 05 THE PACK afterward to reconnect. ':'')+'If thoughts about who you are feel distressing or overwhelming, stop, use the Emergency Exit button, and talk to someone you trust.'));
   g.append(care);
   g.append(resCard());
@@ -997,30 +1029,32 @@ const TRIGCOMMON={
  what:['A trigger is a short cue word that gets installed during a track. You hear it again and again while you are in a relaxed, receptive state, until the word and the state belong together. Later, the word alone can bring that state back.','Each track in these colors installs one word. The word is shown on the track card as its trigger.'],
  how:['Listen in order, and give each track a full listen so the word has time to settle.','Over the next days, you can say or hear the word briefly to check it. Do that only somewhere safe, stationary and private. Triggers are installed to work on their own, so never practice one while driving, operating anything, or when you need your full attention.','Nothing is forced on you. You can leave any track at any time, and you decide which words you keep.'],
  before:['Be somewhere private and safe, sitting or lying down, with headphones on and water within reach.','Know your way out first: say HUMAN aloud (up to three times), or AWAKE, and you come back.','Choose a time when you can spend a few quiet minutes afterward.'],
- after:['Say HUMAN or AWAKE, open your eyes, and name 3 things you can see, 3 you can touch and 3 you can hear.','Drink some water. Press your tongue to the roof of your mouth and wiggle your toes.','Write one line about what the word did for you, so you know what you installed.']};
+ after:['Say HUMAN or AWAKE, open your eyes, and name 3 things you can see, 3 you can touch and 3 you can hear.','Drink some water. Press your tongue to the roof of your mouth and wiggle your toes.','Write one line about what the word did for you, so you know what you installed.'],
+ afterFeel:['Say HUMAN or AWAKE, open your eyes, and name 3 things you can see, 3 you can touch and 3 you can hear.','Drink some water. Press your tongue to the roof of your mouth and wiggle your toes.','Write a line or two: how did it make you feel, and what stayed with you? Every track has an optional notes box if you want to keep it.']};
 const GUIDES={
+White:{title:'Installing the Foundation triggers',theme:'The base layer: ten kernel words that everything else in Luna Sleep builds on.',what:['The Foundation installs ten kernel words, one in each track. A trigger is a short cue word that gets installed while you are relaxed and receptive. You hear it again and again until the word and the state belong together, and later the word alone can bring that state back.','These ten are the roots. The Blue, Green and Red words that come later grow out of them, which is why the whole Foundation unlocks the rest of the catalog.'],mind:['Receive. This is groundwork, so there is nothing to perform and nothing to get right. You let each word land and let your body follow it.','Patient and unhurried is the right mindset, like laying a floor. You are building a steady base that is yours, and nothing here is forced on you.'],rules:['Ten tracks, about 13 to 16 minutes each, all out now. Every one is Standard consent and sits on the Pack Member tier.','Go in order, starting with SKU 00 THE CALL. Give each track a full listen, ideally spread over several days, so each word has time to settle before the next.','Hear all ten before anything else unlocks.','Several double as off-ramps you can come back to. THE STREAM (RENEW) is a good rinse after heavier tracks, THE SHADOW (SHIFT) is a sleep landing, and THE ALPHA (DAWNBREAK) brings you back to daytime. THE HUNT (LOCK IN) is the exception: it is not an off-ramp.'],care:true,trig:true},
 Blue:{title:'Installing triggers: Blue',theme:'The heart lane: safety, settling and co-regulation.',mind:['Receive. You are not performing or trying hard. You let the word land and let your body follow it.','Blue is the color of feeling held. The words install steadiness, belonging and calm, so the right mindset is open and unhurried.'],rules:['Blue is gentle, Standard consent, and sits on the Pack Member tier.','It suits the daytime or winding down.','It is the color you wrap Red in: play a Blue track before and after any Red track.'],care:true,trig:true},
 Green:{title:'Installing triggers: Green',theme:'The prefrontal lane: focus, momentum and getting started.',mind:['Aim. You are in charge, awake and choosing. The words install a switch you can reach for when you need to focus or start.','Green is activating, so listen with intention and keep your eyes on what you want to do next.'],rules:['Green is best in the daytime rather than at bed.','Never combine Green with Red.','If you feel wired afterward, stand up, stretch, drink water and play SKU 07 THE STREAM.'],care:true,trig:true},
 Red:{title:'Installing triggers: Red',theme:'The limbic lane: arousal, surrender and power exchange.',mind:['Surrender by choice. You are opting in, and every part of this is yours to stop. The power you hand over is lent, never taken.','Come in with your stops ready and your trust earned. The mindset is open and willing, not pushed.'],rules:['18+ only, opt-in, and part of The Chosen tier.','Some Red tracks involve restriction or sensory deprivation, so learn your stops first: HUMAN, AWAKE, EXEMPT and UNBOUND.','Always wrap Red in Blue, never mix it with Green, and keep an off-ramp ready.'],care:true,trig:true},
 Silver:{title:'The companion',theme:'Silver: about 30 minutes walking beside the Alpha as an equal.',mind:['You are not below the Alpha and you are not leading. You are their equal and their beta: second at their side, trusted and steady.','Walk the way a partner walks. Your attention, your opinions and your comfort count. The Alpha is glad of your company, not your obedience.'],rules:['Companion walks are about 30 minutes. Some are NSFW (The Chosen tier, 18+) and some are SFW (Pack Member tier), so check the content level on each card.','If a walk uses restrictive triggers, you will see them flagged.','The Silver anthologies are longer, with world-building lore from the Alpha\'s side.'],care:false},
 Purple:{title:'The cherished pup',theme:'Purple: long, safe-harbor listening where you are looked after.',mind:['You are small, safe and cherished. Nothing is expected of you here, and nothing is wrong. You get to rest and be taken care of.','The mindset is soft and trusting, like a pup who knows they are loved and that the den is warm.'],rules:['SFW, rated G to PG, Standard consent, Pack Member tier.','Anthologies are 60 minutes. The finale is 135 minutes, so plan the full 2 hours 15 minutes and have water ready.','These are made for safe harbor, so they make good bedtime listening.'],care:false},
 Black:{title:'The submissive',theme:'Black: dark anthologies of erotic and psychological horror, for consenting adults.',mind:['Yielding, by your own choice. You hand over control inside a frame you have agreed to, and you can take it back at any time.','Trust is the mindset: you trust the Alpha, and just as much, you trust your own stops. Surrender here is something you give, never something taken.'],rules:['18+ only, private, consenting adults, Heightened consent.','60-minute NSFW anthologies plus a 135-minute finale. The horror is somatic, not graphic, with simulated stress and restriction.','Plan the full time, have water ready, and say HUMAN to stop at any point.'],care:true},
-Gold:{title:'The story of Luna',theme:'Gold: annual Shattering albums, told as story.',mind:['You are a witness. Each Gold album is part of Luna\'s story, told in story form and working through grief and hard chapters of the creator\'s own life.','Listen as someone being trusted with something real. You do not have to fix anything or feel any particular way.'],rules:['Important heads up: from SZ-06 through SZ-10, Station Zero uses real audio of Atka, including her labored breathing, which gets louder and harder to ignore with each track and is at its height in SZ-10, Tír na nÓg. SZ-10 also includes a recording of the creator singing to her.','Two 13-day albums so far: Station Zero (Dec 2026) and Untitled 2027 Gold (Dec 2027, details to be announced). One track a day, Dec 20 to Jan 1.','Psychological horror at Heightened consent, with sudden or sharp intensity. Best experienced awake, in the daytime or early evening.','Every Gold track ends with a grounding exit ramp in its last 2 minutes. Let it finish, and do not stack a second Gold track the same night.'],care:true}};
+Gold:{title:'The story of Luna',theme:'Gold: the annual Shattering, told as story.',what:['A Shattering is the annual Gold event: one story told across 13 daily tracks, one a day from Dec 20 to Jan 1. Luna works through grief and a hard chapter of the creator\'s own life, written and recorded by hand by the creator alone, with no templates.','The word fits. Something heavy is broken open so it can be seen, named and put down. Horror and folklore are the container, and the love underneath is the point.'],mind:['You are a witness. A Shattering is part of Luna\'s story, told in story form and working through grief and hard chapters of the creator\'s own life.','Listen as someone being trusted with something real. You do not have to fix anything or feel any particular way.'],rules:['Important heads up: from SZ-06 through SZ-10, Station Zero uses real audio of Atka, including her labored breathing, which gets louder and harder to ignore with each track and is at its height in SZ-10, Tír na nÓg. SZ-10 also includes a recording of the creator singing to her.','Every Shattering runs the same way: 13 days, one track a day, Dec 20 to Jan 1.','Psychological horror at Heightened consent, with sudden or sharp intensity. Best experienced awake, in the daytime or early evening.','Every Gold track ends with a grounding exit ramp in its last 2 minutes. Let it finish, and do not stack a second Gold track the same night.'],care:true}};
 function mindGuide(v,key){
   const G=GUIDES[key];const g=el('section','idguide mindguide');
   g.append(el('h2',null,G.title),el('p','idtheme',G.theme));
   const det=(title,body,open)=>{const d=el('details','idd');if(open)d.open=true;d.append(el('summary',null,title));const u=el('div','idbody');body.forEach(x=>u.append(el('p',null,x)));d.append(u);return d};
   const lst=(title,items,open)=>{const d=el('details','idd');if(open)d.open=true;d.append(el('summary',null,title));const u=el('ul');items.forEach(x=>u.append(el('li',null,x)));d.append(u);return d};
-  if(G.trig)g.append(det('What is a trigger?',TRIGCOMMON.what,true));
+  if(G.trig)g.append(det('What is a trigger?',G.what||TRIGCOMMON.what,true));else if(G.what)g.append(det('What is a Shattering?',G.what,true));
   g.append(det('The mindset',G.mind,true));
-  g.append(lst(G.trig?'The '+key+' rules':'Good to know',G.rules,true));
+  g.append(lst(G.trig?'The '+(key==='White'?'Foundation':key)+' rules':'Good to know',G.rules,true));
   if(G.trig)g.append(lst('How installation works',TRIGCOMMON.how));
   g.append(lst('Before you listen',TRIGCOMMON.before));
-  g.append(lst('Afterward',TRIGCOMMON.after));
+  g.append(lst('Afterward',G.trig?TRIGCOMMON.after:TRIGCOMMON.afterFeel));
   const all=Object.keys(TI).map(tinfo).filter(x=>x&&(x.pillar||'').split(/[ (]/)[0]===key).sort((a,b)=>(a.date<b.date?-1:a.date>b.date?1:(a.id<b.id?-1:1)));
   const vis=all.filter(x=>adultOK()||!isAdultT(x)),done=vis.filter(x=>S.done[x.id]).length;
   if(G.care){const care=el('div','lockban');care.append(el('b',null,'Please read. '),document.createTextNode((G.trig?'Triggers are installed to work on their own, so practice them only in a safe, stationary moment. ':'')+'This is entertainment and somatic regulation, not medical care or therapy. If something feels like too much, stop, use the Emergency Exit button, and talk to someone you trust.'));g.append(care)}
-  g.append(el('h3',null,key==='Gold'?'Every Gold track':'Every '+key+' track'),el('span','mono',done+' of '+vis.length+' heard'));
+  g.append(el('h3',null,key==='Gold'?'Every Gold track':(key==='White'?'Every Foundation track':'Every '+key+' track')),el('span','mono',done+' of '+vis.length+' heard'));
   const lst2=el('div','idlist');
   groupSub(vis,lst2,x=>{const r=el('button','idrow'+(S.done[x.id]?' done':''));r.type='button';
     r.append(el('span','mono',x.id),el('b',null,x.title),el('span','idw',x.trig&&!/^Week/.test(x.trig)&&x.trig!=='To be announced'?(G.trig?'Trigger: ':'')+x.trig:(G.trig?'Trigger revealed on release':(x.cat||''))),el('span','pill'+(isAdultT(x)?' warn':''),x.consent),el('span','idd2',(released(x.date)?'Out now':'Releases '+fmtDate(x.date))+(S.done[x.id]?' \u00B7 heard':'')));
@@ -1350,6 +1384,19 @@ function renderSide(){
   }
   if(lockedByFound(id)){const lb=el('div','lockban');lb.append(el('b',null,'Locked until the Foundation is done. '),document.createTextNode('Hear all 10 White Foundation tracks first ('+foundCount()+' of 10 so far). You can still read about this track and add it to your plan.'));s.append(lb)}
   s.append(l);
+  {const isTr=/^(Blue|Green|Red|White)/.test(t.pillar||'');
+   const box=el('div','mynotes');const lb=el('label',null,'My notes (optional)');lb.htmlFor='nt-'+id;
+   const ta=el('textarea');ta.id='nt-'+id;ta.rows=4;ta.maxLength=2000;ta.value=(S.notes[id]&&S.notes[id].t)||'';
+   ta.placeholder=isTr?'How did the word land? What did it do for you?':'How did it make you feel? What stayed with you?';
+   const row=el('div','acts');const st=el('span','note');
+   const sv=btn('Save note',()=>{const v=ta.value.trim();if(v){S.notes[id]={t:v,at:Date.now()};st.textContent='Saved on this device.'}else{delete S.notes[id];st.textContent='Note cleared.'}save()},'small');
+   const cl=btn('Clear',()=>{ta.value='';delete S.notes[id];save();st.textContent='Note cleared.'},'small');
+   row.append(sv,cl,st);box.append(lb,ta,row);
+   box.append(el('p','fine','Notes stay on this device unless you choose to back them up or send one.'));
+   if(FEEDBACK.url){const fr=el('div','acts');let armed=false;const fb=btn('Send this note to The Primal Luna',()=>{const v=ta.value.trim();if(!v){st.textContent='Write a note first.';return}
+      if(!armed){armed=true;fb.textContent='Tap again to confirm. It cannot be unsent.';st.textContent='This sends only this note and the track name to the creator. Nothing else is shared.';return}
+      sendNote(id,t.title,v).then(ok=>{armed=false;fb.textContent='Send this note to The Primal Luna';st.textContent=ok?'Sent. Thank you.':'Could not send right now. Your note is still saved here.'})},'small');fr.append(fb);box.append(fr)}
+   s.append(box)}
   const a=el('div','acts');a.style.display='flex';a.style.flexWrap='wrap';a.style.gap='8px';
   const done=!!S.done[id];const lk=lockedByFound(id);const b=btn(done?'Marked heard · tap to undo':(lk?'Locked: hear the Foundation first':'Mark as heard'),()=>{if(lk&&!done)return;if(S.done[id])delete S.done[id];else S.done[id]=true;save();render()},'primary');if(lk&&!done){b.disabled=true;b.setAttribute('aria-disabled','true')}
   if(r&&status(id)==='locked'&&!done&&!lk)b.append(el('span',null,' (locked)'));a.append(b);
@@ -1382,6 +1429,13 @@ function tinkerForm(s,id,r){
 // ================= wiring =================
 $('m-listener').onclick=()=>{S.mode='listener';render()};
 $('m-tinker').onclick=()=>{S.mode='tinker';render()};
+
+(function(){const send=document.getElementById('bug-send');if(!send)return;const msg=document.getElementById('bug-msg'),ta=document.getElementById('bug-text'),cx=document.getElementById('bug-ctx');
+ if(FEEDBACK.url)send.hidden=false;else{ta.placeholder='Describe what happened, then copy it into a Patreon message to me.'}
+ send.onclick=async()=>{const v=ta.value.trim();if(!v){msg.textContent='Write a few words first.';return}
+  let body=v;if(cx.checked){body+='\n\n[device] '+navigator.userAgent+' | screen '+screen.width+'x'+screen.height+' | tab '+S.tab+(window.matchMedia('(display-mode: standalone)').matches?' | installed app':'')}
+  send.disabled=true;msg.textContent='Sending...';const ok=await sendFeedback('BUG REPORT',body);send.disabled=false;
+  if(ok){msg.textContent='Sent. Thank you.';ta.value=''}else msg.textContent='Could not send right now. Please message me on Patreon instead.'}})();
 $('trig-btn').onclick=()=>{S.showTrig=!S.showTrig;UNW=null;save();render()};
 $('adult-btn').onclick=()=>{if(S.fullOk){S.fullOk=false;if(S.path==='Full'||S.path==='Red')S.path='Balanced';save();render()}else{goNSFW()}};
 $('gate-yes').onclick=()=>{S.fullOk=true;if(S.pend==='path')S.path=S.pendPath||'Full';S.pend=null;S.pendPath=null;save();render()};
@@ -1403,11 +1457,11 @@ function sosClose(){$('sos').hidden=true;document.body.style.overflow='';try{sos
 $('sos-open').onclick=sosOpen;$('sos-close').onclick=sosClose;
 $('sos').addEventListener('click',e=>{if(e.target.id==='sos')sosClose()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('sos').hidden){e.stopPropagation();sosClose()}},true);
-function backup(){return JSON.stringify({app:'luna-sleep',v:2,saved:new Date().toISOString(),path:S.path,done:S.done,kdone:S.kdone,edits:S.edits,ideas:S.ideas,seq:S.seq,identity:S.identity||''})}
+function backup(){return JSON.stringify({app:'luna-sleep',v:2,saved:new Date().toISOString(),path:S.path,done:S.done,kdone:S.kdone,edits:S.edits,ideas:S.ideas,seq:S.seq,notes:S.notes||{},identity:S.identity||''})}
 function markBackup(){S.lastBackup=Date.now();save();render()}
 function doRestore(txt,msg){try{const x=JSON.parse(txt);
   if(!x||typeof x!=='object')throw 0;S.path=['Calm','Focus','Balanced'].includes(x.path)||((x.path==='Full'||x.path==='Red')&&S.fullOk)?x.path:S.path;
-  S.identity=IDENT[x.identity]?x.identity:'';S.done=x.done||{};S.kdone=x.kdone||{};S.edits=x.edits||{};S.ideas=Array.isArray(x.ideas)?x.ideas:[];S.seq=Array.isArray(x.seq)?x.seq:[];S.lastBackup=Date.now();save();render();msg.textContent='Restored. '+Object.keys(S.done).length+' tracks marked heard.'}catch(e){msg.textContent='That does not look like a valid backup.'}}
+  S.identity=IDENT[x.identity]?x.identity:'';S.done=x.done||{};S.kdone=x.kdone||{};S.edits=x.edits||{};S.ideas=Array.isArray(x.ideas)?x.ideas:[];S.seq=Array.isArray(x.seq)?x.seq:[];S.notes=(x.notes&&typeof x.notes==='object')?x.notes:{};S.lastBackup=Date.now();save();render();msg.textContent='Restored. '+Object.keys(S.done).length+' tracks marked heard.'}catch(e){msg.textContent='That does not look like a valid backup.'}}
 let DL=null;(async()=>{try{DL=window.claude&&window.claude.use?await window.claude.use('downloads'):null}catch(e){DL=null}})();
 $('io-save').onclick=async()=>{const msg=$('io-msg');const t=$('io-text');t.value=backup();
   const nm='luna-sleep-backup-'+new Date().toISOString().slice(0,10)+'.json';
@@ -1421,6 +1475,13 @@ $('io-load').onclick=()=>doRestore($('io-text').value,$('io-msg'));
 $('io-reset').onclick=()=>{S.done={};S.kdone={};save();render();$('io-msg').textContent='Progress cleared.'};
 $('io-reset-edits').onclick=()=>{S.edits={};save();render();$('io-msg').textContent='All edits cleared.'};
 window.addEventListener('resize',()=>{if(!S.sel)renderSide()});
+
+(function(){const ab=$('about');let from=null;
+function open(){from=document.activeElement;ab.hidden=false;document.body.style.overflow='hidden';$('about-box').scrollTop=0;ab.scrollTop=0;$('about-box').focus()}
+function close(){ab.hidden=true;if($('den').hidden)document.body.style.overflow='';if(from&&from.focus)try{from.focus()}catch(e){}}
+$('about-open').onclick=open;$('about-open2').onclick=open;$('about-close').onclick=close;
+ab.addEventListener('click',e=>{if(e.target===ab)close()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!ab.hidden){e.stopPropagation();close()}},true)})();
 (function(){const den=$('den'),ack=$('den-ack'),go=$('den-enter');let from=null;const K='lunaSleep.denAck';
 (function(){const s=$('den-stars');let h='';const r=(a,b)=>(a+Math.random()*(b-a)).toFixed(1);
   for(let i=0;i<9;i++)h+='<span class="sh" style="--x:'+r(15,105)+'%;--d:'+r(2.4,4.2)+'s;--w:'+r(0,9)+'s"></span>';
@@ -1431,7 +1492,7 @@ function close(){den.hidden=true;document.body.style.overflow='';if(from&&from.f
 ack.onchange=()=>{go.disabled=!ack.checked};
 go.onclick=()=>{if(!ack.checked)return;try{localStorage.setItem(K,'1')}catch(e){}close();window.scrollTo(0,0)};
 $('den-open').onclick=()=>open(false);
-document.addEventListener('keydown',e=>{if(den.hidden)return;if(e.key==='Tab'){const f=[...den.querySelectorAll('input,button:not([disabled])')];if(!f.length)return;const a=f[0],z=f[f.length-1];if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}},true);
+document.addEventListener('keydown',e=>{if(den.hidden||!$('about').hidden)return;if(e.key==='Tab'){const f=[...den.querySelectorAll('input,button:not([disabled])')];if(!f.length)return;const a=f[0],z=f[f.length-1];if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}},true);
 let seen=false;try{seen=localStorage.getItem(K)==='1'}catch(e){}
 if(!seen)open(true);
 })();
