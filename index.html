@@ -535,7 +535,7 @@ html[data-skin="Black"]{--selc:#ffffff}
 .aboutdlg{position:relative;max-width:640px;width:100%;background:var(--surface);color:var(--ink);border-radius:18px;padding:20px 18px 22px;display:grid;gap:12px;outline:0;margin:auto 0}.aboutdlg h2{margin:0;font-size:26px}.aboutdlg p{margin:0;line-height:1.55}.linkbtn{background:none;border:0;padding:0;font:inherit;color:var(--tw-gold,var(--accent));text-decoration:underline;cursor:pointer}#about{z-index:110}
 .foot{margin-top:26px;padding:16px 0 96px;border-top:1px solid var(--line);display:grid;gap:10px;justify-items:center;text-align:center}.footbtns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}.foot .fine{margin:0;font-size:12px;color:var(--mute)}
 .sosfab{touch-action:none;cursor:grab;-webkit-user-select:none;user-select:none}.sosfab.dragging{cursor:grabbing;transition:none}
-#help-dlg,#io-dlg{z-index:110}#io-dlg textarea{width:100%;box-sizing:border-box}
+#help-dlg,#io-dlg,#new-dlg{z-index:110}#new-dlg h3{margin:14px 0 4px}#new-dlg ul{margin:0;padding-left:20px;display:grid;gap:6px}#io-dlg textarea{width:100%;box-sizing:border-box}
 .lane.X{border:1px solid var(--line);background:var(--surface2)}.lane.X .chain{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 .customp .paths{margin:0}.customed{gap:10px}.customed input[type=text],.customed input[type=search]{width:100%;box-sizing:border-box;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit}.cgrp{border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--surface2)}.cgrp summary{cursor:pointer;font-weight:600}.clist{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:4px 12px;margin-top:8px}.cit{display:flex;gap:6px;align-items:baseline;font-size:13px;min-width:0}.cit .id{font-family:var(--f-mono,monospace);font-size:11px;color:var(--mute);flex:0 0 auto}.cit[hidden]{display:none}
 .foot{order:20}
@@ -581,6 +581,7 @@ html[data-skin="Black"]{--selc:#ffffff}
     <div class="footbtns">
       <button type="button" class="btn" id="den-open">Welcome and safety</button>
       <button type="button" class="btn" id="about-open">About this app</button>
+      <button type="button" class="btn" id="new-open">What's new <span class="pill" id="new-dot" hidden>New</span></button>
       <button type="button" class="btn" id="help-open">Help and bug reports</button>
       <button type="button" class="btn" id="io-open">Save and restore</button>
       <a class="btn" id="pat-link" href="https://www.patreon.com/PrimalLunaSleep" target="_blank" rel="noopener noreferrer">Join on Patreon &#8599;</a>
@@ -649,6 +650,7 @@ html[data-skin="Black"]{--selc:#ffffff}
   <div class="aboutdlg helpbox" id="help-dlg-box" tabindex="-1">
     <button type="button" class="btn sosx" id="help-close">Close</button>
     <h2 id="help-h">Help and bug reports</h2>
+    <p class="note"><b>Spotify:</b> episodes are hosted on Patreon. Link your Patreon account to Spotify, and your tier decides which episodes you see. If a Listen link opens empty, check the link in Patreon first.</p>
     <p class="note">Something not working, or a part of the app that confuses you? Tell me and I will look into it.</p>
     <textarea id="bug-text" rows="4" maxlength="2000" aria-label="Describe the problem" placeholder="What happened? What were you doing, and what did you expect to see?"></textarea>
     <label class="chk"><input type="checkbox" id="bug-ctx"> Include my device and browser info (helps me fix it)</label>
@@ -659,6 +661,29 @@ html[data-skin="Black"]{--selc:#ffffff}
     </div>
     <p class="fine">Reports go to the creator only. Please do not include anything personal you do not want to share.</p>
     </div>
+</div>
+<div class="sos" id="new-dlg" role="dialog" aria-modal="true" aria-labelledby="new-h" hidden>
+  <div class="aboutdlg helpbox" id="new-dlg-box" tabindex="-1">
+    <button type="button" class="btn sosx" id="new-close">Close</button>
+    <h2 id="new-h">What's new</h2>
+    <h3>October 22, 2026</h3>
+    <ul>
+      <li>Join the Discord button added at the bottom of the page.</li>
+      <li>Build a session now has Listen links for each track, plus a button that copies your list with links, to help you make a Spotify playlist.</li>
+      <li>Notes explaining that Spotify episodes need your Patreon linked to Spotify.</li>
+      <li>This What's new page.</li>
+    </ul>
+    <h3>Earlier in October</h3>
+    <ul>
+      <li>Your Path has new paths: Submissive (was Red), Obedient Wolf, SFW and NSFW (was Full). The order is Calm, Focus, Submissive, Balanced, Obedient Wolf, SFW, NSFW.</li>
+      <li>Build your own path with no restrictions. It saves on your device and in your backups.</li>
+      <li>The Emergency Exit button can be dragged anywhere, so it never blocks the screen.</li>
+      <li>Welcome and safety, About this app, Help and bug reports, Save and restore and Join on Patreon moved to the bottom. Help and Save and restore are now pop-ups.</li>
+      <li>Notes and bug reports can be sent straight to me from the web or installed app.</li>
+      <li>The installed app checks for updates when you open it and tells you when a new version is ready.</li>
+    </ul>
+    <label class="chk" style="margin-top:14px"><input type="checkbox" id="new-opt"> Don't show this when I open the app. I can still find it at the bottom of the page.</label>
+  </div>
 </div>
 <div class="sos" id="io-dlg" role="dialog" aria-modal="true" aria-labelledby="io-h" hidden>
   <div class="aboutdlg " id="io-dlg-box" tabindex="-1">
@@ -1381,16 +1406,25 @@ function viewIdeas(v){
       const up=btn('↑',()=>{if(i>0){[S.seq[i-1],S.seq[i]]=[S.seq[i],S.seq[i-1]];save();render()}},'small');up.setAttribute('aria-label','Move up');
       const dn=btn('↓',()=>{if(i<S.seq.length-1){[S.seq[i+1],S.seq[i]]=[S.seq[i],S.seq[i+1]];save();render()}},'small');dn.setAttribute('aria-label','Move down');
       const rm=btn('Remove',()=>{S.seq.splice(i,1);save();render()},'small');
-      li.append(tt,open1,up,dn,rm);ol.append(li)});
+      const sl=spotLink(t,'btn small primary');if(sl){sl.style.display='inline-block';sl.style.marginTop='6px';tt.append(sl)}li.append(tt,open1,up,dn,rm);ol.append(li)});
     p.append(ol);
     const res=checkSeq(S.seq);const cr=el('div','chk-res');
     res.forEach(([k,m])=>cr.append(el('div','msg '+k,m)));
     p.append(cr);
     const tot=res.total;
-    p.append(el('div','cnt-line',el('span',null,S.seq.length+' tracks'+(tot?' · up to about '+tot+' min of track time':'')+'')));
+    p.append(el('div','cnt-line',S.seq.length+' tracks'+(tot?' · up to about '+tot+' min of track time':'')));
     const acts=el('div','jot');const nm=el('input');nm.type='text';nm.id='bn';nm.placeholder='Name this session';nm.setAttribute('aria-label','Session name');
     acts.append(nm,btn('Save as idea',()=>{const name=nm.value.trim()||'My session '+(S.ideas.filter(i=>i.kind==='build').length+1);S.ideas.unshift({k:'b:'+Date.now(),kind:'build',title:name,tracks:S.seq.join(' → '),note:''});save();render()},'primary'),btn('Clear',()=>{S.seq=[];save();render()}));
     p.append(acts);
+    const pl=el('div','jot');pl.style.marginTop='14px';pl.style.display='block';
+    pl.append(el('h3',null,'Take this to a Spotify playlist'));
+    pl.append(el('p','note','Open each Listen link in order and use the three dots, then Add to playlist. Download the playlist before bed, keep shuffle and Autoplay off, and set the sleep timer.'));
+    pl.append(spotNote());
+    const ids2=S.seq.map(id=>({id,t:tinfo(id)})).filter(x=>x.t);
+    const lines=ids2.map((x,i)=>(i+1)+'. '+x.t.title+(x.t.spotify&&released(x.t.date)?'\n'+x.t.spotify:' (not out on Spotify yet)'));
+    const cm=el('span','mono');cm.style.fontSize='12px';cm.style.color='var(--mute)';
+    pl.append(btn('Copy my list with links',()=>copyText(lines.join('\n'),cm),'small'),cm);
+    p.append(pl);
   }
   v.append(p);
   const ip=el('section','panel');ip.append(el('h2',null,'My saved ideas'));
@@ -1410,6 +1444,8 @@ function viewIdeas(v){
 
 // ================= SIDE PANEL =================
 function dd(label,node){const d=el('div');d.append(el('dt',null,label));const x=el('dd');x.append(node);d.append(x);return d}
+function spotNote(){return el('p','note','Spotify episodes need your Patreon linked to Spotify. Your tier decides which episodes appear for you. If a link opens empty, check the link in Patreon first.')}
+function copyText(txt,msg){const done=ok=>{msg.textContent=ok?'Copied.':'Could not copy. Select the text below and copy it.'};try{navigator.clipboard.writeText(txt).then(()=>done(true),()=>done(false))}catch(e){done(false)}}
 function spotLink(t,cls){if(!t||!t.spotify||!released(t.date))return null;const a=el('a',cls||'btn primary','\u25B6 Listen on Spotify');a.href=t.spotify;a.target='_blank';a.rel='noopener noreferrer';a.setAttribute('aria-label','Listen to '+t.title+' on Spotify (opens in a new tab)');return a}
 function renderSide(){
   const s=$('side');s.textContent='';const narrow=window.matchMedia('(max-width:980px)').matches;$('scrim').hidden=true;
@@ -1473,7 +1509,7 @@ function renderSide(){
   const a=el('div','acts');a.style.display='flex';a.style.flexWrap='wrap';a.style.gap='8px';
   const done=!!S.done[id];const lk=lockedByFound(id);const b=btn(done?'Marked heard · tap to undo':(lk?'Locked: hear the Foundation first':'Mark as heard'),()=>{if(lk&&!done)return;if(S.done[id])delete S.done[id];else S.done[id]=true;save();render()},'primary');if(lk&&!done){b.disabled=true;b.setAttribute('aria-disabled','true')}
   if(r&&status(id)==='locked'&&!done&&!lk)b.append(el('span',null,' (locked)'));a.append(b);
-  {const sl=spotLink(t);if(sl)a.prepend(sl)}
+  {const sl=spotLink(t);if(sl){a.prepend(sl);s.append(spotNote())}}
   a.append(btn('Add to builder',()=>{S.seq.push(id);S.tab='ideas';save();render()}));
   a.append(heartBtn({k:'t:'+id,kind:'track',title:id+' '+t.title,tracks:id}));
   s.append(a);
@@ -1557,11 +1593,13 @@ $('about-open').onclick=open;$('about-open2').onclick=open;$('about-close').oncl
 ab.addEventListener('click',e=>{if(e.target===ab)close()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!ab.hidden){e.stopPropagation();close()}},true)})();
 
-(function(){[['help-dlg','help-open','help-close','help-box'],['io-dlg','io-open','io-close','io-box']].forEach(([d,o,c])=>{const dl=$(d);let from=null;
+(function(){[['help-dlg','help-open','help-close','help-box'],['io-dlg','io-open','io-close','io-box'],['new-dlg','new-open','new-close','new-box']].forEach(([d,o,c])=>{const dl=$(d);let from=null;
 function open(){from=document.activeElement;dl.hidden=false;document.body.style.overflow='hidden';dl.scrollTop=0;$(d+'-box').scrollTop=0;$(d+'-box').focus()}
 function close(){dl.hidden=true;if($('den').hidden&&$('about').hidden)document.body.style.overflow='';if(from&&from.focus)try{from.focus()}catch(e){}}
 $(o).onclick=open;$(c).onclick=close;dl.addEventListener('click',e=>{if(e.target===dl)close()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!dl.hidden){e.stopPropagation();close()}},true)})})();
+(function(){const NK='lunaSleep.newSeen',NV='2026-10-22',dot=$('new-dot'),ob=$('new-open');let seen='';try{seen=localStorage.getItem(NK)||''}catch(e){}
+if(seen!==NV)dot.hidden=false;ob.addEventListener('click',()=>{dot.hidden=true;try{localStorage.setItem(NK,NV)}catch(e){}})})();
 (function(){const f=$('sos-open'),PK='lunaSleep.sosPos';let pos=null,drag=null,moved=false;
 try{pos=JSON.parse(localStorage.getItem(PK)||'null')}catch(e){}
 function lim(){return{w:Math.max(0,innerWidth-f.offsetWidth-6),h:Math.max(0,innerHeight-f.offsetHeight-6)}}
@@ -1592,6 +1630,9 @@ let seen=false;try{seen=localStorage.getItem(K)==='1'}catch(e){}
 if(!seen)open(true);
 })();
 
+(function(){const OK='lunaSleep.newOptOut',cb=$('new-opt');let out=false;try{out=localStorage.getItem(OK)==='1'}catch(e){}
+cb.checked=out;cb.onchange=()=>{try{if(cb.checked)localStorage.setItem(OK,'1');else localStorage.removeItem(OK)}catch(e){}};
+if(!out&&$('den').hidden)setTimeout(()=>$('new-open').click(),400)})();
 render();
 </script>
 
