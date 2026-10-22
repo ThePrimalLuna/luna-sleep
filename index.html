@@ -539,6 +539,90 @@ html[data-skin="Black"]{--selc:#ffffff}
 .lane.X{border:1px solid var(--line);background:var(--surface2)}.lane.X .chain{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 .customp .paths{margin:0}.customed{gap:10px}.customed input[type=text],.customed input[type=search]{width:100%;box-sizing:border-box;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit}.cgrp{border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--surface2)}.cgrp summary{cursor:pointer;font-weight:600}.clist{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:4px 12px;margin-top:8px}.cit{display:flex;gap:6px;align-items:baseline;font-size:13px;min-width:0}.cit .id{font-family:var(--f-mono,monospace);font-size:11px;color:var(--mute);flex:0 0 auto}.cit[hidden]{display:none}
 .foot{order:20}
+
+.resbody{max-width:68ch;line-height:1.7;font-size:16px}.resbody h3{margin:26px 0 6px}.resbody h4{margin:18px 0 4px}.resbody p{margin:0 0 14px}.resbody ul,.resbody ol{margin:0 0 14px;padding-left:22px;display:grid;gap:6px}.resbody blockquote{margin:0 0 14px;padding:4px 14px;border-left:3px solid var(--accent);color:var(--mute)}.resbody a{color:var(--accent)}.resbody hr{border:0;border-top:1px solid var(--line);margin:22px 0}
+.resmeta{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 12px}.reslist{display:grid;gap:12px;margin-top:12px}.reslist-item h3{margin:0}.reslist-item p{margin:0 0 10px}.restoc{margin:0 0 18px;padding:10px 14px;border:1px solid var(--line);border-radius:12px}.restoc ul{margin:8px 0 0;padding-left:20px;display:grid;gap:4px}.restoc a{color:var(--accent)}.resart h2{margin:12px 0 0}
+#rq{width:100%;box-sizing:border-box;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:inherit;font:inherit;margin:4px 0 12px}
+#dc-link{color:inherit;font-weight:600}
+
+/* ===== Luna's Theme: the Primal Luna night, a moonlit den under the pines ===== */
+:root[data-album="Luna"]{--bg:#060a1c;--surface:#0d1432;--surface2:#131b42;--ink:#eef2ff;--mute:#a9b5df;--line:rgba(170,190,255,.22);--accent:#cddaff;--accent-ink:#0a1030;--hero1:#27346e;--glow:rgba(150,175,255,.34);--ember:#ff8aae;--blue:#78a8ff;--green:#4fd8a2;--red:#ff7a92;--white:#f2f4ff;--silver:#b4bcd8;--rose:#ff8fc0;--azure:#57cfe8;--prism:#c79bff;--gold:#e8c15a;--purple:#b3a0ff;--black:#c9cde4;--warn:#ffb454;--ok:#4fd8a2;color-scheme:dark}
+html[data-skin="Luna"]{background:#04060f}
+html[data-skin="Luna"] body{background:
+ radial-gradient(circle 5px at calc(100% - 46px) 34px,rgba(120,138,200,.45) 0 60%,transparent 100%),
+ radial-gradient(circle 3px at calc(100% - 36px) 44px,rgba(120,138,200,.35) 0 60%,transparent 100%),
+ radial-gradient(circle 24px at calc(100% - 40px) 40px,#f7faff 0,#e3ebff 60%,#b9c8f2 93%,rgba(185,200,242,0) 100%),
+ radial-gradient(circle 150px at calc(100% - 40px) 40px,rgba(170,195,255,.34),transparent 72%),
+ radial-gradient(1100px 620px at 50% -12%,rgba(86,110,210,.34),transparent 66%),
+ radial-gradient(900px 560px at 8% 18%,rgba(112,72,190,.2),transparent 62%),
+ radial-gradient(800px 500px at 96% 62%,rgba(52,96,196,.16),transparent 64%),
+ linear-gradient(180deg,#0b1340 0%,#070c26 46%,#04060f 100%) fixed;color:var(--ink)}
+@media (min-width:900px){html[data-skin="Luna"] body{background:
+ radial-gradient(circle 8px at calc(100% - 118px) 86px,rgba(120,138,200,.45) 0 60%,transparent 100%),
+ radial-gradient(circle 5px at calc(100% - 98px) 108px,rgba(120,138,200,.35) 0 60%,transparent 100%),
+ radial-gradient(circle 40px at calc(100% - 104px) 100px,#f7faff 0,#e3ebff 60%,#b9c8f2 93%,rgba(185,200,242,0) 100%),
+ radial-gradient(circle 240px at calc(100% - 104px) 100px,rgba(170,195,255,.34),transparent 72%),
+ radial-gradient(1100px 620px at 50% -12%,rgba(86,110,210,.34),transparent 66%),
+ radial-gradient(900px 560px at 8% 18%,rgba(112,72,190,.2),transparent 62%),
+ radial-gradient(800px 500px at 96% 62%,rgba(52,96,196,.16),transparent 64%),
+ linear-gradient(180deg,#0b1340 0%,#070c26 46%,#04060f 100%) fixed}}
+html[data-skin="Luna"] body::before{content:"";position:fixed;left:0;top:0;width:1px;height:1px;z-index:-2;pointer-events:none;box-shadow:6.1vw 70.1vh 0 1px rgba(200,215,255,.4),71.7vw 88.7vh 0 0px rgba(220,230,255,.55),94.1vw 35.5vh 0 0px rgba(200,215,255,.4),5.9vw 76.8vh 0 0px rgba(255,255,255,.7),24.8vw 39.1vh 0 1px rgba(220,230,255,.55),16.6vw 40.2vh 0 0px rgba(220,230,255,.55),81.9vw 86.4vh 0 0px rgba(255,255,255,.7),41.5vw 35.9vh 0 1px rgba(220,230,255,.55),15.1vw 17.6vh 0 0px rgba(255,255,255,.7),23.3vw 48.5vh 0 0px rgba(200,215,255,.4),28.2vw 14.6vh 0 0px rgba(255,255,255,.7),56.6vw 95.3vh 0 0px rgba(200,215,255,.4),90.0vw 78.0vh 0 1px rgba(200,215,255,.4),39.9vw 10.4vh 0 1px rgba(220,230,255,.55),19.1vw 98.5vh 0 1px rgba(220,230,255,.55),11.0vw 60.1vh 0 0px rgba(220,230,255,.55),56.7vw 53.7vh 0 0px rgba(255,255,255,.7),2.6vw 87.4vh 0 1px rgba(220,230,255,.55),63.4vw 95.5vh 0 0px rgba(200,215,255,.4),12.3vw 84.9vh 0 1px rgba(200,215,255,.4),48.4vw 8.6vh 0 0px rgba(255,255,255,.7),34.3vw 26.5vh 0 0px rgba(255,255,255,.7),2.3vw 95.1vh 0 0px rgba(220,230,255,.55),69.0vw 91.4vh 0 0px rgba(255,255,255,.7),86.3vw 69.6vh 0 0px rgba(255,255,255,.7),36.7vw 16.7vh 0 0px rgba(255,255,255,.7),54.2vw 50.3vh 0 0px rgba(255,255,255,.7),81.2vw 98.5vh 0 0px rgba(220,230,255,.55),81.8vw 74.0vh 0 0px rgba(220,230,255,.55),51.8vw 35.6vh 0 0px rgba(220,230,255,.55),79.0vw 47.2vh 0 0px rgba(255,255,255,.7),60.5vw 34.4vh 0 0px rgba(200,215,255,.4),8.1vw 10.2vh 0 1px rgba(220,230,255,.55),33.8vw 48.3vh 0 0px rgba(200,215,255,.4),90.9vw 34.4vh 0 0px rgba(255,255,255,.7),12.0vw 38.9vh 0 0px rgba(200,215,255,.4),88.9vw 43.4vh 0 0px rgba(220,230,255,.55),80.1vw 97.2vh 0 1px rgba(200,215,255,.4),40.1vw 94.7vh 0 0px rgba(220,230,255,.55),99.3vw 2.8vh 0 1px rgba(255,255,255,.7),14.6vw 82.7vh 0 1px rgba(255,255,255,.7),93.7vw 15.6vh 0 0px rgba(220,230,255,.55),1.4vw 97.1vh 0 0px rgba(255,255,255,.7),74.9vw 13.9vh 0 0px rgba(220,230,255,.55),2.8vw 21.3vh 0 0px rgba(255,255,255,.7),32.6vw 54.4vh 0 0px rgba(220,230,255,.55),91.0vw 35.4vh 0 1px rgba(255,255,255,.7),58.3vw 90.4vh 0 1px rgba(255,255,255,.7),13.1vw 15.2vh 0 0px rgba(200,215,255,.4),77.7vw 60.9vh 0 0px rgba(220,230,255,.55),14.2vw 61.9vh 0 0px rgba(255,255,255,.7),6.2vw 68.2vh 0 1px rgba(220,230,255,.55),88.3vw 5.7vh 0 0px rgba(200,215,255,.4),4.2vw 9.8vh 0 1px rgba(255,255,255,.7),2.8vw 89.4vh 0 0px rgba(200,215,255,.4),32.6vw 97.3vh 0 0px rgba(255,255,255,.7),27.7vw 50.8vh 0 1px rgba(255,255,255,.7),94.2vw 69.9vh 0 0px rgba(255,255,255,.7),89.3vw 20.3vh 0 1px rgba(220,230,255,.55),41.7vw 39.2vh 0 0px rgba(220,230,255,.55),67.1vw 42.8vh 0 0px rgba(255,255,255,.7),30.3vw 12.2vh 0 0px rgba(255,255,255,.7),64.3vw 36.6vh 0 0px rgba(220,230,255,.55),96.8vw 22.0vh 0 0px rgba(200,215,255,.4),88.5vw 16.3vh 0 0px rgba(220,230,255,.55),70.6vw 99.4vh 0 1px rgba(200,215,255,.4),42.1vw 35.7vh 0 0px rgba(255,255,255,.7),36.6vw 33.8vh 0 1px rgba(200,215,255,.4),70.3vw 38.4vh 0 0px rgba(255,255,255,.7),96.1vw 11.3vh 0 0px rgba(220,230,255,.55),8.4vw 27.2vh 0 0px rgba(200,215,255,.4),75.6vw 82.0vh 0 0px rgba(200,215,255,.4),14.9vw 91.9vh 0 1px rgba(255,255,255,.7),32.7vw 27.9vh 0 0px rgba(200,215,255,.4),89.5vw 26.9vh 0 0px rgba(255,255,255,.7),8.9vw 26.1vh 0 0px rgba(220,230,255,.55),26.4vw 12.2vh 0 0px rgba(200,215,255,.4),99.4vw 41.8vh 0 0px rgba(255,255,255,.7),12.9vw 52.7vh 0 0px rgba(220,230,255,.55),96.9vw 26.2vh 0 0px rgba(220,230,255,.55),93.2vw 62.9vh 0 0px rgba(200,215,255,.4),44.6vw 67.2vh 0 0px rgba(200,215,255,.4),80.4vw 99.4vh 0 0px rgba(220,230,255,.55),1.8vw 50.6vh 0 0px rgba(255,255,255,.7),47.5vw 93.5vh 0 0px rgba(255,255,255,.7),81.9vw 43.2vh 0 1px rgba(255,255,255,.7),83.5vw 39.3vh 0 0px rgba(255,255,255,.7),21.5vw 23.0vh 0 0px rgba(255,255,255,.7),72.9vw 14.0vh 0 0px rgba(220,230,255,.55),83.7vw 1.4vh 0 0px rgba(200,215,255,.4)}
+html[data-skin="Luna"] body::after{content:"";position:fixed;left:0;top:0;width:2px;height:2px;border-radius:50%;z-index:-2;pointer-events:none;box-shadow:16.3vw 6.3vh 0 1px rgba(255,215,230,.85),67.1vw 21.1vh 0 0px rgba(255,215,230,.85),29.3vw 34.5vh 0 0px rgba(190,210,255,.9),44.6vw 19.7vh 0 0px rgba(255,215,230,.85),32.4vw 2.6vh 0 0px rgba(235,242,255,.95),35.7vw 0.1vh 0 1px rgba(235,242,255,.95),47.5vw 37.7vh 0 0px rgba(235,242,255,.95),50.5vw 0.4vh 0 0px rgba(235,242,255,.95),14.4vw 44.0vh 0 1px rgba(235,242,255,.95),30.0vw 47.2vh 0 0px rgba(255,215,230,.85),95.8vw 64.0vh 0 0px rgba(255,215,230,.85),89.3vw 58.8vh 0 1px rgba(190,210,255,.9),72.1vw 37.1vh 0 0px rgba(255,215,230,.85),61.9vw 10.9vh 0 1px rgba(255,215,230,.85),70.1vw 37.9vh 0 0px rgba(255,215,230,.85),58.4vw 67.0vh 0 0px rgba(235,242,255,.95),3.1vw 10.0vh 0 0px rgba(235,242,255,.95),37.7vw 33.9vh 0 0px rgba(255,215,230,.85),1.9vw 39.9vh 0 0px rgba(190,210,255,.9),26.4vw 34.3vh 0 0px rgba(255,215,230,.85),93.3vw 67.3vh 0 0px rgba(255,215,230,.85),52.6vw 55.9vh 0 1px rgba(190,210,255,.9),80.9vw 63.5vh 0 0px rgba(255,215,230,.85),75.6vw 17.3vh 0 1px rgba(190,210,255,.9),84.6vw 5.8vh 0 0px rgba(235,242,255,.95),61.7vw 48.2vh 0 0px rgba(255,215,230,.85),14.7vw 19.0vh 0 0px rgba(255,215,230,.85),56.8vw 0.9vh 0 0px rgba(190,210,255,.9)}
+html[data-skin="Luna"]::after{content:"";position:fixed;left:0;right:0;bottom:0;height:150px;z-index:-1;pointer-events:none;background:linear-gradient(180deg,transparent,rgba(3,5,14,.86) 92%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='150' viewBox='0 0 900 150'%3E%3Cpath d='M30.0 69.0L35.8 91.5L24.2 91.5ZM30.0 81.9L41.6 104.4L18.4 104.4ZM30.0 94.8L47.4 117.3L12.6 117.3ZM30.0 107.7L53.2 130.2L6.8 130.2ZM30.0 120.6L59.0 143.1L1.0 143.1ZM28.0 140h4.1V146h-4.1ZM112.8 41.0L118.2 71.9L107.4 71.9ZM112.8 58.7L123.6 89.6L102.0 89.6ZM112.8 76.4L129.0 107.3L96.6 107.3ZM112.8 94.1L134.4 125.0L91.2 125.0ZM112.8 111.9L139.8 142.8L85.8 142.8ZM110.9 140h3.8V146h-3.8ZM198.9 28.0L204.3 62.8L193.5 62.8ZM198.9 48.0L209.7 82.8L188.1 82.8ZM198.9 67.9L215.1 102.7L182.7 102.7ZM198.9 87.9L220.5 122.7L177.3 122.7ZM198.9 107.8L225.9 142.6L171.9 142.6ZM197.0 140h3.8V146h-3.8ZM277.4 36.0L282.6 76.5L272.1 76.5ZM277.4 59.2L287.9 99.7L266.9 99.7ZM277.4 82.4L293.1 122.9L261.6 122.9ZM277.4 105.7L298.4 146.2L256.4 146.2ZM275.9 140h2.9V146h-2.9ZM348.4 42.0L353.6 72.6L343.2 72.6ZM348.4 59.5L358.8 90.1L338.0 90.1ZM348.4 77.1L364.0 107.7L332.8 107.7ZM348.4 94.6L369.2 125.2L327.6 125.2ZM348.4 112.2L374.4 142.8L322.4 142.8ZM346.5 140h3.6V146h-3.6ZM429.0 26.0L434.0 61.4L424.0 61.4ZM429.0 46.3L439.0 81.7L419.0 81.7ZM429.0 66.6L444.0 102.0L414.0 102.0ZM429.0 86.9L449.0 122.3L409.0 122.3ZM429.0 107.2L454.0 142.6L404.0 142.6ZM427.3 140h3.5V146h-3.5ZM518.3 43.0L524.8 80.9L511.8 80.9ZM518.3 64.7L531.3 102.6L505.3 102.6ZM518.3 86.4L537.8 124.3L498.8 124.3ZM518.3 108.1L544.3 146.0L492.3 146.0ZM516.5 140h3.6V146h-3.6ZM599.0 32.0L603.2 65.6L594.8 65.6ZM599.0 51.3L607.4 84.9L590.6 84.9ZM599.0 70.5L611.6 104.1L586.4 104.1ZM599.0 89.8L615.8 123.4L582.2 123.4ZM599.0 109.1L620.0 142.7L578.0 142.7ZM597.5 140h2.9V146h-2.9ZM673.2 53.0L679.4 80.3L667.0 80.3ZM673.2 68.7L685.6 96.0L660.8 96.0ZM673.2 84.3L691.8 111.6L654.6 111.6ZM673.2 100.0L698.0 127.3L648.4 127.3ZM673.2 115.6L704.2 142.9L642.2 142.9ZM671.0 140h4.3V146h-4.3ZM743.1 36.0L747.6 63.0L738.6 63.0ZM743.1 51.5L752.1 78.5L734.1 78.5ZM743.1 67.0L756.6 94.0L729.6 94.0ZM743.1 82.4L761.1 109.4L725.1 109.4ZM743.1 97.9L765.6 124.9L720.6 124.9ZM743.1 113.4L770.1 140.4L716.1 140.4ZM741.2 140h3.8V146h-3.8ZM808.7 70.0L816.9 97.8L800.4 97.8ZM808.7 85.9L825.2 113.7L792.2 113.7ZM808.7 101.8L833.4 129.6L783.9 129.6ZM808.7 117.7L841.7 145.5L775.7 145.5ZM806.4 140h4.6V146h-4.6ZM870.0 57.0L876.8 89.6L863.2 89.6ZM870.0 75.7L883.5 108.3L856.5 108.3ZM870.0 94.4L890.2 127.0L849.8 127.0ZM870.0 113.1L897.0 145.7L843.0 145.7ZM868.1 140h3.8V146h-3.8Z' fill='%2303050e' opacity='1'/%3E%3Crect y='142' width='900' height='8' fill='%2303050e' opacity='1'/%3E%3C/svg%3E") bottom left/900px 150px repeat-x,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='120' viewBox='0 0 640 120'%3E%3Cpath d='M30.0 53.0L34.0 75.9L26.0 75.9ZM30.0 66.1L38.0 89.0L22.0 89.0ZM30.0 79.2L42.0 102.1L18.0 102.1ZM30.0 92.3L46.0 115.2L14.0 115.2ZM28.9 110h2.2V116h-2.2ZM77.9 39.0L83.4 67.1L72.4 67.1ZM77.9 55.1L88.9 83.2L66.9 83.2ZM77.9 71.2L94.4 99.4L61.4 99.4ZM77.9 87.4L99.9 115.5L55.9 115.5ZM76.3 110h3.1V116h-3.1ZM119.2 51.0L122.1 66.8L116.4 66.8ZM119.2 60.0L124.9 75.8L113.6 75.8ZM119.2 69.1L127.7 84.8L110.7 84.8ZM119.2 78.1L130.6 93.8L107.9 93.8ZM119.2 87.1L133.4 102.9L105.1 102.9ZM119.2 96.2L136.2 111.9L102.2 111.9ZM118.0 110h2.4V116h-2.4ZM169.3 63.0L175.5 82.1L163.0 82.1ZM169.3 74.0L181.8 93.1L156.8 93.1ZM169.3 84.9L188.0 104.1L150.5 104.1ZM169.3 95.9L194.3 115.0L144.3 115.0ZM167.5 110h3.5V116h-3.5ZM228.0 52.0L234.5 75.2L221.5 75.2ZM228.0 65.3L241.0 88.6L215.0 88.6ZM228.0 78.7L247.5 101.9L208.5 101.9ZM228.0 92.0L254.0 115.2L202.0 115.2ZM226.2 110h3.6V116h-3.6ZM266.1 30.0L270.3 51.0L262.0 51.0ZM266.1 42.0L274.5 63.0L257.8 63.0ZM266.1 54.1L278.6 75.1L253.6 75.1ZM266.1 66.1L282.8 87.1L249.5 87.1ZM266.1 78.2L287.0 99.2L245.3 99.2ZM266.1 90.2L291.1 111.2L241.1 111.2ZM264.4 110h3.5V116h-3.5ZM305.3 63.0L310.1 82.1L300.6 82.1ZM305.3 74.0L314.8 93.1L295.8 93.1ZM305.3 84.9L319.6 104.1L291.1 104.1ZM305.3 95.9L324.3 115.0L286.3 115.0ZM304.0 110h2.7V116h-2.7ZM370.6 31.0L374.2 55.9L367.0 55.9ZM370.6 45.3L377.8 70.2L363.4 70.2ZM370.6 59.6L381.4 84.5L359.8 84.5ZM370.6 73.8L385.0 98.7L356.2 98.7ZM370.6 88.1L388.6 113.0L352.6 113.0ZM369.3 110h2.5V116h-2.5ZM426.1 40.0L430.6 67.8L421.6 67.8ZM426.1 55.9L435.1 83.7L417.1 83.7ZM426.1 71.8L439.6 99.6L412.6 99.6ZM426.1 87.7L444.1 115.5L408.1 115.5ZM424.8 110h2.5V116h-2.5ZM466.4 30.0L470.4 55.2L462.4 55.2ZM466.4 44.4L474.4 69.6L458.4 69.6ZM466.4 58.9L478.4 84.1L454.4 84.1ZM466.4 73.3L482.4 98.5L450.4 98.5ZM466.4 87.8L486.4 113.0L446.4 113.0ZM465.0 110h2.8V116h-2.8ZM515.3 60.0L520.3 76.2L510.3 76.2ZM515.3 69.3L525.3 85.5L505.3 85.5ZM515.3 78.6L530.3 94.8L500.3 94.8ZM515.3 87.9L535.3 104.1L495.3 104.1ZM515.3 97.2L540.3 113.4L490.3 113.4ZM513.6 110h3.5V116h-3.5ZM571.9 43.0L576.2 69.6L567.7 69.6ZM571.9 58.3L580.4 84.9L563.4 84.9ZM571.9 73.5L584.7 100.2L559.2 100.2ZM571.9 88.8L588.9 115.4L554.9 115.4ZM570.7 110h2.4V116h-2.4ZM610.0 30.0L613.2 55.2L606.8 55.2ZM610.0 44.4L616.4 69.6L603.6 69.6ZM610.0 58.9L619.6 84.1L600.4 84.1ZM610.0 73.3L622.8 98.5L597.2 98.5ZM610.0 87.8L626.0 113.0L594.0 113.0ZM608.9 110h2.2V116h-2.2Z' fill='%230a1030' opacity='0.95'/%3E%3Crect y='112' width='640' height='8' fill='%230a1030' opacity='0.95'/%3E%3C/svg%3E") bottom 0 left -210px/640px 120px repeat-x}
+html[data-skin="Luna"]::before{content:"";position:fixed;left:0;top:0;width:2px;height:2px;border-radius:50%;z-index:-1;pointer-events:none;box-shadow:28.7vw 84.1vh 0 1px rgba(255,150,185,.9),67.7vw 84.2vh 0 1px rgba(255,150,185,.9),30.8vw 79.9vh 0 1px rgba(255,150,185,.9),46.7vw 78.6vh 0 1px rgba(255,150,185,.9),14.9vw 90.1vh 0 1px rgba(255,150,185,.9),22.3vw 92.4vh 0 1px rgba(255,150,185,.9),90.1vw 66.5vh 0 1px rgba(255,150,185,.9),46.2vw 88.1vh 0 1px rgba(255,150,185,.9),93.1vw 78.1vh 0 1px rgba(255,150,185,.9)}
+@media (prefers-reduced-motion:no-preference){
+ html[data-skin="Luna"] body::after{animation:lunatw 7s ease-in-out infinite}
+ html[data-skin="Luna"]::before{animation:lunaember 9s ease-in-out infinite}
+ html[data-skin="Luna"] .card,html[data-skin="Luna"] .btn,html[data-skin="Luna"] .tabs button{transition:transform .18s,box-shadow .2s,border-color .2s}
+ html[data-skin="Luna"] .card:hover{transform:translateY(-2px)}}
+@keyframes lunatw{0%,100%{opacity:.35}50%{opacity:1}}
+@keyframes lunaember{0%,100%{opacity:.25;transform:translateY(0)}50%{opacity:.95;transform:translateY(-14px)}}
+html[data-skin="Luna"] ::selection{background:rgba(255,138,174,.4);color:#fff}
+html[data-skin="Luna"] :focus-visible{outline:2px solid #cddaff;outline-offset:3px;box-shadow:0 0 0 5px rgba(160,185,255,.25)}
+html[data-skin="Luna"]{scrollbar-color:rgba(170,190,255,.4) #070b20;accent-color:#ff8aae}
+html[data-skin="Luna"] .eyebrow{color:#b9c8f5;letter-spacing:.34em;text-shadow:0 0 16px rgba(160,185,255,.55)}
+html[data-skin="Luna"] .top h1{background:linear-gradient(100deg,#ffffff 0%,#cddaff 38%,#9fb4ff 70%,#ffb4cb 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 18px rgba(150,175,255,.55)) drop-shadow(0 2px 0 rgba(0,0,20,.4))}
+html[data-skin="Luna"] .top p{color:#b4c0e6}
+html[data-skin="Luna"] h2,html[data-skin="Luna"] h3,html[data-skin="Luna"] .tabs button,html[data-skin="Luna"] .idguide summary{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-weight:500;letter-spacing:.02em}
+html[data-skin="Luna"] h2{font-size:30px;font-weight:400;color:#f2f5ff;text-shadow:0 0 24px rgba(160,185,255,.5)}
+html[data-skin="Luna"] .home-hero h2::after,html[data-skin="Luna"] .panel>h2::after{content:"";display:block;width:84px;height:1px;margin-top:10px;background:linear-gradient(90deg,#cddaff,rgba(205,218,255,0))}
+html[data-skin="Luna"] .card h3,html[data-skin="Luna"] .side h3{font-family:"Cormorant Garamond",Georgia,serif;font-style:normal;font-weight:700;font-size:21px;letter-spacing:.05em;line-height:1.2;color:#f4f7ff}
+html[data-skin="Luna"] .card,html[data-skin="Luna"] .fbar,html[data-skin="Luna"] .rescard,html[data-skin="Luna"] .side,html[data-skin="Luna"] .welcome,html[data-skin="Luna"] .foundcard,html[data-skin="Luna"] .next,html[data-skin="Luna"] .idguide,html[data-skin="Luna"] .panel,html[data-skin="Luna"] .kern,html[data-skin="Luna"] .idea,html[data-skin="Luna"] .io,html[data-skin="Luna"] .restoc{background:linear-gradient(160deg,rgba(28,40,96,.62),rgba(9,14,40,.8) 68%);border:1px solid rgba(170,190,255,.22);border-radius:18px;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 16px 44px -20px rgba(0,0,12,.95),0 0 0 1px rgba(8,12,36,.5);-webkit-backdrop-filter:blur(12px) saturate(1.25);backdrop-filter:blur(12px) saturate(1.25)}
+html[data-skin="Luna"] .card{border:1px solid color-mix(in srgb,var(--c) 42%,rgba(170,190,255,.22));background:linear-gradient(160deg,color-mix(in srgb,var(--c) 16%,rgba(14,20,56,.84)),rgba(8,12,36,.86) 70%)}
+html[data-skin="Luna"] .card:hover{border-color:color-mix(in srgb,var(--c) 70%,#cddaff);box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 18px 48px -18px color-mix(in srgb,var(--c) 60%,transparent)}
+html[data-skin="Luna"] .foundcard,html[data-skin="Luna"] .idguide{border-color:rgba(205,218,255,.5)}
+html[data-skin="Luna"] .btn,html[data-skin="Luna"] .tabs button,html[data-skin="Luna"] .pill,html[data-skin="Luna"] .heart,html[data-skin="Luna"] .path{background:rgba(160,185,255,.07);border:1px solid rgba(170,190,255,.3);border-radius:999px;color:#dbe4ff}
+html[data-skin="Luna"] .path{border-radius:16px}
+html[data-skin="Luna"] .btn:hover,html[data-skin="Luna"] .tabs button:hover,html[data-skin="Luna"] .path:hover{border-color:#cddaff;box-shadow:0 0 22px -4px rgba(160,185,255,.6)}
+html[data-skin="Luna"] .tabs button{font-size:20px;padding:8px 20px}
+html[data-skin="Luna"] .tabs button[aria-selected="true"]{background:linear-gradient(135deg,#f4f8ff,#a9bcf5);color:#0a1030;border-color:transparent;box-shadow:0 0 28px -2px rgba(170,195,255,.7),0 4px 16px rgba(0,0,20,.5)}
+html[data-skin="Luna"] .path[aria-pressed="true"]{background:linear-gradient(160deg,rgba(60,80,170,.55),rgba(24,32,90,.7));border-color:#cddaff;box-shadow:0 0 26px -6px rgba(170,195,255,.7)}
+html[data-skin="Luna"] .btn.primary{background:linear-gradient(135deg,#ffc9da,#ff8aae);color:#3a0b1d;border-color:transparent;font-weight:700;box-shadow:0 0 26px -6px rgba(255,138,174,.85),0 6px 18px rgba(0,0,20,.45)}
+html[data-skin="Luna"] .btn.primary:hover{box-shadow:0 0 34px -4px rgba(255,138,174,1),0 6px 18px rgba(0,0,20,.45)}
+html[data-skin="Luna"] .pill.warn{color:#ffd29a;border-color:rgba(255,180,84,.5)}
+html[data-skin="Luna"] .seg{background:rgba(10,16,48,.7);border-color:rgba(170,190,255,.3)}
+html[data-skin="Luna"] .seg button[aria-pressed="true"]{background:linear-gradient(135deg,#f4f8ff,#a9bcf5);color:#0a1030}
+html[data-skin="Luna"] input[type=text],html[data-skin="Luna"] input[type=search],html[data-skin="Luna"] select,html[data-skin="Luna"] textarea,html[data-skin="Luna"] #rq{background:rgba(6,10,32,.7);border:1px solid rgba(170,190,255,.3);border-radius:12px;color:#eef2ff}
+html[data-skin="Luna"] input::placeholder,html[data-skin="Luna"] textarea::placeholder{color:#7f8cb8}
+html[data-skin="Luna"] .note{border-left:2px solid rgba(255,138,174,.6);color:#aab6df}
+html[data-skin="Luna"] #topnote{border-left-color:rgba(255,138,174,.6)}
+html[data-skin="Luna"] .sos{background:rgba(3,5,18,.78);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+html[data-skin="Luna"] .sosbox,html[data-skin="Luna"] .aboutdlg{background:linear-gradient(165deg,rgba(24,34,86,.97),rgba(8,12,36,.98) 72%);border:1px solid rgba(170,190,255,.3);box-shadow:0 30px 80px -20px rgba(0,0,20,.95),0 0 60px -20px rgba(130,160,255,.45)}
+html[data-skin="Luna"] .foot .fine,html[data-skin="Luna"] .foot{color:#9aa7d4}
+html[data-skin="Luna"] .foot{border-top:1px solid rgba(170,190,255,.2)}
+html[data-skin="Luna"] .resbody blockquote{border-left-color:#ff8aae}
+html[data-skin="Luna"] .resbody a,html[data-skin="Luna"] .restoc a,html[data-skin="Luna"] a{color:#cddaff}
+html[data-skin="Luna"] .btn.primary,html[data-skin="Luna"] a.btn.primary{color:#3a0b1d}
+html[data-skin="Luna"] #pat-link{color:#ffc2d4;border-color:rgba(255,138,174,.6)}
+#cv-dlg{z-index:110}.cvlist{display:grid;gap:8px;max-height:56vh;overflow:auto;padding-right:4px}
+.cvrow{display:grid;grid-template-columns:40px 1fr;gap:12px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:10px 12px;background:var(--surface2,var(--surface))}
+.cvrow .cvi{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:18px;border:1px solid var(--line);color:var(--mute)}
+.cvrow b{display:block;font-size:15px}.cvrow .cvd{display:block;font-size:13px;color:var(--mute);margin-top:2px}.cvrow em{display:block;font-style:normal;font-size:12px;color:var(--mute);margin-top:3px}
+.cvrow.got{border-color:var(--accent)}.cvrow.got .cvi{background:var(--accent);color:var(--accent-ink,#111);border-color:var(--accent)}
+.cvrow.lock{opacity:.8}.cvrow.sec .cvi{border-style:dashed}
+.cvtoast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:140;max-width:min(92vw,420px);background:var(--surface);color:var(--ink);border:1px solid var(--accent);border-radius:14px;padding:10px 16px;font-size:14px;box-shadow:0 8px 30px rgba(0,0,0,.35);text-align:center;cursor:pointer}
+.cvtoast small{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-bottom:2px}
+@media (prefers-reduced-motion:no-preference){html:not(.calm) .cvtoast{animation:cvin .35s ease-out}}@keyframes cvin{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translate(-50%,0)}}
 </style>
 
 <div class="wrap">
@@ -549,7 +633,7 @@ html[data-skin="Black"]{--selc:#ffffff}
       <p>Your guide to the whole Luna Sleep catalog. See what to play next, search every track, try color combinations, and build sessions of your own.</p>
     </div>
     <div class="topr">
-      <button type="button" class="btn" id="set-open">&#9881; Settings</button>
+      <button type="button" class="btn" id="set-open">&#9776; Menu <span class="pill" id="menu-dot" hidden>New</span></button>
       <div class="seg" role="group" aria-label="View mode">
         <button type="button" id="m-listener" aria-pressed="true">Listener view</button>
         <button type="button" id="m-tinker" aria-pressed="false">Tinker mode</button>
@@ -576,13 +660,7 @@ html[data-skin="Black"]{--selc:#ffffff}
 
   <footer class="foot" id="foot">
     <div class="footbtns">
-      <button type="button" class="btn" id="den-open">Welcome and safety</button>
-      <button type="button" class="btn" id="about-open">About this app</button>
-      <button type="button" class="btn" id="new-open">What's new <span class="pill" id="new-dot" hidden>New</span></button>
-      <button type="button" class="btn" id="help-open">Help and bug reports</button>
-      <button type="button" class="btn" id="io-open">Save and restore</button>
-      <a class="btn" id="pat-link" href="https://www.patreon.com/PrimalLunaSleep" target="_blank" rel="noopener noreferrer">Join on Patreon &#8599;</a>
-      <a class="btn" id="dc-link" href="https://discord.gg/Tn6F9ZeSFy" target="_blank" rel="noopener noreferrer">Join the Discord &#8599;</a>
+      <button type="button" class="btn" id="res-open">Resources</button>
     </div>
     <p class="fine">The Emergency Exit button can be dragged anywhere on the screen. <button type="button" class="linkbtn" id="sos-reset">Put it back</button></p>
   </footer>
@@ -662,8 +740,16 @@ html[data-skin="Black"]{--selc:#ffffff}
 <div class="sos" id="set-dlg" role="dialog" aria-modal="true" aria-labelledby="set-h" hidden>
   <div class="aboutdlg helpbox" id="set-dlg-box" tabindex="-1">
     <button type="button" class="btn sosx" id="set-close">Close</button>
-    <h2 id="set-h">Settings</h2>
-    <p class="note">These save on this device only.</p>
+    <h2 id="set-h">Menu</h2>
+    <div class="setrow" id="set-links"><h3>Help and info</h3><div class="footbtns" id="set-linkbtns">      <button type="button" class="btn" id="den-open">Welcome and safety</button>
+      <button type="button" class="btn" id="about-open">About this app</button>
+      <button type="button" class="btn" id="new-open">What's new <span class="pill" id="new-dot" hidden>New</span></button>
+      <button type="button" class="btn" id="cv-open">Achievements <span class="pill" id="cv-count"></span></button>
+      <button type="button" class="btn" id="help-open">Help and bug reports</button>
+      <button type="button" class="btn" id="io-open">Save and restore</button>
+      <a class="btn" id="pat-link" href="https://www.patreon.com/PrimalLunaSleep" target="_blank" rel="noopener noreferrer">Join on Patreon &#8599;</a>
+      <a class="btn" id="dc-link" href="https://discord.gg/Tn6F9ZeSFy" target="_blank" rel="noopener noreferrer">Join the Discord &#8599;</a></div></div>
+    <div class="setrow"><h3>Settings</h3><p class="note">These save on this device only.</p></div>
     <div class="setrow"><h3>Theme</h3><p class="note">Colors the app to match an album, or follows your device's light and dark setting.</p><div id="set-theme"><div class="themebar"><label for="theme-sel">Theme</label><select id="theme-sel"></select></div></div></div>
     <div class="setrow"><h3>Adult content</h3><p class="note">SFW hides the adult tracks, paths and identities. NSFW shows them. You must be 18 or older to turn it on.</p><div id="set-adult"><button type="button" class="btn" id="adult-btn" aria-pressed="false"></button></div></div>
     <div class="setrow"><h3>Trigger words</h3><p class="note">Hidden keeps the trigger words for tracks that are not out yet under wraps. Shown reveals them.</p><div id="set-trig"><button type="button" class="btn" id="trig-btn" aria-pressed="false"></button>
@@ -673,13 +759,23 @@ html[data-skin="Black"]{--selc:#ffffff}
     <div class="setrow"><h3>Emergency Exit</h3><p class="note">The button can be dragged anywhere. If it ends up somewhere awkward, put it back in its original spot.</p><button type="button" class="btn" id="set-sosreset">Put the Emergency Exit button back</button></div>
   </div>
 </div>
+<div class="sos" id="cv-dlg" role="dialog" aria-modal="true" aria-labelledby="cv-h" hidden>
+  <div class="aboutdlg helpbox" id="cv-dlg-box" tabindex="-1">
+    <button type="button" class="btn sosx" id="cv-close">Close</button>
+    <h2 id="cv-h">Achievements</h2>
+    <p class="note">Just for fun. No points, no levels. They save on this device and in your backups.</p>
+    <p class="mono" id="cv-sum" style="font-size:13px;color:var(--mute);margin:0 0 10px"></p>
+    <div id="cv-list" class="cvlist"></div>
+  </div>
+</div>
+<div id="cv-toast" class="cvtoast" role="status" aria-live="polite" hidden></div>
 <div class="sos" id="new-dlg" role="dialog" aria-modal="true" aria-labelledby="new-h" hidden>
   <div class="aboutdlg helpbox" id="new-dlg-box" tabindex="-1">
     <button type="button" class="btn sosx" id="new-close">Close</button>
     <h2 id="new-h">What's new</h2>
     <p class="note">Every change to the app, newest first. Scroll to see older ones.</p>
     <div id="new-log" tabindex="0" role="region" aria-label="Change log" style="max-height:52vh;overflow:auto;padding-right:6px"></div>
-    <label class="chk" style="margin-top:14px"><input type="checkbox" id="new-opt"> Don't show this when I open the app. I can still find it at the bottom of the page.</label>
+    <label class="chk" style="margin-top:14px"><input type="checkbox" id="new-opt"> Don't show this when I open the app. I can still find it in the Menu.</label>
   </div>
 </div>
 <div class="sos" id="io-dlg" role="dialog" aria-modal="true" aria-labelledby="io-h" hidden>
@@ -844,7 +940,7 @@ const TABS=[['home','Home'],['map','Your path'],['cat','Library'],['combo','Comb
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&S.sel){S.sel=null;render();return}const tg=(e.target&&e.target.tagName)||'';if(e.key==='/'&&!/INPUT|TEXTAREA|SELECT/.test(tg)){e.preventDefault();S.tab='cat';render();const i=$('cq');if(i){i.focus();i.select()}}});
 const THEMES=[['','Auto (follow my device)'],['White','Foundation · white'],['Blue','Blue'],['Green','Green'],['Red','Red'],['Silver','Silver'],['Rose','Rose'],['Prism','Prism'],['Azure','Azure'],['Purple','Purple'],['Black','Black'],['Gold','Gold']];
 const ALBUM_ORDER=['White','Blue','Green','Red','Rose','Prism','Azure','Silver','Purple','Black','Gold'];const ordr=a=>ALBUM_ORDER.indexOf(a[0]);
-THEMES.sort((a,b)=>a[0]===''?-1:b[0]===''?1:ordr(a)-ordr(b));
+THEMES.sort((a,b)=>a[0]===''?-1:b[0]===''?1:ordr(a)-ordr(b));THEMES.push(['Luna',"Luna's Theme"]);
 function applyTheme(v){if(v)document.documentElement.setAttribute('data-album',v);else document.documentElement.removeAttribute('data-album');try{localStorage.setItem('lunaNeuroMap.album',v)}catch(e){}}
 (function(){const sel=document.getElementById('theme-sel');THEMES.forEach(([v,l])=>{const o=document.createElement('option');o.value=v;o.textContent=l;sel.append(o)});
   let v='';try{v=localStorage.getItem('lunaNeuroMap.album')||''}catch(e){}
@@ -887,11 +983,11 @@ Black:['Black · The dark anthologies','60-minute NSFW erotic and psychological 
 Gold:['Gold · The Shatterings','A Shattering is Luna Sleep\'s annual Gold event: one story told across 13 daily tracks, one a day from Dec 20 to Jan 1. Each year, Luna works through grief and a hard chapter of the creator\'s own life, written and recorded by hand by the creator alone, with no templates, as a kind of audio memoir. It uses horror and folklore to give what happened a shape you can face, name and put down, and you take part as a witness, not a patient. It is psychological horror at Heightened consent, with sudden or sharp intensity, so it is best experienced awake, in the daytime or early evening. Gold events are included with Pack Member and up, or you can buy the tracks individually or bundled in the Patreon store. Some tracks carry heads-ups about real recorded audio, so read each track\'s warnings first. Every Gold track ends with a grounding exit ramp in its last 2 minutes, so let it finish, and do not stack a second Gold track the same night. Headphones, never while driving or operating machinery. Entertainment and somatic regulation, not medical advice.'],
 };
 function renderTopNote(){const n=$('topnote');if(!n)return;if(!n.dataset.def)n.dataset.def=n.textContent;const a=S.tab==='cat'&&F.col&&ALBUM_NOTE[F.col];n.textContent='';n.classList.toggle('albumnote',!!a);if(a){n.append(el('b',null,a[0]+'. '),document.createTextNode(a[1]+TAIL))}else n.textContent='';n.hidden=!a}
-function applySkin(){const re=/^(White|Blue|Green|Red|Silver|Rose|Prism|Azure|Purple|Black|Gold)$/;const sel=document.getElementById('theme-sel');const v=sel?sel.value:'';const k=re.test(v)?v:(re.test(F.col||'')?F.col:'');const h=document.documentElement;if(k){h.setAttribute('data-skin',k);h.setAttribute('data-album',k)}else{h.removeAttribute('data-skin');h.removeAttribute('data-album')}}
+function applySkin(){const re=/^(White|Blue|Green|Red|Silver|Rose|Prism|Azure|Purple|Black|Gold|Luna)$/;const sel=document.getElementById('theme-sel');const v=sel?sel.value:'';const k=re.test(v)?v:(re.test(F.col||'')?F.col:'');const h=document.documentElement;if(k){h.setAttribute('data-skin',k);h.setAttribute('data-album',k)}else{h.removeAttribute('data-skin');h.removeAttribute('data-album')}}
 function render(){
   migrateK();applySkin();renderChrome();renderTopNote();renderNag();
   const v=$('view');v.textContent='';
-  ({home:viewHome,bonus:viewBonus,map:viewMap,cat:viewCat,combo:viewCombo,ideas:viewIdeas}[S.tab])(v);
+  ({home:viewHome,bonus:viewBonus,res:viewRes,map:viewMap,cat:viewCat,combo:viewCombo,ideas:viewIdeas}[S.tab])(v);
   renderSide();
   UNW=null;scrubTrig(v);scrubTrig($('side'));
 }
@@ -1046,6 +1142,48 @@ function bonusCard(b){
   if(b.spotify&&released(b.date)){const a=el('a','btn primary','▶ Listen on Spotify');a.href=b.spotify;a.target='_blank';a.rel='noopener noreferrer';a.setAttribute('aria-label','Listen to '+b.title+' on Spotify (opens in a new tab)');const r=el('div','acts');r.append(a);c.append(r)}
   return c}
 
+
+// ================= RESOURCES =================
+const RES=[{"id":"getting-started","title":"Getting started: install the app and connect Spotify","source":"Guide","date":"2026-10-22","url":"","adult":false,"summary":"How to install the Luna Sleep app on Android, iPhone and PC, how to listen through Spotify, and the first things to try.","body":"The Luna Sleep app is a guide to the whole catalog. It tells you what to play next, keeps your progress, and links out to Spotify when you are ready to listen. This page covers setup. Everything here also works from the browser without installing anything.\n\n## Install the app\n\nInstalling is optional, but the app opens faster and feels like any other app on your phone.\n\n- **Android (Chrome):** open the app link, tap the three-dot menu, then tap Install app or Add to Home screen.\n- **iPhone and iPad (Safari):** open the link in Safari, tap the Share button, scroll down and tap Add to Home Screen, then Add.\n- **Windows or Mac (Chrome or Edge):** open the link and click the install icon at the right end of the address bar. If you do not see it, open the browser menu and choose Install Luna Sleep or Install this site as an app.\n\nThe app updates itself. When a new version is ready, it tells you.\n\n## Listen through Spotify\n\nEpisodes are hosted on Patreon and play through Spotify. Link your Patreon account to Spotify, and your tier decides which episodes appear for you. After that, the Listen on Spotify buttons in the app open the episode. If a link opens empty, check the link in Patreon first.\n\nTo make a playlist, open Build a session, add your tracks in order, and use the Listen links and the Copy my list with links button. In Spotify, turn off Autoplay and shuffle, download the playlist before bed, and set the sleep timer.\n\n## Your first session\n\n- Start with the 10 White Foundation tracks. They teach your mind and body the signals every other track builds on. Anything beyond the Foundation unlocks once you have heard all ten.\n- Open Your path and pick Calm if you are unsure. Calm is Blue only, for sleep.\n- Tap any track to see what it does, how to use it safely, and how to come back down.\n- Mark tracks as heard to track your progress.\n\n## Settings and safety\n\n- Open the Menu at the top for the theme, the adult content switch, trigger words, and reduced motion. The app starts in SFW mode. Adult content is a switch you turn on yourself, and you must be 18 or older.\n- The Emergency Exit button is always on screen. You can drag it anywhere, and the Menu has a button to put it back.\n- Always listen with headphones, sitting or lying down, never while driving. This is entertainment, not medical advice.\n\n## Keep your progress\n\nYour progress, notes and custom paths are saved on your device only. Open the Menu, choose Save and restore, and save a backup file now and then. You can restore it on any device.\n\n## Something wrong?\n\nOpen the Menu and choose Help and bug reports, or join the Discord from there."}];
+const RSRC=['Reddit','Substack','Patreon','Guide'];
+function rInline(p,t){const re=/\*\*(.+?)\*\*|\*(.+?)\*|\[(.+?)\]\((https?:\/\/[^\s)]+)\)/g;let i=0,m;while((m=re.exec(t))){if(m.index>i)p.append(document.createTextNode(t.slice(i,m.index)));
+  if(m[1]!=null)p.append(el('strong',null,m[1]));else if(m[2]!=null)p.append(el('em',null,m[2]));else{const a=el('a',null,m[3]);a.href=m[4];a.target='_blank';a.rel='noopener noreferrer';p.append(a)}i=re.lastIndex}
+  if(i<t.length)p.append(document.createTextNode(t.slice(i)))}
+function rBody(md){const box=el('div','resbody'),heads=[];const blocks=md.replace(/\r/g,'').split(/\n{2,}/);
+  blocks.forEach(b=>{b=b.trim();if(!b)return;const lines=b.split('\n');
+    if(/^#{2,3} /.test(b)){const lv=b.startsWith('###')?'h4':'h3';const h=el(lv);rInline(h,b.replace(/^#{2,3} /,''));h.id='rh'+heads.length;if(lv==='h3')heads.push([h.id,h.textContent]);box.append(h)}
+    else if(/^---+$/.test(b))box.append(el('hr'));
+    else if(lines.every(l=>/^[-*] /.test(l))){const u=el('ul');lines.forEach(l=>{const li=el('li');rInline(li,l.replace(/^[-*] /,''));u.append(li)});box.append(u)}
+    else if(lines.every(l=>/^\d+\. /.test(l))){const u=el('ol');lines.forEach(l=>{const li=el('li');rInline(li,l.replace(/^\d+\. /,''));u.append(li)});box.append(u)}
+    else if(lines.every(l=>/^> ?/.test(l))){const q=el('blockquote');rInline(q,lines.map(l=>l.replace(/^> ?/,'')).join(' '));box.append(q)}
+    else{const p=el('p');lines.forEach((l,i)=>{if(i)p.append(el('br'));rInline(p,l)});box.append(p)}});
+  return [box,heads]}
+const rMins=r=>Math.max(1,Math.round(r.body.split(/\s+/).length/200));
+const rDate=d=>{try{return new Date(d+'T12:00:00').toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'})}catch(e){return d}};
+function viewRes(v){
+  const vis=RES.filter(r=>adultOK()||!r.adult);const hid=RES.length-vis.length;
+  if(S.resOpen){const r=RES.find(x=>x.id===S.resOpen);if(r&&(adultOK()||!r.adult)){
+    const p=el('section','panel resart');p.append(btn('← All resources',()=>{S.resOpen=null;render();window.scrollTo({top:0})},'small'));
+    p.append(el('h2',null,r.title));const m=el('div','resmeta');m.append(el('span','pill',r.source),el('span','pill',rDate(r.date)),el('span','pill',rMins(r)+' min read'));if(r.adult)m.append(el('span','pill warn','NSFW'));p.append(m);
+    const [box,heads]=rBody(r.body);
+    if(heads.length>2){const d=el('details','restoc');d.append(el('summary',null,'In this article'));const ul=el('ul');heads.forEach(([id,t])=>{const li=el('li');const a=el('a',null,t);a.href='#'+id;a.onclick=e=>{e.preventDefault();const n=document.getElementById(id);if(n)n.scrollIntoView({behavior:'smooth',block:'start'})};li.append(a);ul.append(li)});d.append(ul);p.append(d)}
+    p.append(box);
+    const f=el('div','acts');if(r.url){const a=el('a','btn','Read the original on '+r.source+' ↗');a.href=r.url;a.target='_blank';a.rel='noopener noreferrer';f.append(a)}
+    f.append(btn('← All resources',()=>{S.resOpen=null;render();window.scrollTo({top:0})}));p.append(f);v.append(p);return}
+    S.resOpen=null}
+  const h=el('section','home-hero');h.append(el('h2',null,'Resources'),el('p',null,'Articles and guides about Luna Sleep, gathered in one place so you can read the full version here without hunting across Reddit, Substack and Patreon.'));v.append(h);
+  const p=el('section','panel');
+  const lb=el('label','lbl','Search resources');lb.htmlFor='rq';const q=el('input');q.type='search';q.id='rq';q.placeholder='Search titles and text';q.value=S.resQ||'';q.oninput=()=>{S.resQ=q.value;rerenderKeep('rq',q.selectionStart)};p.append(lb,q);
+  const chips=el('div','paths');chips.setAttribute('role','group');chips.setAttribute('aria-label','Source');
+  ['All'].concat(RSRC.filter(s=>RES.some(r=>r.source===s))).forEach(s=>{const b=el('button','path');b.type='button';b.setAttribute('aria-pressed',String((S.resSrc||'All')===s));b.append(el('b',null,s));b.onclick=()=>{S.resSrc=s;render()};chips.append(b)});p.append(chips);
+  const qq=(S.resQ||'').trim().toLowerCase();
+  const list=vis.filter(r=>((S.resSrc||'All')==='All'||r.source===S.resSrc)&&(!qq||(r.title+' '+r.summary+' '+r.body).toLowerCase().includes(qq))).sort((a,b)=>a.date<b.date?1:-1);
+  p.append(el('p','note','Showing '+list.length+' of '+vis.length+' resource'+(vis.length===1?'':'s')+'.'+(hid?' '+hid+' NSFW resource'+(hid===1?' is':'s are')+' hidden in SFW mode. Turn on NSFW in the Menu to see '+(hid===1?'it':'them')+'.':'')));
+  if(!list.length)p.append(el('p','empty','Nothing matches. Clear the search or pick another source.'));
+  const g=el('div','reslist');
+  list.forEach(r=>{const c=el('article','card reslist-item');c.append(el('h3',null,r.title));const m=el('div','resmeta');m.append(el('span','pill',r.source),el('span','pill',rDate(r.date)),el('span','pill',rMins(r)+' min read'));if(r.adult)m.append(el('span','pill warn','NSFW'));c.append(m,el('p',null,r.summary));
+    const a=el('div','acts');a.append(btn('Read',()=>{S.resOpen=r.id;render();window.scrollTo({top:0})},'primary'));c.append(a);g.append(c)});
+  p.append(g);v.append(p)}
 function viewBonus(v){
   const h=el('section','home-hero');h.append(el('h2',null,'Bonus episodes'),el('p',null,'Extras outside the numbered catalogue: one-shots, specials and surprises. Each one stands on its own.'));v.append(h);
   const g=el('div','grid wide2');BONUS.forEach(b=>g.append(bonusCard(b)));v.append(g);
@@ -1563,12 +1701,12 @@ function sosClose(){$('sos').hidden=true;document.body.style.overflow='';try{sos
 $('sos-open').onclick=sosOpen;$('sos-close').onclick=sosClose;
 $('sos').addEventListener('click',e=>{if(e.target.id==='sos')sosClose()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('sos').hidden){e.stopPropagation();sosClose()}},true);
-function backup(){return JSON.stringify({app:'luna-sleep',v:2,saved:new Date().toISOString(),path:S.path,done:S.done,kdone:S.kdone,edits:S.edits,ideas:S.ideas,seq:S.seq,notes:S.notes||{},custom:S.custom||[],identity:S.identity||''})}
+function backup(){return JSON.stringify({app:'luna-sleep',v:2,saved:new Date().toISOString(),path:S.path,done:S.done,kdone:S.kdone,edits:S.edits,ideas:S.ideas,seq:S.seq,notes:S.notes||{},custom:S.custom||[],identity:S.identity||'',cheevos:(window.cvGet?window.cvGet():{})})}
 function markBackup(){S.lastBackup=Date.now();save();render()}
 function doRestore(txt,msg){try{const x=JSON.parse(txt);
   if(!x||typeof x!=='object')throw 0;S.custom=Array.isArray(x.custom)?x.custom.filter(c=>c&&typeof c.id==='string'&&Array.isArray(c.ids)).map(c=>({id:c.id.slice(0,24),name:String(c.name||'My path').slice(0,40),ids:c.ids.filter(i=>typeof i==='string')})):S.custom;S.cedit=false;
   S.path=['Calm','Focus','Balanced','SFW'].includes(x.path)||(ADULT_PATHS.includes(x.path)&&S.fullOk)||(/^c:/.test(x.path||'')&&S.custom.some(c=>'c:'+c.id===x.path))?x.path:S.path;
-  S.identity=IDENT[x.identity]?x.identity:'';S.done=x.done||{};S.kdone=x.kdone||{};S.edits=x.edits||{};S.ideas=Array.isArray(x.ideas)?x.ideas:[];S.seq=Array.isArray(x.seq)?x.seq:[];S.notes=(x.notes&&typeof x.notes==='object')?x.notes:{};S.lastBackup=Date.now();save();render();msg.textContent='Restored. '+Object.keys(S.done).length+' tracks marked heard.'}catch(e){msg.textContent='That does not look like a valid backup.'}}
+  S.identity=IDENT[x.identity]?x.identity:'';S.done=x.done||{};S.kdone=x.kdone||{};S.edits=x.edits||{};S.ideas=Array.isArray(x.ideas)?x.ideas:[];S.seq=Array.isArray(x.seq)?x.seq:[];S.notes=(x.notes&&typeof x.notes==='object')?x.notes:{};if(x.cheevos&&window.cvSet)window.cvSet(x.cheevos);S.lastBackup=Date.now();save();render();msg.textContent='Restored. '+Object.keys(S.done).length+' tracks marked heard.'}catch(e){msg.textContent='That does not look like a valid backup.'}}
 let DL=null;(async()=>{try{DL=window.claude&&window.claude.use?await window.claude.use('downloads'):null}catch(e){DL=null}})();
 $('io-save').onclick=async()=>{const msg=$('io-msg');const t=$('io-text');t.value=backup();
   const nm='luna-sleep-backup-'+new Date().toISOString().slice(0,10)+'.json';
@@ -1590,15 +1728,15 @@ $('about-open').onclick=open;$('about-open2').onclick=open;$('about-close').oncl
 ab.addEventListener('click',e=>{if(e.target===ab)close()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!ab.hidden){e.stopPropagation();close()}},true)})();
 
-(function(){[['help-dlg','help-open','help-close','help-box'],['io-dlg','io-open','io-close','io-box'],['new-dlg','new-open','new-close','new-box'],['set-dlg','set-open','set-close','set-box']].forEach(([d,o,c])=>{const dl=$(d);let from=null;
+(function(){[['help-dlg','help-open','help-close','help-box'],['io-dlg','io-open','io-close','io-box'],['new-dlg','new-open','new-close','new-box'],['cv-dlg','cv-open','cv-close','cv-box'],['set-dlg','set-open','set-close','set-box']].forEach(([d,o,c])=>{const dl=$(d);let from=null;
 function open(){from=document.activeElement;dl.hidden=false;document.body.style.overflow='hidden';dl.scrollTop=0;$(d+'-box').scrollTop=0;$(d+'-box').focus()}
 function close(){dl.hidden=true;if($('den').hidden&&$('about').hidden)document.body.style.overflow='';if(from&&from.focus)try{from.focus()}catch(e){}}
 $(o).onclick=open;$(c).onclick=close;dl.addEventListener('click',e=>{if(e.target===dl)close()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!dl.hidden){e.stopPropagation();close()}},true)})})();
-(function(){const LOG=[{"d": "October 22, 2026", "i": ["Swiping back, or pressing the back button, now closes the open menu or track panel instead of leaving the app.", "A Settings menu holds the theme, the adult content toggle, trigger words, reduced motion and more.", "Join the Discord button added at the bottom of the page.", "Build a session now has Listen links for each track, plus a button that copies your list with links, to help you make a Spotify playlist.", "Notes explaining that Spotify episodes need your Patreon linked to Spotify.", "This What's new log. It opens when you open the app unless you turn that off in Settings, and it keeps every change."]}, {"d": "Earlier in October 2026", "i": ["Your Path has new paths: Submissive (was Red), Obedient Wolf, SFW and NSFW (was Full). The order is Calm, Focus, Submissive, Balanced, Obedient Wolf, SFW, NSFW.", "Build your own path with no restrictions. It saves on your device and in your backups.", "The Emergency Exit button can be dragged anywhere, so it never blocks the screen.", "Welcome and safety, About this app, Help and bug reports, Save and restore and Join on Patreon moved to the bottom. Help and Save and restore are now pop-ups.", "Notes and bug reports can be sent straight to me from the web or installed app.", "The installed app checks for updates when you open it and tells you when a new version is ready."]}],LOGV='2026-10-22c';
+(function(){const LOG=[{"d": "October 22, 2026", "i": ["Achievements: a short list of small milestones to unlock, like hearing all 10 Foundation tracks. No points or levels, just a bit of fun. Find it in the Menu.","The links that sat at the bottom of the page (Welcome and safety, About this app, What's new, Help and bug reports, Save and restore, Join on Patreon and Join the Discord) now live in a new Menu at the top, together with the settings. Resources moved to the bottom of the page.","A new Resources section holds full-length articles and guides about Luna Sleep, so you can read them here instead of hunting across Reddit, Substack and Patreon. The first one covers installing the app and connecting Spotify.","Fixed: pressing Tab inside a pop-up no longer jumps to the page behind it.","Swiping back, or pressing the back button, now closes the open menu or track panel instead of leaving the app.", "A Settings menu holds the theme, the adult content toggle, trigger words, reduced motion and more.", "Join the Discord button added.", "Build a session now has Listen links for each track, plus a button that copies your list with links, to help you make a Spotify playlist.", "Notes explaining that Spotify episodes need your Patreon linked to Spotify.", "This What's new log. It opens when you open the app unless you turn that off in the Menu, and it keeps every change."]}, {"d": "Earlier in October 2026", "i": ["Your Path has new paths: Submissive (was Red), Obedient Wolf, SFW and NSFW (was Full). The order is Calm, Focus, Submissive, Balanced, Obedient Wolf, SFW, NSFW.", "Build your own path with no restrictions. It saves on your device and in your backups.", "The Emergency Exit button can be dragged anywhere, so it never blocks the screen.", "Welcome and safety, About this app, Help and bug reports, Save and restore and Join on Patreon moved to the bottom. Help and Save and restore are now pop-ups.", "Notes and bug reports can be sent straight to me from the web or installed app.", "The installed app checks for updates when you open it and tells you when a new version is ready."]}],LOGV='2026-10-22g';
 const lg=$('new-log');LOG.forEach(g=>{const h=document.createElement('h3');h.textContent=g.d;const u=document.createElement('ul');g.i.forEach(t=>{const l=document.createElement('li');l.textContent=t;u.append(l)});lg.append(h,u)});
 const NK='lunaSleep.newSeen',NV=LOGV,dot=$('new-dot'),ob=$('new-open');let seen='';try{seen=localStorage.getItem(NK)||''}catch(e){}
-if(seen!==NV)dot.hidden=false;ob.addEventListener('click',()=>{dot.hidden=true;try{localStorage.setItem(NK,NV)}catch(e){}})})();
+if(seen!==NV){dot.hidden=false;$('menu-dot').hidden=false}ob.addEventListener('click',()=>{dot.hidden=true;$('menu-dot').hidden=true;try{localStorage.setItem(NK,NV)}catch(e){}})})();
 (function(){const f=$('sos-open'),PK='lunaSleep.sosPos';let pos=null,drag=null,moved=false;
 try{pos=JSON.parse(localStorage.getItem(PK)||'null')}catch(e){}
 function lim(){return{w:Math.max(0,innerWidth-f.offsetWidth-6),h:Math.max(0,innerHeight-f.offsetHeight-6)}}
@@ -1640,15 +1778,63 @@ no.checked=rd(OK);no.onchange=()=>{wr(OK,no.checked);$('new-opt').checked=no.che
 $('set-open').addEventListener('click',()=>{calm.checked=rd(CK);no.checked=rd(OK)});
 $('new-opt').addEventListener('change',()=>{no.checked=$('new-opt').checked});
 $('set-sosreset').onclick=()=>$('sos-reset').click()})();
-(function(){const DL=[['sos','sos-close'],['new-dlg','new-close'],['set-dlg','set-close'],['help-dlg','help-close'],['io-dlg','io-close'],['about','about-close']];
+(function(){const CK='lunaSleep.cheevos',IK='lunaSleep.cheevoInit';
+const heard=()=>Object.keys(S.done||{}).filter(k=>S.done[k]).length;
+const LIST=[
+{id:'first',n:'First steps',d:'Mark your first track as heard.',t:()=>heard()>=1,i:'\u2726'},
+{id:'half',n:'Halfway down',d:'Hear 5 of the 10 Foundation tracks.',t:()=>foundCount()>=5,i:'\u25D0'},
+{id:'found',n:'The Foundation',d:'Hear all 10 Foundation tracks.',t:()=>foundCount()>=FOUND_IDS.length,i:'\u25CF'},
+{id:'ten',n:'Ten and counting',d:'Mark 10 tracks as heard.',t:()=>heard()>=10,i:'\u2162'},
+{id:'deep',n:'Deep listener',d:'Mark 25 tracks as heard.',t:()=>heard()>=25,i:'\u2161'},
+{id:'ident',n:'Know thyself',d:'Choose an identity.',t:()=>!!S.identity,i:'\u2740'},
+{id:'mine',n:'Your own way',d:'Build your own path.',t:()=>(S.custom||[]).length>=1,i:'\u2192'},
+{id:'build',n:'Session architect',d:'Save a session you built.',t:()=>(S.ideas||[]).some(x=>x.kind==='build'),i:'\u266B'},
+{id:'read',n:'Bookworm',d:'Open an article in Resources.',t:()=>S.tab==='res'&&!!S.resOpen,i:'\u2637'},
+{id:'wear',n:'New look',d:'Try a theme other than the default.',t:()=>{const v=($('theme-sel')||{}).value;return !!v},i:'\u25D1'},
+{id:'safe',n:'Safe and sound',d:'Save a backup of your progress.',t:()=>!!S.lastBackup,i:'\u2713'},
+{id:'luna',n:'Moonlit',d:'Found the secret theme.',secret:true,t:()=>($('theme-sel')||{}).value==='Luna',i:'\u263E'}
+];
+function rd(){try{const o=JSON.parse(localStorage.getItem(CK)||'{}');return o&&typeof o==='object'?o:{}}catch(e){return{}}}
+function wr(o){try{localStorage.setItem(CK,JSON.stringify(o))}catch(e){}}
+window.cvGet=()=>rd();
+window.cvSet=o=>{const c=rd();Object.keys(o||{}).forEach(k=>{if(LIST.some(a=>a.id===k)&&(!c[k]||(+o[k]||0)<c[k]))c[k]=+o[k]||Date.now()});wr(c)};
+let first=false;try{first=!localStorage.getItem(IK)}catch(e){}
+let tt=null;
+function toast(items){const t=$('cv-toast');t.textContent='';const sm=document.createElement('small');sm.textContent=items.length>1?'Achievements unlocked':'Achievement unlocked';const b=document.createElement('b');b.textContent=items.map(a=>a.n).join(', ');t.append(sm,b);t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>{t.hidden=true},5200)}
+$('cv-toast').onclick=()=>{$('cv-toast').hidden=true};
+function check(){const c=rd();const fresh=[];LIST.forEach(a=>{if(!c[a.id]){let ok=false;try{ok=!!a.t()}catch(e){}if(ok){c[a.id]=Date.now();fresh.push(a)}}});
+ if(fresh.length){wr(c);if(!first)toast(fresh)}
+ if(first){first=false;try{localStorage.setItem(IK,'1')}catch(e){}}
+ const n=LIST.filter(a=>c[a.id]).length;const cc=$('cv-count');if(cc)cc.textContent=n+'/'+LIST.length}
+function draw(){const c=rd();const box=$('cv-list');box.textContent='';let n=0;
+ LIST.forEach(a=>{const got=!!c[a.id];if(got)n++;const r=document.createElement('div');r.className='cvrow '+(got?'got':'lock')+(a.secret?' sec':'');
+  const ic=document.createElement('div');ic.className='cvi';ic.setAttribute('aria-hidden','true');ic.textContent=got?a.i:(a.secret?'?':'\u25CB');
+  const bd=document.createElement('div');const b=document.createElement('b');b.textContent=(a.secret&&!got)?'???':a.n;const d=document.createElement('span');d.className='cvd';d.textContent=(a.secret&&!got)?'???':a.d;bd.append(b,d);
+  if(got){const e=document.createElement('em');e.textContent='Unlocked '+new Date(c[a.id]).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});bd.append(e)}
+  r.append(ic,bd);box.append(r)});
+ $('cv-sum').textContent=n+' of '+LIST.length+' unlocked'}
+$('cv-open').addEventListener('click',()=>{check();draw()});
+const sel=$('theme-sel');if(sel)sel.addEventListener('change',check);
+const _r=render;render=function(){const r=_r.apply(this,arguments);check();return r};
+check()})();
+(function(){const DL=[['sos','sos-close'],['new-dlg','new-close'],['cv-dlg','cv-close'],['set-dlg','set-close'],['help-dlg','help-close'],['io-dlg','io-close'],['about','about-close']];
 let depth=0,ignore=0;const narrow=()=>window.matchMedia('(max-width:980px)').matches;
-const count=()=>DL.filter(([d])=>{const e=$(d);return e&&!e.hidden}).length+((S.sel&&narrow())?1:0);
-function sync(){const n=count();try{while(depth<n){history.pushState({luna:depth+1},'');depth++}
+const count=()=>DL.filter(([d])=>{const e=$(d);return e&&!e.hidden}).length+((S.sel&&narrow())?1:0)+((S.tab==='res'&&S.resOpen)?1:0);
+let st=null;function sync(){clearTimeout(st);st=setTimeout(doSync,30)}
+function doSync(){const n=count();try{while(depth<n){history.pushState({luna:depth+1},'');depth++}
  if(depth>n){depth=n;ignore++;history.go(-1)}}catch(e){}}
-function closeTop(){for(const [d,c] of DL){const e=$(d);if(e&&!e.hidden){$(c).click();return}}if(S.sel){S.sel=null;render()}}
+function closeTop(){for(const [d,c] of DL){const e=$(d);if(e&&!e.hidden){$(c).click();return}}if(S.sel){S.sel=null;render();return}if(S.tab==='res'&&S.resOpen){S.resOpen=null;render()}}
 window.addEventListener('popstate',()=>{if(ignore>0){ignore--;return}if(depth>0){depth--;closeTop();sync()}});
 const mo=new MutationObserver(sync);DL.forEach(([d])=>{const e=$(d);if(e)mo.observe(e,{attributes:true,attributeFilter:['hidden']})});
 const _r=render;render=function(){const r=_r.apply(this,arguments);sync();return r}})();
+(function(){const IDS=['sos','new-dlg','cv-dlg','set-dlg','help-dlg','io-dlg','about'];
+document.addEventListener('keydown',e=>{if(e.key!=='Tab')return;const d=IDS.map($).find(x=>x&&!x.hidden);if(!d)return;
+const f=[...d.querySelectorAll('a[href],button,input,select,textarea,[tabindex]:not([tabindex="-1"])')].filter(x=>!x.disabled&&!x.hidden&&x.offsetParent&&!x.closest('[hidden]'));
+if(!f.length){e.preventDefault();return}const a=f[0],z=f[f.length-1],cur=document.activeElement;
+if(!d.contains(cur)||cur.classList.contains('aboutdlg')||cur.classList.contains('sosbox')||cur.classList.contains('helpbox')){e.preventDefault();(e.shiftKey?z:a).focus();return}
+if(e.shiftKey&&cur===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&cur===z){e.preventDefault();a.focus()}},true)})();
+(function(){const bx=$('set-linkbtns');bx.addEventListener('click',e=>{const b=e.target.closest('button');if(b&&b.id!=='')$('set-close').click()},true);
+$('res-open').onclick=()=>{S.tab='res';S.resOpen=null;render();window.scrollTo({top:0})}})();
 render();
 </script>
 

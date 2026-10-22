@@ -8,9 +8,7 @@ FILES
   index.html            the app
   manifest.webmanifest  name, colors and icons (this is what makes it installable)
   sw.js                 lets it open offline and load fast
-  icon-*.png, maskable-512.png, apple-touch-icon.png   app icons
-
-UPLOAD ALL 8 FILES at the top level (no folders). On GitHub: Add file > Upload files, select every file here at once, commit.
+                  app icons
 
 PUT IT ONLINE (any one of these, all free)
   Netlify:       drag this folder onto app.netlify.com/drop, then (optional) attach your own domain.
