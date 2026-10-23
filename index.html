@@ -710,6 +710,43 @@ html[data-skin="Cutie"] .note{border-left:3px solid #ff9ecf;color:#7d5390}
 html[data-skin="Cutie"] #topnote{border-left-color:#ff9ecf}
 html[data-skin="Cutie"] .cwbox{border-left-color:#d33389;border-radius:18px}
 html[data-skin="Cutie"] .sos{background:rgba(90,40,110,.5);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+
+/* Gold, softened: champagne instead of polished metal */
+html[data-skin="Gold"]{--bg:#fbf5e6;--surface:#fffcf3;--surface2:#f6ecd0;--line:#e6d6a6;--accent:#8f6a12;--selc:#c9a24a}
+html[data-skin="Gold"] body{background:radial-gradient(900px 520px at 10% -6%,rgba(236,208,128,.3),transparent 62%),radial-gradient(760px 460px at 96% 6%,rgba(255,244,214,.7),transparent 60%),linear-gradient(180deg,#fbf5e6,#f6ecd2) fixed}
+html[data-skin="Gold"] .card,html[data-skin="Gold"] .fbar,html[data-skin="Gold"] .rescard,html[data-skin="Gold"] .side,html[data-skin="Gold"] .welcome,html[data-skin="Gold"] .foundcard,html[data-skin="Gold"] .next,html[data-skin="Gold"] .idguide{background:linear-gradient(160deg,#fffdf6,#fbf2d9);border:1px solid #e6d4a0;border-radius:24px;box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 10px 26px -18px rgba(140,100,20,.4);color:#3a2d0c}
+html[data-skin="Gold"] .card h3,html[data-skin="Gold"] h2,html[data-skin="Gold"] h3{color:#3a2d0c;text-shadow:none}
+html[data-skin="Gold"] h2{font-weight:400}
+html[data-skin="Gold"] .tt,html[data-skin="Gold"] .meta{color:#6a5628}
+html[data-skin="Gold"] .btn,html[data-skin="Gold"] .tabs button,html[data-skin="Gold"] .pill{background:#fffaea;border:1px solid #e3d09a;color:#3a2d0c;box-shadow:none}
+html[data-skin="Gold"] .tabs button[aria-selected="true"],html[data-skin="Gold"] .btn.primary{background:linear-gradient(180deg,#f0dca0,#e4c677);color:#3a2706;border-color:#cfae5c;box-shadow:0 4px 14px -8px rgba(160,110,10,.6)}
+html[data-skin="Gold"] .btn:hover,html[data-skin="Gold"] .tabs button:hover{border-color:#cfae5c}
+
+/* Gold, Tir na nOg: pearl light, mist and a low golden dawn */
+html[data-skin="Gold"]{--bg:#fdf9ef;--surface:#fffdf8;--surface2:#faf3e0;--line:#eee0b8;--accent:#8a6a1c;--mute:#7b6a43;--selc:#e0c27a}
+:root[data-album="Gold"]{--ink:#46381a}
+html[data-skin="Gold"] body{background:
+ radial-gradient(ellipse 70% 38% at 50% -4%,rgba(255,236,175,.75),rgba(255,236,175,0) 70%),
+ radial-gradient(520px 420px at 92% 18%,rgba(214,232,226,.55),transparent 70%),
+ radial-gradient(560px 420px at 4% 46%,rgba(250,224,222,.45),transparent 70%),
+ radial-gradient(ellipse 90% 26% at 50% 108%,rgba(255,240,196,.9),transparent 70%),
+ linear-gradient(180deg,#fffaf0 0%,#fbf4e2 55%,#f8f0dc 100%) fixed}
+html[data-skin="Gold"]::after{content:"";position:fixed;left:0;right:0;bottom:0;height:34vh;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,247,222,.85))}
+html[data-skin="Gold"] body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:
+ radial-gradient(3px 3px at 14% 22%,rgba(255,226,140,.95),transparent),radial-gradient(2.5px 2.5px at 78% 14%,rgba(255,226,140,.9),transparent),radial-gradient(3.5px 3.5px at 62% 38%,rgba(255,235,170,.9),transparent),radial-gradient(2px 2px at 32% 55%,rgba(255,226,140,.9),transparent),radial-gradient(3px 3px at 88% 62%,rgba(255,226,140,.85),transparent),radial-gradient(2.5px 2.5px at 8% 80%,rgba(255,235,170,.9),transparent),radial-gradient(3px 3px at 52% 84%,rgba(255,226,140,.85),transparent),radial-gradient(2px 2px at 40% 10%,rgba(255,240,190,.9),transparent);filter:drop-shadow(0 0 5px rgba(240,200,90,.7));inset:0}
+@media (prefers-reduced-motion:no-preference){html[data-skin="Gold"] body::before{inset:-6% 0;animation:tnnmotes 38s ease-in-out infinite alternate}}
+@keyframes tnnmotes{0%{transform:translateY(0);opacity:.55}50%{opacity:1}100%{transform:translateY(-3%);opacity:.6}}
+html[data-skin="Gold"] .card,html[data-skin="Gold"] .fbar,html[data-skin="Gold"] .rescard,html[data-skin="Gold"] .side,html[data-skin="Gold"] .welcome,html[data-skin="Gold"] .foundcard,html[data-skin="Gold"] .next,html[data-skin="Gold"] .idguide,html[data-skin="Gold"] .panel,html[data-skin="Gold"] .kern,html[data-skin="Gold"] .idea,html[data-skin="Gold"] .io,html[data-skin="Gold"] .restoc{background:linear-gradient(165deg,rgba(255,255,255,.88),rgba(255,248,228,.62));-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(232,208,142,.55);border-radius:28px;box-shadow:0 0 38px -12px rgba(244,214,120,.55),inset 0 0 22px rgba(255,255,255,.7);color:#46381a}
+html[data-skin="Gold"] .card h3,html[data-skin="Gold"] h2,html[data-skin="Gold"] h3{color:#4a3b1a;text-shadow:0 0 18px rgba(255,226,140,.6)}
+html[data-skin="Gold"] .card h3,html[data-skin="Gold"] .side h3{text-shadow:none}
+html[data-skin="Gold"] h2{font-weight:300}
+html[data-skin="Gold"] .top h1{background-image:linear-gradient(100deg,#b8943a,#d9bc6a 50%,#a8832e);filter:drop-shadow(0 0 14px rgba(255,226,140,.7))}
+html[data-skin="Gold"] .frow{background:rgba(255,252,240,.8);border-color:rgba(232,208,142,.5)}
+html[data-skin="Gold"] .tt,html[data-skin="Gold"] .meta,html[data-skin="Gold"] .note{color:#7b6a43}
+html[data-skin="Gold"] .btn,html[data-skin="Gold"] .tabs button,html[data-skin="Gold"] .pill{background:rgba(255,255,255,.75);border:1px solid rgba(226,200,130,.7);color:#4a3b1a;box-shadow:0 0 16px -8px rgba(240,200,90,.7)}
+html[data-skin="Gold"] .tabs button[aria-selected="true"],html[data-skin="Gold"] .btn.primary{background:linear-gradient(180deg,#fff3cc,#f3dd9c);color:#4a3406;border-color:#e0c680;box-shadow:0 0 24px -4px rgba(244,214,120,.9)}
+html[data-skin="Gold"] .btn:hover,html[data-skin="Gold"] .tabs button:hover{border-color:#d9b960}
+html[data-skin="Gold"] input[type=text],html[data-skin="Gold"] input[type=search],html[data-skin="Gold"] select,html[data-skin="Gold"] textarea,html[data-skin="Gold"] #rq{background:rgba(255,255,255,.8);border-color:rgba(226,200,130,.7)}
 </style>
 
 <div class="wrap">
