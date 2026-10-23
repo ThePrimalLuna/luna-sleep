@@ -747,6 +747,26 @@ html[data-skin="Gold"] .btn,html[data-skin="Gold"] .tabs button,html[data-skin="
 html[data-skin="Gold"] .tabs button[aria-selected="true"],html[data-skin="Gold"] .btn.primary{background:linear-gradient(180deg,#fff3cc,#f3dd9c);color:#4a3406;border-color:#e0c680;box-shadow:0 0 24px -4px rgba(244,214,120,.9)}
 html[data-skin="Gold"] .btn:hover,html[data-skin="Gold"] .tabs button:hover{border-color:#d9b960}
 html[data-skin="Gold"] input[type=text],html[data-skin="Gold"] input[type=search],html[data-skin="Gold"] select,html[data-skin="Gold"] textarea,html[data-skin="Gold"] #rq{background:rgba(255,255,255,.8);border-color:rgba(226,200,130,.7)}
+
+/* Make the Foundation the obvious first step */
+.orb.startorb{position:relative;box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--accent),0 0 22px 2px var(--glow);border-radius:18px}
+.orb.startorb span{font-weight:800}
+@media (prefers-reduced-motion:no-preference){.orb.startorb{animation:startpulse 3.2s ease-in-out infinite}}
+@keyframes startpulse{0%,100%{box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--accent),0 0 14px 0 var(--glow)}50%{box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--accent),0 0 28px 5px var(--glow)}}
+
+/* progress card, read markers */
+.progrows{display:grid;gap:8px;margin:10px 0}
+.progrow{display:grid;grid-template-columns:minmax(78px,96px) 1fr;gap:4px 10px;align-items:center;padding:8px 10px;border:1px solid var(--line);border-left:4px solid var(--c,var(--accent));border-radius:10px;background:var(--surface2)}
+.progrow .progname{justify-self:start;font-weight:700;text-align:left}
+.progrow .fprog{margin:0}
+.progrow .mono{grid-column:1/2;font-size:12px;color:var(--mute)}
+.progrow .btn{grid-column:2/3;justify-self:end}
+.progrow.here{box-shadow:0 0 0 2px var(--accent)}
+.shlab.here{display:inline-block;justify-self:start;background:var(--accent);color:var(--accent-ink);border-radius:999px;padding:2px 10px;letter-spacing:.14em}
+.reslist-item.isread{opacity:.82}
+.pill.readpill{border-color:var(--ok);color:var(--ok)}
+.readend{height:1px}
+.chk{display:inline-flex;align-items:center;gap:6px;font-size:14px}
 </style>
 
 <div class="wrap">
@@ -878,6 +898,7 @@ html[data-skin="Gold"] input[type=text],html[data-skin="Gold"] input[type=search
     <div class="setrow"><h3>Adult content</h3><p class="note">SFW hides the adult tracks, paths and identities. NSFW shows them. You must be 18 or older to turn it on.</p><div id="set-adult"><button type="button" class="btn" id="adult-btn" aria-pressed="false"></button></div></div>
     <div class="setrow"><h3>Trigger words</h3><p class="note">Hidden keeps the trigger words for tracks that are not out yet under wraps. Shown reveals them.</p><div id="set-trig"><button type="button" class="btn" id="trig-btn" aria-pressed="false"></button>
       <button type="button" class="btn" id="inst-btn" hidden>Install app</button></div></div>
+    <div class="setrow"><h3>Start marker</h3><label class="chk"><input type="checkbox" id="set-start"> Show the glowing start marker on the albums at the top. It follows your progress, or you can move it from the Your progress card.</label></div>
     <div class="setrow"><h3>Motion</h3><label class="chk"><input type="checkbox" id="set-calm"> Reduce motion. Stops the animated backgrounds and transitions.</label></div>
     <div class="setrow"><h3>What's new</h3><label class="chk"><input type="checkbox" id="set-newopt"> Don't show What's new when I open the app.</label></div>
     <div class="setrow"><h3>Emergency Exit</h3><p class="note">The button can be dragged anywhere. If it ends up somewhere awkward, put it back in its original spot.</p><button type="button" class="btn" id="set-sosreset">Put the Emergency Exit button back</button></div>
@@ -914,6 +935,7 @@ html[data-skin="Gold"] input[type=text],html[data-skin="Gold"] input[type=search
       <button type="button" class="btn" id="io-copy">Copy backup text</button>
       <button type="button" class="btn" id="io-load">Restore from text</button>
       <button type="button" class="btn" id="io-reset">Reset my progress</button>
+      <button type="button" class="btn" id="io-wipe">Reset everything (fresh start)</button>
       <button type="button" class="btn" id="io-reset-edits" hidden>Reset all edits</button>
       <span id="io-msg" class="mono" style="font-size:12px;color:var(--mute)"></span>
     </div>
@@ -962,10 +984,10 @@ const ADULT_PATHS=['Full','Red','Wolf'];
 const PNAME=k=>{const c=S.custom.find(c=>'c:'+c.id===k);return c?c.name:(PATHS.find(p=>p.k===k)||{n:k+' path'}).n};
 const PIL={B:'Blue · heart / oxytocin',G:'Green · prefrontal',R:'Red · limbic (opt-in)'};
 const KEY='lunaNeuroMap.v2';
-let S={tab:'home',path:'Balanced',custom:[],cedit:false,notes:{},done:{},kdone:{},edits:{},ideas:[],seq:[],fullOk:false,mode:'listener',sel:null,pend:null};
+let S={tab:'home',path:'Balanced',read:{},here:'',hideStart:false,custom:[],cedit:false,notes:{},done:{},kdone:{},edits:{},ideas:[],seq:[],fullOk:false,mode:'listener',sel:null,pend:null};
 try{const x=JSON.parse(localStorage.getItem(KEY)||localStorage.getItem('lunaNeuroMap.v1')||'null');if(x&&typeof x==='object')S=Object.assign(S,x,{mode:'listener',sel:null,pend:null,tab:'home',cedit:false})}catch(e){}
-if(!Array.isArray(S.custom))S.custom=[];if(/^c:/.test(S.path||'')&&!S.custom.some(c=>'c:'+c.id===S.path))S.path='Balanced';
-function save(){try{localStorage.setItem(KEY,JSON.stringify({path:S.path,done:S.done,kdone:S.kdone,edits:S.edits,ideas:S.ideas,seq:S.seq,notes:S.notes,fullOk:S.fullOk,showTrig:!!S.showTrig,identity:S.identity||'',welcomed:S.welcomed,lastBackup:S.lastBackup,custom:S.custom}))}catch(e){}}
+if(!Array.isArray(S.custom))S.custom=[];if(!S.read||typeof S.read!=='object')S.read={};if(/^c:/.test(S.path||'')&&!S.custom.some(c=>'c:'+c.id===S.path))S.path='Balanced';
+function save(){try{localStorage.setItem(KEY,JSON.stringify({path:S.path,done:S.done,kdone:S.kdone,edits:S.edits,ideas:S.ideas,seq:S.seq,notes:S.notes,fullOk:S.fullOk,showTrig:!!S.showTrig,identity:S.identity||'',welcomed:S.welcomed,lastBackup:S.lastBackup,custom:S.custom,read:S.read||{},here:S.here||'',hideStart:!!S.hideStart}))}catch(e){}}
 // view-only filter state (not saved)
 const F={q:'',cat:'',col:'',sub:'',cons:'',tier:'',sleep:'',maxI:5,sort:'date',shown:48};
 const CF={sub:'recipes',q:'',level:'',col:'',cons:'',time:'',maxI:5,maxM:999,heard:false,sort:'ready'};
@@ -1063,12 +1085,12 @@ function heartBtn(e){const on=hasIdea(e.k);const b=el('button','heart',on?'♥ S
 // ---- chrome
 const TABS=[['home','Home'],['map','Your path'],['cat','Library'],['combo','Combos'],['bonus','Bonus'],['ideas','My sessions']];
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&S.sel){S.sel=null;render();return}const tg=(e.target&&e.target.tagName)||'';if(e.key==='/'&&!/INPUT|TEXTAREA|SELECT/.test(tg)){e.preventDefault();S.tab='cat';render();const i=$('cq');if(i){i.focus();i.select()}}});
-const THEMES=[['','Auto (follow my device)'],['White','Foundation · white'],['Blue','Blue'],['Green','Green'],['Red','Red'],['Silver','Silver'],['Rose','Rose'],['Prism','Prism'],['Azure','Azure'],['Purple','Purple'],['Black','Black'],['Gold','Gold']];
+const THEMES=[['','Auto (follows the album I am viewing)'],['White','Foundation · white'],['Blue','Blue'],['Green','Green'],['Red','Red'],['Silver','Silver'],['Rose','Rose'],['Prism','Prism'],['Azure','Azure'],['Purple','Purple'],['Black','Black'],['Gold','Gold']];
 const ALBUM_ORDER=['White','Blue','Green','Red','Rose','Prism','Azure','Silver','Purple','Black','Gold'];const ordr=a=>ALBUM_ORDER.indexOf(a[0]);
 THEMES.sort((a,b)=>a[0]===''?-1:b[0]===''?1:ordr(a)-ordr(b));THEMES.push(['Luna',"Luna's Theme"],['Apex','Apex Predator'],['Cutie','Cutie']);
 function applyTheme(v){if(v)document.documentElement.setAttribute('data-album',v);else document.documentElement.removeAttribute('data-album');try{localStorage.setItem('lunaNeuroMap.album',v)}catch(e){}}
 (function(){const sel=document.getElementById('theme-sel');THEMES.forEach(([v,l])=>{const o=document.createElement('option');o.value=v;o.textContent=l;sel.append(o)});
-  let v='';try{v=localStorage.getItem('lunaNeuroMap.album')||''}catch(e){}
+  let v='',first=false;try{const q=localStorage.getItem('lunaNeuroMap.album');if(q===null)first=true;v=q||''}catch(e){}
   if(!THEMES.some(t=>t[0]===v))v='';sel.value=v;applyTheme(v);sel.onchange=()=>{applyTheme(sel.value);applySkin()}})();
 function renderChrome(){
   const tb=$('tabs');tb.textContent='';
@@ -1082,10 +1104,10 @@ function renderChrome(){
   const ab=$('adult-btn');const tb2=$('trig-btn');tb2.textContent=S.showTrig?'Trigger words: shown':'Trigger words: hidden until release';tb2.setAttribute('aria-pressed',String(!!S.showTrig));tb2.title=S.showTrig?'Click to hide trigger words until each track is released':'Click to reveal trigger words for tracks that are not out yet';
   ab.textContent=S.fullOk?'Mode: NSFW':'Mode: SFW';ab.setAttribute('aria-pressed',String(S.fullOk));
   $('gate').hidden=!S.pend;
-  const sh=$('shelf');sh.textContent='';let curG=null,curR=null;const GRP_START={White:'Start here',Blue:'Triggers',Rose:'Identity',Silver:'Stories',Gold:'Shatterings'};
+  const sh=$('shelf');sh.textContent='';let curG=null,curR=null;const hk=hereKey();const GRP_START={White:'Start here',Blue:'Triggers',Rose:'Identity',Silver:'Stories',Gold:'Shatterings'};
   [['White','Foundation'],['Blue','Blue'],['Green','Green'],['Red','Red'],['Rose','Rose'],['Prism','Prism'],['Azure','Azure'],['Silver','Silver'],['Purple','Purple'],['Black','Black'],['Gold','Gold']].forEach(([k,l])=>{
-    if(GRP_START[k]){if(sh.lastChild){const sp=el('span','shsep');sp.setAttribute('aria-hidden','true');sh.append(sp)}curG=el('div','shgrp');curG.append(el('div','shlab',GRP_START[k]));curR=el('div','shrow');curG.append(curR);sh.append(curG)}
-    const b=el('button','orb');b.type='button';b.title='Browse '+l+' in the catalogue';b.style.setProperty('--c','var(--'+COVCSS[k]+')');
+    if(GRP_START[k]){if(sh.lastChild){const sp=el('span','shsep');sp.setAttribute('aria-hidden','true');sh.append(sp)}curG=el('div','shgrp');{const inG=hk&&ALB_GROUP[hk]===k;const lab=k==='White'?(hk==='White'?'Start here':'Foundation'):GRP_START[k]+(inG?' \u00B7 You are here':'');curG.append(el('div','shlab'+(inG?' here':''),lab))}curR=el('div','shrow');curG.append(curR);sh.append(curG)}
+    const b=el('button','orb'+(hk===k?' startorb':''));b.type='button';b.title=hk===k?'You are here: browse '+l+' in the catalogue':'Browse '+l+' in the catalogue';b.style.setProperty('--c','var(--'+COVCSS[k]+')');
     const on=F.col===k;b.setAttribute('aria-pressed',String(on));
     const i=el('img');i.src=COV[k];i.alt='';i.width=66;i.height=66;b.append(i,el('span',null,l));
     b.onclick=()=>{F.sub='';if(F.col===k)F.col='';else{S.tab='cat';F.col=k}F.shown=48;render()};curR.append(b)});
@@ -1108,7 +1130,7 @@ Black:['Black · The dark anthologies','60-minute NSFW erotic and psychological 
 Gold:['Gold · The Shatterings','A Shattering is Luna Sleep\'s annual Gold event: one story told across 13 daily tracks, one a day from Dec 20 to Jan 1. Each year, Luna works through grief and a hard chapter of the creator\'s own life, written and recorded by hand by the creator alone, with no templates, as a kind of audio memoir. It uses horror and folklore to give what happened a shape you can face, name and put down, and you take part as a witness, not a patient. It is psychological horror at Heightened consent, with sudden or sharp intensity, so it is best experienced awake, in the daytime or early evening. Gold events are included with Pack Member and up, or you can buy the tracks individually or bundled in the Patreon store. Some tracks carry heads-ups about real recorded audio, so read each track\'s warnings first. Every Gold track ends with a grounding exit ramp in its last 2 minutes, so let it finish, and do not stack a second Gold track the same night. Headphones, never while driving or operating machinery. Entertainment and somatic regulation, not medical advice.'],
 };
 function renderTopNote(){const n=$('topnote');if(!n)return;if(!n.dataset.def)n.dataset.def=n.textContent;const a=S.tab==='cat'&&F.col&&ALBUM_NOTE[F.col];n.textContent='';n.classList.toggle('albumnote',!!a);if(a){n.append(el('b',null,a[0]+'. '),document.createTextNode(a[1]+TAIL))}else n.textContent='';n.hidden=!a}
-function applySkin(){const re=/^(White|Blue|Green|Red|Silver|Rose|Prism|Azure|Purple|Black|Gold|Luna|Apex|Cutie)$/;const sel=document.getElementById('theme-sel');const v=sel?sel.value:'';const k=re.test(v)?v:(re.test(F.col||'')?F.col:'');const h=document.documentElement;if(k){h.setAttribute('data-skin',k);h.setAttribute('data-album',k)}else{h.removeAttribute('data-skin');h.removeAttribute('data-album')}}
+function applySkin(){const re=/^(White|Blue|Green|Red|Silver|Rose|Prism|Azure|Purple|Black|Gold|Luna|Apex|Cutie)$/;const sel=document.getElementById('theme-sel');const v=sel?sel.value:'';const k=re.test(v)?v:(re.test(F.col||'')?F.col:(v===''?'White':''));const h=document.documentElement;if(k){h.setAttribute('data-skin',k);h.setAttribute('data-album',k)}else{h.removeAttribute('data-skin');h.removeAttribute('data-album')}}
 function render(){
   migrateK();applySkin();renderChrome();renderTopNote();renderNag();
   const v=$('view');v.textContent='';
@@ -1148,9 +1170,39 @@ function customEditor(){
   const a=el('div','acts');a.append(btn('Done',()=>{S.cedit=false;render()},'primary'),btn(delArm?'Tap again to delete':'Delete this path',()=>{if(!delArm){delArm=true;render();return}delArm=false;S.custom=S.custom.filter(x=>x!==c);S.path='Balanced';S.cedit=false;save();render()},'small'));box.append(a);
   return box}
 let delArm=false;
+
+// ---- reading and album progress
+const ALBUM_KEYS=['White','Blue','Green','Red','Rose','Prism','Azure','Silver','Purple','Black','Gold'];
+const ALB_NAME={White:'Foundation',Blue:'Blue',Green:'Green',Red:'Red',Rose:'Rose',Prism:'Prism',Azure:'Azure',Silver:'Silver',Purple:'Purple',Black:'Black',Gold:'Gold'};
+const ALB_GROUP={White:'White',Blue:'Blue',Green:'Blue',Red:'Blue',Rose:'Rose',Prism:'Rose',Azure:'Rose',Silver:'Silver',Purple:'Silver',Black:'Silver',Gold:'Gold'};
+const isRead=id=>!!(S.read&&S.read[id]);
+function setRead(id,on){if(!S.read)S.read={};if(on)S.read[id]=Date.now();else delete S.read[id];save()}
+const readCount=()=>RES.filter(r=>isRead(r.id)).length;
+function albStats(){const o={};ALBUM_KEYS.forEach(k=>o[k]={k,total:0,heard:0,soon:0});
+  Object.keys(TI).forEach(id=>{const t=tinfo(id);if(!t)return;if(!adultOK()&&isAdultT(t))return;const a=o[(t.pillar||'').split(/[ (]/)[0]];if(!a)return;if(released(t.date)){a.total++;if(S.done[id])a.heard++}else a.soon++});return o}
+function hereKey(){if(S.hideStart)return '';if(S.here&&ALBUM_KEYS.includes(S.here))return S.here;const st=albStats();for(const k of ALBUM_KEYS){const a=st[k];if(a.total&&a.heard<a.total)return k}return 'White'}
+function progressCard(){
+  const st=albStats(),hk=hereKey();const c=el('section','panel progcard');
+  c.append(el('h2',null,'Your progress'),el('p','note','Tick tracks as heard and they count here. Pick where you are, and the glowing marker at the top moves to that album. By default it follows you: it starts on the Foundation, then moves on once an album is done.'));
+  const rows=el('div','progrows');
+  ALBUM_KEYS.forEach(k=>{const a=st[k];if(!a.total&&!a.soon)return;
+    const r=el('div','progrow'+(hk===k?' here':''));r.style.setProperty('--c','var(--'+COVCSS[k]+')');
+    const nm=el('button','linkbtn progname',ALB_NAME[k]);nm.type='button';nm.onclick=()=>goPillar(k);
+    const bar=el('div','fprog');bar.setAttribute('role','progressbar');bar.setAttribute('aria-label',ALB_NAME[k]+' progress');bar.setAttribute('aria-valuemin','0');bar.setAttribute('aria-valuemax',String(a.total));bar.setAttribute('aria-valuenow',String(a.heard));const i=el('i');i.style.width=(a.total?a.heard/a.total*100:0)+'%';bar.append(i);
+    const tx=el('span','mono',a.total?(a.heard+' of '+a.total+' heard'+(a.soon?' \u00B7 '+a.soon+' coming':'')):(a.soon+' coming soon'));
+    const here=el('button','btn small',hk===k?'You are here':'Start here');here.type='button';here.setAttribute('aria-pressed',String(hk===k));here.onclick=()=>{S.here=k;S.hideStart=false;save();render()};
+    r.append(nm,bar,tx,here);rows.append(r)});
+  c.append(rows);
+  const ctl=el('div','acts');
+  const tg=el('label','chk');const cb=el('input');cb.type='checkbox';cb.checked=!S.hideStart;cb.onchange=()=>{S.hideStart=!cb.checked;save();render()};tg.append(cb,document.createTextNode(' Show the start marker on the albums'));ctl.append(tg);
+  if(S.here)ctl.append(btn('Let the app choose',()=>{S.here='';save();render()},'small'));
+  c.append(ctl);
+  const rd=el('p','note','Resources read: '+readCount()+' of '+RES.filter(r=>adultOK()||!r.adult).length+'. ');rd.append(btn('Open Resources',()=>{S.tab='res';S.resOpen=null;render();window.scrollTo({top:0})},'small'));c.append(rd);
+  return c}
 function viewMap(v){
   if(!S.welcomed){const w=el('div','welcome');w.append(el('b',null,'New here? Three quick steps'));const ol=el('ol');['Pick a path below. Calm is Blue only, for sleep and co-regulation. Start there if you are unsure.','Tap any track to see what it does, how to use it safely, and how to come back down. Tap Close, press Esc, or tap outside the panel to dismiss it.','Mark tracks as heard to unlock what comes next. Press / anytime to search the whole library.'].forEach(t=>ol.append(el('li',null,t)));const r=el('div','row');r.append(btn('Got it',()=>{S.welcomed=true;save();render()},'primary'),el('span','note','Always listen with headphones, sitting or lying down, never while driving. Not medical advice.'));w.append(ol,r);v.append(w)}
   v.append(foundCard());
+  v.append(progressCard());
   const pb=el('div','paths');pb.setAttribute('role','group');pb.setAttribute('aria-label','Listener path');
   PATHS.forEach(p=>{const b=el('button','path');b.type='button';b.setAttribute('aria-pressed',String(S.path===p.k));
     b.append(el('b',null,p.n),el('span',null,p.d));
@@ -1294,8 +1346,10 @@ function viewRes(v){
     const [box,heads]=rBody(r.body);
     if(heads.length>2){const d=el('details','restoc');d.append(el('summary',null,'In this article'));const ul=el('ul');heads.forEach(([id,t])=>{const li=el('li');const a=el('a',null,t);a.href='#'+id;a.onclick=e=>{e.preventDefault();const n=document.getElementById(id);if(n)n.scrollIntoView({behavior:'smooth',block:'start'})};li.append(a);ul.append(li)});d.append(ul);p.append(d)}
     p.append(box);
+    {const end=el('div','readend');end.setAttribute('aria-hidden','true');p.append(end);if(!isRead(r.id)&&'IntersectionObserver' in window){const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){io.disconnect();if(!isRead(r.id)){setRead(r.id,true);const b=document.getElementById('read-tog');if(b){b.textContent='\u2713 Read. Tap to mark unread';b.setAttribute('aria-pressed','true')}if(window.cvCheck)window.cvCheck()}}},{threshold:.6});setTimeout(()=>io.observe(end),600)}}
     {const rb=relBlock(r);if(rb)p.append(rb)}
     const f=el('div','acts');if(r.url){const a=el('a','btn','Read the original on '+r.source+' ↗');a.href=r.url;a.target='_blank';a.rel='noopener noreferrer';f.append(a)}
+    {const rt=btn(isRead(r.id)?'\u2713 Read. Tap to mark unread':'Mark as read',()=>{setRead(r.id,!isRead(r.id));const y=window.scrollY;render();window.scrollTo({top:y})},'');rt.id='read-tog';rt.setAttribute('aria-pressed',String(isRead(r.id)));f.append(rt)}
     f.append(btn('← All resources',()=>{S.resOpen=null;render();window.scrollTo({top:0})}));p.append(f);v.append(p);return}
     S.resOpen=null}
   const h=el('section','home-hero');h.append(el('h2',null,'Resources'),el('p',null,'Articles and guides about Luna Sleep, gathered in one place so you can read the full version here without hunting across Reddit, Substack and Patreon.'));v.append(h);
@@ -1308,7 +1362,7 @@ function viewRes(v){
   p.append(el('p','note','Showing '+list.length+' of '+vis.length+' resource'+(vis.length===1?'':'s')+'.'+(hid?' '+hid+' NSFW resource'+(hid===1?' is':'s are')+' hidden in SFW mode. Turn on NSFW in the Menu to see '+(hid===1?'it':'them')+'.':'')));
   if(!list.length)p.append(el('p','empty','Nothing matches. Clear the search or pick another type.'));
   const g=el('div','reslist');
-  list.forEach(r=>{const c=el('article','card reslist-item');c.append(el('h3',null,r.title));const m=el('div','resmeta');m.append(el('span','pill',r.source),...(r.kind&&r.kind!==r.source?[el('span','pill',r.kind)]:[]),...(r.date?[el('span','pill',rDate(r.date))]:[]),el('span','pill',rMins(r)+' min read'));if(r.adult)m.append(el('span','pill warn','NSFW'));c.append(m,el('p',null,r.summary));
+  list.forEach(r=>{const c=el('article','card reslist-item'+(isRead(r.id)?' isread':''));c.append(el('h3',null,r.title));const m=el('div','resmeta');m.append(el('span','pill',r.source),...(r.kind&&r.kind!==r.source?[el('span','pill',r.kind)]:[]),...(r.date?[el('span','pill',rDate(r.date))]:[]),el('span','pill',rMins(r)+' min read'),...(isRead(r.id)?[el('span','pill readpill','\u2713 Read')]:[]));if(r.adult)m.append(el('span','pill warn','NSFW'));c.append(m,el('p',null,r.summary));
     const a=el('div','acts');a.append(btn('Read',()=>{S.resOpen=r.id;render();window.scrollTo({top:0})},'primary'));c.append(a);g.append(c)});
   p.append(g);v.append(p)}
 
@@ -1486,6 +1540,7 @@ function viewHome(v){
   const hero=el('section','home-hero');hero.append(el('h2',null,heard?'Welcome back':'Welcome'),el('p',null,heard?'You have marked '+heard+' track'+(heard===1?'':'s')+' as heard. Pick up where you left off, or see what is new.':'Start with the White Foundation tracks below, then follow Your path. Headphones on, somewhere you can sit or lie down.'));
   const q=el('div','acts');q.append(btn('Search the library',()=>{S.tab='cat';render();const i=$('cq');if(i)i.focus()},'primary'),btn('Open Your path',()=>{S.tab='map';render()}));hero.append(q);v.append(hero);
   if(foundDone())v.append(nextStrip());else v.append(foundCard());
+  v.append(progressCard());
   identHome(v);
   v.append(el('h2','hh','Out now'));
   const og=el('div','grid');CAT.found.filter(f=>released(f.date)).forEach(f=>{const t=tinfo(f.sku);if(t)og.append(tcard(t))});v.append(og);
@@ -1877,12 +1932,12 @@ function sosClose(){$('sos').hidden=true;document.body.style.overflow='';try{sos
 $('sos-open').onclick=sosOpen;$('sos-close').onclick=sosClose;
 $('sos').addEventListener('click',e=>{if(e.target.id==='sos')sosClose()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('sos').hidden){e.stopPropagation();sosClose()}},true);
-function backup(){return JSON.stringify({app:'luna-sleep',v:2,saved:new Date().toISOString(),path:S.path,done:S.done,kdone:S.kdone,edits:S.edits,ideas:S.ideas,seq:S.seq,notes:S.notes||{},custom:S.custom||[],identity:S.identity||'',cheevos:(window.cvGet?window.cvGet():{})})}
+function backup(){return JSON.stringify({app:'luna-sleep',v:2,saved:new Date().toISOString(),path:S.path,done:S.done,kdone:S.kdone,edits:S.edits,ideas:S.ideas,seq:S.seq,notes:S.notes||{},custom:S.custom||[],identity:S.identity||'',read:S.read||{},here:S.here||'',hideStart:!!S.hideStart,cheevos:(window.cvGet?window.cvGet():{})})}
 function markBackup(){S.lastBackup=Date.now();save();render()}
 function doRestore(txt,msg){try{const x=JSON.parse(txt);
   if(!x||typeof x!=='object')throw 0;S.custom=Array.isArray(x.custom)?x.custom.filter(c=>c&&typeof c.id==='string'&&Array.isArray(c.ids)).map(c=>({id:c.id.slice(0,24),name:String(c.name||'My path').slice(0,40),ids:c.ids.filter(i=>typeof i==='string')})):S.custom;S.cedit=false;
   S.path=['Calm','Focus','Balanced','SFW'].includes(x.path)||(ADULT_PATHS.includes(x.path)&&S.fullOk)||(/^c:/.test(x.path||'')&&S.custom.some(c=>'c:'+c.id===x.path))?x.path:S.path;
-  S.identity=IDENT[x.identity]?x.identity:'';S.done=x.done||{};S.kdone=x.kdone||{};S.edits=x.edits||{};S.ideas=Array.isArray(x.ideas)?x.ideas:[];S.seq=Array.isArray(x.seq)?x.seq:[];S.notes=(x.notes&&typeof x.notes==='object')?x.notes:{};if(x.cheevos&&window.cvSet)window.cvSet(x.cheevos);S.lastBackup=Date.now();save();render();msg.textContent='Restored. '+Object.keys(S.done).length+' tracks marked heard.'}catch(e){msg.textContent='That does not look like a valid backup.'}}
+  S.identity=IDENT[x.identity]?x.identity:'';S.done=x.done||{};S.kdone=x.kdone||{};S.edits=x.edits||{};S.ideas=Array.isArray(x.ideas)?x.ideas:[];S.seq=Array.isArray(x.seq)?x.seq:[];S.notes=(x.notes&&typeof x.notes==='object')?x.notes:{};S.read=(x.read&&typeof x.read==='object')?x.read:{};S.here=typeof x.here==='string'?x.here:'';S.hideStart=!!x.hideStart;if(x.cheevos&&window.cvSet)window.cvSet(x.cheevos);S.lastBackup=Date.now();save();render();msg.textContent='Restored. '+Object.keys(S.done).length+' tracks marked heard.'}catch(e){msg.textContent='That does not look like a valid backup.'}}
 let DL=null;(async()=>{try{DL=window.claude&&window.claude.use?await window.claude.use('downloads'):null}catch(e){DL=null}})();
 $('io-save').onclick=async()=>{const msg=$('io-msg');const t=$('io-text');t.value=backup();
   const nm='luna-sleep-backup-'+new Date().toISOString().slice(0,10)+'.json';
@@ -1893,6 +1948,9 @@ $('io-file').onchange=()=>{const f=$('io-file').files[0];const msg=$('io-msg');i
 $('io-copy').onclick=async()=>{const t=$('io-text');t.value=backup();const msg=$('io-msg');
   try{await navigator.clipboard.writeText(t.value);msg.textContent='Copied.'}catch(e){t.focus();t.select();msg.textContent='Select and copy the text above.'}};
 $('io-load').onclick=()=>doRestore($('io-text').value,$('io-msg'));
+(function(){let arm=false,tm=0;const w=$('io-wipe');w.onclick=()=>{if(!arm){arm=true;w.textContent='Tap again to erase everything on this device';$('io-msg').textContent='This clears progress, saved ideas, achievements, theme and settings, and cannot be undone. Save a backup first if you want one.';clearTimeout(tm);tm=setTimeout(()=>{arm=false;w.textContent='Reset everything (fresh start)'},6000);return}
+  try{const ks=[];for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(/^(lunaNeuroMap|lunaSleep)\./.test(k))ks.push(k)}ks.forEach(k=>localStorage.removeItem(k))}catch(e){}
+  location.reload()}})();
 $('io-reset').onclick=()=>{S.done={};S.kdone={};save();render();$('io-msg').textContent='Progress cleared.'};
 $('io-reset-edits').onclick=()=>{S.edits={};save();render();$('io-msg').textContent='All edits cleared.'};
 window.addEventListener('resize',()=>{if(!S.sel)renderSide()});
@@ -1909,7 +1967,7 @@ function open(){from=document.activeElement;dl.hidden=false;document.body.style.
 function close(){dl.hidden=true;if($('den').hidden&&$('about').hidden)document.body.style.overflow='';if(from&&from.focus)try{from.focus()}catch(e){}}
 $(o).onclick=open;$(c).onclick=close;dl.addEventListener('click',e=>{if(e.target===dl)close()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!dl.hidden){e.stopPropagation();close()}},true)})})();
-(function(){const LOG=[{"d": "October 22, 2026", "i": ["Resources grew into a proper library: the essential guide, the Foundation manual, a deep dive for every Foundation track, and essays on the science, safety and heart of Luna Sleep. Filter by type or search the full text.","Every Foundation track now links to its deep dive, and the deep dives link back to the track, to each other and to the matching colors in the Library.","Text inductions live in the Bonus tab: written inductions to read when you cannot listen, each with content warnings, the trigger words it uses and how it ends. Velvet now has its text version on the same card as the audio.","Achievements: a short list of small milestones to unlock, like hearing all 10 Foundation tracks. No points or levels, just a bit of fun. Find it in the Menu.","The links that sat at the bottom of the page (Welcome and safety, About this app, What's new, Help and bug reports, Save and restore, Join on Patreon and Join the Discord) now live in a new Menu at the top, together with the settings. Resources moved to the bottom of the page.","A new Resources section holds full-length articles and guides about Luna Sleep, so you can read them here instead of hunting across Reddit, Substack and Patreon. The first one covers installing the app and connecting Spotify.","Fixed: pressing Tab inside a pop-up no longer jumps to the page behind it.","Swiping back, or pressing the back button, now closes the open menu or track panel instead of leaving the app.", "A Settings menu holds the theme, the adult content toggle, trigger words, reduced motion and more.", "Join the Discord button added.", "Build a session now has Listen links for each track, plus a button that copies your list with links, to help you make a Spotify playlist.", "Notes explaining that Spotify episodes need your Patreon linked to Spotify.", "This What's new log. It opens when you open the app unless you turn that off in the Menu, and it keeps every change."]}, {"d": "Earlier in October 2026", "i": ["Your Path has new paths: Submissive (was Red), Obedient Wolf, SFW and NSFW (was Full). The order is Calm, Focus, Submissive, Balanced, Obedient Wolf, SFW, NSFW.", "Build your own path with no restrictions. It saves on your device and in your backups.", "The Emergency Exit button can be dragged anywhere, so it never blocks the screen.", "Welcome and safety, About this app, Help and bug reports, Save and restore and Join on Patreon moved to the bottom. Help and Save and restore are now pop-ups.", "Notes and bug reports can be sent straight to me from the web or installed app.", "The installed app checks for updates when you open it and tells you when a new version is ready."]}],LOGV='2026-10-22h';
+(function(){const LOG=[{"d": "October 23, 2026", "i": ["The app now opens in the white Foundation look, to match the advice to start with the Foundation. Auto in the theme menu now follows the album you are viewing, and returns to Foundation when none is open.","The Foundation circle at the top is easier to spot: it has a soft glowing ring and a Start here badge.","The Gold theme is softer: pale, pearly and glowing, instead of polished metal.","A new article in Resources, Why I Built This App With AI, explains why and how this app was made with an AI assistant, and where that choice is imperfect. It is also linked from About this app.","Your progress: a new card shows how many tracks you have heard in each album, and lets you move the glowing start marker to wherever you are. Find it on Home and Your path.","Resources now remember what you have read. Articles are marked as read when you reach the end, or you can mark them yourself, and nothing is hidden. Read 3 to unlock a new achievement.","Save and restore has a new Reset everything (fresh start) button that clears all progress and settings on this device. It asks you to tap twice, so save a backup first."]},{"d": "October 22, 2026", "i": ["Resources grew into a proper library: the essential guide, the Foundation manual, a deep dive for every Foundation track, and essays on the science, safety and heart of Luna Sleep. Filter by type or search the full text.","Every Foundation track now links to its deep dive, and the deep dives link back to the track, to each other and to the matching colors in the Library.","Text inductions live in the Bonus tab: written inductions to read when you cannot listen, each with content warnings, the trigger words it uses and how it ends. Velvet now has its text version on the same card as the audio.","Achievements: a short list of small milestones to unlock, like hearing all 10 Foundation tracks. No points or levels, just a bit of fun. Find it in the Menu.","The links that sat at the bottom of the page (Welcome and safety, About this app, What's new, Help and bug reports, Save and restore, Join on Patreon and Join the Discord) now live in a new Menu at the top, together with the settings. Resources moved to the bottom of the page.","A new Resources section holds full-length articles and guides about Luna Sleep, so you can read them here instead of hunting across Reddit, Substack and Patreon. The first one covers installing the app and connecting Spotify.","Fixed: pressing Tab inside a pop-up no longer jumps to the page behind it.","Swiping back, or pressing the back button, now closes the open menu or track panel instead of leaving the app.", "A Settings menu holds the theme, the adult content toggle, trigger words, reduced motion and more.", "Join the Discord button added.", "Build a session now has Listen links for each track, plus a button that copies your list with links, to help you make a Spotify playlist.", "Notes explaining that Spotify episodes need your Patreon linked to Spotify.", "This What's new log. It opens when you open the app unless you turn that off in the Menu, and it keeps every change."]}, {"d": "Earlier in October 2026", "i": ["Your Path has new paths: Submissive (was Red), Obedient Wolf, SFW and NSFW (was Full). The order is Calm, Focus, Submissive, Balanced, Obedient Wolf, SFW, NSFW.", "Build your own path with no restrictions. It saves on your device and in your backups.", "The Emergency Exit button can be dragged anywhere, so it never blocks the screen.", "Welcome and safety, About this app, Help and bug reports, Save and restore and Join on Patreon moved to the bottom. Help and Save and restore are now pop-ups.", "Notes and bug reports can be sent straight to me from the web or installed app.", "The installed app checks for updates when you open it and tells you when a new version is ready."]}],LOGV='2026-10-23b';
 const lg=$('new-log');LOG.forEach(g=>{const h=document.createElement('h3');h.textContent=g.d;const u=document.createElement('ul');g.i.forEach(t=>{const l=document.createElement('li');l.textContent=t;u.append(l)});lg.append(h,u)});
 const NK='lunaSleep.newSeen',NV=LOGV,dot=$('new-dot'),ob=$('new-open');let seen='';try{seen=localStorage.getItem(NK)||''}catch(e){}
 if(seen!==NV){dot.hidden=false;$('menu-dot').hidden=false}ob.addEventListener('click',()=>{dot.hidden=true;$('menu-dot').hidden=true;try{localStorage.setItem(NK,NV)}catch(e){}})})();
@@ -1946,6 +2004,7 @@ if(!seen)open(true);
 (function(){const OK='lunaSleep.newOptOut',cb=$('new-opt');let out=false;try{out=localStorage.getItem(OK)==='1'}catch(e){}
 cb.checked=out;cb.onchange=()=>{try{if(cb.checked)localStorage.setItem(OK,'1');else localStorage.removeItem(OK)}catch(e){}};
 if(!out&&$('den').hidden)setTimeout(()=>$('new-open').click(),400)})();
+(function(){const c=$('set-start');if(!c)return;const sync=()=>{c.checked=!S.hideStart};sync();c.onchange=()=>{S.hideStart=!c.checked;save();render()};$('set-open').addEventListener('click',sync)})();
 (function(){const CK='lunaSleep.calm',OK='lunaSleep.newOptOut',calm=$('set-calm'),no=$('set-newopt');
 const rd=k=>{try{return localStorage.getItem(k)==='1'}catch(e){return false}},wr=(k,v)=>{try{if(v)localStorage.setItem(k,'1');else localStorage.removeItem(k)}catch(e){}};
 const ap=()=>document.documentElement.classList.toggle('calm',rd(CK));ap();
@@ -1966,6 +2025,7 @@ const LIST=[
 {id:'mine',n:'Your own way',d:'Build your own path.',t:()=>(S.custom||[]).length>=1,i:'\u2192'},
 {id:'build',n:'Session architect',d:'Save a session you built.',t:()=>(S.ideas||[]).some(x=>x.kind==='build'),i:'\u266B'},
 {id:'read',n:'Bookworm',d:'Open an article in Resources.',t:()=>(S.tab==='res'&&!!S.resOpen)||(S.tab==='bonus'&&!!S.bonusOpen),i:'\u2637'},
+{id:'reader',n:'Reader',d:'Read 3 articles in Resources.',t:()=>(typeof readCount==='function'?readCount():0)>=3,i:'\u25A4'},
 {id:'wear',n:'New look',d:'Try a theme other than the default.',t:()=>{const v=($('theme-sel')||{}).value;return !!v},i:'\u25D1'},
 {id:'safe',n:'Safe and sound',d:'Save a backup of your progress.',t:()=>!!S.lastBackup,i:'\u2713'},
 {id:'luna',n:'Moonlit',d:'Found a secret theme.',secret:true,t:()=>($('theme-sel')||{}).value==='Luna',i:'\u263E'},
@@ -1991,7 +2051,7 @@ function draw(){const c=rd();const box=$('cv-list');box.textContent='';let n=0;
   if(got){const e=document.createElement('em');e.textContent='Unlocked '+new Date(c[a.id]).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});bd.append(e)}
   r.append(ic,bd);box.append(r)});
  $('cv-sum').textContent=n+' of '+LIST.length+' unlocked'}
-$('cv-open').addEventListener('click',()=>{check();draw()});
+window.cvCheck=check;$('cv-open').addEventListener('click',()=>{check();draw()});
 const sel=$('theme-sel');if(sel)sel.addEventListener('change',check);
 const _r=render;render=function(){const r=_r.apply(this,arguments);check();return r};
 check()})();
