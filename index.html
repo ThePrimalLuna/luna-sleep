@@ -648,7 +648,7 @@ html[data-skin="Luna"] #pat-link{color:#ffc2d4;border-color:rgba(255,138,174,.6)
 .cvrow.lock{opacity:.8}.cvrow.sec .cvi{border-style:dashed}
 .cvtoast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:140;max-width:min(92vw,420px);background:var(--surface);color:var(--ink);border:1px solid var(--accent);border-radius:14px;padding:10px 16px;font-size:14px;box-shadow:0 8px 30px rgba(0,0,0,.35);text-align:center;cursor:pointer}
 .cvtoast small{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-bottom:2px}
-@media (prefers-reduced-motion:no-preference){html:not(.calm) .cvtoast{animation:cvin .35s ease-out}}@keyframes cvin{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translate(-50%,0)}}
+@media (prefers-reduced-motion:no-preference){html:not(.calm) .cvtoast{animation:cvin .35s ease-out}}
 .cwbox{border:1px solid var(--line);border-left:4px solid var(--red);border-radius:10px;background:var(--surface2);padding:12px 14px;margin:14px 0;display:grid;gap:6px}.cwbox ul{margin:0;padding-left:18px;display:grid;gap:4px}.cwbox p{margin:0}
 .relbox{display:grid;gap:8px;margin:16px 0;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface2)}.relbox b{font-size:13px}.relbox p{margin:0}.relbox .acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 
@@ -1630,7 +1630,6 @@ const CF={sub:'recipes',q:'',level:'',col:'',cons:'',time:'',maxI:5,maxM:999,hea
 const BQ={q:''};
 const $=id=>document.getElementById(id);
 const el=(t,c,txt)=>{const e=document.createElement(t);if(c)e.className=c;if(txt!=null)e.textContent=txt;return e};
-const kids=(p,...a)=>{a.flat().forEach(x=>{if(x==null||x===false)return;p.append(typeof x==='string'?document.createTextNode(x):x)});return p};
 const btn=(txt,fn,cls)=>{const b=el('button','btn'+(cls?' '+cls:''),txt);b.type='button';b.onclick=fn;return b};
 
 // ---- data lookups
@@ -1686,10 +1685,10 @@ function foundCard(){
   const ul=el('div','flist');
   FOUND_IDS.forEach(id=>{const t=TI[id];const row=el('div','frow'+(S.done[id]?' done':''));
     const cb=el('button','fcheck',S.done[id]?'✓':'');cb.type='button';cb.setAttribute('role','checkbox');cb.setAttribute('aria-checked',String(!!S.done[id]));cb.setAttribute('aria-label','Mark '+id+' '+t.title+' as heard');cb.onclick=()=>{let fresh=false;if(S.done[id])delete S.done[id];else{S.done[id]=true;fresh=true;stampHeard(id)}save();render();if(fresh)afterHeard(id)};
-    const nm=el('button','fname');nm.type='button';nm.append(el('span','mono',id),el('b',null,t.title));nm.onclick=()=>open(id);
+    const nm=el('button','fname');nm.type='button';nm.append(el('span','mono',id),el('b',null,t.title));nm.onclick=()=>openTrack(id);
     row.append(cb,nm);const sl=spotLink(t,'btn small primary');if(sl)row.append(sl);ul.append(row)});
   c.append(ul);return c}
-function status(id){
+function trackStatus(id){
   if(S.done[id])return 'done';
   if(!foundDone())return 'locked';
   const r=get(id),k=kernelNeed(r);
@@ -1705,17 +1704,17 @@ function onPathX(t){const p=S.path;if(isCust())return custVis(t.id);if(p==='Full
 const dotsEl=n=>{const d=el('span','dots');for(let i=1;i<=5;i++)d.append(el('i',i<=n?'on':''));return d};
 const adultOK=()=>!!S.fullOk;
 function goNSFW(){S.fullOk=true;S.pend=null;S.pendPath=null;save();render()}
-function open(id){S.sel=id;render();const s=$('side');if(s)s.hidden=false}
+function openTrack(id){S.sel=id;render();const s=$('side');if(s)s.hidden=false}
 function refs(ids,withTitle){
   const w=el('div','refs');
   ids.forEach(t=>{const id=(String(t).match(/SKU \d\d|\b(?:RO|BL|SZ|UG|[BGRSAWP])-\d\d\b/)||[])[0];const r=el(id&&TI[id]?'button':'span','ref'+(id&&S.done[id]?' ok':''),String(t).trim());
-    if(id&&TI[id]){r.type='button';r.title=TI[id].title;r.onclick=()=>open(id)}w.append(r)});return w;
+    if(id&&TI[id]){r.type='button';r.title=TI[id].title;r.onclick=()=>openTrack(id)}w.append(r)});return w;
 }
 function chipFor(id,extra){
-  const t=tinfo(id)||{title:id,trig:''};const st=base[id]?status(id):(S.done[id]?'done':'');
+  const t=tinfo(id)||{title:id,trig:''};const st=base[id]?trackStatus(id):(S.done[id]?'done':'');
   const b=el('button','chip '+fam(id)+' '+st+(S.sel===id?' sel':'')+(extra?' '+extra:''));
   b.type='button';b.append(el('span','id',id),el('span','tg',t.trig&&!/^Week|^Wave/.test(t.trig)?t.trig:t.title));
-  b.title=t.title;b.setAttribute('aria-label',id+' '+t.title);b.onclick=()=>open(id);return b;
+  b.title=t.title;b.setAttribute('aria-label',id+' '+t.title);b.onclick=()=>openTrack(id);return b;
 }
 // ---- favourites / ideas
 const hasIdea=k=>S.ideas.some(i=>i.k===k);
@@ -1730,7 +1729,7 @@ const ALBUM_ORDER=['White','Blue','Green','Red','Rose','Prism','Azure','Silver',
 THEMES.sort((a,b)=>a[0]===''?-1:b[0]===''?1:ordr(a)-ordr(b));THEMES.push(['Frostlight','Frostlight'],['Greenhush','Greenhush'],['Goldenhour','Golden Hour'],['Luna',"Luna's Theme"],['Apex','Apex Predator'],['Cutie','Cutie'],['Titsoak','TITSOAK'],['Bambi','Bambi Sleep'],['Lantern','Lantern Hour'],['Hallowtide','Hallowtide']);THEMES.push(['Horror','Horror']);THEMES.push(['Alpha',"Luna's Alpha"],['Heart',"Luna's Heart"],['Rainbow','Rainbow Trail']);
 function applyTheme(v){if(v)document.documentElement.setAttribute('data-album',v);else document.documentElement.removeAttribute('data-album');try{localStorage.setItem('lunaNeuroMap.album',v)}catch(e){}}
 (function(){const sel=document.getElementById('theme-sel');THEMES.forEach(([v,l])=>{const o=document.createElement('option');o.value=v;o.textContent=l;sel.append(o)});
-  let v='',first=false;try{const q=localStorage.getItem('lunaNeuroMap.album');if(q===null)first=true;v=q||''}catch(e){}
+  let v='';try{v=localStorage.getItem('lunaNeuroMap.album')||''}catch(e){}
   if(!THEMES.some(t=>t[0]===v))v='';sel.value=v;applyTheme(v);sel.onchange=()=>{applyTheme(sel.value);applySkin()}})();
 function renderChrome(){
   const tb=$('tabs');tb.textContent='';
@@ -1772,7 +1771,9 @@ Gold:['Gold · The Shatterings','A Shattering is Luna Sleep\'s annual Gold event
 };
 function renderTopNote(){const n=$('topnote');if(!n)return;if(!n.dataset.def)n.dataset.def=n.textContent;const a=S.tab==='cat'&&F.col&&ALBUM_NOTE[F.col];n.textContent='';n.classList.toggle('albumnote',!!a);if(a){n.append(el('b',null,a[0]+'. '),document.createTextNode(a[1]+TAIL))}else n.textContent='';n.hidden=!a}
 function applySkin(){const re=/^(White|Blue|Green|Red|Silver|Rose|Prism|Azure|Purple|Black|Gold|Luna|Apex|Cutie|Titsoak|Bambi|Lantern|Hallowtide|Horror|Alpha|Heart|Rainbow|Frostlight|Greenhush|Goldenhour)$/;const sel=document.getElementById('theme-sel');const v=sel?sel.value:'';const k=re.test(v)?v:(re.test(F.col||'')?F.col:(v===''?'White':''));const h=document.documentElement;if(k){h.setAttribute('data-skin',k);h.setAttribute('data-album',k)}else{h.removeAttribute('data-skin');h.removeAttribute('data-album')}}
-function render(){
+const RENDER_HOOKS=[];
+function render(){const r=renderCore.apply(this,arguments);RENDER_HOOKS.forEach(f=>f());return r}
+function renderCore(){
   migrateK();applySkin();renderChrome();renderTopNote();renderNag();
   const v=$('view');v.textContent='';
   ({home:viewHome,bonus:viewBonus,stories:viewStories,res:viewRes,map:viewMap,cat:viewCat,lore:viewLore,combo:viewCombo,ideas:viewIdeas}[S.tab])(v);
@@ -1823,7 +1824,6 @@ function advBox(t){
 
 // ================= LORE =================
 const LR={k:'White',i:0,m:'lore'};
-const QL=['Q2','Q3','Q4'];
 function goLore(k,i){LR.m='lore';S.resOpen=null;S.bonusOpen=null;S.sel=null;S.tab='lore';if(k)LR.k=k;LR.i=i||0;render();window.scrollTo({top:0})}
 const FO={};
 function foldify(sec,key,open,n){n=n||1;const d=el('details','fold');if(FO[key]===undefined?open:FO[key])d.open=true;d.addEventListener('toggle',()=>{FO[key]=d.open});
@@ -1843,7 +1843,7 @@ function loreTracks(k,i,all){
     if(t.purpose)bd.append(el('p',null,t.purpose));
     const L=[['Content labels',t.labels],['Flags',t.flags],['Binaural',t.binaural],['Consent',t.consent],['If it gets intense',t.exit]].filter(x=>x[1]&&!/^None/.test(x[1]));
     if(L.length){const dl=el('dl','loredl');L.forEach(([q,x])=>dl.append(el('dt',null,q),el('dd',null,x)));bd.append(dl)}
-    const ac=el('div','acts');ac.append(btn('Open in Library',()=>{S.tab='cat';open(t.id);window.scrollTo({top:0})},'small'));bd.append(ac);
+    const ac=el('div','acts');ac.append(btn('Open in Library',()=>{S.tab='cat';openTrack(t.id);window.scrollTo({top:0})},'small'));bd.append(ac);
     d.append(bd);list.append(d)});
   tb.append(list);if(hid)tb.append(el('p','note',hid+' NSFW track'+(hid===1?' is':'s are')+' hidden. Switch on NSFW mode in the Menu under Content and identity to see them.'));
   return foldify(tb,'tr-'+k+i,true)}
@@ -1991,7 +1991,7 @@ function viewGloss(v){
     {const ch=glChain(e);if(ch.length>1){const f=el('p','glfam');f.append(el('b',null,'Family line: '));ch.forEach((w,i)=>{if(i)f.append(document.createTextNode(' \u2192 '));f.append(w===e.w?el('b','glme',w):document.createTextNode(w))});bd.append(f)}
       const kids=glKids(e);if(kids.length)bd.append(el('p','note','Becomes '+kids.join(', ')+'.'));
       bd.append(el('p','note glend','When the cycle ends: '+glEnd(e)))}
-    const ac=el('div','acts');ac.append(btn('Open in Library',()=>{S.tab='cat';open(e.id);window.scrollTo({top:0})},'small'));bd.append(ac);
+    const ac=el('div','acts');ac.append(btn('Open in Library',()=>{S.tab='cat';openTrack(e.id);window.scrollTo({top:0})},'small'));bd.append(ac);
     c.append(bd);grid.append(c)});
   tp.append(foldBar(grid,'words'),grid);v.append(foldify(tp,'g-trig',true))}
 function viewLore(v){
@@ -2150,10 +2150,10 @@ function viewMap(v){
 function nextStrip(){
   const n=el('div','next');
   const vis=ALL.filter(onPath),done=vis.filter(id=>S.done[id]).length;
-  const readyAll=vis.filter(id=>status(id)==='ready');const ready=readyAll.filter(id=>released(get(id)['Release Date'])).sort((a,b)=>get(a)['Map Step']-get(b)['Map Step']).slice(0,6);
+  const readyAll=vis.filter(id=>trackStatus(id)==='ready');const ready=readyAll.filter(id=>released(get(id)['Release Date'])).sort((a,b)=>get(a)['Map Step']-get(b)['Map Step']).slice(0,6);
   n.append(el('h2',null,'Next up'));
   if(ready.length)ready.forEach(id=>{const r=get(id);const b=el('button','chip '+fam(id)+' ready');b.type='button';
-    b.append(el('span','id',id+' · '+r.Title),el('span','tg',hideTrig(id)?'':r.Trigger));b.onclick=()=>open(id);n.append(b)});
+    b.append(el('span','id',id+' · '+r.Title),el('span','tg',hideTrig(id)?'':r.Trigger));b.onclick=()=>openTrack(id);n.append(b)});
   else{
     const un=DATA.kernels.filter(k=>!kHeard(k.key));
     if(readyAll.length&&!ready.length){n.append(el('span','empty','You are caught up on everything that is out. The next releases are on Home under Coming up.'))}else
@@ -2196,7 +2196,7 @@ function tcard(t){
   const c=el('div','card p'+cardFam(t)+(S.sel===t.id?' selcard':''));
   const top=el('div','top2');
   const ck=covKey(t);
-  const o=el('button','open');o.type='button';o.onclick=()=>open(t.id);
+  const o=el('button','open');o.type='button';o.onclick=()=>openTrack(t.id);
   o.append(el('span','mono',t.id),el('h3',null,t.title));top.append(...(ck?[thumb(ck)]:[]),o,heartBtn({k:'t:'+t.id,kind:'track',title:t.id+' '+t.title,tracks:t.id}));
   c.append(top);
   c.append(el('div','tt',gated(t)?'Details hidden (NSFW). Tap to open.':(t.trig&&!/^Week/.test(t.trig)?t.trig:'')));
@@ -2247,7 +2247,7 @@ function readStory(v,st){
   const ft=el('div','rdfoot');
   if(st.g==='files'){const n=+st.id.split('-')[1];const prev=STORIES.find(x=>x.id==='files-'+(n-1)),next=STORIES.find(x=>x.id==='files-'+(n+1));
     const nv=el('div','acts');if(prev)nv.append(btn('← Part '+(n-1),()=>{S.storyOpen=prev.id;save();render();window.scrollTo({top:0})},'small'));if(next)nv.append(btn('Part '+(n+1)+' →',()=>{S.storyOpen=next.id;save();render();window.scrollTo({top:0})},'primary'));else nv.append(el('span','note','More parts to come.'));ft.append(nv);
-    if(st.sku&&TI[st.sku])ft.append(btn('See the track: '+st.sku+' '+st.skuTitle,()=>{S.storyOpen=null;S.tab='home';open(st.sku)},'small'))}
+    if(st.sku&&TI[st.sku])ft.append(btn('See the track: '+st.sku+' '+st.skuTitle,()=>{S.storyOpen=null;S.tab='home';openTrack(st.sku)},'small'))}
   if(st.link){const a=el('a','btn small','Read on Reddit');a.href=st.link;a.target='_blank';a.rel='noopener noreferrer';ft.append(a)}
   ft.append(el('p','fine','Written by The Primal Luna. Every word is human-written.'));
   r.append(ft);v.append(r);
@@ -2326,7 +2326,7 @@ function relBlock(r){
   const w=el('section','relbox');let any=false;
   if(r.tools&&r.tools.length&&window.LT){const row=el('div','acts');r.tools.forEach(k=>{const t=LT.tools[k];if(t)row.append(btn(t[0],t[1],'small'))});if(row.children.length){w.append(el('b',null,'Try it in the app'),row);any=true}}
   if(r.pil&&r.pil.length){const row=el('div','acts');r.pil.forEach(k=>row.append(btn((k==='White'?'Foundation':k)+' in the Library',()=>goPillar(k),'small')));w.append(el('b',null,'In the Library'),row);any=true}
-  if(r.track&&TI[r.track]){const row=el('div','acts');row.append(btn('Open the track: '+r.track+' '+TI[r.track].title,()=>{open(r.track)},'small'));w.append(el('b',null,'The track'),row);any=true}
+  if(r.track&&TI[r.track]){const row=el('div','acts');row.append(btn('Open the track: '+r.track+' '+TI[r.track].title,()=>{openTrack(r.track)},'small'));w.append(el('b',null,'The track'),row);any=true}
   const ids=[];
   if(r.kind==='Track deep dive'){const sk=RES.filter(x=>x.kind==='Track deep dive').sort((a,b)=>a.ord-b.ord),i=sk.findIndex(x=>x.id===r.id);if(i>0)ids.push(sk[i-1].id);if(i>=0&&i<sk.length-1)ids.push(sk[i+1].id)}
   (r.rel||[]).forEach(x=>ids.push(x));
@@ -2335,7 +2335,7 @@ function relBlock(r){
   return any?w:null}
 function trigLinks(r){
   const w=el('div','relbox');let any=false;
-  (r.trig||[]).forEach(t=>{const k=WSKU[t.toUpperCase()];if(!k||!TI[k])return;any=true;const row=el('div','acts');row.append(el('span','note',t+': '),btn('Open '+k+' '+TI[k].title,()=>{open(k)},'small'));const dd=RES.find(x=>x.track===k);if(dd)row.append(btn('Read the deep dive',()=>goRes(dd.id),'small'));w.append(row)});
+  (r.trig||[]).forEach(t=>{const k=WSKU[t.toUpperCase()];if(!k||!TI[k])return;any=true;const row=el('div','acts');row.append(el('span','note',t+': '),btn('Open '+k+' '+TI[k].title,()=>{openTrack(k)},'small'));const dd=RES.find(x=>x.track===k);if(dd)row.append(btn('Read the deep dive',()=>goRes(dd.id),'small'));w.append(row)});
   return any?w:null}
 function trigInfo(r){const t=r.trig||[];if(!t.length)return 'Trigger words: none.';const bad=t.filter(w=>{const k=WSKU[w.toUpperCase()],ti=k&&TI[k];return !(ti&&released(ti.date))});return 'Trigger words: '+t.join(', ')+'. '+(bad.length?bad.join(', ')+(bad.length>1?' are':' is')+' not released yet.':(t.length>1?'All released':'Released')+' in the Foundation.')}
 function txtPills(r,m){m.append(el('span','pill','Text only'),el('span','pill',r.adult?'NSFW':'SFW'));if(r.adult)m.lastChild.className='pill warn';m.append(el('span','pill',rMins(r)+' min read'))}
@@ -2436,7 +2436,7 @@ function identGuide(v,key){
   const lst=el('div','idlist');
   groupSub(vis,lst,t=>{const w=waveOf(t);const r=el('button','idrow'+(S.done[t.id]?' done':''));r.type='button';
     r.append(el('span','mono',w[0]||t.id),el('b',null,t.title),el('span','idw',gated(t)?'':w[1]),el('span','pill'+(isAdultT(t)?' warn':''),t.consent),el('span','idd2',(released(t.date)?'Out now':'Releases '+fmtDate(t.date))+(S.done[t.id]?' · heard':'')));
-    r.onclick=()=>open(t.id);return r});
+    r.onclick=()=>openTrack(t.id);return r});
   g.append(lst);
   const hid=all.length-vis.length;
   if(hid){g.append(el('p','note',hid+' tracks in this series are NSFW and hidden in SFW mode.'));g.append(btn('Switch to NSFW mode',()=>{goNSFW()},'small'))}
@@ -2476,12 +2476,11 @@ function mindGuide(v,key){
   const lst2=el('div','idlist');
   groupSub(vis,lst2,x=>{const r=el('button','idrow'+(S.done[x.id]?' done':''));r.type='button';
     r.append(el('span','mono',x.id),el('b',null,x.title),el('span','idw',!gated(x)&&x.trig&&!/^Week/.test(x.trig)&&x.trig!=='To be announced'?(G.trig?'Trigger: ':'')+x.trig:(G.trig?'Trigger revealed on release':(x.cat||''))),el('span','pill'+(isAdultT(x)?' warn':''),x.consent),el('span','idd2',(released(x.date)?'Out now':'Releases '+fmtDate(x.date))+(S.done[x.id]?' \u00B7 heard':'')));
-    r.onclick=()=>open(x.id);return r});
+    r.onclick=()=>openTrack(x.id);return r});
   g.append(lst2);
   const hid=all.length-vis.length;
   if(hid){g.append(el('p','note',hid+' tracks in this album are NSFW and hidden in SFW mode.'));g.append(btn('Switch to NSFW mode',()=>{goNSFW()},'small'))}
   v.append(g)}
-const IDMAP={Rose:'Nivi',Azure:'Amarok',Prism:'Wolfie'};
 function goIdent(key){S.tab='cat';F.col=key;F.sub='';F.shown=48;render();window.scrollTo({top:0})}
 function setIdent(key){S.identity=(S.identity===key)?'':key;save();render()}
 function identPicker(){
@@ -2499,7 +2498,7 @@ function identHome(v){
   const nx=vis.find(t=>!S.done[t.id]);
   if(!foundDone())c.append(el('p',null,'Finish the Foundation first. Then your '+I.name+' series opens with '+(nx?nx.title:'the first track')+'.'));
   else if(!nx)c.append(el('p',null,'You have heard every '+I.name+' track that is available to you. Welcome.'));
-  else if(released(nx.date)){c.append(el('p',null,'Next: '+nx.title+' ('+waveOf(nx).join(' · ')+').'));c.append(btn('Open '+nx.title,()=>open(nx.id),'primary'))}
+  else if(released(nx.date)){c.append(el('p',null,'Next: '+nx.title+' ('+waveOf(nx).join(' · ')+').'));c.append(btn('Open '+nx.title,()=>openTrack(nx.id),'primary'))}
   else c.append(el('p',null,'Your next '+I.name+' track is '+nx.title+', releasing '+fmtDate(nx.date)+'.'));
   c.append(btn('Open the '+I.name+' guide',()=>{S.tab='cat';F.col=key;F.sub='';F.shown=48;render()},'small'));
   v.append(c)}
@@ -2516,9 +2515,8 @@ function viewHome(v){
   {const og=el('div','grid');CAT.found.filter(f=>released(f.date)).forEach(f=>{const t=tinfo(f.sku);if(t)og.append(tcard(t))});
    const os=el('section','homefold');os.append(el('h2','hh','Out now ('+og.childNodes.length+')'));if(!foundDone())os.append(el('p','note','The same ten Foundation tracks as the checklist above, with full details.'));os.append(og);v.append(foldify(os,'h-out',foundDone()))}
   velvetCard(v);
-  const today=new Date().toISOString().slice(0,10);
   const up=ALL.map(id=>({id,t:tinfo(id)})).filter(x=>x.t&&x.t.date&&!released(x.t.date)&&(adultOK()||!hardT(x.t))).sort((a,b)=>a.t.date<b.t.date?-1:1).slice(0,6);
-  if(up.length){const ch=el('div','acts');ch.append(el('h2','hh','Coming up'),btn('Add to my calendar',calOpen,'small'));ch.style.alignItems='center';ch.style.justifyContent='space-between';v.append(ch);const ul=el('div','upc');up.forEach(({id,t})=>{const r=el('button','upr '+fam(id));r.type='button';r.append(el('span','d',fmtDate(t.date)),el('b',null,t.title),el('span','mono',id));r.onclick=()=>open(id);ul.append(r)});v.append(ul)}
+  if(up.length){const ch=el('div','acts');ch.append(el('h2','hh','Coming up'),btn('Add to my calendar',calOpen,'small'));ch.style.alignItems='center';ch.style.justifyContent='space-between';v.append(ch);const ul=el('div','upc');up.forEach(({id,t})=>{const r=el('button','upr '+fam(id));r.type='button';r.append(el('span','d',fmtDate(t.date)),el('b',null,t.title),el('span','mono',id));r.onclick=()=>openTrack(id);ul.append(r)});v.append(ul)}
   if(S.ideas.length){v.append(el('h2','hh','Your recent sessions'));const il=el('div','upc');S.ideas.slice(-3).reverse().forEach(it=>{const r=el('button','upr');r.type='button';r.append(el('b',null,it.title||'Saved idea'),el('span','mono',(it.tracks||'').slice(0,60)));r.onclick=()=>{S.tab='ideas';render()};il.append(r)});v.append(il)}
   v.append(stopCard());
 }
@@ -2626,7 +2624,7 @@ function feelCard(r){
 }
 function table(head,rows,cellFn){
   const w=el('div','tablewrap');const t=el('table');const th=el('tr');head.forEach(h=>th.append(el('th',null,h)));t.append(th);
-  rows.forEach(r=>{const tr=el('tr');r.forEach((c,i)=>{const td=el('td',/^\d+$/.test(c)?'n':'');if(cellFn&&cellFn(td,c,i)){}else td.textContent=c;tr.append(td)});t.append(tr)});
+  rows.forEach(r=>{const tr=el('tr');r.forEach((c,i)=>{const td=el('td',/^\d+$/.test(c)?'n':'');if(!(cellFn&&cellFn(td,c,i)))td.textContent=c;tr.append(td)});t.append(tr)});
   w.append(t);return w;
 }
 function idCell(td,c){const ids=idsIn(c);if(!ids.length||ids.join(' ').length<2)return false;td.append(refs(c.split(/\s*(?:→|\/|,)\s*/).filter(Boolean)));return true}
@@ -2750,7 +2748,7 @@ function viewIdeas(v){
     const ol=el('ol','seq');
     S.seq.forEach((id,i)=>{const t=tinfo(id);const li=el('li');
       const tt=el('div','t');tt.append(el('b',null,(i+1)+'. '+(t?t.title:id)),el('span',null,id+(t&&t.rt?' · '+t.rt:'')+(t&&t.inten!==''?' · intensity '+t.inten:'')));
-      const open1=btn('Details',()=>open(id),'small');
+      const open1=btn('Details',()=>openTrack(id),'small');
       const up=btn('↑',()=>{if(i>0){[S.seq[i-1],S.seq[i]]=[S.seq[i],S.seq[i-1]];save();render()}},'small');up.setAttribute('aria-label','Move up');
       const dn=btn('↓',()=>{if(i<S.seq.length-1){[S.seq[i+1],S.seq[i]]=[S.seq[i],S.seq[i+1]];save();render()}},'small');dn.setAttribute('aria-label','Move down');
       const rm=btn('Remove',()=>{S.seq.splice(i,1);save();render()},'small');
@@ -2871,7 +2869,7 @@ function renderSide(){
   if(!S.done[id]&&!lockedByFound(id)){if(!S.noReady)s.append(readyCard());s.append(preRow(id))}
   const a=el('div','acts');a.style.display='flex';a.style.flexWrap='wrap';a.style.gap='8px';
   const done=!!S.done[id];const lk=lockedByFound(id);const b=btn(done?'Marked heard · tap to undo':(lk?'Locked: hear the Foundation first':'Mark as heard'),()=>{if(lk&&!done)return;let fresh=false;if(S.done[id])delete S.done[id];else{S.done[id]=true;fresh=true;stampHeard(id)}save();render();if(fresh)afterHeard(id)},'primary');if(lk&&!done){b.disabled=true;b.setAttribute('aria-disabled','true')}
-  if(r&&status(id)==='locked'&&!done&&!lk)b.append(el('span',null,' (locked)'));a.append(b);
+  if(r&&trackStatus(id)==='locked'&&!done&&!lk)b.append(el('span',null,' (locked)'));a.append(b);
   {const sl=spotLink(t);if(sl){a.prepend(sl);s.append(spotNote());const em=spotEmbed(t);if(em)s.append(em)}}
   a.append(btn('Add to builder',()=>{S.seq.push(id);S.tab='ideas';save();render()}));
   a.append(heartBtn({k:'t:'+id,kind:'track',title:id+' '+t.title,tracks:id}));
@@ -2954,9 +2952,25 @@ const SENS=[['heavy','Heavy'],['floaty','Floaty'],['tingling','Tingling'],['warm
 const FEEL5=['1 \u00B7 Rough','2 \u00B7 Low','3 \u00B7 Okay','4 \u00B7 Good','5 \u00B7 Great'];
 let cxFrom=null;
 window.cxHooks=[];function cxRun(){const h=window.cxHooks||[];window.cxHooks=[];h.forEach(f=>{try{f()}catch(e){}})}
+function dragFab(f,PK,resetId,onKeep){let pos=null,drag=null,moved=false;try{pos=JSON.parse(localStorage.getItem(PK)||'null')}catch(e){}
+  const lim=()=>({w:Math.max(0,innerWidth-f.offsetWidth-6),h:Math.max(0,innerHeight-f.offsetHeight-6)});
+  const put=(x,y)=>{const L=lim();x=Math.min(L.w,Math.max(6,x));y=Math.min(L.h,Math.max(6,y));f.style.left=x+'px';f.style.top=y+'px';f.style.right='auto';f.style.bottom='auto';return{x,y}};
+  const apply=()=>{if(!pos)return;const L=lim();put(pos.fx*L.w,pos.fy*L.h)};
+  const keep=(x,y)=>{const L=lim();pos={fx:L.w?x/L.w:0,fy:L.h?y/L.h:0};try{localStorage.setItem(PK,JSON.stringify(pos))}catch(e){}if(onKeep)onKeep()};
+  f.addEventListener('pointerdown',e=>{if(e.button>0)return;const r=f.getBoundingClientRect();drag={id:e.pointerId,sx:e.clientX,sy:e.clientY,ox:r.left,oy:r.top};moved=false;try{f.setPointerCapture(e.pointerId)}catch(_){}});
+  f.addEventListener('pointermove',e=>{if(!drag||e.pointerId!==drag.id)return;const dx=e.clientX-drag.sx,dy=e.clientY-drag.sy;if(!moved&&Math.hypot(dx,dy)<8)return;moved=true;f.classList.add('dragging');put(drag.ox+dx,drag.oy+dy)});
+  const end=e=>{if(!drag||e.pointerId!==drag.id)return;drag=null;f.classList.remove('dragging');if(moved){const r=f.getBoundingClientRect();keep(r.left,r.top)}};
+  f.addEventListener('pointerup',end);f.addEventListener('pointercancel',end);
+  f.addEventListener('click',e=>{if(moved){e.stopImmediatePropagation();e.preventDefault();moved=false}},true);
+  f.addEventListener('keydown',e=>{const d={ArrowLeft:[-24,0],ArrowRight:[24,0],ArrowUp:[0,-24],ArrowDown:[0,24]}[e.key];if(!d||!e.shiftKey)return;e.preventDefault();const r=f.getBoundingClientRect();const p=put(r.left+d[0],r.top+d[1]);keep(p.x,p.y)});
+  addEventListener('resize',apply);apply();
+  const rs=$(resetId);if(rs)rs.onclick=()=>{pos=null;try{localStorage.removeItem(PK)}catch(e){}f.style.left=f.style.top=f.style.bottom=f.style.right=''}}
+function pickRow(b,title,opts,get,set){const w=el('div','wsrow');w.append(el('b',null,title));const g=el('div','wsseg');g.setAttribute('role','group');g.setAttribute('aria-label',title);
+  opts.forEach(o=>{const x=btn(o[1],()=>{set(o[0]);[...g.children].forEach((c,j)=>c.setAttribute('aria-pressed',String(opts[j][0]===get())))},'small');x.setAttribute('aria-pressed',String(get()===o[0]));g.append(x)});w.append(g);b.append(w)}
 function cxClose(){cxRun();const d=$('cx-dlg');d.hidden=true;document.body.style.overflow=($('sos')&&!$('sos').hidden)?'hidden':'';if(cxFrom&&cxFrom.focus)try{cxFrom.focus()}catch(e){}}
 function cxOpen(title,build){cxRun();cxFrom=document.activeElement;$('cx-h').textContent=title;const b=$('cx-body');b.textContent='';build(b);const d=$('cx-dlg');d.hidden=false;document.body.style.overflow='hidden';d.scrollTop=0;$('cx-box').focus()}
 async function saveOut(name,data,mime){
+  if(!DL){try{const bl=new Blob([t.value],{type:'application/json'});const u=URL.createObjectURL(bl);const an=document.createElement('a');an.href=u;an.download=nm;document.body.append(an);an.click();an.remove();setTimeout(()=>URL.revokeObjectURL(u),2000);markBackup();msg.textContent='Backup saved.';return}catch(e){}}
   if(DL){try{await DL.save({filename:name,data});return 'saved'}catch(e){if(e&&e.code==='declined')return 'declined';if(!(e&&e.code==='rejected_extension'))return 'fail'}return 'noext'}
   try{const u=URL.createObjectURL(data instanceof Blob?data:new Blob([data],{type:mime}));const a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);return 'saved'}catch(e){return 'fail'}}
 function rangeRow(label,val,onch){const w=el('label','cxr');w.append(el('span',null,label));const r=document.createElement('input');r.type='range';r.min=1;r.max=5;r.step=1;r.value=val;const o=el('b','cxv',FEEL5[val-1]);r.oninput=()=>{o.textContent=FEEL5[r.value-1];onch(+r.value)};w.append(r,o);return w}
@@ -2977,9 +2991,9 @@ function tonightCard(v){const h=new Date().getHours();let hi,tip;
   else if(h>=17&&h<22){hi='Good evening';tip='A good time to wind down. Water within reach, something in your stomach, and nothing you have to do after.'}
   else{hi='Late night';tip='Settle in first: in bed, lights low, headphones on. Skip anything activating (Green) this close to sleep.'}
   const nm=((S.profile&&S.profile.name)||'').trim();
-  const vis=ALL.filter(onPath);const rd=vis.filter(id=>status(id)==='ready'&&released(get(id)['Release Date'])).sort((a,b)=>get(a)['Map Step']-get(b)['Map Step'])[0];
+  const vis=ALL.filter(onPath);const rd=vis.filter(id=>trackStatus(id)==='ready'&&released(get(id)['Release Date'])).sort((a,b)=>get(a)['Map Step']-get(b)['Map Step'])[0];
   const c=el('section','foundcard tonight');c.append(el('h2',null,hi+(nm?', '+nm:'')+'.'),el('p',null,tip));{const cd=countdownText();if(cd)c.append(el('p','mono tcount',cd))}
-  const a=el('div','acts');if(rd&&foundDone())a.append(btn('Next up: '+get(rd).Title,()=>open(rd),'primary'));else if(!foundDone()){const f0=CAT.found.find(f=>released(f.date)&&!S.done[f.sku]);if(f0)a.append(btn((Object.keys(S.done).length?'Next Foundation track: ':'Start with ')+f0.title,()=>open(f0.sku),'primary'))}else if(rd)a.append(btn('Next up: '+get(rd).Title,()=>open(rd),'primary'));a.append(btn('Come-back card',cbOpen,'small'),btn('Partner hand-off',partnerOpen,'small'),btn('Dream log',dreamOpen,'small'),btn('Breathe',breatheOpen,'small'),btn('Visual Reinforcer',()=>window.wsOpen(),'small'),btn('Night Plan',()=>window.LT&&LT.planOpen(),'small'),btn('Bedside mode',()=>window.LT&&LT.bedOpen(),'small'));c.append(a);if(window.LT)LT.extras(c);
+  const a=el('div','acts');if(rd&&foundDone())a.append(btn('Next up: '+get(rd).Title,()=>openTrack(rd),'primary'));else if(!foundDone()){const f0=CAT.found.find(f=>released(f.date)&&!S.done[f.sku]);if(f0)a.append(btn((Object.keys(S.done).length?'Next Foundation track: ':'Start with ')+f0.title,()=>openTrack(f0.sku),'primary'))}else if(rd)a.append(btn('Next up: '+get(rd).Title,()=>openTrack(rd),'primary'));a.append(btn('Come-back card',cbOpen,'small'),btn('Partner hand-off',partnerOpen,'small'),btn('Dream log',dreamOpen,'small'),btn('Breathe',breatheOpen,'small'),btn('Visual Reinforcer',()=>window.wsOpen(),'small'),btn('Night Plan',()=>window.LT&&LT.planOpen(),'small'),btn('Bedside mode',()=>window.LT&&LT.bedOpen(),'small'));c.append(a);if(window.LT)LT.extras(c);
   if(!(S.checks||[]).length)c.append(el('p','note','Tip: on any track page you can rate how you feel before. When you mark it heard, the app asks again and draws your private trend.'));
   v.append(c)}
 function cbPlan(){const P=S.profile||{};return{name:(P.name||'').trim(),contact:(P.contact||'').trim()}}
@@ -3159,19 +3173,7 @@ function recapOpen(){cxOpen('Your recap',b=>{const D=recapData();const opt={name
   document.addEventListener('visibilitychange',()=>{let a=false;try{a=localStorage.getItem('lunaSleep.qhAuto')==='1'}catch(x){}if(document.hidden&&a)window.qhShow()});
   {const sm=$('set-simple');try{sm.checked=localStorage.getItem('lunaSleep.simple')==='1'}catch(e){}sm.onchange=()=>{try{localStorage.setItem('lunaSleep.simple',sm.checked?'1':'0')}catch(e){}render()}}
   {const q=$('set-cvquiet');try{q.checked=localStorage.getItem('lunaSleep.cvQuiet')==='1'}catch(e){}q.onchange=()=>{try{localStorage.setItem('lunaSleep.cvQuiet',q.checked?'1':'0')}catch(e){}}}
-  {const f=$('panic'),PK='lunaSleep.panicPos';let pos=null,drag=null,moved=false;try{pos=JSON.parse(localStorage.getItem(PK)||'null')}catch(e){}
-   const lim=()=>({w:Math.max(0,innerWidth-f.offsetWidth-6),h:Math.max(0,innerHeight-f.offsetHeight-6)});
-   const put=(x,y)=>{const L=lim();x=Math.min(L.w,Math.max(6,x));y=Math.min(L.h,Math.max(6,y));f.style.left=x+'px';f.style.top=y+'px';f.style.right='auto';f.style.bottom='auto';return{x,y}};
-   const apply=()=>{if(!pos)return;const L=lim();put(pos.fx*L.w,pos.fy*L.h)};
-   const keep=(x,y)=>{const L=lim();pos={fx:L.w?x/L.w:0,fy:L.h?y/L.h:0};try{localStorage.setItem(PK,JSON.stringify(pos))}catch(e){}if(window.cvCheck)window.cvCheck()};
-   f.addEventListener('pointerdown',e=>{if(e.button>0)return;const r=f.getBoundingClientRect();drag={id:e.pointerId,sx:e.clientX,sy:e.clientY,ox:r.left,oy:r.top};moved=false;try{f.setPointerCapture(e.pointerId)}catch(_){}});
-   f.addEventListener('pointermove',e=>{if(!drag||e.pointerId!==drag.id)return;const dx=e.clientX-drag.sx,dy=e.clientY-drag.sy;if(!moved&&Math.hypot(dx,dy)<8)return;moved=true;f.classList.add('dragging');put(drag.ox+dx,drag.oy+dy)});
-   const end=e=>{if(!drag||e.pointerId!==drag.id)return;drag=null;f.classList.remove('dragging');if(moved){const r=f.getBoundingClientRect();keep(r.left,r.top)}};
-   f.addEventListener('pointerup',end);f.addEventListener('pointercancel',end);
-   f.addEventListener('click',e=>{if(moved){e.preventDefault();moved=false;return}window.qhShow()});
-   f.addEventListener('keydown',e=>{const d={ArrowLeft:[-24,0],ArrowRight:[24,0],ArrowUp:[0,-24],ArrowDown:[0,24]}[e.key];if(!d||!e.shiftKey)return;e.preventDefault();const r=f.getBoundingClientRect();const p=put(r.left+d[0],r.top+d[1]);keep(p.x,p.y)});
-   addEventListener('resize',apply);apply();
-   const rs=$('set-panicreset');if(rs)rs.onclick=()=>{pos=null;try{localStorage.removeItem(PK)}catch(e){}f.style.left=f.style.top=f.style.bottom=f.style.right=''};
+  {const f=$('panic');dragFab(f,'lunaSleep.panicPos','set-panicreset',()=>{if(window.cvCheck)window.cvCheck()});f.addEventListener('click',()=>window.qhShow());
    let lt=0;ov.style.touchAction='manipulation';ov.addEventListener('pointerup',e=>{const n=Date.now();if(n-lt<400){lt=0;window.qhHide()}else lt=n});ov.addEventListener('dblclick',()=>window.qhHide())}
   $('qh-open').onclick=window.qhShow;
   const ac=$('set-qhauto');try{ac.checked=localStorage.getItem('lunaSleep.qhAuto')==='1'}catch(e){}ac.onchange=()=>{try{localStorage.setItem('lunaSleep.qhAuto',ac.checked?'1':'0')}catch(e){}}})();
@@ -3185,7 +3187,7 @@ const DEN_EVENTS=[
 function denCard(v){const d=new Date(),ts=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');const out=[];
   ALL.forEach(id=>{const x=tinfo(id);if(x&&x.date===ts&&(adultOK()||!hardT(x))&&x.title)out.push({title:'New today: '+x.title,text:id+' is out today.',open:id})});
   DEN_EVENTS.filter(e=>e.from<=ts&&ts<=e.to).forEach(e=>out.push(e));if(!out.length)return;
-  const c=el('section','foundcard denev');c.append(el('h2',null,'In the Den now'));out.forEach(e=>{const w=el('div','denit');w.append(el('b',null,e.title),el('p',null,e.text));if(e.open)w.append(btn('Open it',()=>open(e.open),'small'));c.append(w)});v.append(c)}
+  const c=el('section','foundcard denev');c.append(el('h2',null,'In the Den now'));out.forEach(e=>{const w=el('div','denit');w.append(el('b',null,e.title),el('p',null,e.text));if(e.open)w.append(btn('Open it',()=>openTrack(e.open),'small'));c.append(w)});v.append(c)}
 
 function goGloss(w){LR.m='gloss';GL.q=w||'';GL.c='';S.resOpen=null;S.bonusOpen=null;S.sel=null;S.tab='lore';render();window.scrollTo({top:0})}
 function trigPathCard(v){
@@ -3202,7 +3204,7 @@ function trigPathCard(v){
     c.append(el('p','note','Filled words are installed. Outlined is next on that line. Tap a word to read about it.'),ls);
     if(lines.length>4)c.append(el('p','note','And '+(lines.length-4)+' more line'+(lines.length-4===1?'':'s')+' in the glossary.'))}
   const a=el('div','acts');
-  if(nextW){const ti=tinfo(nextW.id);const out=ti&&released(ti.date);c.append(el('p',null,'Next on your lines: '+nextW.w+' ('+((ti&&ti.title)||nextW.t)+')'+(out?'.':ti&&ti.date?', out '+fmtDate(ti.date)+'.':'.')));if(out)a.append(btn('Open '+((ti&&ti.title)||nextW.t),()=>open(nextW.id),'primary'))}
+  if(nextW){const ti=tinfo(nextW.id);const out=ti&&released(ti.date);c.append(el('p',null,'Next on your lines: '+nextW.w+' ('+((ti&&ti.title)||nextW.t)+')'+(out?'.':ti&&ti.date?', out '+fmtDate(ti.date)+'.':'.')));if(out)a.append(btn('Open '+((ti&&ti.title)||nextW.t),()=>openTrack(nextW.id),'primary'))}
   else if(n&&n===ent.length)c.append(el('p',null,'You have installed every word that is available. Welcome.'));
   a.append(btn('Open the trigger glossary',()=>goGloss(),'small'));c.append(a);v.append(c)}
 
@@ -3335,13 +3337,12 @@ function lensEl(k,small){const d=document.createElement('div');d.className='wsle
   cw.onclick=()=>{pn.hidden=!pn.hidden;cw.setAttribute('aria-expanded',String(!pn.hidden));if(!pn.hidden){syncWheel()}};
   mark();syncWheel()}
  window.wsOpen=function(w,look){if(Array.isArray(w))ovr=w;else if(w!=='keep')ovr=null;C=load();preName='';if(look&&typeof look==='object'){preName=look.__n||'';C=norm(Object.assign({},look,{off:C.off,mine:C.mine}));flag('vrpre')}cxOpen('Visual Reinforcer',b=>{
-  let prevEl=null;
   const draw=()=>{b.textContent='';const ws=baseW();
    b.append(el('p',null,'A quiet screen of soft words to rest your eyes on while you listen. It uses the trigger words from tracks you have heard, plus any words of your own. Your words and looks are saved on this device only.'));
    b.append(el('p','note','Built to be gentle: each word fades slowly in and out, never faster than once every 3 seconds. The spiral turns slowly, with a full turn taking 14 seconds at the fastest, and nothing strobes or flashes. With Reduce motion on, everything holds still. Stop at any time with Esc, the Stop button, or the Emergency Exit. If you feel unwell, stop and say HUMAN. This is not medical advice.'));
    if(ovr){const nb=el('div','wsrow');nb.append(el('p','note','Showing only the words from the track you opened this from.'),btn('Use all my words instead',()=>{ovr=null;draw()},'small'));b.append(nb)}
    if(preName)b.append(el('p','note','Using the '+preName+' look that goes with this track. Change anything you like. Your own look comes back next time you open it from the Menu.'));
-   const prev=el('div','wsprev');prevEl=prev;b.append(prev);
+   const prev=el('div','wsprev');b.append(prev);
    const upPrev=()=>{prev.textContent='';prev.style.background=C.bg;prev.style.position='relative';if(C.sp.on){const w=el('div','wssp');w.append(spiralSvg(C.sp,true));prev.append(w)}
     const pw=el('div',null,(ws.concat(C.mine).find(w=>!C.off.includes(w))||'Settle'));pw.style.cssText='position:relative;color:'+C.color+';font-family:'+FF[C.font]+';font-size:'+Math.min(SZ[C.size],64)+'px;font-weight:'+(C.font==='serif'?600:500)+';letter-spacing:.04em;text-align:center;text-shadow:'+(C.tglow?'0 0 18px '+C.color+',0 0 46px '+C.color:'none');prev.append(pw)};upPrev();
    const seg=(title,opts,get,set,after)=>{const r=el('div','wsrow');r.append(el('b',null,title));const g=el('div','wsseg');g.setAttribute('role','group');g.setAttribute('aria-label',title);opts.forEach(o=>{const x=btn(o[1],()=>{set(o[0]);sv();draw()},'small');x.setAttribute('aria-pressed',String(get()===o[0]));g.append(x)});r.append(g);b.append(r)};
@@ -3412,7 +3413,7 @@ function lensEl(k,small){const d=document.createElement('div');d.className='wsle
   $('inst-t').textContent=dp?'Add Luna Sleep to your home screen so it opens like an app, works offline and is one tap away at bedtime.':'Add Luna Sleep to your home screen: tap the Share button, then Add to Home Screen. It opens like an app and works offline.';
   $('inst-go').hidden=!dp;box.hidden=false}
  if(box){$('inst-no').onclick=()=>hide(false);$('inst-go').onclick=async()=>{if(!dp)return;try{dp.prompt();await dp.userChoice}catch(e){}dp=null;hide(false)};
-  window.addEventListener('appinstalled',()=>hide(false));const _r=render;render=function(){const r=_r.apply(this,arguments);chk();return r}}
+  window.addEventListener('appinstalled',()=>hide(false));RENDER_HOOKS.push(chk)}
 })();
 /* promo code */
 (function(){const PROMO={code:'LUNAAPP',end:Date.UTC(2027,3,23,5,36)};/* April 22, 2027, 11:36 PM Mountain time (UTC-6) */
@@ -3428,7 +3429,7 @@ function lensEl(k,small){const d=document.createElement('div');d.className='wsle
   const d=Math.ceil(left()/864e5);const e=document.createElement('p');e.className='note';e.textContent='New Patreon members only. Not for existing members. Ends April 22, 2027 at 11:36 PM Mountain time'+(d<=30?' ('+d+(d===1?' day':' days')+' left)':'')+'. Enter the code at checkout on Patreon.';
   c.append(h,t,row,e);if(link){const a=document.createElement('a');a.className='btn small';a.href='https://www.patreon.com/PrimalLunaSleep';a.target='_blank';a.rel='noopener noreferrer';a.textContent='Join on Patreon ↗';c.append(a)}return c};
  function fill(){[['promo-menu',false]].forEach(([id,l])=>{const n=document.getElementById(id);if(!n)return;n.textContent='';const c=window.promoCard(false);if(c)n.append(c)})}
- fill();const so=document.getElementById('set-open');if(so)so.addEventListener('click',fill);const _r=render;render=function(){const r=_r.apply(this,arguments);fill();return r}
+ fill();const so=document.getElementById('set-open');if(so)so.addEventListener('click',fill);RENDER_HOOKS.push(fill)
 })();
 let sosFrom=null;
 function sosBuild(){
@@ -3459,8 +3460,7 @@ function doRestore(txt,msg){try{const x=JSON.parse(txt);
 let DL=null;(async()=>{try{DL=window.claude&&window.claude.use?await window.claude.use('downloads'):null}catch(e){DL=null}})();
 $('io-save').onclick=async()=>{const msg=$('io-msg');const t=$('io-text');t.value=backup();
   const nm='luna-sleep-backup-'+new Date().toISOString().slice(0,10)+'.json';
-  if(!DL){try{const bl=new Blob([t.value],{type:'application/json'});const u=URL.createObjectURL(bl);const an=document.createElement('a');an.href=u;an.download=nm;document.body.append(an);an.click();an.remove();setTimeout(()=>URL.revokeObjectURL(u),2000);markBackup();msg.textContent='Backup saved.';return}catch(e){}}
-  if(DL){try{const r=await DL.save({filename:nm,data:t.value});markBackup();msg.textContent='Backup saved.';return}catch(e){if(e&&e.code==='declined'){msg.textContent='Cancelled.';return}}}
+  if(DL){try{await DL.save({filename:nm,data:t.value});markBackup();msg.textContent='Backup saved.';return}catch(e){if(e&&e.code==='declined'){msg.textContent='Cancelled.';return}}}
   try{await navigator.clipboard.writeText(t.value);markBackup();msg.textContent='Saving a file is not available here, so the backup text was copied. Paste it into a note or email to yourself.'}catch(e){t.focus();t.select();msg.textContent='Saving a file is not available here. Select the text above, copy it, and keep it somewhere safe.'}};
 $('io-file').onchange=()=>{const f=$('io-file').files[0];const msg=$('io-msg');if(!f)return;const r=new FileReader();r.onload=()=>doRestore(String(r.result||''),msg);r.onerror=()=>{msg.textContent='Could not read that file.'};r.readAsText(f);$('io-file').value=''};
 $('io-copy').onclick=async()=>{const t=$('io-text');t.value=backup();const msg=$('io-msg');
@@ -3490,21 +3490,7 @@ const lg=$('new-log');LOG.forEach(g=>{const h=document.createElement('h3');h.tex
 const NK='lunaSleep.newSeen',NV=LOGV,dot=$('new-dot'),ob=$('new-open');let seen='';try{seen=localStorage.getItem(NK)||''}catch(e){}
 if(seen!==NV){dot.hidden=false;$('menu-dot').hidden=false;$('set-links').open=true}new MutationObserver(()=>{const nx=$('new-next');if(nx)nx.textContent=countdownText()}).observe($('new-dlg'),{attributes:true,attributeFilter:['hidden']});
 $('new-feedback').onclick=()=>{$('new-close').click();setTimeout(()=>$('help-open').click(),60)};ob.addEventListener('click',()=>{const nx=$('new-next');if(nx)nx.textContent=countdownText();dot.hidden=true;$('menu-dot').hidden=true;try{localStorage.setItem(NK,NV)}catch(e){}})})();
-(function(){const f=$('sos-open'),PK='lunaSleep.sosPos';let pos=null,drag=null,moved=false;
-try{pos=JSON.parse(localStorage.getItem(PK)||'null')}catch(e){}
-function lim(){return{w:Math.max(0,innerWidth-f.offsetWidth-6),h:Math.max(0,innerHeight-f.offsetHeight-6)}}
-function put(x,y){const L=lim();x=Math.min(L.w,Math.max(6,x));y=Math.min(L.h,Math.max(6,y));f.style.left=x+'px';f.style.top=y+'px';f.style.right='auto';f.style.bottom='auto';return{x,y}}
-function apply(){if(!pos)return;const L=lim();put(pos.fx*L.w,pos.fy*L.h)}
-function keep(x,y){const L=lim();pos={fx:L.w?x/L.w:0,fy:L.h?y/L.h:0};try{localStorage.setItem(PK,JSON.stringify(pos))}catch(e){}}
-f.addEventListener('pointerdown',e=>{if(e.button>0)return;const r=f.getBoundingClientRect();drag={id:e.pointerId,sx:e.clientX,sy:e.clientY,ox:r.left,oy:r.top};moved=false;try{f.setPointerCapture(e.pointerId)}catch(_){}});
-f.addEventListener('pointermove',e=>{if(!drag||e.pointerId!==drag.id)return;const dx=e.clientX-drag.sx,dy=e.clientY-drag.sy;if(!moved&&Math.hypot(dx,dy)<8)return;moved=true;f.classList.add('dragging');put(drag.ox+dx,drag.oy+dy)});
-function end(e){if(!drag||e.pointerId!==drag.id)return;drag=null;f.classList.remove('dragging');if(moved){const r=f.getBoundingClientRect();keep(r.left,r.top)}}
-f.addEventListener('pointerup',end);f.addEventListener('pointercancel',end);
-f.addEventListener('click',e=>{if(moved){e.stopImmediatePropagation();e.preventDefault();moved=false}},true);
-f.addEventListener('keydown',e=>{const d={ArrowLeft:[-24,0],ArrowRight:[24,0],ArrowUp:[0,-24],ArrowDown:[0,24]}[e.key];if(!d||!e.shiftKey)return;e.preventDefault();const r=f.getBoundingClientRect();const p=put(r.left+d[0],r.top+d[1]);keep(p.x,p.y)});
-addEventListener('resize',apply);apply();
-$('sos-reset').onclick=()=>{pos=null;try{localStorage.removeItem(PK)}catch(e){}f.style.left=f.style.top=f.style.bottom=f.style.right=''};
-})();
+dragFab($('sos-open'),'lunaSleep.sosPos','sos-reset');
 (function(){const den=$('den'),ack=$('den-ack'),go=$('den-enter');let from=null;const K='lunaSleep.denAck';
 (function(){const s=$('den-stars');let h='';const r=(a,b)=>(a+Math.random()*(b-a)).toFixed(1);
   for(let i=0;i<9;i++)h+='<span class="sh" style="--x:'+r(15,105)+'%;--d:'+r(2.4,4.2)+'s;--w:'+r(0,9)+'s"></span>';
@@ -3535,9 +3521,6 @@ $('set-open').addEventListener('click',()=>{calm.checked=rd(CK);no.checked=rd(OK
 $('new-opt').addEventListener('change',()=>{no.checked=$('new-opt').checked});
 $('set-sosreset').onclick=()=>$('sos-reset').click();
 const CV_PK=[['blue','Blue'],['green','Green'],['red','Red'],['rose','Rose'],['azure','Azure'],['prism','Prism'],['silver','Silver']];
-const CV_SW=[['#4d8dff','Blue'],['#7fd0ff','Sky blue'],['#2bc4a8','Teal'],['#f2d94a','Yellow'],['#ff9a3d','Orange'],['#e0502a','Vermilion'],['#ff9ec7','Pink'],['#a98bff','Violet'],['#f2f2f2','White'],['#8a8fa3','Gray']];
-const cvLoad=()=>{try{const m=JSON.parse(localStorage.getItem('lunaSleep.cvdc')||'{}'),o={};CV_PK.forEach(k=>{if(typeof m[k[0]]==='string'&&/^#[0-9a-f]{6}$/i.test(m[k[0]]))o[k[0]]=m[k[0]]});return o}catch(e){return {}}};
-const cvSave=m=>{try{localStorage.setItem('lunaSleep.cvdc',JSON.stringify(m))}catch(e){}};
 const H=document.documentElement,sz=$('a11y-size'),hc=$('a11y-hc'),ft=$('a11y-font'),gv=k=>{try{return localStorage.getItem(k)||''}catch(e){return ''}},sv=(k,v)=>{try{if(v)localStorage.setItem(k,v);else localStorage.removeItem(k)}catch(e){}};
 const apA=()=>{const a=gv('lunaSleep.tsz');a?H.setAttribute('data-tsz',a):H.removeAttribute('data-tsz');gv('lunaSleep.hc')?H.setAttribute('data-hc','1'):H.removeAttribute('data-hc');gv('lunaSleep.font')?H.setAttribute('data-font','easy'):H.removeAttribute('data-font');const cs=gv('lunaSleep.cvd'),has=x=>cs.indexOf(x)>=0,rg=has('p')||has('d'),cv=has('a')?'a':(rg&&has('t')?'x':(has('t')?'t':(has('p')&&!has('d')?'p':(rg?'d':''))));cv?H.setAttribute('data-cvd',cv):H.removeAttribute('data-cvd');(cs||gv('lunaSleep.shp'))?H.setAttribute('data-shp','1'):H.removeAttribute('data-shp');CV_PK.forEach(k=>H.style.removeProperty('--'+k[0]));};
 apA();sz.value=gv('lunaSleep.tsz');hc.checked=!!gv('lunaSleep.hc');ft.checked=!!gv('lunaSleep.font');const cvs=$('a11y-cvd'),cvb=[...cvs.querySelectorAll('input')],cvp=$('cvd-prev'),shp=$('a11y-shp');shp.checked=!!gv('lunaSleep.shp');shp.onchange=()=>{sv('lunaSleep.shp',shp.checked?'1':'');apA()};
@@ -3650,7 +3633,7 @@ function draw(){const c=rd();const box=$('cv-list');box.textContent='';let n=0;
  if(!shown){const p=document.createElement('p');p.className='note';p.textContent=cvF==='done'?'Nothing unlocked yet. That is fine.':'Everything here is unlocked.';box.append(p)}}
 window.cvCheck=check;$('cv-open').addEventListener('click',()=>{check();draw()});
 const sel=$('theme-sel');if(sel)sel.addEventListener('change',check);
-const _r=render;render=function(){const r=_r.apply(this,arguments);check();return r};
+RENDER_HOOKS.push(check);
 check()})();
 /* ===== v38 tools: headphone check, Night Plan, morning-after tap, Bedside mode ===== */
 (function(){
@@ -3658,7 +3641,6 @@ check()})();
  const ART={trouble:'troubleshooting',wrong:'if-it-goes-wrong',vrsafe:'vr-safety',night:'build-your-night'};
  const readLink=(id,label)=>{const r=ALLR.find(x=>x.id===id);return r?btn(label||('Read: '+shortT(r)),()=>{cxClose();goRes(id)},'small'):null};
  const sayDay=t=>new Date(t).toDateString();
- const clean=s=>String(s==null?'':s);
 
  /* ---------- Headphone check ---------- */
  LT.hpOpen=function(){flag('hp');cxOpen('Headphone check',b=>{
@@ -3776,7 +3758,7 @@ check()})();
   const b3=el('button','bedbtn','Dimmer');b3.type='button';let lv=0;b3.onclick=()=>{lv=(lv+1)%3;d.dataset.lv=String(lv)};d.dataset.lv='0';row.append(b3);
   d.hidden=false;document.body.style.overflow='hidden';tick();clearInterval(bedClk);bedClk=setInterval(tick,15000);arm();$('bed-exit').focus()};
  LT.bedClose=function(){const d=bed();if(!d||d.hidden)return;d.hidden=true;bedOn=false;clearTimeout(bedTm);clearInterval(bedClk);wl(false);document.body.style.overflow='';if(bedFrom&&bedFrom.focus)try{bedFrom.focus()}catch(e){}};
- document.addEventListener('DOMContentLoaded',()=>{});
+ 
  (function(){const d=bed();if(!d)return;$('bed-exit').onclick=LT.bedClose;
   ['pointerdown','keydown','touchstart'].forEach(ev=>d.addEventListener(ev,()=>{if(bedOn)arm()},{passive:true}));
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&bedOn&&$('cx-dlg').hidden&&$('sos').hidden)LT.bedClose()});
@@ -3834,7 +3816,7 @@ LT.readOpen=function(r){if(!r||(r.adult&&!adultOK()))return;const P=rdK('lunaSle
  cxOpen('Guided read',b=>{b.append(el('h3',null,r.title));
   const cw=el('div','cwbox');cw.append(el('b',null,'Content warnings and triggers'));const u=el('ul');(r.cw||[]).forEach(x=>u.append(el('li',null,'CW: '+x)));u.append(el('li',null,trigInfo(r)),el('li',null,'Ending: '+r.wake));cw.append(u);b.append(cw);
   b.append(el('p',null,'One phrase appears at a time and fades as the next one arrives. You set the pace.'));safeNote(b);
-  const seg=(title,opts,get,set)=>{const w=el('div','wsrow');w.append(el('b',null,title));const g=el('div','wsseg');g.setAttribute('role','group');g.setAttribute('aria-label',title);opts.forEach(o=>{const x=btn(o[1],()=>{set(o[0]);sv();[...g.children].forEach((c,j)=>c.setAttribute('aria-pressed',String(opts[j][0]===get())))},'small');x.setAttribute('aria-pressed',String(get()===o[0]));g.append(x)});w.append(g);b.append(w)};
+  const seg=(title,opts,get,set)=>pickRow(b,title,opts,get,v=>{set(v);sv()});
   seg('Pace',[['m','My pace (tap)'],['a6','Auto, quicker'],['a9','Auto, steady'],['a12','Auto, slow']],()=>G.mode,v=>G.mode=v);
   seg('Text size',[['m','Medium'],['l','Large'],['x','Huge']],()=>G.size,v=>G.size=v);
   const bl=el('label','cxopt');const bc=document.createElement('input');bc.type='checkbox';bc.checked=G.breath;bc.onchange=()=>{G.breath=bc.checked;sv()};bl.append(bc,document.createTextNode(' Show a slow breathing circle'));b.append(bl);
@@ -3860,7 +3842,7 @@ const BODY=['Let your forehead soften.','Let your jaw hang loose.','Let your sho
 LT.deepOpen=function(){const P=rdK('lunaSleep.dp',{});const D={style:P.style==='frac'?'frac':'count',pace:['quick','std','slow'].includes(P.pace)?P.pace:'std',tone:P.tone!==false,vib:P.vib===true&&vibOK()};const sv=()=>wrK('lunaSleep.dp',D);
  cxOpen('Deepener',b=>{b.append(el('p',null,'A short guided deepener: a countdown with slow breaths, or a few rounds of eyes open, eyes closed. It is only numbers and breath, with no story. Use it before a track, or on its own to settle.'));safeNote(b);
   b.append(el('p','note','Set your volume low before you start. Tones are soft and rise slowly, never sudden. Tones and vibration are optional and can be switched off.'));
-  const seg=(title,opts,get,set)=>{const w=el('div','wsrow');w.append(el('b',null,title));const g=el('div','wsseg');g.setAttribute('role','group');g.setAttribute('aria-label',title);opts.forEach(o=>{const x=btn(o[1],()=>{set(o[0]);sv();[...g.children].forEach((c,j)=>c.setAttribute('aria-pressed',String(opts[j][0]===get())))},'small');x.setAttribute('aria-pressed',String(get()===o[0]));g.append(x)});w.append(g);b.append(w)};
+  const seg=(title,opts,get,set)=>pickRow(b,title,opts,get,v=>{set(v);sv()});
   seg('Style',[['count','Countdown, 10 to 1'],['frac','Eyes open, eyes closed']],()=>D.style,v=>D.style=v);
   seg('Pace',[['quick','Quicker'],['std','Steady'],['slow','Slow']],()=>D.pace,v=>D.pace=v);
   const ck=(t,get,set,dis)=>{const l=el('label','cxopt');const c=document.createElement('input');c.type='checkbox';c.checked=get();c.disabled=!!dis;c.onchange=()=>{set(c.checked);sv()};l.append(c,document.createTextNode(' '+t));b.append(l)};
@@ -3913,7 +3895,7 @@ function doSync(){const n=count();try{while(depth<n){history.pushState({luna:dep
 function closeTop(){for(const [d,c] of DL){const e=$(d);if(e&&!e.hidden){$(c).click();return}}if(S.sel){S.sel=null;render();return}if(S.tab==='res'&&S.resOpen){S.resOpen=null;render();return}if(S.tab==='bonus'&&S.bonusOpen){S.bonusOpen=null;render()}}
 window.addEventListener('popstate',()=>{if(ignore>0){ignore--;return}if(depth>0){depth--;closeTop();sync()}});
 const mo=new MutationObserver(sync);DL.forEach(([d])=>{const e=$(d);if(e)mo.observe(e,{attributes:true,attributeFilter:['hidden']})});
-const _r=render;render=function(){const r=_r.apply(this,arguments);sync();return r}})();
+RENDER_HOOKS.push(sync)})();
 (function(){const IDS=['cx-dlg','prof-dlg','sos','new-dlg','cv-dlg','set-dlg','help-dlg','io-dlg','about'];
 document.addEventListener('keydown',e=>{if(e.key!=='Tab')return;const d=IDS.map($).find(x=>x&&!x.hidden);if(!d)return;
 const f=[...d.querySelectorAll('a[href],button,input,select,textarea,[tabindex]:not([tabindex="-1"])')].filter(x=>!x.disabled&&!x.hidden&&x.offsetParent&&!x.closest('[hidden]'));
