@@ -12,6 +12,22 @@
   "health",
   "lifestyle"
  ],
+ "shortcuts": [
+  {
+   "name": "Emergency Exit",
+   "short_name": "Exit",
+   "url": "./?go=exit"
+  },
+  {
+   "name": "Breathe",
+   "url": "./?go=breathe"
+  },
+  {
+   "name": "Come-back card",
+   "short_name": "Come back",
+   "url": "./?go=cb"
+  }
+ ],
  "icons": [
   {
    "src": "icons/icon-192.png",
