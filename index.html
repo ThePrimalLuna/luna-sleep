@@ -3395,7 +3395,7 @@ window.addEventListener('resize',()=>{if(!S.sel)renderSide()});
 (function(){const ab=$('about');let from=null;
 function open(){from=document.activeElement;ab.hidden=false;document.body.style.overflow='hidden';$('about-box').scrollTop=0;ab.scrollTop=0;$('about-box').focus()}
 function close(){ab.hidden=true;if($('den').hidden)document.body.style.overflow='';if(from&&from.focus)try{from.focus()}catch(e){}}
-$('about-why').onclick=()=>{if(!$('den').hidden){close();window.denNeedBox('Tick the box on the welcome screen first. Then you can read why the app was built with AI.');return}close();goRes('why-ai')};$('about-open').onclick=open;$('about-open2').onclick=open;$('about-close').onclick=close;
+$('about-why').onclick=()=>{if(!$('den').hidden){const r=ALLR.find(x=>x.id==='why-ai');close();if(r){cxOpen(r.title,bx=>{const [box]=rBody(r.body);bx.append(box);const a=el('div','acts');a.append(btn('Close',cxClose,'primary'));bx.append(a)})}return}close();goRes('why-ai')};$('about-open').onclick=open;$('about-open2').onclick=open;$('about-close').onclick=close;
 ab.addEventListener('click',e=>{if(e.target===ab)close()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!ab.hidden){e.stopPropagation();close()}},true)})();
 
