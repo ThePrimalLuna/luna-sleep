@@ -1004,6 +1004,16 @@ body.hasdock .sosfab,body.hasdock #panic{bottom:calc(var(--dockh,250px) + 8px + 
 details.how>summary::before{content:'+';display:inline-block;width:18px;font-weight:700}
 details.how[open]>summary::before{content:'\2212'}
 @media (prefers-reduced-motion:reduce){#pdock{transition:none}}
+/* ===== v52: streamlined menu ===== */
+.menubig{width:100%;min-height:52px;font-size:18px;margin:4px 0 8px}
+.menu3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.menu3 .btn{justify-content:center;text-align:center;padding-inline:6px}
+.menugrid{margin:0 0 10px}
+.menugrid .btn:last-child:nth-child(odd){grid-column:auto}
+.menuhide{width:100%;margin-bottom:6px}
+.menusub{margin:16px 0 2px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+.setgrp{padding:0}
+.setgrp>summary{min-height:48px;padding:6px 2px}
 /* ===== Boiler Room: secret theme ===== */
 :root[data-album="Boiler"]{--bg:#14100d;--surface:#1f1813;--surface2:#2a2018;--ink:#f3e6d3;--mute:#c9b49c;--line:rgba(240,138,60,.32);--accent:#f08a3c;--accent-ink:#1a0b02;--hero1:#3a2314;--glow:rgba(240,138,60,.34);--blue:#8fb2e8;--green:#8fd6a4;--red:#f08a7a;--white:#f2ede4;--silver:#c4c8d0;--rose:#f0a8c2;--azure:#86cde2;--prism:#c8aaf2;--gold:#f2c866;--purple:#b9a8ff;--black:#d4d6e2;--warn:#ffc766;--ok:#8fd6a4;color-scheme:dark}
 html[data-skin="Boiler"]{background:radial-gradient(520px 420px at 8% 100%,rgba(240,110,30,.28),transparent 70%),radial-gradient(480px 360px at 100% 0,rgba(180,70,20,.20),transparent 70%),linear-gradient(180deg,#1f150e,#0b0705) fixed;background-color:#14100d;scrollbar-color:#6b4326 #14100d;accent-color:#f08a3c}
@@ -1630,31 +1640,23 @@ html[data-skin="Bambi"] .tabwrap,html[data-skin="Bambi"] .tabbar{background:tran
     <button type="button" class="btn sosx" id="set-close">Close</button>
     <h2 id="set-h">Menu</h2>
     <div id="set-quick">
-      <h3 class="menugh">Tonight</h3>
-      <div class="menuquick">
-        <button type="button" class="btn" id="tn-open">Start my night</button>
+      <button type="button" class="btn primary menubig" id="tn-open">Start my night</button>
+      <div class="menu3">
         <button type="button" class="btn" id="plan-open">Night Plan</button>
-        <button type="button" class="btn" id="bed-open">Bedside mode</button>
-        <button type="button" class="btn" id="hp-open">Headphone check</button>
+        <button type="button" class="btn" id="bed-open">Bedside</button>
+        <button type="button" class="btn" id="hp-open">Headphones</button>
       </div>
-      <h3 class="menugh">Settle and feel</h3>
-      <div class="menuquick">
+      <div class="menuquick menugrid">
         <button type="button" class="btn" id="st-open">Settle tools</button>
         <button type="button" class="btn" id="hx-open">Haptics and glow</button>
-        <button type="button" class="btn" id="cf-open">Pick your comfort</button>
+        <button type="button" class="btn" id="cf-open">Comfort</button>
         <button type="button" class="btn" id="af-open">Afterward</button>
-      </div>
-      <h3 class="menugh">Safety</h3>
-      <div class="menuquick">
-        <button type="button" class="btn" id="sf-open">Safety and consent <span class="pill" id="sf-count" hidden></span></button>
-        <button type="button" class="btn" id="qh-open">Quick hide</button>
-      </div>
-      <h3 class="menugh">You</h3>
-      <div class="menuquick">
+        <button type="button" class="btn" id="sf-open">Safety <span class="pill" id="sf-count" hidden></span></button>
         <button type="button" class="btn" id="me-open">About you</button>
         <button type="button" class="btn" id="cal-open">Release calendar</button>
         <button type="button" class="btn" id="dv-open">This device</button>
       </div>
+      <button type="button" class="btn menuhide" id="qh-open">Quick hide</button>
       <div id="menu-legacy" hidden>
         <button type="button" id="br-open">Breathe</button>
         <button type="button" id="dp-open">Deepener</button>
@@ -1681,7 +1683,8 @@ html[data-skin="Bambi"] .tabwrap,html[data-skin="Bambi"] .tabbar{background:tran
       <a class="btn" id="dc-link" href="https://discord.gg/XsjKJjeYVs" target="_blank" rel="noopener noreferrer">Join the Discord &#8599;</a>
       <a class="btn" id="kofi-link" href="https://ko-fi.com/theprimalluna" target="_blank" rel="noopener noreferrer">Buy the Luna a drink &#8599;</a>
       <a class="btn" id="throne-link" href="https://throne.com/primalluna" target="_blank" rel="noopener noreferrer">Gift the Luna &#8599;</a></div></details>
-    <details class="setgrp"><summary>Look and feel</summary>
+    <details class="setgrp" id="set-settings"><summary>Settings</summary>
+    <h3 class="menusub">Look and feel</h3>
     <div class="setrow"><h3>Offline and storage</h3><p class="note" id="set-off">Checking.</p></div>
     <div class="setrow"><h3>Theme</h3><p class="note">Auto follows the album you are viewing.</p><div id="set-theme"><div class="themebar"><label for="theme-sel">Theme</label><select id="theme-sel"></select></div></div></div>
     <div class="setrow"><h3>Reading</h3>
@@ -1697,15 +1700,13 @@ html[data-skin="Bambi"] .tabwrap,html[data-skin="Bambi"] .tabbar{background:tran
       <label class="chk"><input type="checkbox" id="a11y-font"> Easy-read font</label>
       <label class="chk"><input type="checkbox" id="set-calm"> Reduce motion</label>
       <label class="chk"><input type="checkbox" id="set-simple"> Simple Home: only Tonight and Next up.</label></div>
-    </details>
-    <details class="setgrp"><summary>Content and identity</summary>
+    <h3 class="menusub">Content and identity</h3>
     <div class="setrow"><h3>Adult content</h3><p class="note">SFW hides adult tracks. NSFW shows them. You must be 18 or older.</p><div id="set-adult"><button type="button" class="btn" id="adult-btn" aria-pressed="false"></button></div></div>
     <div class="setrow"><h3>Trigger words</h3><p class="note">Hide trigger words for tracks that are not out yet, to keep them a surprise.</p><div id="set-trig"><button type="button" class="btn" id="trig-btn" aria-pressed="false"></button>
       <button type="button" class="btn" id="inst-btn" hidden>Install app</button></div></div>
     <div class="setrow"><h3>Identity</h3><div class="a11y"><label for="set-ident">Identity</label><select id="set-ident"><option value="">None yet</option><option value="Rose">Nivi (Rose)</option><option value="Azure">Amarok (Azure)</option><option value="Prism">Wolfie (Prism)</option></select></div></div>
     <div class="setrow"><h3>Start marker</h3><label class="chk"><input type="checkbox" id="set-start"> Show the glowing start marker on the albums at the top.</label></div>
-    </details>
-    <details class="setgrp"><summary>Notices and buttons</summary>
+    <h3 class="menusub">Notices and buttons</h3>
     <div class="setrow"><label class="chk"><input type="checkbox" id="set-cvquiet"> Quiet achievements: no pop-up when one unlocks.</label></div>
     <div class="setrow"><h3>Quick hide</h3><p class="note">Swaps the app for a plain blank note. Double-tap anywhere on the note to come back (holding its title for a second also works). The faint Panic button on screen does the same hiding in one tap: it is nearly invisible until you touch it, and you can drag it anywhere.</p><label class="chk"><input type="checkbox" id="set-qhauto"> Hide the app when I switch away from it.</label></div>
     <div class="setrow"><label class="chk"><input type="checkbox" id="set-newopt"> Don't show What's new when I open the app.</label></div>
