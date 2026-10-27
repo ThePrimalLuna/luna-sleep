@@ -1001,6 +1001,9 @@ details.how>p{margin:2px 0 8px}
 body.hasdock .foot{padding-bottom:calc(var(--dockh,330px) + 24px + env(safe-area-inset-bottom))}
 body.hasdock .sosfab,body.hasdock #panic{bottom:calc(var(--dockh,250px) + 8px + env(safe-area-inset-bottom))}
 /* v56 */
+.stoast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:92;max-width:calc(100% - 32px);padding:10px 16px;border-radius:999px;background:var(--surface);color:var(--ink);border:1px solid var(--line);box-shadow:0 8px 24px rgba(0,0,0,.4);font-size:14px}
+@media (pointer:coarse){.btn.small.playsm{min-width:40px}.btn.small,.pilchip,.heart{min-height:40px}.btn.small{padding:6px 12px}.fcheck{min-width:40px;min-height:40px}.fname{min-height:40px}.linkbtn{min-height:36px;padding:8px 4px}select{min-height:40px}.pdsl select{min-height:36px}.cxopt input[type=checkbox],.swrow input[type=checkbox]{min-width:24px;min-height:24px}}
+@media (max-height:520px){.pdfr{height:80px}.pdhelp,.pdfeel{display:none}}
 .nextrow{display:inline-flex;gap:6px;align-items:center;max-width:100%}
 #pdock{gap:6px}
 .pdbar{display:flex;gap:8px;align-items:center;flex-wrap:nowrap;min-height:40px}
@@ -4917,7 +4920,7 @@ const stMin=()=>{const m=rdK(STKEY,{}).min;return [15,30,45,60,90].includes(m)?m
 LT.stEnd=0;let stTick=0;
 const fmtT=ms=>{const s=Math.max(0,Math.round(ms/1000));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
 LT.stClear=()=>{LT.stEnd=0;clearInterval(stTick);stTick=0;const t=document.querySelector('#pdock .pdtl');if(t)t.textContent='Now playing'};
-const stLoop=()=>{if(!LT.stEnd)return;const left=LT.stEnd-Date.now();if(left<=0){LT.dockStop();return}const lab=document.querySelector('#pdock .pdtl');if(lab)lab.textContent='Stops in '+fmtT(left)};
+const stLoop=()=>{if(!LT.stEnd)return;const left=LT.stEnd-Date.now();if(left<=0){LT.dockStop();const t=el('div','stoast','Sleep timer ended. The player stopped.');t.setAttribute('role','status');document.body.append(t);setTimeout(()=>t.remove(),7000);return}const lab=document.querySelector('#pdock .pdtl');if(lab)lab.textContent='Stops in '+fmtT(left)};
 LT.stSet=m=>{wrK(STKEY,{min:m});LT.stClear();if(m){LT.stEnd=Date.now()+m*60000;stTick=setInterval(stLoop,1000);stLoop()}};
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')stLoop()});
 {const _ds=LT.dockStop;LT.dockStop=function(){LT.stClear();_ds()}}
