@@ -33,3 +33,8 @@ NOTES
   a Backup file option for moving them.
 - The page itself and its text (including unreleased track names) can be read by anyone with
   the link. Only the audio is gated, by Patreon.
+- Haptic scores are a placeholder. Haptics and glow shows a locked, labelled "Not active yet" slot, and the
+  code has an empty SCORES table (format described in the comment above it) plus LT.scoreFor(id). Nothing
+  calls it yet, so adding an entry does nothing until the playback side is built.
+- The app never listens: it uses no microphone, camera or motion sensors. The Hold pad and every haptic
+  feature only respond to touch and to timers.
