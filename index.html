@@ -1001,6 +1001,7 @@ details.how>p{margin:2px 0 8px}
 body.hasdock .foot{padding-bottom:calc(var(--dockh,330px) + 24px + env(safe-area-inset-bottom))}
 body.hasdock .sosfab,body.hasdock #panic{bottom:calc(var(--dockh,250px) + 8px + env(safe-area-inset-bottom))}
 /* v56 */
+.nextrow{display:inline-flex;gap:6px;align-items:center;max-width:100%}
 #pdock{gap:6px}
 .pdbar{display:flex;gap:8px;align-items:center;flex-wrap:nowrap;min-height:40px}
 .pdthumb{width:40px;height:40px;border-radius:9px;flex:none;object-fit:cover;border:1px solid var(--line)}
@@ -2554,7 +2555,7 @@ function nextStrip(){
   const readyAll=vis.filter(id=>trackStatus(id)==='ready');const ready=readyAll.filter(id=>released(get(id)['Release Date'])).sort((a,b)=>get(a)['Map Step']-get(b)['Map Step']).slice(0,6);
   n.append(el('h2',null,'Next up'));
   if(ready.length)ready.forEach(id=>{const r=get(id);const b=el('button','chip '+fam(id)+' ready');b.type='button';
-    b.append(el('span','id',id+' · '+r.Title),el('span','tg',hideTrig(id)?'':r.Trigger));b.onclick=()=>openTrack(id);n.append(b)});
+    b.append(el('span','id',id+' · '+r.Title),el('span','tg',hideTrig(id)?'':r.Trigger));b.onclick=()=>openTrack(id);const w=el('div','nextrow');w.append(b);{const pt=TI[id],pb=pt&&window.LT&&LT.playBtn?LT.playBtn(pt,'small playsm'):null;if(pb){pb.textContent='\u25B6';pb.setAttribute('aria-label','Play '+pt.title+' here');pb.title='Play here';w.append(pb)}}n.append(w)});
   else{
     const un=DATA.kernels.filter(k=>!kHeard(k.key));
     if(readyAll.length&&!ready.length){n.append(el('span','empty','You are caught up on everything that is out. The next releases are on Home under Coming up.'))}else
@@ -2668,7 +2669,7 @@ function bonusCard(b){
   if(b.note)c.append(el('div','tt',b.note));
   const m=el('div','meta2');b.pills.forEach(x=>m.append(el('span','pill'+(/NSFW/.test(x)?' warn':''),x)));c.append(m);
   const dl=el('dl','bdl');b.details.forEach(([k,val])=>{const d=el('div');d.append(el('dt',null,k),el('dd',null,val));dl.append(d)});c.append(dl);
-  if(b.spotify&&released(b.date)){const a=el('a','btn primary','▶ Listen on Spotify');a.href=b.spotify;a.target='_blank';a.rel='noopener noreferrer';a.setAttribute('aria-label','Listen to '+b.title+' on Spotify (opens in a new tab)');const r=el('div','acts');r.append(a);c.append(r)}
+  if(b.spotify&&released(b.date)){const a=el('a','btn primary','▶ Listen on Spotify');a.href=b.spotify;a.target='_blank';a.rel='noopener noreferrer';a.setAttribute('aria-label','Listen to '+b.title+' on Spotify (opens in a new tab)');const r=el('div','acts');{const pb=window.LT&&LT.playBtn?LT.playBtn(b,'primary'):null;if(pb)r.append(pb)}r.append(a);c.append(r)}
   {const tx=TXT.find(t=>t.card===b.id);if(tx){const r2=el('div','acts');if(adultOK())r2.append(btn('Read the text version',()=>{S.bonusOpen=tx.id;render();window.scrollTo({top:0})}));else r2.append(el('p','note','A free text version exists. It is NSFW, so it is hidden in SFW mode.'));c.append(r2)}}
   return c}
 
@@ -3153,7 +3154,7 @@ function viewIdeas(v){
       const up=btn('↑',()=>{if(i>0){[S.seq[i-1],S.seq[i]]=[S.seq[i],S.seq[i-1]];save();render()}},'small');up.setAttribute('aria-label','Move up');
       const dn=btn('↓',()=>{if(i<S.seq.length-1){[S.seq[i+1],S.seq[i]]=[S.seq[i],S.seq[i+1]];save();render()}},'small');dn.setAttribute('aria-label','Move down');
       const rm=btn('Remove',()=>{S.seq.splice(i,1);save();render()},'small');
-      const sl=spotLink(t,'btn small primary');if(sl){sl.style.display='inline-block';sl.style.marginTop='6px';tt.append(sl)}li.append(tt,open1,up,dn,rm);ol.append(li)});
+      const sl=spotLink(t,'btn small primary');if(sl){sl.style.display='inline-block';sl.style.marginTop='6px';tt.append(sl)}{const pb=window.LT&&LT.playBtn?LT.playBtn(t,'small'):null;if(pb){pb.style.marginTop='6px';pb.style.marginLeft='6px';tt.append(pb)}}li.append(tt,open1,up,dn,rm);ol.append(li)});
     p.append(ol);
     const res=checkSeq(S.seq);const cr=el('div','chk-res');
     res.forEach(([k,m])=>cr.append(el('div','msg '+k,m)));
@@ -3403,7 +3404,7 @@ function tonightCard(v){const h=new Date().getHours();let hi,tip;
   const nm=((S.profile&&S.profile.name)||'').trim();
   const vis=ALL.filter(onPath);const rd=vis.filter(id=>trackStatus(id)==='ready'&&released(get(id)['Release Date'])).sort((a,b)=>get(a)['Map Step']-get(b)['Map Step'])[0];
   const c=el('section','foundcard tonight');c.append(el('h2',null,hi+(nm?', '+nm:'')+'.'),el('p',null,tip));{const cd=countdownText();if(cd)c.append(el('p','mono tcount',cd))}
-  const a=el('div','acts');if(rd&&foundDone())a.append(btn('Next up: '+get(rd).Title,()=>openTrack(rd),'primary'));else if(!foundDone()){const f0=CAT.found.find(f=>released(f.date)&&!S.done[f.sku]);if(f0)a.append(btn((Object.keys(S.done).length?'Next Foundation track: ':'Start with ')+f0.title,()=>openTrack(f0.sku),'primary'))}else if(rd)a.append(btn('Next up: '+get(rd).Title,()=>openTrack(rd),'primary'));a.append(btn('Start my night',()=>window.LT&&LT.tonightOpen(),'primary'),btn('Breathe',breatheOpen,'small'),btn('Bedside mode',()=>window.LT&&LT.bedOpen(),'small'),btn('More tools',()=>window.LT&&LT.hubOpen('tools'),'small'));c.append(a);if(window.LT)LT.extras(c);
+  const a=el('div','acts');if(rd&&foundDone())a.append(btn('Next up: '+get(rd).Title,()=>openTrack(rd),'primary'));else if(!foundDone()){const f0=CAT.found.find(f=>released(f.date)&&!S.done[f.sku]);if(f0)a.append(btn((Object.keys(S.done).length?'Next Foundation track: ':'Start with ')+f0.title,()=>openTrack(f0.sku),'primary'))}else if(rd)a.append(btn('Next up: '+get(rd).Title,()=>openTrack(rd),'primary'));{const nid=(rd&&foundDone())?rd:(!foundDone()?((CAT.found.find(f=>released(f.date)&&!S.done[f.sku])||{}).sku):rd);const nt=nid&&TI[nid];const pb=nt&&window.LT&&LT.playBtn?LT.playBtn(nt,'small'):null;if(pb)a.append(pb)}a.append(btn('Start my night',()=>window.LT&&LT.tonightOpen(),'primary'),btn('Breathe',breatheOpen,'small'),btn('Bedside mode',()=>window.LT&&LT.bedOpen(),'small'),btn('More tools',()=>window.LT&&LT.hubOpen('tools'),'small'));c.append(a);if(window.LT)LT.extras(c);
   if(!(S.checks||[]).length)c.append(el('p','note','Tip: on any track page you can rate how you feel before. When you mark it heard, the app asks again and draws your private trend.'));
   v.append(c)}
 function cbPlan(){const P=S.profile||{};return{name:(P.name||'').trim(),contact:(P.contact||'').trim()}}
