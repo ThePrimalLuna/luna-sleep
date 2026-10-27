@@ -38,3 +38,7 @@ NOTES
   calls it yet, so adding an entry does nothing until the playback side is built.
 - The app never listens: it uses no microphone, camera or motion sensors. The Hold pad and every haptic
   feature only respond to touch and to timers.
+
+- v56 storage: lunaSleep.stimer (sleep timer choice) is included in backups. lunaSleep.last (last tracks and tool),
+  lunaSleep.filt (Library and Combos filters, 3-day expiry) and lunaSleep.nm (Night mode's remembered settings) are
+  deliberately not backed up. Closing a dialog returns to the previous dialog or the Menu (see cxS in index.html).
