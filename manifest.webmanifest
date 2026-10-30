@@ -19,13 +19,17 @@
    "url": "./?go=exit"
   },
   {
+   "name": "Start my night",
+   "short_name": "Tonight",
+   "url": "./?go=tonight"
+  },
+  {
    "name": "Breathe",
    "url": "./?go=breathe"
   },
   {
-   "name": "Come-back card",
-   "short_name": "Come back",
-   "url": "./?go=cb"
+   "name": "The Count",
+   "url": "./?go=count"
   }
  ],
  "icons": [

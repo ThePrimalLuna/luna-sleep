@@ -34,11 +34,11 @@ async function pushOne(env, endpoint) {
   } catch (e) { return 0; }
 }
 const clean = (s, n) => String(s == null ? '' : s).replace(/[\u0000-\u001f<>]/g, ' ').trim().slice(0, n);
-async function startJob(env, n) {
+async function startJob(env, n, kind) {
   const id = String(Date.now());
   const latest = { id, title: clean(n.title, 60) || 'Luna Sleep', body: clean(n.body, 140), url: './' };
   await env.SUBS.put('latest', JSON.stringify(latest));
-  await env.SUBS.put('job', JSON.stringify({ id, cursor: null, done: false, sent: 0, gone: 0 }));
+  await env.SUBS.put('job', JSON.stringify({ id, kind: kind === 'release' ? 'release' : 'news', cursor: null, done: false, sent: 0, gone: 0, held: 0 }));
   return latest;
 }
 async function step(env) {
@@ -46,13 +46,28 @@ async function step(env) {
   if (!job || job.done) return job || { done: true, sent: 0, gone: 0 };
   const l = await env.SUBS.list({ prefix: 'sub:', limit: CHUNK, cursor: job.cursor || undefined });
   await Promise.all(l.keys.map(async k => {
-    const e = k.metadata && k.metadata.e; if (!e) return;
+    const m = k.metadata || {}, e = m.e; if (!e) return;
+    if ((job.kind === 'release' && m.r === 0) || (job.kind === 'news' && m.n === 0) || inQuiet(m)) { job.held++; return; }
     const st = await pushOne(env, e);
     if (st === 404 || st === 410) { await env.SUBS.delete(k.name); job.gone++; } else if (st >= 200 && st < 300) job.sent++;
   }));
   job.done = l.list_complete; job.cursor = l.list_complete ? null : l.cursor;
   await env.SUBS.put('job', JSON.stringify(job));
   return job;
+}
+/* quiet hours are stored as [start, end] hours in the subscriber's own time zone */
+function inQuiet(m) {
+  if (!Array.isArray(m.q) || !m.z) return false;
+  let hr; try { hr = +new Date().toLocaleString('en-US', { timeZone: m.z, hour: 'numeric', hour12: false }) % 24; } catch (e) { return false; }
+  const [s, e] = m.q; return s > e ? (hr >= s || hr < e) : (hr >= s && hr < e);
+}
+function prefsOf(b) {
+  const o = {};
+  if (b.r === 0) o.r = 0; if (b.n === 0) o.n = 0;
+  if (Array.isArray(b.q) && b.q.length === 2 && b.q.every(x => Number.isInteger(x) && x >= 0 && x < 24) && typeof b.z === 'string' && b.z.length < 50) {
+    try { new Date().toLocaleString('en-US', { timeZone: b.z }); o.q = b.q; o.z = b.z; } catch (e) { /* unknown zone: skip quiet hours */ }
+  }
+  return o;
 }
 async function countSubs(env) { let n = 0, cursor; do { const l = await env.SUBS.list({ prefix: 'sub:', limit: 1000, cursor }); n += l.keys.length; cursor = l.list_complete ? null : l.cursor; } while (cursor); return n; }
 function isAdmin(req, env) { const t = (req.headers.get('authorization') || '').replace(/^Bearer\s+/i, ''); return !!env.ADMIN_TOKEN && t.length > 0 && t === env.ADMIN_TOKEN; }
@@ -74,19 +89,20 @@ async function checkReleases(env) {
   if (job && !job.done) return;
   const title = 'New in Luna Sleep';
   const body = fresh.length === 1 ? (fresh[0].sfw ? fresh[0].title + ' is out now.' : 'A new track is out now.') : fresh.length + ' new tracks are out now.';
-  await startJob(env, { title, body });
+  await startJob(env, { title, body }, 'release');
   await env.SUBS.put('notified', JSON.stringify(seen.concat(fresh.map(x => x.id))));
 }
 
 const ADMIN_HTML = `<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Luna push</title>
-<style>body{font:16px system-ui;max-width:480px;margin:24px auto;padding:0 16px;background:#14162a;color:#e8eaff}input,textarea,button{font:inherit;width:100%;box-sizing:border-box;padding:10px;margin:6px 0 14px;border-radius:10px;border:1px solid #556;background:#1d2040;color:inherit}button{background:#7a86ff;border:0;color:#fff;font-weight:700}small{opacity:.7}</style>
+<style>body{font:16px system-ui;max-width:480px;margin:24px auto;padding:0 16px;background:#14162a;color:#e8eaff}input,textarea,select,button{font:inherit;width:100%;box-sizing:border-box;padding:10px;margin:6px 0 14px;border-radius:10px;border:1px solid #556;background:#1d2040;color:inherit}button{background:#7a86ff;border:0;color:#fff;font-weight:700}small{opacity:.7}</style>
 <h1>Send a notification</h1><label>Admin password<input id=t type=password autocomplete=off></label>
 <label>Title<input id=ti maxlength=60 value="Luna Sleep"></label><label>Message<textarea id=b rows=3 maxlength=140></textarea></label>
+<label>This is<select id=k><option value=news>App news</option><option value=release>A new release</option></select></label>
 <button id=s>Send to everyone</button><p id=o role=status></p><small>Subscribers: <span id=n>?</span>. Nothing is sent until you press the button.</small>
 <script>const $=i=>document.getElementById(i);const H=()=>({'content-type':'application/json',authorization:'Bearer '+$('t').value});
 $('t').onchange=async()=>{try{const r=await fetch('/stats',{headers:H()});$('n').textContent=r.ok?(await r.json()).subs:'wrong password'}catch(e){}};
-$('s').onclick=async()=>{const o=$('o');o.textContent='Sending...';try{let r=await fetch('/send',{method:'POST',headers:H(),body:JSON.stringify({title:$('ti').value,body:$('b').value})});if(!r.ok){o.textContent='Not sent: '+(r.status===401?'wrong password':'error '+r.status);return}
-let j=await r.json();while(!j.done){r=await fetch('/step',{method:'POST',headers:H()});j=await r.json();o.textContent='Sending... '+j.sent+' so far'}o.textContent='Done. Sent to '+j.sent+(j.gone?' ('+j.gone+' old ones removed)':'')+'.'}catch(e){o.textContent='Something went wrong.'}};</script>`;
+$('s').onclick=async()=>{const o=$('o');o.textContent='Sending...';try{let r=await fetch('/send',{method:'POST',headers:H(),body:JSON.stringify({title:$('ti').value,body:$('b').value,kind:$('k').value})});if(!r.ok){o.textContent='Not sent: '+(r.status===401?'wrong password':'error '+r.status);return}
+let j=await r.json();while(!j.done){r=await fetch('/step',{method:'POST',headers:H()});j=await r.json();o.textContent='Sending... '+j.sent+' so far'}o.textContent='Done. Sent to '+j.sent+(j.held?', '+j.held+' held back by their choices or quiet hours':'')+(j.gone?', '+j.gone+' old ones removed':'')+'.'}catch(e){o.textContent='Something went wrong.'}};</script>`;
 
 export default {
   async fetch(req, env) {
@@ -99,10 +115,12 @@ export default {
       if (p === '/subscribe' && req.method === 'POST') {
         const b = await req.json().catch(() => ({})); const e = String(b.endpoint || '');
         let h; try { h = new URL(e); } catch (x) { return J({ error: 'bad' }, 400); }
-        if (h.protocol !== 'https:' || !HOST_OK.test(h.hostname) || e.length > 900) return J({ error: 'bad' }, 400);
+        if (h.protocol !== 'https:' || !HOST_OK.test(h.hostname) || e.length > 700) return J({ error: 'bad' }, 400);
         const k = 'sub:' + await sha(e);
         if (!(await env.SUBS.get(k)) && (await countSubs(env)) >= MAX_SUBS) return J({ error: 'full' }, 503);
-        await env.SUBS.put(k, '1', { metadata: { e } });
+        const meta = Object.assign({ e }, prefsOf(b));
+        if (JSON.stringify(meta).length > 1000) return J({ error: 'bad' }, 400);
+        await env.SUBS.put(k, '1', { metadata: meta });
         return J({ ok: true });
       }
       if (p === '/unsubscribe' && req.method === 'POST') {
@@ -114,7 +132,7 @@ export default {
       if (p === '/send' && req.method === 'POST') {
         if (!isAdmin(req, env)) return J({ error: 'no' }, 401);
         const b = await req.json().catch(() => ({})); if (!clean(b.body, 140) && !clean(b.title, 60)) return J({ error: 'empty' }, 400);
-        await startJob(env, b); return J(await step(env));
+        await startJob(env, b, b.kind); return J(await step(env));
       }
       if (p === '/step' && req.method === 'POST') { if (!isAdmin(req, env)) return J({ error: 'no' }, 401); return J(await step(env)); }
     } catch (e) { return J({ error: 'server' }, 500); }

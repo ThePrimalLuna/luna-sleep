@@ -1,0 +1,15 @@
+const {chromium}=require('playwright');(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:400,height:800}});await p.addInitScript(()=>{try{localStorage.setItem('lunaSleep.newSeen','2026-10-29c');localStorage.setItem('lunaSleep.newOptOut','1')}catch(e){}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
+await p.goto('file://'+require('path').resolve(__dirname,'..','index.html')+'');await p.waitForTimeout(800);
+const before=await p.evaluate(()=>JSON.stringify(localStorage));
+await p.evaluate(()=>LT.helpOpen());await p.waitForTimeout(200);
+const t=await p.evaluate(()=>document.body.textContent);
+const ok=['1-888-373-7888','233733','08000 121 700','1-833-900-1010','1-800-799-7233','0808 2000 247','1-866-331-9474','1-844-762-8483'].every(x=>t.includes(x));
+const after=await p.evaluate(()=>JSON.stringify(localStorage));
+console.log('hotlines',ok,'storage unchanged',before===after,'errs',errs.length);
+await p.evaluate(()=>{document.querySelector('.cx-close,#cx-close')&&0});
+await p.evaluate(()=>cxDismiss&&cxDismiss());
+await p.evaluate(()=>{S.tab='res';render()});await p.waitForTimeout(200);
+console.log('res tab',await p.evaluate(()=>document.body.innerText.includes('being trafficked or abused')));
+await p.evaluate(()=>{sosOpen()});await p.waitForTimeout(300);
+console.log('sos',await p.evaluate(()=>document.getElementById('sos').innerText.includes('being trafficked or abused')));
+console.log(ok?'help card: pass':'FAIL help card');await b.close()})();

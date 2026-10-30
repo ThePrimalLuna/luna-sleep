@@ -51,3 +51,10 @@ NOTES
   Pushes carry no text; the service worker asks the Worker's /latest what to show. New-release alerts come from
   releases.json, which worker/make-releases.py builds from the catalog: run it and push the file whenever dates change.
   Only SFW titles are ever shown. The Worker's /admin page sends a manual notice. The app stores nothing for this.
+
+v59 NOTES
+- New storage: lunaSleep.act (daily activity counts for the weekly recap), lunaSleep.push (notification choices),
+  lunaSleep.mixes (Trigger Mix saves). Reader font, size and spacing now save with the main state. All are in Backup and Delete everything.
+- Get help (trafficking and domestic violence hotlines) is in the Emergency Exit screen, Safety and consent, and the Resources tab. It saves nothing.
+- Developer docs are in README.md, CLAUDE.md and docs/. Run "npm run check" before releasing.
+- If worker/worker.js changed, paste it into the Cloudflare Worker editor again and Deploy.

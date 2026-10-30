@@ -1,0 +1,23 @@
+name: Update releases.json
+# Keeps releases.json (read by the push Worker) in step with the catalog in index.html.
+on:
+  push:
+    branches: [main]
+    paths: [index.html]
+permissions:
+  contents: write
+jobs:
+  regen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 worker/make-releases.py
+      - name: Commit if changed
+        run: |
+          if ! git diff --quiet releases.json; then
+            git config user.name "luna-sleep-bot"
+            git config user.email "actions@users.noreply.github.com"
+            git add releases.json
+            git commit -m "Update releases.json"
+            git push
+          fi

@@ -1,0 +1,18 @@
+{
+  "name": "luna-sleep",
+  "private": true,
+  "description": "Luna Sleep listener app (single-file PWA) plus its push Worker",
+  "scripts": {
+    "lint": "node tests/lint.js",
+    "test": "node tests/run-all.js",
+    "static": "node tests/static.js",
+    "releases": "python3 worker/make-releases.py",
+    "themes": "python3 tools/gen-themes.py",
+    "check": "npm run static && npm run lint && npm test"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "playwright": "^1.48.0",
+    "axe-core": "^4.10.2"
+  }
+}
