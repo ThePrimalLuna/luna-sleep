@@ -10,3 +10,9 @@ self.addEventListener('fetch',e=>{const r=e.request;if(r.method!=='GET')return;c
  e.respondWith(caches.open(VERSION).then(async c=>{const hit=await c.match(r,{ignoreSearch:true});
   const net=fetch(r).then(res=>{if(res&&(res.status===200||res.type==='opaque'))c.put(r,res.clone());return res}).catch(()=>hit);
   return hit||net}))});
+/* Push: the push itself carries no text. We ask the Worker what to show. */
+const PUSH_URL='https://luna-push.thorned-rose2010.workers.dev';
+self.addEventListener('push',e=>{e.waitUntil((async()=>{let d={title:'Luna Sleep',body:'Something new is out.',id:'x'};
+ try{const r=await fetch(PUSH_URL+'/latest',{cache:'no-store'});if(r.ok){const j=await r.json();if(j&&j.title)d=Object.assign(d,j)}}catch(x){}
+ await self.registration.showNotification(String(d.title).slice(0,60),{body:String(d.body||'').slice(0,140),icon:'icons/icon-192.png',badge:'icons/icon-192.png',tag:'luna-'+d.id})})())});
+self.addEventListener('notificationclick',e=>{e.notification.close();e.waitUntil(self.clients.matchAll({type:'window',includeUncontrolled:true}).then(l=>{for(const c of l){if('focus' in c)return c.focus()}return self.clients.openWindow('./')}))});

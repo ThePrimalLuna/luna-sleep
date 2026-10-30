@@ -45,3 +45,9 @@ NOTES
 
 - v58 storage: lunaSleep.mixes (up to six saved Trigger Mixes: name, texture, strength, heartbeat speed, glow color) is
   included in backups. lunaSleep.vib gained an optional hue (glow color). The Count stores nothing and uses touch only.
+
+- v58 notifications: the Worker lives at luna-push.thorned-rose2010.workers.dev (code in worker/worker.js, paste it into
+  the Cloudflare editor). It needs a KV binding named SUBS, a secret named ADMIN_TOKEN and a cron every 15 minutes.
+  Pushes carry no text; the service worker asks the Worker's /latest what to show. New-release alerts come from
+  releases.json, which worker/make-releases.py builds from the catalog: run it and push the file whenever dates change.
+  Only SFW titles are ever shown. The Worker's /admin page sends a manual notice. The app stores nothing for this.
