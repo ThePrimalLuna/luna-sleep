@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generates the v59 themes (seasonal and meme looks) and writes them into index.html between the two marker comments.
+"""Generates the v59+ themes (Dusk, seasonal and meme looks) and writes them into index.html between the two marker comments.
 Run it after editing a theme below:  python3 tools/gen-themes.py
 It also checks WCAG contrast for every theme and refuses to write anything that falls short.
 To add a theme: add an entry to THEMES, then add [key, label] to the THEMES list and the key to the applySkin() regex in index.html."""
@@ -24,6 +24,8 @@ leaf = lambda col, x, y, r: "<path transform='translate(%d %d) rotate(%d)' d='M0
 paw = lambda col, x, y: "<g fill='%s' fill-opacity='.22' transform='translate(%d %d)'><ellipse cx='0' cy='4' rx='6' ry='5'/><circle cx='-7' cy='-4' r='2.6'/><circle cx='-2.5' cy='-8' r='2.6'/><circle cx='2.5' cy='-8' r='2.6'/><circle cx='7' cy='-4' r='2.6'/></g>" % (col, x, y)
 
 THEMES = [
+ dict(key='Dusk', dark=True, bg='#15131b', surface='#1e1b26', surface2='#282432', ink='#ece8f3', mute='#b8b1c6', line='rgba(178,164,214,.24)', accent='#b7a5e3', ink2='#191425', hero1='#2a2638', glow='rgba(183,165,227,.20)',
+      html="radial-gradient(640px 420px at 50% -8%,rgba(150,132,196,.14),transparent 70%),linear-gradient(180deg,#19171f,#100e15) fixed", base='#121017', head='"Cormorant Garamond",Georgia,serif', eyebrow='#cfc7e2'),
  dict(key='Harvest', dark=True, bg='#1a110a', surface='#271a0f', surface2='#342213', ink='#f7ead6', mute='#cdb79a', line='rgba(232,150,60,.32)', accent='#f0a24a', ink2='#1d0f03', hero1='#3a2414', glow='rgba(240,162,74,.34)',
       html="radial-gradient(560px 380px at 8% 100%,rgba(220,110,30,.28),transparent 70%),radial-gradient(520px 420px at 100% 0,rgba(150,60,30,.26),transparent 70%),linear-gradient(180deg,#24160c,#120a05) fixed", base='#120a05', head='"Cormorant Garamond",Georgia,serif', eyebrow='#f0cfa0',
       deco=svg("<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'>" + leaf('#e07a2c', 30, 40, 20) + leaf('#c2452a', 150, 90, 70) + leaf('#e8b04a', 220, 200, 140) + leaf('#a8531f', 70, 190, 200) + "</svg>")),

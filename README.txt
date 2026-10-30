@@ -54,7 +54,15 @@ NOTES
 
 v59 NOTES
 - New storage: lunaSleep.act (daily activity counts for the weekly recap), lunaSleep.push (notification choices),
-  lunaSleep.mixes (Trigger Mix saves). Reader font, size and spacing now save with the main state. All are in Backup and Delete everything.
+  lunaSleep.mixes (Trigger Mix saves). Reader font, size and spacing now save with the main state.
+  Delete everything clears all of them. Backup carries act and mixes; push choices stay on the phone because a
+  notification subscription belongs to one device.
 - Get help (trafficking and domestic violence hotlines) is in the Emergency Exit screen, Safety and consent, and the Resources tab. It saves nothing.
 - Developer docs are in README.md, CLAUDE.md and docs/. Run "npm run check" before releasing.
 - If worker/worker.js changed, paste it into the Cloudflare Worker editor again and Deploy.
+
+v60 NOTES
+- Backups now include settings (theme, text size, contrast, font, calm, night mode, reader options, story positions) in ls.prefs.
+- Dusk theme: Auto uses it on dark-mode phones in place of the light album colors (White, Silver, Rose, Prism, Gold).
+- What's new opens by itself only when LOGV changes.
+- tests/personas.js walks the app as a new, returning and veteran listener; tests/crawl.js opens everything.

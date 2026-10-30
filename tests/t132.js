@@ -44,12 +44,14 @@ await btnTxt('Remind me in a week');
 await W(200);ok(await ev(()=>{const x=document.getElementById('nag');return x.hidden}),'nag snoozed');
 ok(await ev(()=>JSON.parse(localStorage.getItem('lunaNeuroMap.v2')).nagSnooze>0),'snooze saved');
 // wipe
+await ev(()=>localStorage.setItem('lunaNeuroMap.album','Dusk'));
 await ev(()=>LT.wipeOpen());await W(300);
 ok(await ev(()=>[...document.querySelectorAll('#cx-body button')].find(x=>x.textContent==='Delete everything').disabled),'wipe disabled until ticked');
 await ev(()=>document.querySelector('#cx-body input[type=checkbox]').click());await W(100);
 await Promise.all([p.waitForNavigation({timeout:5000}).catch(()=>{}),btnTxt('Delete everything')]);await W(800);
 const left=await ev(()=>Object.keys(localStorage).filter(k=>/^lunaSleep|^lunaNeuroMap/.test(k)));
 ok(await ev(()=>localStorage.getItem('otherapp.key')==='keep'),'other app key kept');
+ok(await ev(()=>!localStorage.getItem('lunaNeuroMap.album')),'theme reset by wipe');
 ok(!left.includes('lunaSleep.push')&&!left.includes('lunaSleep.mixes'),'own keys gone: '+left.join());
 console.log('pass',pass,'bad',bad,'pageerrors',errs.filter(e=>!/boom test/.test(e)).join('|'));
 }catch(e){console.log('ERR',e.message)}await b.close()})();
