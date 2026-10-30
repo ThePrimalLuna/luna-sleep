@@ -3995,7 +3995,8 @@ const pillarsHeard=()=>{const s=new Set();Object.keys(S.done||{}).forEach(k=>{if
 const storiesRead=()=>STORIES.filter(x=>fl('rd_'+x.id)).length;
 const filesTotal=()=>STORIES.filter(x=>x.g==='files').length;
 const filesRead=()=>STORIES.filter(x=>x.g==='files'&&fl('rd_'+x.id)).length;
-const texTried=()=>TEX.filter(x=>fl('tx_'+x[0])).length;
+const texList=()=>(window.LT&&LT.TEX)||[];
+const texTried=()=>texList().filter(x=>fl('tx_'+x[0])).length;
 const nowD=()=>{const d=new Date();return [d.getMonth()+1,d.getDate()]};
 const fl=k=>!!(S.fl&&S.fl[k]);const th=v=>($('theme-sel')||{}).value===v;
 const days=()=>new Set((S.checks||[]).map(c=>new Date(c.t).toDateString())).size;
@@ -4018,7 +4019,7 @@ const LIST=[
 {g:'Stories',id:'rd1',n:'First page',d:'Read a story to the end.',t:()=>storiesRead()>=1,i:'❡'},
 {g:'Stories',id:'rd10',n:'Reading light',d:'Read ten stories to the end.',t:()=>storiesRead()>=10,p:()=>[Math.min(10,storiesRead()),10],i:'❦'},
 {g:'Stories',id:'filesall',n:'Every file',d:'Read every part of the Luna Sleep Files.',t:()=>filesRead()>=filesTotal(),p:()=>[filesRead(),filesTotal()],i:'☠'},
-{g:'Care and calm',id:'texall',n:'Every texture',d:'Feel every haptic texture at least once.',t:()=>texTried()>=TEX.length,p:()=>[texTried(),TEX.length],i:'≋'},
+{g:'Care and calm',id:'texall',n:'Every texture',d:'Feel every haptic texture at least once.',t:()=>texList().length>0&&texTried()>=texList().length,p:()=>[texTried(),texList().length],i:'≋'},
 {g:'Care and calm',id:'countdrift',n:'Gone quiet',d:'Let The Count run out on its own.',t:()=>fl('countdrift'),i:'◌'},
 {g:'Care and calm',id:'count30',n:'Thirty',d:'Finish The Count at 30.',t:()=>fl('count30'),i:'㉚'},
 {g:'Care and calm',id:'morn30',n:'Thirty mornings',d:'Log how thirty nights landed.',t:()=>(S.morn||[]).length>=30,p:()=>[Math.min(30,(S.morn||[]).length),30],i:'☀'},
@@ -4299,7 +4300,7 @@ LT.vibLvl=()=>{const l=rdK('lunaSleep.vib',{}).lvl;return l>=1&&l<=5?l:3};
 LT.vibLvlSet=l=>wrK('lunaSleep.vib',Object.assign(rdK('lunaSleep.vib',{}),{lvl:l}));
 const vcfg=()=>rdK('lunaSleep.vib',{});
 const vset=o=>wrK('lunaSleep.vib',Object.assign(vcfg(),o));
-const TEX=[['swell','Swell and fade'],['heart','Heartbeat'],['purr','Purr'],['rain','Rain'],['rock','Rocking'],['thunder','Thunder'],['fire','Campfire'],['tide','Tide'],['train','Night train'],['moth','Moth wings']];LT.vpat=()=>{const p=vcfg().pat;return TEX.some(x=>x[0]===p)?p:'swell'};
+const TEX=[['swell','Swell and fade'],['heart','Heartbeat'],['purr','Purr'],['rain','Rain'],['rock','Rocking'],['thunder','Thunder'],['fire','Campfire'],['tide','Tide'],['train','Night train'],['moth','Moth wings']];LT.TEX=TEX;LT.vpat=()=>{const p=vcfg().pat;return TEX.some(x=>x[0]===p)?p:'swell'};
 LT.vbpm=()=>{const v=vcfg().bpm;return v>=40&&v<=90?v:60};
 LT.vflag=k=>{const c=vcfg();return k==='exit'?c.exit!==false:c[k]===true};
 LT.vhere=()=>{const m=vcfg().here;return [5,10,15].includes(m)?m:0};
