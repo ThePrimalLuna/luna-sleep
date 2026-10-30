@@ -10,18 +10,19 @@ await p.goto(APP);await p.waitForTimeout(900);
 const ev=(f,a)=>p.evaluate(f,a);
 const body=()=>ev(()=>document.getElementById('cx-body').innerText);
 const clickText=(t)=>ev(t=>{const x=[...document.querySelectorAll('#cx-dlg button')].find(b=>(b.textContent||'').trim().startsWith(t));if(x){x.click();return true}return false},t);
+const pickTex=async id=>{for(let i=0;i<5;i++){const hit=await p.evaluate(id=>{const b=document.querySelector('#cx-body [data-tex="'+id+'"]');if(b){b.click();return true}return false},id);if(hit)return true;const ok2=await p.evaluate(i=>{const t=document.querySelectorAll('#cx-body .textabs button')[i];if(t){t.click();return true}return false},i);if(!ok2)return false}return false};
 // textures
-for(const k of ['thunder','fire','tide','train','moth']){
+for(const k of ['thunder','fire','tide','train','moth','knead','fur','paws','bellows','cricket','chimes']){
  for(const lvl of [1,3,5])for(const secs of [2,4,6]){await ev(([k,l])=>{localStorage.setItem('lunaSleep.vib',JSON.stringify({on:true,lvl:l,pat:k}));window.__v=[]},[k,lvl]);
   for(const ty of [1,0])await ev(([ty,s])=>LT.buzz(ty,s,true),[ty,secs]);
   const v=await ev(()=>window.__v);ok(v.length===2,k+' two');v.forEach(a=>{ok(Array.isArray(a)&&a.length%2===1&&a.length<=99&&a.every(x=>Number.isInteger(x)&&x>0&&x<=1100),k+' valid '+JSON.stringify(a).slice(0,90))})}
  const v=await ev(()=>window.__v);console.log(k,'len',v.map(a=>a.length).join('/'),'ms',v.map(a=>a.reduce((x,y)=>x+y,0)).join('/'))}
 // picker
 await ev(()=>{localStorage.removeItem('lunaSleep.vib');LT.hapticsOpen()});
-for(const [lab,k] of [['Thunder','thunder'],['Campfire','fire'],['Tide','tide'],['Night train','train'],['Moth wings','moth']]){ok(await clickText(lab),'btn '+lab);ok(await ev(()=>JSON.parse(localStorage.getItem('lunaSleep.vib')).pat)===k,'set '+k)}
+for(const [lab,k] of [['Thunder','thunder'],['Campfire','fire'],['Tide','tide'],['Night train','train'],['Moth wings','moth'],['Cat kneading','knead'],['Fur stroke','fur'],['Wolf paws on snow','paws'],['Breath bellows','bellows'],['Cricket song','cricket'],['Wind chimes','chimes']]){ok(await pickTex(k),'btn '+lab);ok(await ev(()=>JSON.parse(localStorage.getItem('lunaSleep.vib')).pat)===k,'set '+k)}
 let t=await body();ok(/Share this feel/.test(t),'share row');
 await ev(()=>{const i=document.querySelector('#cx-body input[type=text]');i.value='Slow Tide <b>';i.dispatchEvent(new Event('input'))});
-const link=await ev(()=>LT.feelLink(LT.vpat(),LT.vbpm(),LT.vdesc(),'Slow Tide <b>'));ok(/\?feel=moth/.test(link)&&!/[<>]/.test(decodeURIComponent(link)),'link '+link);
+const link=await ev(()=>LT.feelLink(LT.vpat(),LT.vbpm(),LT.vdesc(),'Slow Tide <b>'));ok(/\?feel=chimes/.test(link)&&!/[<>]/.test(decodeURIComponent(link)),'link '+link);
 // open link flow
 const page2=await ctx.newPage();await page2.addInitScript(()=>{window.__v=[];navigator.vibrate=function(x){window.__v.push(x);return true};try{localStorage.setItem('lunaSleep.vib',JSON.stringify({on:false,lvl:2,pat:'swell'}))}catch(e){}});
 await page2.goto('file://'+require('path').resolve(__dirname,'..','index.html')+'?feel=thunder&desc=15&bpm=55&n=Night%20Swim%3Cb%3E');await page2.waitForTimeout(1200);

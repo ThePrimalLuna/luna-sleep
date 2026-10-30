@@ -21,10 +21,12 @@ ok(ids.length===0,'menu ids missing '+ids);
 ok(await ev(()=>[...document.querySelectorAll('#set-quick button')].filter(b=>!b.closest('#menu-legacy')).length===13),'13 menu buttons');
 // haptics dialog
 await ev(()=>LT.hapticsOpen());ok(await open()&&(await title())==='Haptics and glow','haptics title');
-let t=await body();ok(/Buzz feel/.test(t)&&/Slow descent/.test(t)&&/Tap your own heartbeat/.test(t)&&/Breath glow/.test(t)&&/Battery-kind/.test(t)&&/Drift check/.test(t),'haptics sections');
-for(const [lab,k] of [['Purr','purr'],['Rain','rain'],['Rocking','rock'],['Heartbeat','heart'],['Swell and fade','swell']]){await clickText(lab);const pat=await ev(()=>JSON.parse(localStorage.getItem('lunaSleep.vib')||'{}').pat);ok(pat===k,'pattern '+k+' got '+pat)}
+const pickTex=async id=>{for(let i=0;i<5;i++){const hit=await p.evaluate(id=>{const b=document.querySelector('#cx-body [data-tex="'+id+'"]');if(b){b.click();return true}return false},id);if(hit)return true;const ok2=await p.evaluate(i=>{const t=document.querySelectorAll('#cx-body .textabs button')[i];if(t){t.click();return true}return false},i);if(!ok2)return false}return false};
+let t=await ev(()=>document.getElementById('cx-body').textContent);ok(/Buzz feel/.test(t)&&/Slow descent/.test(t)&&/Tap your own heartbeat/.test(t)&&/Breath glow/.test(t)&&/Battery-kind/.test(t)&&/Drift check/.test(t),'haptics sections');
+ok(await ev(()=>document.querySelectorAll('#cx-body details.hsec').length>=5&&document.querySelectorAll('#cx-body details.hsec[open]').length<document.querySelectorAll('#cx-body details.hsec').length),'haptics split into collapsible sections');
+for(const [lab,k] of [['Purr','purr'],['Rain','rain'],['Rocking','rock'],['Heartbeat','heart'],['Swell and fade','swell']]){ok(await pickTex(k),'pick '+k);const pat=await ev(()=>JSON.parse(localStorage.getItem('lunaSleep.vib')||'{}').pat);ok(pat===k,'pattern '+k+' got '+pat)}
 // pattern shapes
-for(const k of ['swell','heart','purr','rain','rock']){await ev(k=>{localStorage.setItem('lunaSleep.vib',JSON.stringify({on:true,lvl:3,pat:k}));window.__v=[]},k);
+for(const k of ['swell','heart','purr','rain','rock','thunder','fire','tide','train','moth','knead','fur','paws','bellows','cricket','chimes']){await ev(k=>{localStorage.setItem('lunaSleep.vib',JSON.stringify({on:true,lvl:3,pat:k}));window.__v=[]},k);
  for(const ty of [1,0]){await ev(ty=>LT.buzz(ty,6,true),ty);}
  const v=await ev(()=>window.__v);ok(v.length===2,k+' two buzzes');v.forEach((a,i)=>{ok(Array.isArray(a)&&a.length%2===1&&a.every(x=>Number.isInteger(x)&&x>0),k+' valid pattern '+i+' '+JSON.stringify(a).slice(0,80));if(k!=='swell')ok(a.length<=99,k+' len '+a.length)})
  console.log(k,'len',v.map(a=>a.length).join('/'),'total ms',v.map(a=>a.reduce((x,y)=>x+y,0)).join('/'))}

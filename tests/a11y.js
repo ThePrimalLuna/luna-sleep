@@ -3,7 +3,7 @@
 const {chromium}=require('playwright'),fs=require('fs'),path=require('path');
 let axeSrc;try{axeSrc=fs.readFileSync(require.resolve('axe-core/axe.min.js'),'utf8')}catch(e){console.log('SKIP axe-core not installed (npm install). pass');process.exit(0)}
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:400,height:800}});
-await p.addInitScript(()=>{try{localStorage.setItem('lunaSleep.newSeen','2026-10-29d');localStorage.setItem('lunaSleep.newOptOut','1');localStorage.setItem('lunaSleep.cheevoInit','1');localStorage.setItem('lunaSleep.denAck','1')}catch(e){}});
+await p.addInitScript(()=>{try{localStorage.setItem('lunaSleep.newSeen','2026-10-30a');localStorage.setItem('lunaSleep.newOptOut','1');localStorage.setItem('lunaSleep.cheevoInit','1');localStorage.setItem('lunaSleep.denAck','1')}catch(e){}});
 await p.goto('file://'+path.resolve(__dirname,'..','index.html'));await p.waitForTimeout(900);await p.addScriptTag({content:axeSrc});
 const bad={};let n=0;
 const scan=async label=>{n++;const r=await p.evaluate(async()=>{const x=await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']},resultTypes:['violations']});return x.violations.map(v=>({id:v.id,impact:v.impact,n:v.nodes.length,ex:v.nodes[0].target.join(' ').slice(0,90)}))});

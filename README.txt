@@ -61,6 +61,11 @@ v59 NOTES
 - Developer docs are in README.md, CLAUDE.md and docs/. Run "npm run check" before releasing.
 - If worker/worker.js changed, paste it into the Cloudflare Worker editor again and Deploy.
 
+v61 NOTES
+- Six new haptic textures (knead, fur, paws, bellows, cricket, chimes). To add one: TEX, TXN, a texPat branch and a group in TXC. Backup, mixes and the Every texture achievement follow TEX.
+- texPick is the shared group-and-texture picker used by Haptics and Trigger Mix.
+- Haptics and glow is built from collapsible sections (sec() in LT.hapticsOpen).
+
 v60 NOTES
 - Backups now include settings (theme, text size, contrast, font, calm, night mode, reader options, story positions) in ls.prefs.
 - Dusk theme: Auto uses it on dark-mode phones in place of the light album colors (White, Silver, Rose, Prism, Gold).

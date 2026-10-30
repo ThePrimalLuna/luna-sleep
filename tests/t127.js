@@ -11,11 +11,11 @@ const ev=(f,a)=>p.evaluate(f,a);const W=ms=>p.waitForTimeout(ms);
 // Trigger Mix
 await ev(()=>LT.mixOpen());await W(300);
 ok(await ev(()=>document.querySelector('#cx-dlg')&&!document.querySelector('#cx-dlg').hidden),'mix opens');
-ok(await ev(()=>document.querySelectorAll('#cx-body .wsseg').length===3),'3 pick rows');
+ok(await ev(()=>document.querySelectorAll('#cx-body .wsseg').length===2&&document.querySelectorAll('#cx-body .textabs button').length===4),'tabs plus 2 pick rows');
 ok(await ev(()=>document.querySelector('#cx-body .wsrow input[type=range]').closest('.wsrow').hidden===true),'bpm hidden unless heart');
-await ev(()=>{[...document.querySelectorAll('#cx-body .wsseg button')].find(x=>x.textContent==='Heartbeat').click()});
+await ev(()=>{document.querySelector('#cx-body [data-tex=heart]').click()});
 ok(await ev(()=>document.querySelector('#cx-body input[type=range]').closest('.wsrow').hidden===false),'bpm shows for heart');
-await ev(()=>{[...document.querySelectorAll('#cx-body .wsseg')[2].children].find(x=>x.textContent==='Rose').click()});
+await ev(()=>{[...document.querySelectorAll('#cx-body .wsseg')[1].children].find(x=>x.textContent==='Rose').click()});
 const v0=await ev(()=>JSON.stringify(JSON.parse(localStorage.getItem('lunaSleep.vib')||'{}')));
 await ev(()=>{[...document.querySelectorAll('#cx-body button')].find(x=>x.textContent==='Try it').click()});await W(200);
 ok(await ev(()=>window.__v.some(Array.isArray)),'try vibrates');
