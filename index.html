@@ -5164,7 +5164,7 @@ function begin(){
  cnEnd=end;
  const vh=()=>{if(document.hidden)end()};document.addEventListener('visibilitychange',vh);
  const lull=(t,fl)=>{done=true;run=false;clearTimeout(tm);msg.textContent=t;ov.classList.add('cntfade');if(fl)flag('count');};
- const spin=()=>{if(!run)return;if(!still)try{ring.animate([{transform:'translate(-50%,-50%) scale(2.6)',opacity:.15},{transform:'translate(-50%,-50%) scale(1)',opacity:.85}],{duration:P,easing:'linear'})}catch(e){}};
+ const spin=()=>{if(!run)return;if(!still)try{ring.animate([{transform:'translate(-50%,-50%) scale(1.15)',opacity:.2},{transform:'translate(-50%,-50%) scale(.34)',opacity:.9}],{duration:P,easing:'linear'})}catch(e){}};
  const beat=()=>{if(!run)return;
   if(k>=1){if(got.has(k-1))miss=0;else miss++}
   if(miss>=8){lull('Rest now.',false);return}
