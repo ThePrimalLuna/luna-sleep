@@ -42,3 +42,6 @@ NOTES
 - v56 storage: lunaSleep.stimer (sleep timer choice) is included in backups. lunaSleep.last (last tracks and tool),
   lunaSleep.filt (Library and Combos filters, 3-day expiry) and lunaSleep.nm (Night mode's remembered settings) are
   deliberately not backed up. Closing a dialog returns to the previous dialog or the Menu (see cxS in index.html).
+
+- v58 storage: lunaSleep.mixes (up to six saved Trigger Mixes: name, texture, strength, heartbeat speed, glow color) is
+  included in backups. lunaSleep.vib gained an optional hue (glow color). The Count stores nothing and uses touch only.
