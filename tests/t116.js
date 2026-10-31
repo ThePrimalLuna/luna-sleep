@@ -22,7 +22,7 @@ await ev(()=>document.getElementById('set-tuck').click());
 ok(await ev(()=>document.getElementById('adult-btn').textContent.length>0&&document.getElementById('set-off').textContent!=='Checking.'),'adult text/offline text '+await ev(()=>document.getElementById('set-off').textContent));
 // theme select
 const g=await ev(()=>[...document.querySelectorAll('#theme-sel optgroup')].map(x=>x.label+':'+x.children.length));
-ok(g.length===5&&/Album colors:11/.test(g[0])&&/Seasonal:4/.test(g[2])&&/Just for fun:6/.test(g[3]),'groups '+g);
+ok(g.length===5&&/Album colors:11/.test(g[0])&&/Seasonal:4/.test(g[2])&&/Just for fun:8/.test(g[3]),'groups '+g);
 const more=await ev(()=>[...document.querySelectorAll('#theme-sel optgroup')[4].children].map(x=>x.textContent));
 ok(more.includes('Rainy Day')&&more.join()===[...more].sort((a,b)=>a.localeCompare(b)).join(),'sorted more looks '+more.length);
 await ev(()=>{const s=document.getElementById('theme-sel');s.value='Rainy';s.dispatchEvent(new Event('change'))});await p.waitForTimeout(300);

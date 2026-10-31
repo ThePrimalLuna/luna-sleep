@@ -61,6 +61,9 @@ v59 NOTES
 - Developer docs are in README.md, CLAUDE.md and docs/. Run "npm run check" before releasing.
 - If worker/worker.js changed, paste it into the Cloudflare Worker editor again and Deploy.
 
+v63 NOTES
+- A screen wake lock is held while a haptic score runs (lunaSleep.vib scoreWake, default on). Released on pause, stop and low battery.
+
 v62 NOTES
 - THE CALL haptic score (scores/the-call.json). Edit the master, run python3 tools/gen-score.py, run the tests (t137).
 - Settings key lunaSleep.vib gains "score" (backup and wipe already cover it).

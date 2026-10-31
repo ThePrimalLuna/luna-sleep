@@ -3,7 +3,7 @@ const APP='file://'+require('path').resolve(__dirname,'../index.html');const {ch
 let pass=0,bad=0;const ok=(c,m)=>{if(c)pass++;else{bad++;console.log('FAIL',m)}};
 (async()=>{const b=await chromium.launch();try{
 const p=await (await b.newContext({viewport:{width:400,height:820},hasTouch:true})).newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
-await p.addInitScript(()=>{window.__v=[];navigator.vibrate=x=>{window.__v.push(x);return true};try{localStorage.setItem('lunaSleep.denAck','1');localStorage.setItem('lunaSleep.cheevoInit','1');localStorage.setItem('lunaSleep.newSeen','2026-10-30b')}catch(e){}});
+await p.addInitScript(()=>{window.__v=[];window.__wl=[];Object.defineProperty(navigator,'wakeLock',{configurable:true,value:{request:async()=>{const o={rel:false,release:async()=>{o.rel=true;window.__wl.push('release');(o.l||[]).forEach(f=>f())},addEventListener:(n,f)=>{(o.l=o.l||[]).push(f)}};window.__wl.push('request');return o}}});navigator.vibrate=x=>{window.__v.push(x);return true};try{localStorage.setItem('lunaSleep.denAck','1');localStorage.setItem('lunaSleep.cheevoInit','1');localStorage.setItem('lunaSleep.newSeen','2026-10-30c')}catch(e){}});
 await p.route(/open\.spotify\.com\/embed\/(?!iframe-api)/,r=>r.abort());
 await p.route('https://open.spotify.com/embed/iframe-api/v1',r=>r.fulfill({contentType:'text/javascript',body:"setTimeout(()=>window.onSpotifyIframeApiReady({createController:(el,o,cb)=>{const f=document.createElement('iframe');f.dataset.uri=o.uri;el.replaceWith(f);const L={};cb({addListener:(n,fn)=>{L[n]=fn}});window.__emit=d=>L.playback_update&&L.playback_update({data:d})}}),0)"}));
 await p.goto(APP);await p.waitForTimeout(900);const ev=(f,a)=>p.evaluate(f,a);
@@ -60,13 +60,20 @@ ok(await ev(()=>Math.abs(LT.scorePos()-100.5)<1),'Buzz earlier nudges the clock'
 await ev(()=>{[...document.querySelectorAll('#pdock .pdscore button')].find(b=>b.textContent==='Sync by hand instead').click()});await p.waitForTimeout(100);
 await ev(()=>window.__emit({position:400000,isPaused:false,isBuffering:false}));
 ok(await ev(()=>Math.abs(LT.scorePos()-400)>5&&[...document.querySelectorAll('#pdock .pdscore button')].some(b=>!b.hidden&&b.textContent==='Restart')),'hand mode ignores Spotify and shows manual buttons');
+// screen stays on while the score runs
+await ev(()=>{LT.dockStop();window.__wl=[];LT.scoreStart('THE CALL',10)});await p.waitForTimeout(300);
+ok(await ev(()=>window.__wl.includes('request')),'wake lock requested when the score starts');
+await ev(()=>LT.scorePause());await p.waitForTimeout(200);ok(await ev(()=>window.__wl.includes('release')),'wake lock released on pause');
+await ev(()=>{localStorage.setItem('lunaSleep.vib',JSON.stringify(Object.assign(JSON.parse(localStorage.getItem('lunaSleep.vib')),{scoreWake:false})));window.__wl=[];LT.scoreStart('THE CALL',10)});await p.waitForTimeout(300);
+ok(await ev(()=>!window.__wl.includes('request')),'switch off: no wake lock');
+await ev(()=>{LT.scorePause();localStorage.setItem('lunaSleep.vib',JSON.stringify(Object.assign(JSON.parse(localStorage.getItem('lunaSleep.vib')),{scoreWake:true})))});
 // safety: Emergency Exit and closing the player stop it
 await ev(()=>{LT.scoreStart('THE CALL',100);window.__v=[]});await p.waitForTimeout(200);
 await ev(()=>sosOpen());await p.waitForTimeout(200);
 ok(await ev(()=>!document.querySelector('#pdock .pdscore')&&window.__v.some(x=>x===0)),'Emergency Exit stops the score');
 await p.waitForTimeout(3500);ok(await ev(()=>window.__v.filter(x=>Array.isArray(x)&&x.length>1&&x.some(n=>n>0)).length<=2),'nothing keeps scheduling after stop');
 // script blocked: plain player, manual score
-{const p2=await (await b.newContext({viewport:{width:400,height:820}})).newPage();await p2.addInitScript(()=>{window.__v=[];navigator.vibrate=x=>{window.__v.push(x);return true};try{localStorage.setItem('lunaSleep.denAck','1');localStorage.setItem('lunaSleep.cheevoInit','1');localStorage.setItem('lunaSleep.newSeen','2026-10-30b');localStorage.setItem('lunaSleep.vib',JSON.stringify({score:true}))}catch(e){}});
+{const p2=await (await b.newContext({viewport:{width:400,height:820}})).newPage();await p2.addInitScript(()=>{window.__v=[];navigator.vibrate=x=>{window.__v.push(x);return true};try{localStorage.setItem('lunaSleep.denAck','1');localStorage.setItem('lunaSleep.cheevoInit','1');localStorage.setItem('lunaSleep.newSeen','2026-10-30c');localStorage.setItem('lunaSleep.vib',JSON.stringify({score:true}))}catch(e){}});
  await p2.route(/open\.spotify\.com/,r=>r.abort());await p2.goto(APP);await p2.waitForTimeout(800);
  await p2.evaluate(()=>{const t=Object.values(TI).find(x=>x.title==='THE CALL');t.spotify='https://open.spotify.com/episode/aaaaaaaaaaaaaaaaaaaaaa';LT.dockPlay(t)});await p2.waitForTimeout(800);
  ok(await p2.evaluate(()=>{const f=document.querySelector('#pdock iframe.pdfr');return f&&/embed\/episode\/a+/.test(f.src)&&!document.querySelector('#pdock .pdph')}),'script blocked: plain player');

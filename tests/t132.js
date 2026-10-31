@@ -15,8 +15,8 @@ const ev=(f,a)=>p.evaluate(f,a);const W=ms=>p.waitForTimeout(ms);const btnTxt=t=
 // report
 await ev(()=>LT.reportOpen());await W(300);
 let rep=await ev(()=>document.querySelector('#cx-body textarea[readonly]').value);
-ok(/Luna Sleep v62/.test(rep)&&/Errors: none seen/.test(rep),'report has version: '+rep.slice(0,60));
-ok(!/lunaSleep|notes|profile/i.test(rep.replace(/Luna Sleep v62/,'')),'report has no saved data');
+ok(/Luna Sleep v63/.test(rep)&&/Errors: none seen/.test(rep),'report has version: '+rep.slice(0,60));
+ok(!/lunaSleep|notes|profile/i.test(rep.replace(/Luna Sleep v63/,'')),'report has no saved data');
 await ev(()=>{const t=document.getElementById('rp-note');t.value='the ring is weird';t.dispatchEvent(new Event('input'))});
 ok((await ev(()=>document.querySelector('#cx-body textarea[readonly]').value)).includes('the ring is weird'),'note included');
 await ev(()=>cxClose());await W(450);

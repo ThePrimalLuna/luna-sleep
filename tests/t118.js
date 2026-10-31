@@ -8,7 +8,7 @@ await p.addInitScript(()=>{try{localStorage.setItem('lunaSleep.cheevoInit','1');
 await p.goto(APP);await p.waitForTimeout(800);
 const ev=(f,a)=>p.evaluate(f,a);
 const g=await ev(()=>[...document.querySelectorAll('#theme-sel optgroup')].map(x=>x.label+':'+x.children.length));
-ok(g.join()==='Album colors:11,Pride:11,Seasonal:4,Just for fun:6,More looks:'+g[4].split(':')[1],'groups '+g);
+ok(g.join()==='Album colors:11,Pride:11,Seasonal:4,Just for fun:8,More looks:'+g[4].split(':')[1],'groups '+g);
 const labs=await ev(()=>[...document.querySelectorAll('#theme-sel optgroup')[1].children].map(x=>x.textContent));
 ok(labs.join()===[...labs].sort((a,b)=>a.localeCompare(b)).join()&&labs.includes('Transgender pride')&&labs.includes('Asexual pride')&&labs.includes('Bisexual pride'),'pride labels '+labs);
 const keys=await ev(()=>[...document.querySelectorAll('#theme-sel optgroup')[1].children].map(x=>x.value));

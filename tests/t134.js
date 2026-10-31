@@ -1,4 +1,4 @@
-const {chromium}=require('playwright');(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:400,height:800}});await p.addInitScript(()=>{try{localStorage.setItem('lunaSleep.newSeen','2026-10-30b');localStorage.setItem('lunaSleep.newOptOut','1')}catch(e){}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
+const {chromium}=require('playwright');(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:400,height:800}});await p.addInitScript(()=>{try{localStorage.setItem('lunaSleep.newSeen','2026-10-30c');localStorage.setItem('lunaSleep.newOptOut','1')}catch(e){}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
 await p.goto('file://'+require('path').resolve(__dirname,'..','index.html')+'');await p.waitForTimeout(800);
 const before=await p.evaluate(()=>JSON.stringify(localStorage));
 await p.evaluate(()=>LT.helpOpen());await p.waitForTimeout(200);
