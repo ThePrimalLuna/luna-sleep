@@ -61,6 +61,9 @@ v59 NOTES
 - Developer docs are in README.md, CLAUDE.md and docs/. Run "npm run check" before releasing.
 - If worker/worker.js changed, paste it into the Cloudflare Worker editor again and Deploy.
 
+v66 NOTES
+- At a glance strip on each ungated track page (built only from catalog facts; blanks are left out). One-time new-track notification nudge in the banner slot after the first heard track; S.pushAsk is saved in the main blob (so in Backup and Delete everything) and the nudge never returns after any answer. Test: t138. LOGV is 2026-10-31b.
+
 v65 NOTES
 - Three secret themes (Edward, Alphonse, Winry) with matching secret achievements. Deliberately not in What's new, like the other secret themes. APP_VERSION and the service worker move to v65 so installed copies update; LOGV stays put.
 
