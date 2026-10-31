@@ -13,6 +13,7 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: python3 worker/make-releases.py --check
       - run: python3 tools/gen-themes.py --check
+      - run: python3 tools/gen-score.py --check
       - run: npm run static
       - run: node tests/lint.js
       - run: npm test

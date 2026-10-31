@@ -33,9 +33,9 @@ NOTES
   a Backup file option for moving them.
 - The page itself and its text (including unreleased track names) can be read by anyone with
   the link. Only the audio is gated, by Patreon.
-- Haptic scores are a placeholder. Haptics and glow shows a locked, labelled "Not active yet" slot, and the
-  code has an empty SCORES table (format described in the comment above it) plus LT.scoreFor(id). Nothing
-  calls it yet, so adding an entry does nothing until the playback side is built.
+- Haptic scores: scores/*.json are the masters, tools/gen-score.py compacts them into index.html (npm run check
+  verifies they match). THE CALL is the first. Playback follows the Spotify embed's page API (a script from
+  open.spotify.com, loaded only when the switch is on and the track has a score), with a by-hand fallback.
 - The app never listens: it uses no microphone, camera or motion sensors. The Hold pad and every haptic
   feature only respond to touch and to timers.
 
@@ -60,6 +60,11 @@ v59 NOTES
 - Get help (trafficking and domestic violence hotlines) is in the Emergency Exit screen, Safety and consent, and the Resources tab. It saves nothing.
 - Developer docs are in README.md, CLAUDE.md and docs/. Run "npm run check" before releasing.
 - If worker/worker.js changed, paste it into the Cloudflare Worker editor again and Deploy.
+
+v62 NOTES
+- THE CALL haptic score (scores/the-call.json). Edit the master, run python3 tools/gen-score.py, run the tests (t137).
+- Settings key lunaSleep.vib gains "score" (backup and wipe already cover it).
+- Not verified against real Spotify from the build machine: auto-follow is tested with a mock of the page API. Try it on a phone.
 
 v61 NOTES
 - Six new haptic textures (knead, fur, paws, bellows, cricket, chimes). To add one: TEX, TXN, a texPat branch and a group in TXC. Backup, mixes and the Every texture achievement follow TEX.

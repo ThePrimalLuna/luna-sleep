@@ -1,0 +1,2921 @@
+{
+ "format": "luna-haptic",
+ "version": 1,
+ "track": {
+  "sku": "00",
+  "title": "THE CALL",
+  "label": "White Label Master (Foundation OS)",
+  "statedRuntime": "15:00",
+  "scoreLength": 930.0,
+  "note": "The script's spoken timeline runs to about 15:23, past the stated 15:00. The score runs to 15:30 so the closing lines are covered. Cut at 900 if the final audio is trimmed."
+ },
+ "units": {
+  "t": "seconds from audio start",
+  "i": "intensity 0..1",
+  "s": "sharpness 0..1 (0 = round and low, 1 = sharp and buzzy)",
+  "side": "L / R / C (single-motor devices ignore side)",
+  "env": "[[seconds relative to cue start, intensity], ...] linear"
+ },
+ "playback": {
+  "globalOffsetMs": 0,
+  "masterGain": 1.0,
+  "bedCeiling": 0.66,
+  "stopOnSafeword": true,
+  "notes": "Cues tagged sync=est are placed inside a spoken line by a 2.2 words/sec estimate. Re-time them against the final audio, or use globalOffsetMs for a whole-file shift."
+ },
+ "kinds": {
+  "tap": "one transient",
+  "seq": "list of transients",
+  "hit": "transient plus a decaying low tail",
+  "hum": "continuous event with an intensity envelope",
+  "heartbeat": "generated lub-dub at bpm; env is intensity over time; skip removes beats",
+  "void": "marker only: deliberate haptic silence"
+ },
+ "cues": [
+  {
+   "id": "A1-01",
+   "act": "I",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 0,
+   "d": 71.6,
+   "s": 0.85,
+   "env": [
+    [
+     0,
+     0.3
+    ],
+    [
+     30,
+     0.34
+    ],
+    [
+     43,
+     0.34
+    ],
+    [
+     46,
+     0.46
+    ],
+    [
+     60,
+     0.46
+    ],
+    [
+     62,
+     0.38
+    ],
+    [
+     70.39999999999999,
+     0.62
+    ],
+    [
+     71.6,
+     0
+    ]
+   ],
+   "label": "City buzz",
+   "feel": "A coarse, high-frequency buzz, never smooth. It sits in the teeth and jaw. It rises through 'redlining'.",
+   "anchor": "00:00 City + 00:43 'vibrating right in your teeth' + 01:02 'redlining'",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A1-02",
+   "act": "I",
+   "layer": "accent",
+   "kind": "seq",
+   "t": 27.0,
+   "s": 0.5,
+   "taps": [
+    [
+     0,
+     0.4
+    ],
+    [
+     0.4,
+     0.4
+    ],
+    [
+     0.8,
+     0.4
+    ]
+   ],
+   "label": "Safeword: three soft taps",
+   "feel": "Three even taps on the word HUMAN, echoing 'say it out loud three times'.",
+   "sync": "est",
+   "anchor": "00:22 'Your safe word is HUMAN'",
+   "side": "C"
+  },
+  {
+   "id": "A1-03",
+   "act": "I",
+   "layer": "breath",
+   "kind": "hum",
+   "t": 40.0,
+   "d": 1.5,
+   "s": 0.9,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     1.2,
+     0.5
+    ],
+    [
+     1.5,
+     0
+    ]
+   ],
+   "label": "Sharp tactical inhale",
+   "feel": "A quick rising prickle that stops at the top of the breath.",
+   "anchor": "00:40 [Breathe — sharp inhale]",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A1-04",
+   "act": "I",
+   "layer": "accent",
+   "kind": "hit",
+   "t": 71.6,
+   "i": 0.7,
+   "s": 0.6,
+   "tail": [
+    0.8,
+    0.4
+   ],
+   "label": "'STOPS RIGHT HERE': hard cut",
+   "feel": "One firm knock, then the buzz is gone. The 1:12 to 1:21 void is deliberate.",
+   "sync": "est",
+   "anchor": "01:02 'And it STOPS RIGHT HERE'",
+   "side": "C"
+  },
+  {
+   "id": "A1-05",
+   "act": "I",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 81.0,
+   "d": 44.0,
+   "s": 0.8,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     2,
+     0.14
+    ],
+    [
+     9,
+     0.2
+    ],
+    [
+     34,
+     0.2
+    ],
+    [
+     39,
+     0.18
+    ],
+    [
+     44,
+     0
+    ]
+   ],
+   "label": "City buzz, thinned",
+   "feel": "The buzz returns at a third of its old strength and leaves with the city fade (gone by 02:05).",
+   "anchor": "01:21 breath → 02:00 City fade",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "B-0121",
+   "act": "I",
+   "layer": "breath",
+   "kind": "hum",
+   "t": 81.0,
+   "d": 3.8,
+   "s": 0.1,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     1.6,
+     0.22
+    ],
+    [
+     2.0,
+     0.198
+    ],
+    [
+     3.8,
+     0
+    ]
+   ],
+   "label": "Breath",
+   "feel": "One soft swell with Luna's breath.",
+   "anchor": "01:21 🫁",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A1-06",
+   "act": "I",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 120.0,
+   "d": 150.0,
+   "s": 0.12,
+   "env": [
+    [
+     0,
+     0.0
+    ],
+    [
+     4.0,
+     0.067
+    ],
+    [
+     8.0,
+     0.26
+    ],
+    [
+     12.0,
+     0.1
+    ],
+    [
+     16.0,
+     0.26
+    ],
+    [
+     20.0,
+     0.1
+    ],
+    [
+     24.0,
+     0.26
+    ],
+    [
+     28.0,
+     0.1
+    ],
+    [
+     32.0,
+     0.26
+    ],
+    [
+     36.0,
+     0.1
+    ],
+    [
+     40.0,
+     0.26
+    ],
+    [
+     44.0,
+     0.1
+    ],
+    [
+     48.0,
+     0.26
+    ],
+    [
+     52.0,
+     0.1
+    ],
+    [
+     56.0,
+     0.26
+    ],
+    [
+     60.0,
+     0.1
+    ],
+    [
+     64.0,
+     0.26
+    ],
+    [
+     68.0,
+     0.1
+    ],
+    [
+     72.0,
+     0.26
+    ],
+    [
+     76.0,
+     0.1
+    ],
+    [
+     80.0,
+     0.26
+    ],
+    [
+     84.0,
+     0.1
+    ],
+    [
+     88.0,
+     0.26
+    ],
+    [
+     92.0,
+     0.1
+    ],
+    [
+     96.0,
+     0.26
+    ],
+    [
+     100.0,
+     0.1
+    ],
+    [
+     104.0,
+     0.26
+    ],
+    [
+     108.0,
+     0.1
+    ],
+    [
+     112.0,
+     0.26
+    ],
+    [
+     116.0,
+     0.1
+    ],
+    [
+     120.0,
+     0.26
+    ],
+    [
+     124.0,
+     0.1
+    ],
+    [
+     128.0,
+     0.26
+    ],
+    [
+     132.0,
+     0.1
+    ],
+    [
+     136.0,
+     0.26
+    ],
+    [
+     140.0,
+     0.1
+    ],
+    [
+     144.0,
+     0.26
+    ],
+    [
+     148.0,
+     0.1
+    ],
+    [
+     150.0,
+     0.26
+    ]
+   ],
+   "label": "Treeline wind sway",
+   "feel": "Slow soft swells about eight seconds apart, like heavy branches moving overhead. Nothing sharp.",
+   "anchor": "02:00 Track 5 fades in",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "B-0231",
+   "act": "I",
+   "layer": "breath",
+   "kind": "hum",
+   "t": 151.0,
+   "d": 3.8,
+   "s": 0.1,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     1.6,
+     0.22
+    ],
+    [
+     2.0,
+     0.198
+    ],
+    [
+     3.8,
+     0
+    ]
+   ],
+   "label": "Breath",
+   "feel": "One soft swell with Luna's breath.",
+   "anchor": "02:31 🫁",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "B-0313",
+   "act": "I",
+   "layer": "breath",
+   "kind": "hum",
+   "t": 193.0,
+   "d": 3.8,
+   "s": 0.1,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     1.6,
+     0.22
+    ],
+    [
+     2.0,
+     0.198
+    ],
+    [
+     3.8,
+     0
+    ]
+   ],
+   "label": "Breath",
+   "feel": "One soft swell with Luna's breath.",
+   "anchor": "03:13 🫁",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A1-07",
+   "act": "I",
+   "layer": "accent",
+   "kind": "seq",
+   "t": 197.5,
+   "s": 0.35,
+   "taps": [
+    [
+     0,
+     0.36
+    ],
+    [
+     0.9,
+     0.34
+    ],
+    [
+     1.9,
+     0.3
+    ],
+    [
+     3.1,
+     0.26
+    ],
+    [
+     4.6,
+     0.22
+    ],
+    [
+     6.5,
+     0.18
+    ],
+    [
+     8.9,
+     0.15
+    ]
+   ],
+   "label": "Footsteps slowing",
+   "feel": "Seven soft steps that stretch further apart: 'I can hear you slowing down'.",
+   "anchor": "03:16 'Keep walking'",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A1-08",
+   "act": "I",
+   "layer": "accent",
+   "kind": "seq",
+   "t": 213.5,
+   "s": 0.95,
+   "taps": [
+    [
+     0,
+     0.3
+    ],
+    [
+     0.5,
+     0.26
+    ],
+    [
+     1.3,
+     0.24
+    ],
+    [
+     2.0,
+     0.18
+    ],
+    [
+     3.1,
+     0.15
+    ],
+    [
+     4.1,
+     0.11
+    ],
+    [
+     5.5,
+     0.08
+    ],
+    [
+     7.3,
+     0.06
+    ]
+   ],
+   "label": "Noise breaking apart",
+   "feel": "Tiny sharp ticks that thin out and die away: 'breaking apart... dissolving'.",
+   "anchor": "03:32 'noise in your head is already starting to separate'",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A1-09",
+   "act": "I",
+   "layer": "accent",
+   "kind": "hit",
+   "t": 237.3,
+   "i": 0.5,
+   "s": 0.2,
+   "tail": [
+    1.2,
+    0.3
+   ],
+   "label": "'The perimeter is secure'",
+   "feel": "One low settled thud.",
+   "sync": "est",
+   "anchor": "03:50",
+   "side": "C"
+  },
+  {
+   "id": "B-0409",
+   "act": "I",
+   "layer": "breath",
+   "kind": "hum",
+   "t": 249.0,
+   "d": 3.8,
+   "s": 0.1,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     1.6,
+     0.36
+    ],
+    [
+     2.0,
+     0.324
+    ],
+    [
+     3.8,
+     0
+    ]
+   ],
+   "label": "Breath",
+   "feel": "Luna's breath: Slow and deliberate. Let it be audible.",
+   "anchor": "04:09 🫁",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A2-01",
+   "act": "II",
+   "layer": "accent",
+   "kind": "tap",
+   "t": 276.9,
+   "i": 0.45,
+   "s": 0.6,
+   "side": "L",
+   "label": "'Left.'",
+   "feel": "One tap, felt on the left if the device has two motors.",
+   "sync": "est",
+   "anchor": "04:35"
+  },
+  {
+   "id": "B-0442",
+   "act": "II",
+   "layer": "breath",
+   "kind": "hum",
+   "t": 282.0,
+   "d": 3.8,
+   "s": 0.1,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     1.6,
+     0.22
+    ],
+    [
+     2.0,
+     0.198
+    ],
+    [
+     3.8,
+     0
+    ]
+   ],
+   "label": "Breath",
+   "feel": "One soft swell with Luna's breath.",
+   "anchor": "04:42 🫁",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A2-02",
+   "act": "II",
+   "layer": "accent",
+   "kind": "tap",
+   "t": 286.5,
+   "i": 0.45,
+   "s": 0.6,
+   "side": "R",
+   "label": "'And right.'",
+   "feel": "One tap, felt on the right.",
+   "sync": "est",
+   "anchor": "04:46"
+  },
+  {
+   "id": "B-0452",
+   "act": "II",
+   "layer": "breath",
+   "kind": "hum",
+   "t": 292.0,
+   "d": 3.8,
+   "s": 0.1,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     1.6,
+     0.22
+    ],
+    [
+     2.0,
+     0.198
+    ],
+    [
+     3.8,
+     0
+    ]
+   ],
+   "label": "Breath",
+   "feel": "One soft swell with Luna's breath.",
+   "anchor": "04:52 🫁",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A2-03",
+   "act": "II",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 296.0,
+   "d": 6.0,
+   "s": 0.55,
+   "side": "L",
+   "env": [
+    [
+     0,
+     0.14
+    ],
+    [
+     3.0,
+     0.4
+    ],
+    [
+     6.0,
+     0.14
+    ]
+   ],
+   "label": "Orbit begins",
+   "feel": "Slow swell passing left to right. Taps become soft broad pulses as the ground turns to damp earth.",
+   "anchor": "04:56 → 07:55 [PAN: ORBIT]",
+   "mute": true,
+   "sync": "stamp"
+  },
+  {
+   "id": "A2-04",
+   "act": "II",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 302.0,
+   "d": 6.0,
+   "s": 0.45,
+   "side": "R",
+   "env": [
+    [
+     0,
+     0.14
+    ],
+    [
+     3.0,
+     0.4
+    ],
+    [
+     6.0,
+     0.14
+    ]
+   ],
+   "label": "Orbit swell",
+   "feel": "Slow swell passing left to right. Taps become soft broad pulses as the ground turns to damp earth.",
+   "anchor": "04:56 → 07:55 [PAN: ORBIT]",
+   "mute": true,
+   "sync": "stamp"
+  },
+  {
+   "id": "A2-05",
+   "act": "II",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 308.0,
+   "d": 6.0,
+   "s": 0.35,
+   "side": "L",
+   "env": [
+    [
+     0,
+     0.14
+    ],
+    [
+     3.0,
+     0.4
+    ],
+    [
+     6.0,
+     0.14
+    ]
+   ],
+   "label": "Orbit swell",
+   "feel": "Slow swell passing left to right. Taps become soft broad pulses as the ground turns to damp earth.",
+   "anchor": "04:56 → 07:55 [PAN: ORBIT]",
+   "mute": true,
+   "sync": "stamp"
+  },
+  {
+   "id": "A2-06",
+   "act": "II",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 314.0,
+   "d": 6.0,
+   "s": 0.25,
+   "side": "R",
+   "env": [
+    [
+     0,
+     0.14
+    ],
+    [
+     3.0,
+     0.4
+    ],
+    [
+     6.0,
+     0.14
+    ]
+   ],
+   "label": "Orbit swell",
+   "feel": "Slow swell passing left to right. Taps become soft broad pulses as the ground turns to damp earth.",
+   "anchor": "04:56 → 07:55 [PAN: ORBIT]",
+   "mute": true,
+   "sync": "stamp"
+  },
+  {
+   "id": "B-0517",
+   "act": "II",
+   "layer": "breath",
+   "kind": "hum",
+   "t": 317.0,
+   "d": 3.8,
+   "s": 0.1,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     1.6,
+     0.22
+    ],
+    [
+     2.0,
+     0.198
+    ],
+    [
+     3.8,
+     0
+    ]
+   ],
+   "label": "Breath",
+   "feel": "One soft swell with Luna's breath.",
+   "anchor": "05:17 🫁",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A2-07",
+   "act": "II",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 320.0,
+   "d": 6.0,
+   "s": 0.15,
+   "side": "L",
+   "env": [
+    [
+     0,
+     0.14
+    ],
+    [
+     3.0,
+     0.4
+    ],
+    [
+     6.0,
+     0.14
+    ]
+   ],
+   "label": "Orbit swell",
+   "feel": "Same swell, softer and wider.",
+   "anchor": "04:56 → 07:55 [PAN: ORBIT]",
+   "mute": true,
+   "sync": "stamp"
+  },
+  {
+   "id": "A2-08",
+   "act": "II",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 326.0,
+   "d": 8.0,
+   "s": 0.15,
+   "side": "R",
+   "env": [
+    [
+     0,
+     0.14
+    ],
+    [
+     4.0,
+     0.4
+    ],
+    [
+     8.0,
+     0.14
+    ]
+   ],
+   "label": "Orbit swell",
+   "feel": "Same swell, softer and wider.",
+   "anchor": "04:56 → 07:55 [PAN: ORBIT]",
+   "mute": true,
+   "sync": "stamp"
+  },
+  {
+   "id": "A2-27",
+   "act": "II",
+   "layer": "accent",
+   "kind": "tap",
+   "t": 327.0,
+   "i": 0.35,
+   "s": 1.0,
+   "label": "'Sharper.'",
+   "feel": "A single bright tick.",
+   "sync": "est",
+   "anchor": "05:22",
+   "side": "C"
+  },
+  {
+   "id": "A2-09",
+   "act": "II",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 334.0,
+   "d": 8.0,
+   "s": 0.15,
+   "side": "L",
+   "env": [
+    [
+     0,
+     0.14
+    ],
+    [
+     4.0,
+     0.4
+    ],
+    [
+     8.0,
+     0.14
+    ]
+   ],
+   "label": "Orbit swell",
+   "feel": "Same swell, softer and wider.",
+   "anchor": "04:56 → 07:55 [PAN: ORBIT]",
+   "mute": true,
+   "sync": "stamp"
+  },
+  {
+   "id": "A2-28",
+   "act": "II",
+   "layer": "accent",
+   "kind": "hit",
+   "t": 334.5,
+   "i": 0.65,
+   "s": 0.55,
+   "tail": [
+    0.6,
+    0.35
+   ],
+   "label": "'STOP right here'",
+   "feel": "A firm stop at the border, then a beat of quiet.",
+   "sync": "est",
+   "anchor": "05:34",
+   "side": "C"
+  },
+  {
+   "id": "A2-10",
+   "act": "II",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 342.0,
+   "d": 8.0,
+   "s": 0.15,
+   "side": "R",
+   "env": [
+    [
+     0,
+     0.14
+    ],
+    [
+     4.0,
+     0.4
+    ],
+    [
+     8.0,
+     0.14
+    ]
+   ],
+   "label": "Orbit swell",
+   "feel": "Same swell, softer and wider.",
+   "anchor": "04:56 → 07:55 [PAN: ORBIT]",
+   "mute": true,
+   "sync": "stamp"
+  },
+  {
+   "id": "A2-11",
+   "act": "II",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 350.0,
+   "d": 8.0,
+   "s": 0.15,
+   "side": "L",
+   "env": [
+    [
+     0,
+     0.14
+    ],
+    [
+     4.0,
+     0.4
+    ],
+    [
+     8.0,
+     0.14
+    ]
+   ],
+   "label": "Orbit swell",
+   "feel": "Same swell, softer and wider.",
+   "anchor": "04:56 → 07:55 [PAN: ORBIT]",
+   "mute": true,
+   "sync": "stamp"
+  },
+  {
+   "id": "B-0550",
+   "act": "II",
+   "layer": "breath",
+   "kind": "hum",
+   "t": 350.0,
+   "d": 3.8,
+   "s": 0.1,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     1.6,
+     0.22
+    ],
+    [
+     2.0,
+     0.198
+    ],
+    [
+     3.8,
+     0
+    ]
+   ],
+   "label": "Breath",
+   "feel": "One soft swell with Luna's breath.",
+   "anchor": "05:50 🫁",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A2-12",
+   "act": "II",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 358.0,
+   "d": 8.0,
+   "s": 0.15,
+   "side": "C",
+   "env": [
+    [
+     0,
+     0.14
+    ],
+    [
+     4.0,
+     0.4
+    ],
+    [
+     8.0,
+     0.14
+    ]
+   ],
+   "label": "Orbit swell",
+   "feel": "Centered swell; the orbit keeps going.",
+   "anchor": "04:56 → 07:55 [PAN: ORBIT]",
+   "mute": true,
+   "sync": "stamp"
+  },
+  {
+   "id": "A2-13",
+   "act": "II",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 366.0,
+   "d": 8.0,
+   "s": 0.15,
+   "side": "C",
+   "env": [
+    [
+     0,
+     0.14
+    ],
+    [
+     4.0,
+     0.4
+    ],
+    [
+     8.0,
+     0.14
+    ]
+   ],
+   "label": "Orbit swell",
+   "feel": "Centered swell; the orbit keeps going.",
+   "anchor": "04:56 → 07:55 [PAN: ORBIT]",
+   "mute": true,
+   "sync": "stamp"
+  },
+  {
+   "id": "A2-29",
+   "act": "II",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 367.5,
+   "d": 11,
+   "s": 0.95,
+   "env": [
+    [
+     0,
+     0.26
+    ],
+    [
+     6,
+     0.22
+    ],
+    [
+     11,
+     0
+    ]
+   ],
+   "label": "Friction falling away",
+   "feel": "A fine rough texture that thins to nothing: 'No elastic... no wires... no friction'.",
+   "anchor": "06:07",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A2-14",
+   "act": "II",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 374.0,
+   "d": 8.0,
+   "s": 0.15,
+   "side": "C",
+   "env": [
+    [
+     0,
+     0.14
+    ],
+    [
+     4.0,
+     0.4
+    ],
+    [
+     8.0,
+     0.14
+    ]
+   ],
+   "label": "Orbit swell",
+   "feel": "Centered swell; the orbit keeps going.",
+   "anchor": "04:56 → 07:55 [PAN: ORBIT]",
+   "mute": true,
+   "sync": "stamp"
+  },
+  {
+   "id": "A2-15",
+   "act": "II",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 382.0,
+   "d": 8.0,
+   "s": 0.15,
+   "side": "C",
+   "env": [
+    [
+     0,
+     0.14
+    ],
+    [
+     4.0,
+     0.4
+    ],
+    [
+     8.0,
+     0.14
+    ]
+   ],
+   "label": "Orbit swell",
+   "feel": "Orbit lightening as the listener is untethered.",
+   "anchor": "04:56 → 07:55 [PAN: ORBIT]",
+   "mute": true,
+   "sync": "stamp"
+  },
+  {
+   "id": "A2-30",
+   "act": "II",
+   "layer": "accent",
+   "kind": "tap",
+   "t": 385.2,
+   "i": 0.6,
+   "s": 1.0,
+   "label": "'cut the connection'",
+   "feel": "One crisp snip.",
+   "sync": "est",
+   "anchor": "06:22",
+   "side": "C"
+  },
+  {
+   "id": "A2-31",
+   "act": "II",
+   "layer": "accent",
+   "kind": "hit",
+   "t": 386.6,
+   "i": 0.75,
+   "s": 0.1,
+   "tail": [
+    1.5,
+    0.6
+   ],
+   "label": "'DROP the devices'",
+   "feel": "A falling weight that leaves the body lighter.",
+   "sync": "est",
+   "anchor": "06:22",
+   "side": "C"
+  },
+  {
+   "id": "A2-16",
+   "act": "II",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 390.0,
+   "d": 8.0,
+   "s": 0.15,
+   "side": "C",
+   "env": [
+    [
+     0,
+     0.14
+    ],
+    [
+     4.0,
+     0.4
+    ],
+    [
+     8.0,
+     0.14
+    ]
+   ],
+   "label": "Orbit swell",
+   "feel": "Orbit lightening as the listener is untethered.",
+   "anchor": "04:56 → 07:55 [PAN: ORBIT]",
+   "mute": true,
+   "sync": "stamp"
+  },
+  {
+   "id": "A2-17",
+   "act": "II",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 398.0,
+   "d": 8.0,
+   "s": 0.15,
+   "side": "C",
+   "env": [
+    [
+     0,
+     0.14
+    ],
+    [
+     4.0,
+     0.4
+    ],
+    [
+     8.0,
+     0.14
+    ]
+   ],
+   "label": "Orbit swell",
+   "feel": "Orbit lightening as the listener is untethered.",
+   "anchor": "04:56 → 07:55 [PAN: ORBIT]",
+   "mute": true,
+   "sync": "stamp"
+  },
+  {
+   "id": "B-0641",
+   "act": "II",
+   "layer": "breath",
+   "kind": "hum",
+   "t": 401.0,
+   "d": 3.8,
+   "s": 0.1,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     1.6,
+     0.22
+    ],
+    [
+     2.0,
+     0.198
+    ],
+    [
+     3.8,
+     0
+    ]
+   ],
+   "label": "Breath",
+   "feel": "One soft swell with Luna's breath.",
+   "anchor": "06:41 🫁",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A2-18",
+   "act": "II",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 406.0,
+   "d": 8.0,
+   "s": 0.15,
+   "side": "C",
+   "env": [
+    [
+     0,
+     0.14
+    ],
+    [
+     4.0,
+     0.4
+    ],
+    [
+     8.0,
+     0.14
+    ]
+   ],
+   "label": "Orbit swell",
+   "feel": "Orbit lightening as the listener is untethered.",
+   "anchor": "04:56 → 07:55 [PAN: ORBIT]",
+   "mute": true,
+   "sync": "stamp"
+  },
+  {
+   "id": "A2-19",
+   "act": "II",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 414.0,
+   "d": 8.0,
+   "s": 0.15,
+   "side": "L",
+   "env": [
+    [
+     0,
+     0.06
+    ],
+    [
+     4.0,
+     0.3749253731343284
+    ],
+    [
+     8.0,
+     0.06
+    ]
+   ],
+   "label": "Orbit swell",
+   "feel": "Orbit lightening as the listener is untethered.",
+   "anchor": "04:56 → 07:55 [PAN: ORBIT]",
+   "mute": true,
+   "sync": "stamp"
+  },
+  {
+   "id": "A2-20",
+   "act": "II",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 422.0,
+   "d": 8.0,
+   "s": 0.15,
+   "side": "R",
+   "env": [
+    [
+     0,
+     0.06
+    ],
+    [
+     4.0,
+     0.3414925373134329
+    ],
+    [
+     8.0,
+     0.06
+    ]
+   ],
+   "label": "Orbit swell",
+   "feel": "Orbit lightening as the listener is untethered.",
+   "anchor": "04:56 → 07:55 [PAN: ORBIT]",
+   "mute": true,
+   "sync": "stamp"
+  },
+  {
+   "id": "A2-21",
+   "act": "II",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 430.0,
+   "d": 8.0,
+   "s": 0.15,
+   "side": "L",
+   "env": [
+    [
+     0,
+     0.06
+    ],
+    [
+     4.0,
+     0.3080597014925373
+    ],
+    [
+     8.0,
+     0.06
+    ]
+   ],
+   "label": "Orbit swell",
+   "feel": "Orbit lightening as the listener is untethered.",
+   "anchor": "04:56 → 07:55 [PAN: ORBIT]",
+   "mute": true,
+   "sync": "stamp"
+  },
+  {
+   "id": "A2-22",
+   "act": "II",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 438.0,
+   "d": 8.0,
+   "s": 0.15,
+   "side": "R",
+   "env": [
+    [
+     0,
+     0.06
+    ],
+    [
+     4.0,
+     0.2746268656716418
+    ],
+    [
+     8.0,
+     0.06
+    ]
+   ],
+   "label": "Orbit swell",
+   "feel": "Orbit lightening as the listener is untethered.",
+   "anchor": "04:56 → 07:55 [PAN: ORBIT]",
+   "mute": true,
+   "sync": "stamp"
+  },
+  {
+   "id": "A2-23",
+   "act": "II",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 446.0,
+   "d": 8.0,
+   "s": 0.15,
+   "side": "L",
+   "env": [
+    [
+     0,
+     0.06
+    ],
+    [
+     4.0,
+     0.24119402985074628
+    ],
+    [
+     8.0,
+     0.06
+    ]
+   ],
+   "label": "Orbit swell",
+   "feel": "Orbit lightening as the listener is untethered.",
+   "anchor": "04:56 → 07:55 [PAN: ORBIT]",
+   "mute": true,
+   "sync": "stamp"
+  },
+  {
+   "id": "A2-24",
+   "act": "II",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 454.0,
+   "d": 8.0,
+   "s": 0.15,
+   "side": "R",
+   "env": [
+    [
+     0,
+     0.06
+    ],
+    [
+     4.0,
+     0.20776119402985074
+    ],
+    [
+     8.0,
+     0.06
+    ]
+   ],
+   "label": "Orbit swell",
+   "feel": "Orbit lightening as the listener is untethered.",
+   "anchor": "04:56 → 07:55 [PAN: ORBIT]",
+   "mute": true,
+   "sync": "stamp"
+  },
+  {
+   "id": "A2-25",
+   "act": "II",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 462.0,
+   "d": 8.0,
+   "s": 0.15,
+   "side": "L",
+   "env": [
+    [
+     0,
+     0.06
+    ],
+    [
+     4.0,
+     0.17432835820895523
+    ],
+    [
+     8.0,
+     0.06
+    ]
+   ],
+   "label": "Orbit swell",
+   "feel": "Orbit lightening as the listener is untethered.",
+   "anchor": "04:56 → 07:55 [PAN: ORBIT]",
+   "mute": true,
+   "sync": "stamp"
+  },
+  {
+   "id": "A2-26",
+   "act": "II",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 470.0,
+   "d": 5.0,
+   "s": 0.15,
+   "side": "R",
+   "env": [
+    [
+     0,
+     0.06
+    ],
+    [
+     2.5,
+     0.1408955223880597
+    ],
+    [
+     5.0,
+     0.06
+    ]
+   ],
+   "label": "Orbit swell",
+   "feel": "Orbit lightening as the listener is untethered.",
+   "anchor": "04:56 → 07:55 [PAN: ORBIT]",
+   "mute": true,
+   "sync": "stamp"
+  },
+  {
+   "id": "A3-01",
+   "act": "III",
+   "layer": "heart",
+   "kind": "heartbeat",
+   "t": 480.0,
+   "d": 300.5,
+   "bpm": 60,
+   "gap": 0.14,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     20,
+     0.3
+    ],
+    [
+     45,
+     0.3
+    ],
+    [
+     47,
+     0.42
+    ],
+    [
+     135.0,
+     0.42
+    ],
+    [
+     137.0,
+     0.28
+    ],
+    [
+     210.0,
+     0.28
+    ],
+    [
+     225.0,
+     0.5
+    ],
+    [
+     278.0,
+     0.6
+    ],
+    [
+     298.0,
+     0.66
+    ],
+    [
+     300.5,
+     0.66
+    ]
+   ],
+   "skip": [
+    [
+     93.0,
+     98.0
+    ]
+   ],
+   "label": "Heartbeat (60 BPM, lub-dub)",
+   "feel": "Matches Track 6. It leads the Ear Rest Window (08:45 to 10:15) at a higher level while the binaurals dip, drops out for the Tension Gap, then builds through the induction.",
+   "anchor": "08:00 Track 6 fades in → 13:00 pre-hit blackout",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A3-02",
+   "act": "III",
+   "layer": "accent",
+   "kind": "hit",
+   "t": 489.6,
+   "i": 0.8,
+   "s": 0.1,
+   "tail": [
+    1.5,
+    0.6
+   ],
+   "label": "'DROP IT right there'",
+   "feel": "The shame goes into the ground: a heavy fall.",
+   "sync": "est",
+   "anchor": "08:05",
+   "side": "C"
+  },
+  {
+   "id": "B-0824",
+   "act": "III",
+   "layer": "breath",
+   "kind": "hum",
+   "t": 504.0,
+   "d": 4.0,
+   "s": 0.1,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     0.4,
+     0.42
+    ],
+    [
+     4.0,
+     0
+    ]
+   ],
+   "label": "Breath",
+   "feel": "Luna's breath: Deep, heavy exhale directly into the mic grill",
+   "anchor": "08:24 🫁",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A3-03",
+   "act": "III",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 510.0,
+   "d": 120.0,
+   "s": 0.05,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     8,
+     0.14
+    ],
+    [
+     15,
+     0.14
+    ],
+    [
+     22,
+     0.24
+    ],
+    [
+     100.0,
+     0.24
+    ],
+    [
+     106.0,
+     0.12
+    ],
+    [
+     120.0,
+     0
+    ]
+   ],
+   "label": "Growl rumble",
+   "feel": "Low and wide under the voice. It steps up when the Ear Rest Window starts and falls away before the Maximum Alpha Hold.",
+   "anchor": "08:30 growl · 08:45 Ear Rest → 10:15",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A3-04",
+   "act": "III",
+   "layer": "accent",
+   "kind": "hum",
+   "t": 536.5,
+   "d": 3,
+   "s": 0.1,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     1.2,
+     0.4
+    ],
+    [
+     3,
+     0
+    ]
+   ],
+   "label": "'You only need to be.'",
+   "feel": "One long soft swell.",
+   "sync": "est",
+   "anchor": "08:51",
+   "side": "C"
+  },
+  {
+   "id": "B-0905",
+   "act": "III",
+   "layer": "breath",
+   "kind": "hum",
+   "t": 545.0,
+   "d": 3.8,
+   "s": 0.1,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     1.6,
+     0.22
+    ],
+    [
+     2.0,
+     0.198
+    ],
+    [
+     3.8,
+     0
+    ]
+   ],
+   "label": "Breath",
+   "feel": "One soft swell with Luna's breath.",
+   "anchor": "09:05 🫁",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A3-05",
+   "act": "III",
+   "layer": "accent",
+   "kind": "hum",
+   "t": 557.5,
+   "d": 2.2,
+   "s": 0.2,
+   "env": [
+    [
+     0,
+     0.5
+    ],
+    [
+     2.2,
+     0.08
+    ]
+   ],
+   "label": "Jaw unclenches",
+   "feel": "A sweep that falls away.",
+   "sync": "est",
+   "anchor": "09:12",
+   "side": "C"
+  },
+  {
+   "id": "A3-06",
+   "act": "III",
+   "layer": "accent",
+   "kind": "hum",
+   "t": 560.2,
+   "d": 2.2,
+   "s": 0.2,
+   "env": [
+    [
+     0,
+     0.5
+    ],
+    [
+     2.2,
+     0.08
+    ]
+   ],
+   "label": "Shoulders drop",
+   "feel": "Same sweep, a little lower.",
+   "sync": "est",
+   "anchor": "09:12",
+   "side": "C"
+  },
+  {
+   "id": "A3-07",
+   "act": "III",
+   "layer": "accent",
+   "kind": "hit",
+   "t": 565.2,
+   "i": 0.55,
+   "s": 0.15,
+   "tail": [
+    1.0,
+    0.3
+   ],
+   "label": "'I have the watch.'",
+   "feel": "One steady knock, then the heartbeat gap begins.",
+   "sync": "est",
+   "anchor": "09:12 → 09:32",
+   "side": "C"
+  },
+  {
+   "id": "A3-08",
+   "act": "III",
+   "layer": "mark",
+   "kind": "void",
+   "t": 573.0,
+   "d": 5,
+   "label": "Tension Gap: heartbeat held",
+   "feel": "No heartbeat for five seconds. The held breath is felt. The beat comes back with the breath at 09:38.",
+   "anchor": "09:32 [Pause 06s]",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "B-0938",
+   "act": "III",
+   "layer": "breath",
+   "kind": "hum",
+   "t": 578.0,
+   "d": 3.8,
+   "s": 0.1,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     1.6,
+     0.36
+    ],
+    [
+     2.0,
+     0.324
+    ],
+    [
+     3.8,
+     0
+    ]
+   ],
+   "label": "Breath",
+   "feel": "Luna's breath: audible, slow, from the sternum",
+   "anchor": "09:38 🫁",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A3-09",
+   "act": "III",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 585.0,
+   "d": 13,
+   "s": 0.95,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     0.8,
+     0.17
+    ],
+    [
+     11,
+     0.17
+    ],
+    [
+     13,
+     0
+    ]
+   ],
+   "label": "Vocal fry texture",
+   "feel": "A fine rough hum matching the voice dropping into fry.",
+   "anchor": "09:45",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "B-1006",
+   "act": "III",
+   "layer": "breath",
+   "kind": "hum",
+   "t": 606.0,
+   "d": 3.8,
+   "s": 0.1,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     1.6,
+     0.22
+    ],
+    [
+     2.0,
+     0.198
+    ],
+    [
+     3.8,
+     0
+    ]
+   ],
+   "label": "Breath",
+   "feel": "One soft swell with Luna's breath.",
+   "anchor": "10:06 🫁",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A3-10",
+   "act": "III",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 611.0,
+   "d": 19,
+   "s": 0.95,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     1,
+     0.11
+    ],
+    [
+     16,
+     0.08
+    ],
+    [
+     19,
+     0
+    ]
+   ],
+   "label": "Fry, barely above a murmur",
+   "feel": "The same texture, almost nothing.",
+   "anchor": "10:11",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A3-11",
+   "act": "III",
+   "layer": "mark",
+   "kind": "void",
+   "t": 635.0,
+   "d": 8,
+   "label": "Maximum Alpha Hold",
+   "feel": "Heartbeat only. Nothing else moves.",
+   "anchor": "10:35 [Pause 08s]",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "B-1043",
+   "act": "III",
+   "layer": "breath",
+   "kind": "hum",
+   "t": 643.0,
+   "d": 4.0,
+   "s": 0.1,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     0.4,
+     0.36
+    ],
+    [
+     4.0,
+     0
+    ]
+   ],
+   "label": "Breath",
+   "feel": "Luna's breath: one long, slow exhale. Let it be heard.",
+   "anchor": "10:43 🫁",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "B-1211",
+   "act": "IV",
+   "layer": "breath",
+   "kind": "hum",
+   "t": 731.0,
+   "d": 3.8,
+   "s": 0.1,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     1.6,
+     0.3
+    ],
+    [
+     2.0,
+     0.27
+    ],
+    [
+     3.8,
+     0
+    ]
+   ],
+   "label": "Breath",
+   "feel": "Luna's breath: slow, deliberate",
+   "anchor": "12:11 🫁",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A4-01",
+   "act": "IV",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 750.2,
+   "d": 7.7999999999999545,
+   "s": 0.08,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     7.399999999999954,
+     0.32
+    ],
+    [
+     7.7999999999999545,
+     0
+    ]
+   ],
+   "label": "'One more layer. The last one.'",
+   "feel": "A low swell that builds into the count.",
+   "sync": "est",
+   "anchor": "12:17",
+   "side": "C"
+  },
+  {
+   "id": "B-1238",
+   "act": "IV",
+   "layer": "breath",
+   "kind": "hum",
+   "t": 758.0,
+   "d": 3.8,
+   "s": 0.1,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     1.6,
+     0.22
+    ],
+    [
+     2.0,
+     0.198
+    ],
+    [
+     3.8,
+     0
+    ]
+   ],
+   "label": "Breath",
+   "feel": "One soft swell with Luna's breath.",
+   "anchor": "12:38 🫁",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A4-Three",
+   "act": "IV",
+   "layer": "accent",
+   "kind": "hit",
+   "t": 762.3,
+   "i": 0.5,
+   "s": 0.6,
+   "tail": [
+    0.5,
+    0.25
+   ],
+   "label": "Count: Three",
+   "feel": "Each tick heavier and deeper than the last. A descent, not a clock.",
+   "anchor": "12:42",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "B-1246",
+   "act": "IV",
+   "layer": "breath",
+   "kind": "hum",
+   "t": 766.0,
+   "d": 3.8,
+   "s": 0.1,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     1.6,
+     0.22
+    ],
+    [
+     2.0,
+     0.198
+    ],
+    [
+     3.8,
+     0
+    ]
+   ],
+   "label": "Breath",
+   "feel": "One soft swell with Luna's breath.",
+   "anchor": "12:46 🫁",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A4-Two",
+   "act": "IV",
+   "layer": "accent",
+   "kind": "hit",
+   "t": 770.3,
+   "i": 0.6,
+   "s": 0.4,
+   "tail": [
+    0.5,
+    0.3
+   ],
+   "label": "Count: Two",
+   "feel": "Each tick heavier and deeper than the last. A descent, not a clock.",
+   "anchor": "12:50",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "B-1254",
+   "act": "IV",
+   "layer": "breath",
+   "kind": "hum",
+   "t": 774.0,
+   "d": 3.8,
+   "s": 0.1,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     1.6,
+     0.22
+    ],
+    [
+     2.0,
+     0.198
+    ],
+    [
+     3.8,
+     0
+    ]
+   ],
+   "label": "Breath",
+   "feel": "One soft swell with Luna's breath.",
+   "anchor": "12:54 🫁",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A4-One",
+   "act": "IV",
+   "layer": "accent",
+   "kind": "hit",
+   "t": 778.3,
+   "i": 0.7,
+   "s": 0.2,
+   "tail": [
+    0.5,
+    0.35
+   ],
+   "label": "Count: One",
+   "feel": "Each tick heavier and deeper than the last. A descent, not a clock.",
+   "anchor": "12:58",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A4-04",
+   "act": "IV",
+   "layer": "mark",
+   "kind": "void",
+   "t": 780.5,
+   "d": 1.5,
+   "label": "Pre-hit blackout",
+   "feel": "The heartbeat stops 1.5 seconds before the first PRIMAL, so the hit lands on nothing.",
+   "anchor": "13:00 [Pause 02s]",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A4-05",
+   "act": "IV",
+   "layer": "trigger",
+   "kind": "hit",
+   "t": 782.0,
+   "i": 0.85,
+   "s": 0.5,
+   "tail": [
+    1.6,
+    0.55
+   ],
+   "label": "PRIMAL 1 (+6 dB)",
+   "feel": "Full chest. A door slam through the body.",
+   "anchor": "13:02 PRIMAL · bass hit / door slam",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A4-06",
+   "act": "IV",
+   "layer": "trigger",
+   "kind": "hit",
+   "t": 783.0,
+   "i": 0.45,
+   "s": 0.05,
+   "tail": [
+    0.5,
+    0.3
+   ],
+   "label": "Second bass hit",
+   "feel": "A low sub pulse on the pause row's 'second bass hit'.",
+   "anchor": "13:03 [Pause 01.5s — SECOND BASS HIT]",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A4-07",
+   "act": "IV",
+   "layer": "trigger",
+   "kind": "hit",
+   "t": 785.0,
+   "i": 0.95,
+   "s": 0.3,
+   "tail": [
+    2.0,
+    0.7
+   ],
+   "label": "PRIMAL 2 (+9 dB)",
+   "feel": "Deeper and heavier.",
+   "anchor": "13:05 PRIMAL",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A4-08",
+   "act": "IV",
+   "layer": "trigger",
+   "kind": "hit",
+   "t": 786.0,
+   "i": 0.6,
+   "s": 0.05,
+   "tail": [
+    0.8,
+    0.4
+   ],
+   "label": "Third bass hit",
+   "feel": "Sub-bass pulse on the pause row's 'third bass hit'.",
+   "anchor": "13:06 [Pause 01.5s — THIRD BASS HIT]",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A4-09",
+   "act": "IV",
+   "layer": "trigger",
+   "kind": "hit",
+   "t": 788.0,
+   "i": 1.0,
+   "s": 0.1,
+   "tail": [
+    2.0,
+    0.8
+   ],
+   "label": "PRIMAL 3 (+12 dB): maximum",
+   "feel": "The heaviest, most rounded hit, under a whispered word. It decays to nothing by 13:10.",
+   "anchor": "13:08 PRIMAL (guttural whisper)",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A5-00",
+   "act": "V",
+   "layer": "mark",
+   "kind": "void",
+   "t": 790.0,
+   "d": 8,
+   "label": "The vacuum",
+   "feel": "Absolute haptic silence for eight seconds, matching the audio vacuum.",
+   "anchor": "13:10 → 13:18",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A5-01",
+   "act": "V",
+   "layer": "bed",
+   "kind": "hum",
+   "t": 798.0,
+   "d": 102.0,
+   "s": 0.12,
+   "env": [
+    [
+     0,
+     0.0
+    ],
+    [
+     4.0,
+     0.032
+    ],
+    [
+     8.0,
+     0.12
+    ],
+    [
+     12.0,
+     0.04
+    ],
+    [
+     16.0,
+     0.12
+    ],
+    [
+     20.0,
+     0.04
+    ],
+    [
+     24.0,
+     0.12
+    ],
+    [
+     28.0,
+     0.04
+    ],
+    [
+     32.0,
+     0.12
+    ],
+    [
+     36.0,
+     0.04
+    ],
+    [
+     40.0,
+     0.12
+    ],
+    [
+     44.0,
+     0.039
+    ],
+    [
+     48.0,
+     0.108
+    ],
+    [
+     52.0,
+     0.033
+    ],
+    [
+     56.0,
+     0.092
+    ],
+    [
+     60.0,
+     0.028
+    ],
+    [
+     64.0,
+     0.076
+    ],
+    [
+     68.0,
+     0.023
+    ],
+    [
+     72.0,
+     0.06
+    ],
+    [
+     76.0,
+     0.017
+    ],
+    [
+     80.0,
+     0.044
+    ],
+    [
+     84.0,
+     0.012
+    ],
+    [
+     88.0,
+     0.028
+    ],
+    [
+     92.0,
+     0.007
+    ],
+    [
+     96.0,
+     0.012
+    ],
+    [
+     100.0,
+     0.001
+    ],
+    [
+     102.0,
+     0
+    ]
+   ],
+   "label": "Wind sway, faint",
+   "feel": "The branches return very softly and fade out with the loop fade (14:00 to 15:00).",
+   "anchor": "13:18 Track 5 at −30 dB → 14:00 loop fade",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A5-02",
+   "act": "V",
+   "layer": "accent",
+   "kind": "hum",
+   "t": 800.0,
+   "d": 7,
+   "s": 0.05,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     2.5,
+     0.26
+    ],
+    [
+     3.2,
+     0.22
+    ],
+    [
+     7,
+     0
+    ]
+   ],
+   "label": "Distant howl (Track 7)",
+   "feel": "One long slow swell and a ragged fall. It fires once.",
+   "anchor": "13:20 Track 7",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A5-03",
+   "act": "V",
+   "layer": "heart",
+   "kind": "heartbeat",
+   "t": 805.0,
+   "d": 95.0,
+   "bpm": 60,
+   "gap": 0.14,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     8,
+     0.26
+    ],
+    [
+     35.0,
+     0.26
+    ],
+    [
+     95.0,
+     0
+    ]
+   ],
+   "skip": [],
+   "label": "Heartbeat returns, then fades",
+   "feel": "Softer than before. It comes back on 'There you are' and fades over the last minute with Track 6.",
+   "anchor": "13:25 → 14:00–15:00 loop fade (see note: Track 6 muted 13:10)",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "B-1348",
+   "act": "V",
+   "layer": "breath",
+   "kind": "hum",
+   "t": 828.0,
+   "d": 4.0,
+   "s": 0.1,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     0.4,
+     0.36
+    ],
+    [
+     4.0,
+     0
+    ]
+   ],
+   "label": "Breath",
+   "feel": "Luna's breath: soft, audible inhale/exhale",
+   "anchor": "13:48 🫁",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A5-04",
+   "act": "V",
+   "layer": "accent",
+   "kind": "hum",
+   "t": 849.1,
+   "d": 2.6,
+   "s": 0.12,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     1.1,
+     0.38
+    ],
+    [
+     2.6,
+     0
+    ]
+   ],
+   "label": "'You are safe because you are dangerous.'",
+   "feel": "Soft swell.",
+   "sync": "est",
+   "anchor": "13:55",
+   "side": "C"
+  },
+  {
+   "id": "A5-05",
+   "act": "V",
+   "layer": "accent",
+   "kind": "hum",
+   "t": 852.3,
+   "d": 2.6,
+   "s": 0.12,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     1.1,
+     0.38
+    ],
+    [
+     2.6,
+     0
+    ]
+   ],
+   "label": "'You are home because you are wild.'",
+   "feel": "Second swell, same size.",
+   "sync": "est",
+   "anchor": "13:55",
+   "side": "C"
+  },
+  {
+   "id": "B-1421",
+   "act": "V",
+   "layer": "breath",
+   "kind": "hum",
+   "t": 861.0,
+   "d": 3.8,
+   "s": 0.1,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     1.6,
+     0.22
+    ],
+    [
+     2.0,
+     0.198
+    ],
+    [
+     3.8,
+     0
+    ]
+   ],
+   "label": "Breath",
+   "feel": "One soft swell with Luna's breath.",
+   "anchor": "14:21 🫁",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A5-06",
+   "act": "V",
+   "layer": "accent",
+   "kind": "hum",
+   "t": 870.1,
+   "d": 9,
+   "s": 0.05,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     3,
+     0.3
+    ],
+    [
+     6,
+     0.2
+    ],
+    [
+     9,
+     0
+    ]
+   ],
+   "label": "'Warm and dark.'",
+   "feel": "A warm, slow, wide swell.",
+   "sync": "est",
+   "anchor": "14:26",
+   "side": "C"
+  },
+  {
+   "id": "B-1443",
+   "act": "V",
+   "layer": "breath",
+   "kind": "hum",
+   "t": 883.0,
+   "d": 3.8,
+   "s": 0.1,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     1.6,
+     0.22
+    ],
+    [
+     2.0,
+     0.198
+    ],
+    [
+     3.8,
+     0
+    ]
+   ],
+   "label": "Breath",
+   "feel": "One soft swell with Luna's breath.",
+   "anchor": "14:43 🫁",
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A5-12",
+   "act": "V",
+   "layer": "accent",
+   "kind": "tap",
+   "t": 890.0,
+   "i": 0.07,
+   "s": 0.1,
+   "label": "Subliminal anchor (optional)",
+   "feel": "Below conscious notice. It lines up with the −35 dB PRIMAL in Phase 5, step 7. Drop this cue if you want the anchor to be audio only.",
+   "anchor": "14:50 Phase 5 step 7",
+   "optional": true,
+   "sync": "stamp",
+   "side": "C"
+  },
+  {
+   "id": "A5-07",
+   "act": "V",
+   "layer": "accent",
+   "kind": "hum",
+   "t": 897.0,
+   "d": 3.5,
+   "s": 0.1,
+   "env": [
+    [
+     0,
+     0.45
+    ],
+    [
+     3.5,
+     0
+    ]
+   ],
+   "label": "'sink twice as deep'",
+   "feel": "One long fall.",
+   "sync": "est",
+   "anchor": "14:46",
+   "side": "C"
+  },
+  {
+   "id": "A5-08",
+   "act": "V",
+   "layer": "accent",
+   "kind": "hum",
+   "t": 913.8,
+   "d": 2.4,
+   "s": 0.08,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     1.0,
+     0.3
+    ],
+    [
+     2.4,
+     0
+    ]
+   ],
+   "label": "'Rest, little wolf.'",
+   "feel": "Each swell smaller than the last.",
+   "sync": "est",
+   "anchor": "14:46",
+   "side": "C"
+  },
+  {
+   "id": "A5-09",
+   "act": "V",
+   "layer": "accent",
+   "kind": "hum",
+   "t": 916.2,
+   "d": 2.4,
+   "s": 0.08,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     1.0,
+     0.2
+    ],
+    [
+     2.4,
+     0
+    ]
+   ],
+   "label": "Rest",
+   "feel": "Each swell smaller than the last.",
+   "sync": "est",
+   "anchor": "14:46",
+   "side": "C"
+  },
+  {
+   "id": "A5-10",
+   "act": "V",
+   "layer": "accent",
+   "kind": "hum",
+   "t": 918.4,
+   "d": 2.4,
+   "s": 0.08,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     1.0,
+     0.12
+    ],
+    [
+     2.4,
+     0
+    ]
+   ],
+   "label": "Rest",
+   "feel": "Each swell smaller than the last.",
+   "sync": "est",
+   "anchor": "14:46",
+   "side": "C"
+  },
+  {
+   "id": "A5-11",
+   "act": "V",
+   "layer": "accent",
+   "kind": "hum",
+   "t": 920.8,
+   "d": 2.4,
+   "s": 0.08,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     1.0,
+     0.07
+    ],
+    [
+     2.4,
+     0
+    ]
+   ],
+   "label": "Rest",
+   "feel": "Each swell smaller than the last.",
+   "sync": "est",
+   "anchor": "14:46",
+   "side": "C"
+  },
+  {
+   "id": "B-1523",
+   "act": "V",
+   "layer": "breath",
+   "kind": "hum",
+   "t": 923.0,
+   "d": 4.0,
+   "s": 0.1,
+   "env": [
+    [
+     0,
+     0
+    ],
+    [
+     0.4,
+     0.42
+    ],
+    [
+     4.0,
+     0
+    ]
+   ],
+   "label": "Breath",
+   "feel": "Luna's breath: heavy exhale",
+   "anchor": "15:23 🫁",
+   "sync": "stamp",
+   "side": "C"
+  }
+ ]
+}

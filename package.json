@@ -8,6 +8,7 @@
     "static": "node tests/static.js",
     "releases": "python3 worker/make-releases.py",
     "themes": "python3 tools/gen-themes.py",
+    "scores": "python3 tools/gen-score.py",
     "check": "npm run static && npm run lint && npm test"
   },
   "devDependencies": {
