@@ -44,7 +44,7 @@ const closeAll=p=>p.evaluate(()=>{const d=document.getElementById('new-dlg');if(
      localStorage.setItem(k,JSON.stringify(x));localStorage.setItem('lunaSleep.last',JSON.stringify({ids:['SKU 02'],pt:t}))});
    ok(first.includes('new-dlg'),'returning: What\'s new shows once ('+first+')');
    const top=await p.evaluate(()=>{const d=document.getElementById('new-dlg');const m=d&&d.innerText.match(/v\d+ \u00b7 [^\n]+/);return m?m[0]:''});
-   ok(/^v63/.test(top),'returning: newest entry on top: '+top);
+   ok(/^v64/.test(top),'returning: newest entry on top: '+top);
    await closeAll(p);await p.waitForTimeout(400);await p.screenshot({path:path.join(OUT,'returning-2-home.png')});
    const h=await homeInfo(p);
    ok(h.start==='Start my night with THE DEN','returning: next Foundation track is THE DEN ('+h.start+')');
