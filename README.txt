@@ -61,6 +61,9 @@ v59 NOTES
 - Developer docs are in README.md, CLAUDE.md and docs/. Run "npm run check" before releasing.
 - If worker/worker.js changed, paste it into the Cloudflare Worker editor again and Deploy.
 
+v65 NOTES
+- Three secret themes (Edward, Alphonse, Winry) with matching secret achievements. Deliberately not in What's new, like the other secret themes. APP_VERSION and the service worker move to v65 so installed copies update; LOGV stays put.
+
 v64 NOTES
 - Out of beta: the beta box in What's new is now a one-line thanks with Send feedback and a Patreon link. Push announcement is sent by hand from the worker's /admin page (App news).
 

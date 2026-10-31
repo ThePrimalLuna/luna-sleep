@@ -23,6 +23,10 @@ dots = lambda col, n, w, h, rmax: ''.join("<circle cx='%d' cy='%d' r='%.1f' fill
 leaf = lambda col, x, y, r: "<path transform='translate(%d %d) rotate(%d)' d='M0 0C6 -8 14 -6 16 0C14 8 6 10 0 0Z' fill='%s' fill-opacity='.55'/>" % (x, y, r, col)
 paw = lambda col, x, y: "<g fill='%s' fill-opacity='.22' transform='translate(%d %d)'><ellipse cx='0' cy='4' rx='6' ry='5'/><circle cx='-7' cy='-4' r='2.6'/><circle cx='-2.5' cy='-8' r='2.6'/><circle cx='2.5' cy='-8' r='2.6'/><circle cx='7' cy='-4' r='2.6'/></g>" % (col, x, y)
 
+
+def gear(col, cx, cy, r, op):
+    teeth = ''.join("<rect x='%d' y='%d' width='%d' height='%d' transform='rotate(%d %d %d)'/>" % (cx - r // 6, cy - r - r // 4, r // 3, r // 2, a, cx, cy) for a in range(0, 360, 45))
+    return "<g fill='%s' fill-opacity='%.2f'>%s<circle cx='%d' cy='%d' r='%d'/></g><circle cx='%d' cy='%d' r='%d' fill='none' stroke='#000' stroke-opacity='.35' stroke-width='3'/>" % (col, op, teeth, cx, cy, r, cx, cy, r // 2)
 THEMES = [
  dict(key='Dusk', dark=True, bg='#15131b', surface='#1e1b26', surface2='#282432', ink='#ece8f3', mute='#b8b1c6', line='rgba(178,164,214,.24)', accent='#b7a5e3', ink2='#191425', hero1='#2a2638', glow='rgba(183,165,227,.20)',
       html="radial-gradient(640px 420px at 50% -8%,rgba(150,132,196,.14),transparent 70%),linear-gradient(180deg,#19171f,#100e15) fixed", base='#121017', head='"Cormorant Garamond",Georgia,serif', eyebrow='#cfc7e2'),
@@ -61,6 +65,16 @@ THEMES = [
  dict(key='Candles', dark=True, bg='#130d08', surface='#1e150d', surface2='#2a1e12', ink='#f8ecd2', mute='#d0bc98', line='rgba(240,180,80,.30)', accent='#f2b94b', ink2='#1d1203', hero1='#35260f', glow='rgba(242,185,75,.36)',
       html="radial-gradient(440px 320px at 50% 108%,rgba(255,170,60,.34),transparent 70%),radial-gradient(260px 220px at 10% 100%,rgba(255,200,100,.16),transparent 70%),radial-gradient(260px 220px at 90% 100%,rgba(255,190,90,.14),transparent 70%),linear-gradient(180deg,#18100a,#0a0705) fixed", base='#0a0705', head='"Cormorant Garamond",Georgia,serif', eyebrow='#f0d6a0',
       deco=svg("<svg xmlns='http://www.w3.org/2000/svg' width='240' height='110'>" + ''.join("<g transform='translate(%d %d)'><rect x='0' y='%d' width='14' height='%d' rx='2' fill='#f4e4c0' fill-opacity='.10'/><path d='M7 %d C1 %d 3 %d 7 %d C11 %d 13 %d 7 %d Z' fill='#f2b94b' fill-opacity='.34'/></g>" % (x, 0, 110 - h, h, 110 - h - 4, 110 - h - 10, 110 - h - 20, 110 - h - 24, 110 - h - 20, 110 - h - 10, 110 - h - 4) for x, h in ((20, 46), (70, 30), (118, 58), (168, 36), (214, 24))) + "</svg>"), decopos='bottom/240px 110px repeat-x'),
+
+ dict(key='Edward', dark=True, bg='#150a0b', surface='#211012', surface2='#2e1519', ink='#f6ead8', mute='#d6bda6', line='rgba(226,170,60,.34)', accent='#e2a93a', ink2='#1c1204', hero1='#3b1519', glow='rgba(226,169,58,.32)',
+      html="radial-gradient(560px 420px at 50% -8%,rgba(170,30,40,.34),transparent 70%),linear-gradient(180deg,#1b0b0d,#0b0405) fixed", base='#0b0405', head='"Cormorant Garamond",Georgia,serif', eyebrow='#f0cf8a',
+      deco=svg("<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><g fill='none' stroke='#e2a93a' stroke-opacity='.11' stroke-width='1.6'><circle cx='130' cy='130' r='104'/><circle cx='130' cy='130' r='88'/><path d='M130 38L210 176H50z'/><path d='M130 222L50 84H210z'/><circle cx='130' cy='130' r='22'/></g></svg>"), decopos='center 30%/min(92vw,520px) no-repeat'),
+ dict(key='Alphonse', dark=True, bg='#0f1417', surface='#182027', surface2='#222d36', ink='#e9eff3', mute='#b4c2cc', line='rgba(170,190,206,.30)', accent='#b3c4d2', ink2='#10171c', hero1='#2a3742', glow='rgba(179,196,210,.26)',
+      html="radial-gradient(520x 380px at 20% 0,rgba(120,150,175,.18),transparent 70%),linear-gradient(180deg,#141b20,#0a0e11) fixed".replace('520x','520px'), base='#0a0e11', head='"Archivo Black",system-ui,sans-serif', eyebrow='#cfdbe4',
+      deco=svg("<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><g fill='#b3c4d2' fill-opacity='.10'><circle cx='10' cy='10' r='3'/><circle cx='110' cy='10' r='3'/><circle cx='10' cy='110' r='3'/><circle cx='110' cy='110' r='3'/></g><g stroke='#b3c4d2' stroke-opacity='.08' stroke-width='2'><path d='M0 60H120'/><path d='M60 0V120'/></g></svg>")),
+ dict(key='Winry', dark=False, bg='#fff4cf', surface='#fffdf2', surface2='#fbe8a8', ink='#1d2638', mute='#4d4a3a', line='#e6c660', accent='#1f4f8f', ink2='#ffffff', hero1='#f8dc86', glow='rgba(31,79,143,.26)',
+      html="radial-gradient(520px 380px at 100% 0,rgba(240,160,40,.30),transparent 70%),linear-gradient(180deg,#fff8dc,#fdeaae) fixed", base='#fff4cf', head='"Fredoka",system-ui,sans-serif', eyebrow='#8a5a10',
+      deco=svg("<svg xmlns='http://www.w3.org/2000/svg' width='260' height='220'>" + gear('#e08a1e', 60, 60, 36, .16) + gear('#1f4f8f', 190, 150, 28, .12) + "</svg>")),
 ]
 LABELS = {}
 def css(t):
