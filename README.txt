@@ -61,6 +61,9 @@ v59 NOTES
 - Developer docs are in README.md, CLAUDE.md and docs/. Run "npm run check" before releasing.
 - If worker/worker.js changed, paste it into the Cloudflare Worker editor again and Deploy.
 
+v69 NOTES
+- Three secret themes (Hollywoo, Horsin' Around, Midnight Swim) with matching secret achievements (Missing a letter, Studio audience, Deep end). Not in What's new, like the other secret themes. APP_VERSION and the service worker move to v69; LOGV stays 2026-11-01b. Test: t142.
+
 v68 NOTES
 - Score by hand: Start score runs a 3-2-1 countdown (ticks via LT.tick) so the listener can press play in Spotify on go; Cancel while it counts. A Jump to box (m:ss or seconds) moves the score to a typed time. Nothing new is stored. LOGV is 2026-11-01b. Test: t141.
 
