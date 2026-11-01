@@ -8,7 +8,7 @@ await p.route(/open\.spotify\.com\/embed\/(?!iframe-api)/,r=>r.abort());
 await p.route('https://open.spotify.com/embed/iframe-api/v1',r=>r.fulfill({contentType:'text/javascript',body:"setTimeout(()=>window.onSpotifyIframeApiReady({createController:(el,o,cb)=>{const f=document.createElement('iframe');f.dataset.uri=o.uri;el.replaceWith(f);const L={};cb({addListener:(n,fn)=>{L[n]=fn}});window.__emit=d=>L.playback_update&&L.playback_update({data:d})}}),0)"}));
 await p.goto(APP);await p.waitForTimeout(900);const ev=(f,a)=>p.evaluate(f,a);
 const sc=await ev(()=>LT.scoreFor('the call'));ok(sc&&sc.cues.length===96&&sc.len===930,'score found, 96 cues');
-ok(await ev(()=>LT.scoreFor('THE STREAM')===null),'other tracks have none');
+ok(await ev(()=>LT.scoreFor('THE TETHER')===null),'other tracks have none');
 // every window of the whole track, every strength: valid pattern, <=99 numbers, silence in the voids
 const r=await ev(()=>{const bad=[],tot=[];const voidsOk=[];let pulses=0;
  for(let l=1;l<=5;l++)for(let s=0;s<935;s+=2.5){const x=LT.scoreRender(LT.scoreFor('THE CALL'),s,3.2,l);const a=x.p;

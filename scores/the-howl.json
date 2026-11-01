@@ -1,0 +1,171 @@
+{
+ "format": "luna-haptic",
+ "version": 1,
+ "track": {
+  "sku": "04",
+  "title": "THE HOWL",
+  "label": "Foundation OS",
+  "scoreLength": 900,
+  "note": "Texture cues from the author."
+ },
+ "playback": {
+  "globalOffsetMs": 0,
+  "masterGain": 1.0,
+  "bedCeiling": 0.66,
+  "stopOnSafeword": true
+ },
+ "cues": [
+  {
+   "id": "H-01",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 0,
+   "d": 1,
+   "feel": "swell"
+  },
+  {
+   "id": "H-02",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 49,
+   "d": 4,
+   "feel": "bellows"
+  },
+  {
+   "id": "H-03",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 150,
+   "d": 3,
+   "feel": "bellows"
+  },
+  {
+   "id": "H-04",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 270,
+   "d": 5,
+   "feel": "swell"
+  },
+  {
+   "id": "H-05",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 299,
+   "d": 4,
+   "feel": "bellows"
+  },
+  {
+   "id": "H-06",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 337,
+   "d": 3,
+   "feel": "bellows"
+  },
+  {
+   "id": "H-07",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 340,
+   "d": 8,
+   "feel": "swell"
+  },
+  {
+   "id": "H-08",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 365,
+   "d": 3,
+   "feel": "bellows"
+  },
+  {
+   "id": "H-09",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 368,
+   "d": 8,
+   "feel": "swell"
+  },
+  {
+   "id": "H-10",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 480,
+   "d": 5,
+   "feel": "swell"
+  },
+  {
+   "id": "H-11",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 553,
+   "d": 3,
+   "feel": "bellows"
+  },
+  {
+   "id": "H-12",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 556,
+   "d": 6,
+   "feel": "thunder"
+  },
+  {
+   "id": "H-13",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 563,
+   "d": 2,
+   "feel": "bellows"
+  },
+  {
+   "id": "H-14",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 565,
+   "d": 6,
+   "feel": "thunder"
+  },
+  {
+   "id": "H-15",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 690,
+   "d": 1,
+   "feel": "swell"
+  },
+  {
+   "id": "H-16",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 765,
+   "d": 1,
+   "feel": "thunder"
+  },
+  {
+   "id": "H-17",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 768,
+   "d": 3,
+   "feel": "thunder"
+  },
+  {
+   "id": "H-18",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 771,
+   "d": 6,
+   "feel": "thunder"
+  },
+  {
+   "id": "H-19",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 780,
+   "d": 1,
+   "feel": "swell"
+  }
+ ]
+}

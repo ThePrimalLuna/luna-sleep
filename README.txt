@@ -63,6 +63,8 @@ v59 NOTES
 
 v66 NOTES
 - At a glance strip on each ungated track page (built only from catalog facts; blanks are left out). One-time new-track notification nudge in the banner slot after the first heard track; S.pushAsk is saved in the main blob (so in Backup and Delete everything) and the nudge never returns after any answer. Test: t138. LOGV is 2026-10-31b.
+- Haptic scores for the rest of the Foundation (SKU 01 to 09), in a new texture-cue format (kind tex: a named texture for d seconds; heart takes bpm). Textures with randomness are seeded from the cue time. Masters in scores/*.json, compacted by tools/gen-score.py. FEELS fallbacks for those tracks follow the author's sheet. Tests: t139.
+- Thanksgiving theme (Seasonal group, from tools/gen-themes.py) with a secret achievement, 'Second helpings' (never named in What's new). Test: t140.
 
 v65 NOTES
 - Three secret themes (Edward, Alphonse, Winry) with matching secret achievements. Deliberately not in What's new, like the other secret themes. APP_VERSION and the service worker move to v65 so installed copies update; LOGV stays put.

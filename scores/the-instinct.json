@@ -1,0 +1,246 @@
+{
+ "format": "luna-haptic",
+ "version": 1,
+ "track": {
+  "sku": "02",
+  "title": "INSTINCT",
+  "label": "Foundation OS",
+  "scoreLength": 900,
+  "note": "Texture cues from the author. Each cue plays a named texture for secs seconds."
+ },
+ "playback": {
+  "globalOffsetMs": 0,
+  "masterGain": 1.0,
+  "bedCeiling": 0.66,
+  "stopOnSafeword": true
+ },
+ "cues": [
+  {
+   "id": "I-01",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 0,
+   "d": 5,
+   "feel": "fire"
+  },
+  {
+   "id": "I-02",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 32,
+   "d": 3,
+   "feel": "bellows"
+  },
+  {
+   "id": "I-03",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 90,
+   "d": 1,
+   "feel": "fire"
+  },
+  {
+   "id": "I-04",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 92,
+   "d": 6,
+   "feel": "bellows"
+  },
+  {
+   "id": "I-05",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 99,
+   "d": 3,
+   "feel": "bellows"
+  },
+  {
+   "id": "I-06",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 121,
+   "d": 3,
+   "feel": "bellows"
+  },
+  {
+   "id": "I-07",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 270,
+   "d": 2,
+   "feel": "swell"
+  },
+  {
+   "id": "I-08",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 272,
+   "d": 4,
+   "feel": "bellows"
+  },
+  {
+   "id": "I-09",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 281,
+   "d": 3,
+   "feel": "bellows"
+  },
+  {
+   "id": "I-10",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 291,
+   "d": 3,
+   "feel": "bellows"
+  },
+  {
+   "id": "I-11",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 300,
+   "d": 3,
+   "feel": "bellows"
+  },
+  {
+   "id": "I-12",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 337,
+   "d": 3,
+   "feel": "bellows"
+  },
+  {
+   "id": "I-13",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 480,
+   "d": 5,
+   "feel": "heart",
+   "bpm": 60
+  },
+  {
+   "id": "I-14",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 493,
+   "d": 3,
+   "feel": "bellows"
+  },
+  {
+   "id": "I-15",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 525,
+   "d": 3,
+   "feel": "bellows"
+  },
+  {
+   "id": "I-16",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 690,
+   "d": 10,
+   "feel": "heart",
+   "bpm": 60
+  },
+  {
+   "id": "I-17",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 728,
+   "d": 5,
+   "feel": "bellows"
+  },
+  {
+   "id": "I-18",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 738,
+   "d": 6,
+   "feel": "bellows"
+  },
+  {
+   "id": "I-19",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 752,
+   "d": 6,
+   "feel": "bellows"
+  },
+  {
+   "id": "I-20",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 765,
+   "d": 1,
+   "feel": "thunder"
+  },
+  {
+   "id": "I-21",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 768,
+   "d": 3,
+   "feel": "swell"
+  },
+  {
+   "id": "I-22",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 771,
+   "d": 6,
+   "feel": "swell"
+  },
+  {
+   "id": "I-23",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 780,
+   "d": 1,
+   "feel": "swell"
+  },
+  {
+   "id": "I-24",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 801,
+   "d": 4,
+   "feel": "bellows"
+  },
+  {
+   "id": "I-25",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 820,
+   "d": 4,
+   "feel": "bellows"
+  },
+  {
+   "id": "I-26",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 838,
+   "d": 2,
+   "feel": "bellows"
+  },
+  {
+   "id": "I-27",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 840,
+   "d": 2,
+   "feel": "heart",
+   "bpm": 60
+  },
+  {
+   "id": "I-28",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 842,
+   "d": 6,
+   "feel": "rock"
+  }
+ ]
+}

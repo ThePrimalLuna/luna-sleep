@@ -1,0 +1,179 @@
+{
+ "format": "luna-haptic",
+ "version": 1,
+ "track": {
+  "sku": "08",
+  "title": "THE SHADOW",
+  "label": "Foundation OS",
+  "scoreLength": 900,
+  "note": "Texture cues from the author."
+ },
+ "playback": {
+  "globalOffsetMs": 0,
+  "masterGain": 1.0,
+  "bedCeiling": 0.66,
+  "stopOnSafeword": true
+ },
+ "cues": [
+  {
+   "id": "W-01",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 0,
+   "d": 1,
+   "feel": "swell"
+  },
+  {
+   "id": "W-02",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 35,
+   "d": 4,
+   "feel": "bellows"
+  },
+  {
+   "id": "W-03",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 141,
+   "d": 4,
+   "feel": "bellows"
+  },
+  {
+   "id": "W-04",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 156,
+   "d": 1,
+   "feel": "thunder"
+  },
+  {
+   "id": "W-05",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 202,
+   "d": 4,
+   "feel": "bellows"
+  },
+  {
+   "id": "W-06",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 216,
+   "d": 1,
+   "feel": "thunder"
+  },
+  {
+   "id": "W-07",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 270,
+   "d": 2,
+   "feel": "thunder"
+  },
+  {
+   "id": "W-08",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 295,
+   "d": 3,
+   "feel": "bellows"
+  },
+  {
+   "id": "W-09",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 333,
+   "d": 5,
+   "feel": "bellows"
+  },
+  {
+   "id": "W-10",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 354,
+   "d": 3,
+   "feel": "tide"
+  },
+  {
+   "id": "W-11",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 357,
+   "d": 3,
+   "feel": "tide"
+  },
+  {
+   "id": "W-12",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 360,
+   "d": 1,
+   "feel": "tide"
+  },
+  {
+   "id": "W-13",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 434,
+   "d": 3,
+   "feel": "bellows"
+  },
+  {
+   "id": "W-14",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 630,
+   "d": 1,
+   "feel": "thunder"
+  },
+  {
+   "id": "W-15",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 655,
+   "d": 6,
+   "feel": "tide"
+  },
+  {
+   "id": "W-16",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 690,
+   "d": 1,
+   "feel": "swell"
+  },
+  {
+   "id": "W-17",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 693,
+   "d": 6,
+   "feel": "tide"
+  },
+  {
+   "id": "W-18",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 777,
+   "d": 6,
+   "feel": "chimes"
+  },
+  {
+   "id": "W-19",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 823,
+   "d": 6,
+   "feel": "bellows"
+  },
+  {
+   "id": "W-20",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 829,
+   "d": 6,
+   "feel": "tide"
+  }
+ ]
+}

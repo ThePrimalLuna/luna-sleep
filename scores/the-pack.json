@@ -1,0 +1,204 @@
+{
+ "format": "luna-haptic",
+ "version": 1,
+ "track": {
+  "sku": "05",
+  "title": "THE PACK",
+  "label": "Foundation OS",
+  "scoreLength": 945,
+  "note": "Texture cues from the author. The last cue is at 15:31, so the score runs to 15:45."
+ },
+ "playback": {
+  "globalOffsetMs": 0,
+  "masterGain": 1.0,
+  "bedCeiling": 0.66,
+  "stopOnSafeword": true
+ },
+ "cues": [
+  {
+   "id": "P-01",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 0,
+   "d": 1,
+   "feel": "swell"
+  },
+  {
+   "id": "P-02",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 47,
+   "d": 1,
+   "feel": "bellows"
+  },
+  {
+   "id": "P-03",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 105,
+   "d": 4,
+   "feel": "bellows"
+  },
+  {
+   "id": "P-04",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 266,
+   "d": 4,
+   "feel": "bellows"
+  },
+  {
+   "id": "P-05",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 270,
+   "d": 5,
+   "feel": "swell"
+  },
+  {
+   "id": "P-06",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 296,
+   "d": 3,
+   "feel": "bellows"
+  },
+  {
+   "id": "P-07",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 310,
+   "d": 3,
+   "feel": "bellows"
+  },
+  {
+   "id": "P-08",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 323,
+   "d": 3,
+   "feel": "bellows"
+  },
+  {
+   "id": "P-09",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 355,
+   "d": 5,
+   "feel": "bellows"
+  },
+  {
+   "id": "P-10",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 473,
+   "d": 6,
+   "feel": "bellows"
+  },
+  {
+   "id": "P-11",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 480,
+   "d": 1,
+   "feel": "swell"
+  },
+  {
+   "id": "P-12",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 492,
+   "d": 4,
+   "feel": "bellows"
+  },
+  {
+   "id": "P-13",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 690,
+   "d": 2,
+   "feel": "thunder"
+  },
+  {
+   "id": "P-14",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 705,
+   "d": 4,
+   "feel": "bellows"
+  },
+  {
+   "id": "P-15",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 765,
+   "d": 3,
+   "feel": "purr"
+  },
+  {
+   "id": "P-16",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 768,
+   "d": 3,
+   "feel": "purr"
+  },
+  {
+   "id": "P-17",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 771,
+   "d": 6,
+   "feel": "purr"
+  },
+  {
+   "id": "P-18",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 780,
+   "d": 1,
+   "feel": "swell"
+  },
+  {
+   "id": "P-19",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 797,
+   "d": 5,
+   "feel": "bellows"
+  },
+  {
+   "id": "P-20",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 840,
+   "d": 1,
+   "feel": "bellows"
+  },
+  {
+   "id": "P-21",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 867,
+   "d": 4,
+   "feel": "bellows"
+  },
+  {
+   "id": "P-22",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 907,
+   "d": 6,
+   "feel": "heart",
+   "bpm": 60
+  },
+  {
+   "id": "P-23",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 931,
+   "d": 1,
+   "feel": "bellows"
+  }
+ ]
+}

@@ -1,0 +1,178 @@
+{
+ "format": "luna-haptic",
+ "version": 1,
+ "track": {
+  "sku": "06",
+  "title": "THE HUNT",
+  "label": "Foundation OS",
+  "scoreLength": 900,
+  "note": "Texture cues from the author."
+ },
+ "playback": {
+  "globalOffsetMs": 0,
+  "masterGain": 1.0,
+  "bedCeiling": 0.66,
+  "stopOnSafeword": true
+ },
+ "cues": [
+  {
+   "id": "U-01",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 0,
+   "d": 1,
+   "feel": "swell"
+  },
+  {
+   "id": "U-02",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 75,
+   "d": 1,
+   "feel": "thunder"
+  },
+  {
+   "id": "U-03",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 88,
+   "d": 3,
+   "feel": "bellows"
+  },
+  {
+   "id": "U-04",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 240,
+   "d": 2,
+   "feel": "swell"
+  },
+  {
+   "id": "U-05",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 314,
+   "d": 3,
+   "feel": "bellows"
+  },
+  {
+   "id": "U-06",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 360,
+   "d": 2,
+   "feel": "swell"
+  },
+  {
+   "id": "U-07",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 362,
+   "d": 1,
+   "feel": "heart",
+   "bpm": 60
+  },
+  {
+   "id": "U-08",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 405,
+   "d": 1,
+   "feel": "thunder"
+  },
+  {
+   "id": "U-09",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 408,
+   "d": 3,
+   "feel": "heart",
+   "bpm": 60
+  },
+  {
+   "id": "U-10",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 411,
+   "d": 6,
+   "feel": "heart",
+   "bpm": 60
+  },
+  {
+   "id": "U-11",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 450,
+   "d": 1,
+   "feel": "swell"
+  },
+  {
+   "id": "U-12",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 750,
+   "d": 1,
+   "feel": "swell"
+  },
+  {
+   "id": "U-13",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 763,
+   "d": 3,
+   "feel": "bellows"
+  },
+  {
+   "id": "U-14",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 790,
+   "d": 6,
+   "feel": "heart",
+   "bpm": 60
+  },
+  {
+   "id": "U-15",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 810,
+   "d": 1,
+   "feel": "thunder"
+  },
+  {
+   "id": "U-16",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 813,
+   "d": 3,
+   "feel": "heart",
+   "bpm": 60
+  },
+  {
+   "id": "U-17",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 816,
+   "d": 5,
+   "feel": "heart",
+   "bpm": 60
+  },
+  {
+   "id": "U-18",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 840,
+   "d": 1,
+   "feel": "swell"
+  },
+  {
+   "id": "U-19",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 855,
+   "d": 10,
+   "feel": "heart",
+   "bpm": 80
+  }
+ ]
+}

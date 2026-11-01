@@ -1,0 +1,147 @@
+{
+ "format": "luna-haptic",
+ "version": 1,
+ "track": {
+  "sku": "07",
+  "title": "THE STREAM",
+  "label": "Foundation OS",
+  "scoreLength": 900,
+  "note": "Texture cues from the author. The last cue ends at 14:57."
+ },
+ "playback": {
+  "globalOffsetMs": 0,
+  "masterGain": 1.0,
+  "bedCeiling": 0.66,
+  "stopOnSafeword": true
+ },
+ "cues": [
+  {
+   "id": "S-01",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 0,
+   "d": 1,
+   "feel": "swell"
+  },
+  {
+   "id": "S-02",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 50,
+   "d": 4,
+   "feel": "bellows"
+  },
+  {
+   "id": "S-03",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 105,
+   "d": 2,
+   "feel": "thunder"
+  },
+  {
+   "id": "S-04",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 130,
+   "d": 3,
+   "feel": "bellows"
+  },
+  {
+   "id": "S-05",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 240,
+   "d": 2,
+   "feel": "thunder"
+  },
+  {
+   "id": "S-06",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 266,
+   "d": 4,
+   "feel": "bellows"
+  },
+  {
+   "id": "S-07",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 316,
+   "d": 1,
+   "feel": "thunder"
+  },
+  {
+   "id": "S-08",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 319,
+   "d": 3,
+   "feel": "rain"
+  },
+  {
+   "id": "S-09",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 322,
+   "d": 4,
+   "feel": "rain"
+  },
+  {
+   "id": "S-10",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 390,
+   "d": 1,
+   "feel": "swell"
+  },
+  {
+   "id": "S-11",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 403,
+   "d": 3,
+   "feel": "bellows"
+  },
+  {
+   "id": "S-12",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 442,
+   "d": 3,
+   "feel": "bellows"
+  },
+  {
+   "id": "S-13",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 570,
+   "d": 6,
+   "feel": "swell"
+  },
+  {
+   "id": "S-14",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 660,
+   "d": 6,
+   "feel": "swell"
+  },
+  {
+   "id": "S-15",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 669,
+   "d": 6,
+   "feel": "rain"
+  },
+  {
+   "id": "S-16",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 891,
+   "d": 6,
+   "feel": "tide"
+  }
+ ]
+}

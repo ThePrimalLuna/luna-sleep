@@ -14,6 +14,7 @@ def cue(c):
     if 'taps' in c: o['tp'] = [[r(x), r(y)] for x, y in c['taps']]
     if 'tail' in c: o['tl'] = [r(c['tail'][0]), r(c['tail'][1])]
     if c.get('skip'): o['sk'] = [[r(x), r(y)] for x, y in c['skip']]
+    if 'feel' in c and c['kind'] == 'tex': o['f'] = c['feel']
     if c.get('optional'): o['o'] = 1
     return o
 def build():

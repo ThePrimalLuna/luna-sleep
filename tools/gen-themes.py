@@ -75,6 +75,9 @@ THEMES = [
  dict(key='Winry', dark=False, bg='#fff4cf', surface='#fffdf2', surface2='#fbe8a8', ink='#1d2638', mute='#4d4a3a', line='#e6c660', accent='#1f4f8f', ink2='#ffffff', hero1='#f8dc86', glow='rgba(31,79,143,.26)',
       html="radial-gradient(520px 380px at 100% 0,rgba(240,160,40,.30),transparent 70%),linear-gradient(180deg,#fff8dc,#fdeaae) fixed", base='#fff4cf', head='"Fredoka",system-ui,sans-serif', eyebrow='#8a5a10',
       deco=svg("<svg xmlns='http://www.w3.org/2000/svg' width='260' height='220'>" + gear('#e08a1e', 60, 60, 36, .16) + gear('#1f4f8f', 190, 150, 28, .12) + "</svg>")),
+ dict(key='Thanksgiving', dark=False, bg='#fbf0dc', surface='#fffaf0', surface2='#f5dfb8', ink='#3a2416', mute='#6a4630', line='#dfb77a', accent='#a84a14', ink2='#ffffff', hero1='#f1c88c', glow='rgba(168,74,20,.26)',
+      html="radial-gradient(560px 400px at 0 0,rgba(200,100,30,.26),transparent 70%),radial-gradient(520px 380px at 100% 100%,rgba(140,40,40,.14),transparent 70%),linear-gradient(180deg,#fdf4e2,#f4e0bb) fixed", base='#fbf0dc', head='"Cormorant Garamond",Georgia,serif', eyebrow='#7a3d12',
+      deco=svg("<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><g fill-opacity='.14'><path d='M30 20C18 30 18 48 30 60 42 48 42 30 30 20Z' fill='#b4531a'/><path d='M120 70C108 80 108 98 120 110 132 98 132 80 120 70Z' fill='#8c2f2f'/><path d='M60 110C50 118 50 134 60 144 70 134 70 118 60 110Z' fill='#c58a1e'/></g><g stroke='#7a4a22' stroke-opacity='.12' stroke-width='2' fill='none'><path d='M30 60V70'/><path d='M120 110V120'/><path d='M60 144V152'/></g></svg>")),
 ]
 LABELS = {}
 def css(t):
