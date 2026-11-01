@@ -61,6 +61,9 @@ v59 NOTES
 - Developer docs are in README.md, CLAUDE.md and docs/. Run "npm run check" before releasing.
 - If worker/worker.js changed, paste it into the Cloudflare Worker editor again and Deploy.
 
+v68 NOTES
+- Score by hand: Start score runs a 3-2-1 countdown (ticks via LT.tick) so the listener can press play in Spotify on go; Cancel while it counts. A Jump to box (m:ss or seconds) moves the score to a typed time. Nothing new is stored. LOGV is 2026-11-01b. Test: t141.
+
 v67 NOTES
 - The Spotify iFrame API player (createController) loaded but would not start playback on a real Android phone. Auto-follow stays on by default, with a Follow Spotify automatically switch (vib.follow, in the backup whitelist) to fall back to the plain embed and by-hand panel. Tracks with a score no longer get the separate Feel it chip (feelFor returns null for them), since two vibrate sources override each other. LOGV is 2026-11-01a. Tests: t137 turns follow on where it tests the Spotify mock.
 
