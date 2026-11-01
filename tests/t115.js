@@ -81,7 +81,7 @@ ok(sc.has&&!sc.pill&&!sc.dis&&!sc.chk&&sc.none&&sc.f===null,'scores slot '+JSON.
 ok(await ev(()=>!!document.querySelector('#cx-body .wsrow button')&&/Hold pad/.test(document.getElementById('cx-body').textContent)),'pad link in haptics');
 // feels
 const fe=await ev(()=>['THE CALL','THE COAT','INSTINCT','THE DEN','THE HOWL','THE PACK','THE HUNT','THE STREAM','THE SHADOW','THE ALPHA','NOPE'].map(n=>{const x=LT.feelFor('x',n);return x?x.textContent:null}));
-ok(fe.slice(0,10).every(Boolean)&&fe[10]===null,'feels '+fe);
+ok(fe.every(x=>x===null),'tracks with a haptic score offer no separate feel (they would fight the score) '+fe);
 // no listening features anywhere
 const src=await ev(()=>document.documentElement.outerHTML);
 ok(!/getUserMedia|DeviceMotionEvent|webkitSpeechRecognition|SpeechRecognition|AudioWorklet.*mic|chest mode/i.test(src.replace(/DeviceMotionEvent\s*&&/g,'')),'no listening apis');

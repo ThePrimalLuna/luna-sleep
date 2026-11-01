@@ -61,6 +61,9 @@ v59 NOTES
 - Developer docs are in README.md, CLAUDE.md and docs/. Run "npm run check" before releasing.
 - If worker/worker.js changed, paste it into the Cloudflare Worker editor again and Deploy.
 
+v67 NOTES
+- The Spotify iFrame API player (createController) loaded but would not start playback on a real Android phone. Auto-follow stays on by default, with a Follow Spotify automatically switch (vib.follow, in the backup whitelist) to fall back to the plain embed and by-hand panel. Tracks with a score no longer get the separate Feel it chip (feelFor returns null for them), since two vibrate sources override each other. LOGV is 2026-11-01a. Tests: t137 turns follow on where it tests the Spotify mock.
+
 v66 NOTES
 - At a glance strip on each ungated track page (built only from catalog facts; blanks are left out). One-time new-track notification nudge in the banner slot after the first heard track; S.pushAsk is saved in the main blob (so in Backup and Delete everything) and the nudge never returns after any answer. Test: t138. LOGV is 2026-10-31b.
 - Haptic scores for the rest of the Foundation (SKU 01 to 09), in a new texture-cue format (kind tex: a named texture for d seconds; heart takes bpm). Textures with randomness are seeded from the cue time. Masters in scores/*.json, compacted by tools/gen-score.py. FEELS fallbacks for those tracks follow the author's sheet. Tests: t139.

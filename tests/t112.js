@@ -32,10 +32,10 @@ const info=await ev(()=>{const ks=Object.keys(TI).filter(k=>TI[k].spotify);retur
 const tr=await ev(()=>{const k=Object.keys(TI).find(k=>/STREAM/i.test(TI[k].title)&&TI[k].spotify);return k||null});
 ok(!!tr,'found STREAM '+tr);
 if(tr){await ev(k=>openTrack(k),tr);await p.waitForTimeout(400);
- const feel=await ev(()=>[...document.querySelectorAll('#side button, .side button')].map(b=>b.textContent.trim()).filter(t=>/Feel it|Play here/.test(t)));console.log('side',feel);ok(feel.includes('Play here'),'play here btn');ok(feel.some(t=>/Feel it: Breath bellows/.test(t)),'feel chip');
+ const feel=await ev(()=>[...document.querySelectorAll('#side button, .side button')].map(b=>b.textContent.trim()).filter(t=>/Feel it|Play here/.test(t)));console.log('side',feel);ok(feel.includes('Play here'),'play here btn');ok(!feel.some(t=>/Feel it/.test(t)),'no feel chip on a track with a haptic score');
  await ev(()=>{[...document.querySelectorAll('#side button')].find(b=>b.textContent==='Play here').click()});await p.waitForTimeout(300);
  const dk=await ev(()=>{const d=document.getElementById('pdock');const f=d.querySelector('iframe');return {hidden:d.hidden,src:f&&f.src,cls:document.body.classList.contains('hasdock'),feel:/Feel it/.test(d.innerText)}});
- ok(!dk.hidden&&/embed\/episode\//.test(dk.src||'')&&dk.cls&&dk.feel,'dock '+JSON.stringify(dk));
+ ok(!dk.hidden&&/embed\/episode\//.test(dk.src||'')&&dk.cls&&!dk.feel,'dock '+JSON.stringify(dk));
  await ev(()=>document.querySelector('.pdmin').click());ok(await ev(()=>document.getElementById('pdock').classList.contains('min')),'dock min');
  await ev(()=>LT.bedOpen());ok(await ev(()=>document.getElementById('pdock').classList.contains('min')&&!document.getElementById('pdock').hidden),'bed keeps dock');await ev(()=>{document.getElementById('bed').hidden=true});
  await ev(()=>sosOpen());ok(await ev(()=>document.getElementById('pdock').hidden&&!document.getElementById('pdock').querySelector('iframe')),'EE stops dock');
