@@ -1,0 +1,191 @@
+{
+ "format": "luna-haptic",
+ "version": 1,
+ "track": {
+  "sku": "B-01",
+  "title": "THE TETHER",
+  "label": "Bloom Album (Blue)",
+  "scoreLength": 900,
+  "note": "Texture cues from the author. The last cue ends at 13:29."
+ },
+ "playback": {
+  "globalOffsetMs": 0,
+  "masterGain": 1.0,
+  "bedCeiling": 0.66,
+  "stopOnSafeword": true
+ },
+ "cues": [
+  {
+   "id": "T-01",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 0,
+   "d": 5,
+   "feel": "swell"
+  },
+  {
+   "id": "T-02",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 37,
+   "d": 4,
+   "feel": "bellows"
+  },
+  {
+   "id": "T-03",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 144,
+   "d": 4,
+   "feel": "bellows"
+  },
+  {
+   "id": "T-04",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 208,
+   "d": 5,
+   "feel": "bellows"
+  },
+  {
+   "id": "T-05",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 270,
+   "d": 2,
+   "feel": "swell"
+  },
+  {
+   "id": "T-06",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 296,
+   "d": 4,
+   "feel": "bellows"
+  },
+  {
+   "id": "T-07",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 336,
+   "d": 4,
+   "feel": "bellows"
+  },
+  {
+   "id": "T-08",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 423,
+   "d": 3,
+   "feel": "bellows"
+  },
+  {
+   "id": "T-09",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 480,
+   "d": 5,
+   "feel": "swell"
+  },
+  {
+   "id": "T-10",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 520,
+   "d": 6,
+   "feel": "heart",
+   "bpm": 60
+  },
+  {
+   "id": "T-11",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 526,
+   "d": 3,
+   "feel": "bellows"
+  },
+  {
+   "id": "T-12",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 553,
+   "d": 3,
+   "feel": "bellows"
+  },
+  {
+   "id": "T-13",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 651,
+   "d": 4,
+   "feel": "bellows"
+  },
+  {
+   "id": "T-14",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 690,
+   "d": 2,
+   "feel": "swell"
+  },
+  {
+   "id": "T-15",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 739,
+   "d": 3,
+   "feel": "bellows"
+  },
+  {
+   "id": "T-16",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 756,
+   "d": 4,
+   "feel": "bellows"
+  },
+  {
+   "id": "T-17",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 765,
+   "d": 3,
+   "feel": "heart",
+   "bpm": 60
+  },
+  {
+   "id": "T-18",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 768,
+   "d": 3,
+   "feel": "heart",
+   "bpm": 60
+  },
+  {
+   "id": "T-19",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 771,
+   "d": 6,
+   "feel": "heart",
+   "bpm": 60
+  },
+  {
+   "id": "T-20",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 780,
+   "d": 2,
+   "feel": "swell"
+  },
+  {
+   "id": "T-21",
+   "layer": "accent",
+   "kind": "tex",
+   "t": 805,
+   "d": 4,
+   "feel": "bellows"
+  }
+ ]
+}

@@ -61,6 +61,9 @@ v59 NOTES
 - Developer docs are in README.md, CLAUDE.md and docs/. Run "npm run check" before releasing.
 - If worker/worker.js changed, paste it into the Cloudflare Worker editor again and Deploy.
 
+v70 NOTES
+- B-01 THE TETHER released: Spotify episode added to the catalog (CAT), haptic score (scores/the-tether.json, texture cues), Bloom manual (resource bloom-manual, with a Bloom manual button on B-01 to B-09 pages) and the B-01 track deep dive (dd-b01, ord 19.5 so it follows SKU 09). What's new v70. LOGV is 2026-11-02a. Test: t143. released() now counts a track as out from the start of its release day (local clock) instead of the end of it, so a track shows Play here the day it releases.
+
 v69 NOTES
 - Three secret themes (Hollywoo, Horsin' Around, Midnight Swim) with matching secret achievements (Missing a letter, Studio audience, Deep end). Not in What's new, like the other secret themes. APP_VERSION and the service worker move to v69; LOGV stays 2026-11-01b. Test: t142.
 

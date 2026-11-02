@@ -76,7 +76,7 @@ ok(await ev(()=>document.getElementById('cv-dlg').hidden&&document.getElementByI
 await ev(()=>document.getElementById('cx-close').click());
 // scores slot
 await ev(()=>LT.hapticsOpen());
-const sc=await ev(()=>{const w=document.querySelector('#cx-body .scoreslot');return{has:!!w,pill:/Not active yet/.test(w.textContent),dis:w.querySelector('input').disabled,chk:w.querySelector('input').checked,none:/THE CALL|The Call/i.test(w.textContent),f:LT.scoreFor('THE TETHER')}});
+const sc=await ev(()=>{const w=document.querySelector('#cx-body .scoreslot');return{has:!!w,pill:/Not active yet/.test(w.textContent),dis:w.querySelector('input').disabled,chk:w.querySelector('input').checked,none:/THE CALL|The Call/i.test(w.textContent),f:LT.scoreFor('THE GROVE')}});
 ok(sc.has&&!sc.pill&&!sc.dis&&!sc.chk&&sc.none&&sc.f===null,'scores slot '+JSON.stringify(sc));
 ok(await ev(()=>!!document.querySelector('#cx-body .wsrow button')&&/Hold pad/.test(document.getElementById('cx-body').textContent)),'pad link in haptics');
 // feels
