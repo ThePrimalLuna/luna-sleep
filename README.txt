@@ -63,6 +63,7 @@ v59 NOTES
 
 v72 NOTES
 - Fix: Home's Out now list only showed the ten Foundation tracks, so B-01 THE TETHER and later releases never appeared there. It now lists every released track, newest first, then the Foundation ten. Adult-gated tracks stay hidden unless adult content is on. What's new entry added, LOGV 2026-11-03a. Test: tests/t144.js.
+- New theme Inuit (More looks): arctic night, northern-lights green, lamp-flame amber accent, with the secret achievement Keeper of the flame (not named in What's new). Moving aurora (two curtains, sway and hue drift), twinkling stars and a night-to-horizon sky; static under Calm mode or reduced motion. Also falling snow (two depths), a ridge line, shooting stars, and a figure (Deer Woman) that stands far off on the ridge now and then, drawn by a small #inuit-fx layer that applySkin adds and removes. Everything holds still under Calm mode or reduced motion. Hand-written CSS sits right after the generated theme block. Test: tests/t145.js.
 
 v71 NOTES
 - Secret theme Beach City (pastel sunset, gem diamonds and stars) with the secret achievement Crystal clear. Not in What's new. APP_VERSION and the service worker move to v71; LOGV stays 2026-11-02a. Test: t142.
