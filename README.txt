@@ -61,6 +61,9 @@ v59 NOTES
 - Developer docs are in README.md, CLAUDE.md and docs/. Run "npm run check" before releasing.
 - If worker/worker.js changed, paste it into the Cloudflare Worker editor again and Deploy.
 
+v72 NOTES
+- Fix: Home's Out now list only showed the ten Foundation tracks, so B-01 THE TETHER and later releases never appeared there. It now lists every released track, newest first, then the Foundation ten. Adult-gated tracks stay hidden unless adult content is on. What's new entry added, LOGV 2026-11-03a. Test: tests/t144.js.
+
 v71 NOTES
 - Secret theme Beach City (pastel sunset, gem diamonds and stars) with the secret achievement Crystal clear. Not in What's new. APP_VERSION and the service worker move to v71; LOGV stays 2026-11-02a. Test: t142.
 
