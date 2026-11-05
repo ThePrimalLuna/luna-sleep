@@ -61,6 +61,9 @@ v59 NOTES
 - Developer docs are in README.md, CLAUDE.md and docs/. Run "npm run check" before releasing.
 - If worker/worker.js changed, paste it into the Cloudflare Worker editor again and Deploy.
 
+v76 NOTES
+- Menu > Support block: Show the Discord server panel button (#dc-show). The iframe for Discord's server widget (id 1513689038710767777) is created only when tapped and removed when hidden, so nothing from discord.com loads on its own and nothing is stored (no localStorage, nothing for Backup or Delete everything). Dark or light theme is picked from the current page colour. Test: tests/t149.js.
+
 v75 NOTES
 - Bestiary: tap to enlarge. A released creature's sketch plate (rel:true) is a button that opens a full-size viewer (#sk-dlg, z-index 94 so the Emergency Exit button stays on top; Escape, Close and the back button close it). Unreleased (blurred) sketches are not interactive. Unreleased entries keep their text visible by decision of the owner. The Golden Thread and The Craytoad numbers (threat, nature, sense, realm) are confirmed by the owner. Test: tests/t148.js.
 
