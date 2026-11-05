@@ -61,6 +61,9 @@ v59 NOTES
 - Developer docs are in README.md, CLAUDE.md and docs/. Run "npm run check" before releasing.
 - If worker/worker.js changed, paste it into the Cloudflare Worker editor again and Deploy.
 
+v78 NOTES
+- Library track cards (tcard) get a heard tick (.fcheck.tcheck), same behaviour as the Foundation list and the Mark as heard button: stampHeard and afterHeard on tick, undo on untick. Hidden while a track is still locked behind the Foundation (the lock pill already says so). Cards that are heard get .heardcard.
+
 v77 NOTES
 - What's new now opens on every app open (after the welcome is accepted) until the listener ticks Don't show this when the app opens (same flag as before, lunaSleep.newOptOut, so earlier opt-outs stay opted out). It is still closable with Close or Escape and never blocks the app. Its z-index is 94, under the Emergency Exit button (95), so Emergency Exit stays reachable while it is open. Tests that only set lunaSleep.newSeen now also set lunaSleep.newOptOut so the dialog stays out of their way.
 - Join on Patreon, Join the Discord and Report a bug (opens Help) sit at the very top of the Menu (#ql-menu) and of What's new (#ql-new), built once by one function. The old Send feedback / Subscribe on Patreon row in What's new is gone. Test: tests/t150.js.
