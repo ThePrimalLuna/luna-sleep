@@ -61,6 +61,9 @@ v59 NOTES
 - Developer docs are in README.md, CLAUDE.md and docs/. Run "npm run check" before releasing.
 - If worker/worker.js changed, paste it into the Cloudflare Worker editor again and Deploy.
 
+v74 NOTES
+- Bestiary: every entry gets a header (pillar-coloured edge, thumbnail or letter tile, No. 0XX line, larger title) and a sketch plate. Field sketch rule: `sketch` is the image path, `rel:true` means the episode is out; a sketch without `rel` is blurred with a Not featured yet note; no sketch shows a dashed spot that says No field notes yet. Threat is five dots plus the word. New entry The Craytoad (No. 030, bestiary/craytoad.webp, cached offline via CORE in sw.js). Its threat, nature, sense, realm, tone and content warning are provisional until the owner confirms. Applied with the owner's apply_bestiary_v2.py.
+
 v73 NOTES
 - Schedule: R-01 THE MARKING moves from Wed Nov 4 to Fri Nov 6, the same day as G-01 (double release day). RO-01 and everything after keep their dates. Changed in DATA, CAT and the Red album window, then worker/make-releases.py rewrote releases.json. What's new gets a short note (Luna is under the weather, Wednesday's release moves to Friday) that does not name the NSFW title; LOGV 2026-11-04a. Test: tests/t144.js.
 
