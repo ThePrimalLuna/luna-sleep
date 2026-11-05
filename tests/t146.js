@@ -22,6 +22,9 @@ ok(await ev(()=>/Field sketch of The Craytoad/.test(document.querySelector('.ske
 await ev(()=>{const m=BEAST.find(x=>x.n==='Mothman');m.sketch='bestiary/craytoad.webp';delete m.rel;BF.q='Mothman';render()});await W(400);
 const u=await ev(()=>{const card=document.querySelector('.beast');return{blur:!!card.querySelector('.sketch img.blur'),note:/Not featured yet/.test(card.textContent),alt:card.querySelector('.sketch img').alt}});
 ok(u.blur&&u.note&&/Blurred/.test(u.alt),'unreleased sketch is blurred with a note '+JSON.stringify(u));
+await ev(()=>{BF.q='Wendigo';render()});await W(400);
+ok(await ev(()=>{const c=document.querySelector('.beast');const im=c&&c.querySelector('.sketch img');return !!im&&im.classList.contains('blur')&&/Not featured yet/.test(c.textContent)&&BEAST.find(x=>x.n==='Wendigo').sketch==='bestiary/wendigo.webp'&&!BEAST.find(x=>x.n==='Wendigo').rel}),'Wendigo sketch is filed and blurred until its episode is out');
+ok(require('fs').existsSync(require('path').resolve(__dirname,'../bestiary/wendigo.webp'))&&/wendigo\.webp/.test(require('fs').readFileSync(require('path').resolve(__dirname,'../sw.js'),'utf8')),'Wendigo sketch file exists and is cached offline');
 const other=await ev(()=>BEAST.find(x=>!x.sketch).n);await ev(o=>{BF.q=o;render()},other);await W(400);
 ok(await ev(()=>{const card=document.querySelector('.beast');return !!card&&/No field notes yet/.test(card.textContent)&&!!card.querySelector('.sketch.nosketch')}),'no sketch shows a No field notes yet spot');
 ok(!errs.length,'no page errors '+errs);console.log('t146',pass,'pass',bad,'fail');process.exit(bad?1:0)}finally{await b.close()}})();
