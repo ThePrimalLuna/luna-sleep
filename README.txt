@@ -61,6 +61,10 @@ v59 NOTES
 - Developer docs are in README.md, CLAUDE.md and docs/. Run "npm run check" before releasing.
 - If worker/worker.js changed, paste it into the Cloudflare Worker editor again and Deploy.
 
+v77 NOTES
+- What's new now opens on every app open (after the welcome is accepted) until the listener ticks Don't show this when the app opens (same flag as before, lunaSleep.newOptOut, so earlier opt-outs stay opted out). It is still closable with Close or Escape and never blocks the app. Its z-index is 94, under the Emergency Exit button (95), so Emergency Exit stays reachable while it is open. Tests that only set lunaSleep.newSeen now also set lunaSleep.newOptOut so the dialog stays out of their way.
+- Join on Patreon, Join the Discord and Report a bug (opens Help) sit at the very top of the Menu (#ql-menu) and of What's new (#ql-new), built once by one function. The old Send feedback / Subscribe on Patreon row in What's new is gone. Test: tests/t150.js.
+
 v76 NOTES
 - Menu > Support block: Show the Discord server panel button (#dc-show). The iframe for Discord's server widget (id 1513689038710767777) is created only when tapped and removed when hidden, so nothing from discord.com loads on its own and nothing is stored (no localStorage, nothing for Backup or Delete everything). Dark or light theme is picked from the current page colour. Test: tests/t149.js.
 

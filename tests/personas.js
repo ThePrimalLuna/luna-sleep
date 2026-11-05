@@ -44,18 +44,18 @@ const closeAll=p=>p.evaluate(()=>{const d=document.getElementById('new-dlg');if(
      localStorage.setItem(k,JSON.stringify(x));localStorage.setItem('lunaSleep.last',JSON.stringify({ids:['SKU 02'],pt:t}))});
    ok(first.includes('new-dlg'),'returning: What\'s new shows once ('+first+')');
    const top=await p.evaluate(()=>{const d=document.getElementById('new-dlg');const m=d&&d.innerText.match(/v\d+ \u00b7 [^\n]+/);return m?m[0]:''});
-   ok(/^v76/.test(top),'returning: newest entry on top: '+top);
+   ok(/^v77/.test(top),'returning: newest entry on top: '+top);
    await closeAll(p);await p.waitForTimeout(400);await p.screenshot({path:path.join(OUT,'returning-2-home.png')});
    const h=await homeInfo(p);
    ok(h.start==='Start my night with THE DEN','returning: next Foundation track is THE DEN ('+h.start+')');
    ok(h.primaries.length===1,'returning: one primary button ('+h.primaries+')');
    console.log('  returning: home ->',JSON.stringify(h));
-   await p.goto(APP);await p.waitForTimeout(900);ok(!(await visibleOverlays(p)).includes('new-dlg'),'returning: What\'s new does not show twice');
+   await p.goto(APP);await p.waitForTimeout(900);ok((await visibleOverlays(p)).includes('new-dlg'),'returning: What\'s new shows again on the next open until turned off');
    ok(!errs.length,'returning: errors '+errs.join('|'));await c.close()}
 
   // 3. Veteran: Foundation done, 40 tracks heard, adult on, own theme, mixes, plan for tonight, old backup
   {const {p,c,errs,first}=await persona(b,'veteran',()=>{const now=Date.now();
-     localStorage.setItem('lunaSleep.denAck','1');localStorage.setItem('lunaSleep.cheevoInit','1');localStorage.setItem('lunaSleep.newSeen',LOGV_);
+     localStorage.setItem('lunaSleep.denAck','1');localStorage.setItem('lunaSleep.cheevoInit','1');localStorage.setItem('lunaSleep.newSeen',LOGV_);localStorage.setItem('lunaSleep.newOptOut','1');
      const k='lunaNeuroMap.v2';const x=JSON.parse(localStorage.getItem(k)||'{}');x.done={};x.hlog=[];
      const ids=Object.keys(TI).filter(id=>released(TI[id].date));ids.slice(0,40).forEach((id,i)=>{x.done[id]=true;x.hlog.push({id,t:now-(40-i)*864e5})});
      CAT.found.forEach(f=>x.done[f.sku]=true);x.fullOk=true;x.welcomed=true;x.lastBackup=now-45*864e5;x.identity='Prism';
