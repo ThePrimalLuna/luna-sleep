@@ -1,0 +1,31 @@
+/* t148: Bestiary tap to enlarge: released sketches open a viewer, unreleased ones do not, Emergency Exit stays on top */
+const APP='file://'+require('path').resolve(__dirname,'../index.html');const {chromium}=require('playwright');
+let pass=0,bad=0;const ok=(c,m)=>{if(c)pass++;else{bad++;console.log('FAIL',m)}};
+(async()=>{const b=await chromium.launch();try{
+const p=await (await b.newContext({viewport:{width:400,height:820}})).newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
+await p.addInitScript(()=>{try{localStorage.setItem('lunaSleep.denAck','1');localStorage.setItem('lunaSleep.cheevoInit','1');localStorage.setItem('lunaSleep.newSeen','2026-11-04c')}catch(e){}});
+await p.goto(APP);await p.waitForTimeout(700);const ev=(f,a)=>p.evaluate(f,a),W=ms=>p.waitForTimeout(ms);
+const show=async q=>{await ev(q=>{BF.q=q;LR.m='beast';S.tab='lore';render()},q);await W(400)};
+await show('Craytoad');
+ok(await ev(()=>{const f=document.querySelector('.beast .sketch');return !!f&&f.classList.contains('zoomable')&&f.getAttribute('role')==='button'&&/Enlarge field sketch of The Craytoad/.test(f.getAttribute('aria-label'))&&!!f.querySelector('.shint')}),'released sketch is a labelled button with a hint');
+ok(await ev(()=>document.getElementById('sk-dlg').hidden),'viewer starts closed');
+await ev(()=>document.querySelector('.beast .sketch').click());await W(300);
+const o=await ev(()=>{const d=document.getElementById('sk-dlg'),im=document.getElementById('sk-img');return{open:!d.hidden,src:/bestiary\/craytoad\.webp/.test(im.src),alt:im.alt,w:im.getBoundingClientRect().width,zd:+getComputedStyle(d).zIndex,zs:+getComputedStyle(document.querySelector('.sosfab')).zIndex,focus:document.activeElement&&document.activeElement.id}});
+ok(o.open&&o.src&&/Craytoad/.test(o.alt),'tap opens the full-size sketch '+JSON.stringify(o));
+ok(o.w>=700,'image is wide enough to read the handwriting: '+o.w);
+ok(o.zs>o.zd,'Emergency Exit button sits above the viewer '+o.zs+' > '+o.zd);
+ok(o.focus==='sk-close','focus moves to Close');
+await p.keyboard.press('Escape');await W(200);
+ok(await ev(()=>document.getElementById('sk-dlg').hidden&&!document.getElementById('sk-img').getAttribute('src')),'Escape closes it');
+ok(await ev(()=>document.body.style.overflow===''),'page scroll is restored');
+await ev(()=>document.querySelector('.beast .sketch').click());await W(200);
+await ev(()=>document.getElementById('sk-close').click());await W(200);
+ok(await ev(()=>document.getElementById('sk-dlg').hidden),'Close button closes it');
+await ev(()=>{const f=document.querySelector('.beast .sketch');const d=f.closest('details');if(d)d.open=true;f.focus()});await W(200);await p.keyboard.press('Enter');await W(200);
+ok(await ev(()=>!document.getElementById('sk-dlg').hidden),'Enter on the focused sketch opens it');
+await ev(()=>document.getElementById('sk-close').click());
+await show('Wendigo');
+ok(await ev(()=>{const f=document.querySelector('.beast .sketch');return !!f&&!f.classList.contains('zoomable')&&!f.getAttribute('role')&&!f.querySelector('.shint')}),'unreleased (blurred) sketch is not interactive');
+await ev(()=>document.querySelector('.beast .sketch').click());await W(200);
+ok(await ev(()=>document.getElementById('sk-dlg').hidden),'tapping a blurred sketch does nothing');
+ok(!errs.length,'no page errors '+errs);console.log('t148',pass,'pass',bad,'fail');process.exit(bad?1:0)}finally{await b.close()}})();
