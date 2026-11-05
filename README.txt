@@ -62,7 +62,7 @@ v59 NOTES
 - If worker/worker.js changed, paste it into the Cloudflare Worker editor again and Deploy.
 
 v73 NOTES
-- Schedule: R-01 THE MARKING moves from Wed Nov 4 to Fri Nov 6, the same day as G-01 (double release day). RO-01 and everything after keep their dates. Changed in DATA, CAT and the Red album window, then worker/make-releases.py rewrote releases.json. Not in What's new (NSFW title), so LOGV is unchanged. Test: tests/t144.js.
+- Schedule: R-01 THE MARKING moves from Wed Nov 4 to Fri Nov 6, the same day as G-01 (double release day). RO-01 and everything after keep their dates. Changed in DATA, CAT and the Red album window, then worker/make-releases.py rewrote releases.json. What's new gets a short note (Luna is under the weather, Wednesday's release moves to Friday) that does not name the NSFW title; LOGV 2026-11-04a. Test: tests/t144.js.
 
 v72 NOTES
 - Fix: Home's Out now list only showed the ten Foundation tracks, so B-01 THE TETHER and later releases never appeared there. It now lists every released track, newest first, then the Foundation ten. Adult-gated tracks stay hidden unless adult content is on. What's new entry added, LOGV 2026-11-03a. Test: tests/t144.js.
