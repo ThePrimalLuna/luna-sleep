@@ -7,7 +7,7 @@ await p.addInitScript(()=>{try{localStorage.setItem('lunaSleep.denAck','1');loca
 const ev=(f,a)=>p.evaluate(f,a),W=ms=>p.waitForTimeout(ms);
 const open=()=>ev(()=>!document.getElementById('new-dlg').hidden);
 // 1. already seen this version, not opted out: it still opens
-await p.addInitScript(()=>{try{localStorage.setItem('lunaSleep.newSeen','2026-11-06a')}catch(e){}});
+await p.addInitScript(()=>{try{localStorage.setItem('lunaSleep.newSeen','2026-11-06b')}catch(e){}});
 await p.goto(APP);await W(900);
 ok(await open(),'What\'s new opens on launch even when this version was already seen');
 // 2. still dismissible, and the Emergency Exit button stays above it

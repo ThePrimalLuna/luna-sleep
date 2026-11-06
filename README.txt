@@ -61,6 +61,9 @@ v59 NOTES
 - Developer docs are in README.md, CLAUDE.md and docs/. Run "npm run check" before releasing.
 - If worker/worker.js changed, paste it into the Cloudflare Worker editor again and Deploy.
 
+v80 NOTES
+- Clarity pass: #tabhint (one line per tab, set in renderChrome) and the selected tab scrolls into view; new-listener Welcome hero now sits above the Tonight card; Home gets a small Archives card; new Archives page (S.tab='archives', viewArchives, 4th button in bonusNav, counts as the Bonus & Lore tab). Archives facts come from the owner's Luna Life Archives page; the first episode is not out, so the page says so and carries no feed link. Add the feed link on that page when it exists.
+
 v79 NOTES
 - Start here FAQ (faq-start-here, in ALLR) gets a What is the idea? section: purpose, consent-forward, the nine pillars in one line each, which are NSFW. Source of truth for that wording is the owner's own description, so keep edits in her voice.
 
