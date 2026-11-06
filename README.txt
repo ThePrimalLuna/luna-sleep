@@ -61,6 +61,9 @@ v59 NOTES
 - Developer docs are in README.md, CLAUDE.md and docs/. Run "npm run check" before releasing.
 - If worker/worker.js changed, paste it into the Cloudflare Worker editor again and Deploy.
 
+v81 NOTES
+- Newcomer Welcome on Home is now a real pitch (lede, the mask, the nine pillars grouped, consent, how to hear). Written from the owner's own guides; edit it in viewHome (search 'You spend all day').
+
 v80 NOTES
 - Release clock: RELTIME (near released()) holds a release date until a set moment. 2026-11-06 goes live at 9pm Mountain (04:00Z Nov 7); Home and the countdown say 'tonight at 9pm Mountain' until then. To hold another day, add its date and an ISO time. Notifications are still sent by hand from /admin.
 - TLSA episode links: add the story id and episode URL to TLSA_EPS (https only), e.g. 'files-1':'https://...'. The link appears on the story card, inside the story, and on the Archives page, which then drops its not-out-yet line. Story ids: files-1..files-7, persephone, jakob, artist, rehab, kushtaka, prompt, two, micro.

@@ -3,7 +3,7 @@ const APP='file://'+require('path').resolve(__dirname,'../index.html');const {ch
 let pass=0,bad=0;const ok=(c,m)=>{if(c)pass++;else{bad++;console.log('FAIL',m)}};
 (async()=>{const b=await chromium.launch();try{
 const ctx=await b.newContext({viewport:{width:390,height:844}});const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
-await p.addInitScript(()=>{try{localStorage.setItem('lunaSleep.denAck','1');localStorage.setItem('lunaSleep.cheevoInit','1');localStorage.setItem('lunaSleep.newSeen','2026-11-06b');localStorage.setItem('lunaSleep.newOptOut','1')}catch(e){}});
+await p.addInitScript(()=>{try{localStorage.setItem('lunaSleep.denAck','1');localStorage.setItem('lunaSleep.cheevoInit','1');localStorage.setItem('lunaSleep.newSeen','2026-11-06c');localStorage.setItem('lunaSleep.newOptOut','1')}catch(e){}});
 const ev=(f,a)=>p.evaluate(f,a),W=ms=>p.waitForTimeout(ms);
 await p.goto(APP);await W(800);
 await ev(()=>{S.done={};S.tab='home';save();render()});await W(200);
@@ -30,6 +30,7 @@ ok(!(await ev(()=>/Welcome to Luna Sleep/.test(document.getElementById('view').t
 await ev(()=>{S.done={};S.tab='home';save();render()});await W(200);
 const ord=await ev(()=>[...document.getElementById('view').children].slice(0,3).map(x=>x.textContent.slice(0,30)));
 ok(/Welcome to Luna Sleep/.test(ord[0])&&/Start here: the Foundation/.test(ord[1]),'Foundation follows the Welcome '+JSON.stringify(ord));
+ok(await ev(()=>{const h=document.querySelector('#view .home-hero').innerText;return /You spend all day being the adult/.test(h)&&/Blue, Green and Red install trigger words/.test(h)&&/HUMAN/.test(h)&&/Primal Luna/.test(h)&&!/AI|Claude/.test(h)}),'Welcome pitch reads in full, no AI mention');
 ok(await ev(()=>/How to hear them: the audio is for Patreon members/.test(document.getElementById('view').textContent)),'Foundation card says how to hear the audio');
 await ev(()=>{S.tab='map';S.welcomed=false;render()});await W(200);
 ok(await ev(()=>/Start with the 10 Foundation tracks below/.test(document.getElementById('view').textContent)),'Your path step 1 starts with the Foundation');
