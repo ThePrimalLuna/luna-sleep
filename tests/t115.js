@@ -4,7 +4,7 @@ const {chromium}=require('playwright');
 let pass=0,bad=0;const ok=(c,m)=>{if(c){pass++}else{bad++;console.log('FAIL',m)}};
 (async()=>{const b=await chromium.launch();try{
 const ctx=await b.newContext({viewport:{width:400,height:820},hasTouch:false});const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
-await p.addInitScript(()=>{window.__v=[];Object.defineProperty(navigator,'vibrate',{value:x=>{window.__v.push(x);return true},configurable:true});try{localStorage.setItem('lunaSleep.cheevoInit','1');localStorage.setItem('lunaSleep.vib',JSON.stringify({lvl:2}))}catch(e){}});
+await p.addInitScript(()=>{window.__v=[];Object.defineProperty(navigator,'vibrate',{value:x=>{window.__v.push(x);return true},configurable:true});try{localStorage.setItem('lunaSleep.cheevoInit','1');localStorage.setItem('lunaSleep.denAck','1');localStorage.setItem('lunaSleep.vib',JSON.stringify({lvl:2}))}catch(e){}});
 await p.goto(APP);await p.waitForTimeout(900);
 const ev=(f,a)=>p.evaluate(f,a);
 // icons

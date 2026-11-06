@@ -26,6 +26,15 @@ ok(await ev(()=>S.tab==='stories'),'Read the stories goes to Stories');
 // once something is heard the Welcome goes away
 await ev(()=>{S.done['SKU 00']=true;S.tab='home';save();render()});await W(200);
 ok(!(await ev(()=>/Welcome to Luna Sleep/.test(document.getElementById('view').textContent))),'Welcome hides after the first track is heard');
+// newcomer order: Foundation right after the Welcome, with a how-to-hear line
+await ev(()=>{S.done={};S.tab='home';save();render()});await W(200);
+const ord=await ev(()=>[...document.getElementById('view').children].slice(0,3).map(x=>x.textContent.slice(0,30)));
+ok(/Welcome to Luna Sleep/.test(ord[0])&&/Start here: the Foundation/.test(ord[1]),'Foundation follows the Welcome '+JSON.stringify(ord));
+ok(await ev(()=>/How to hear them: the audio is for Patreon members/.test(document.getElementById('view').textContent)),'Foundation card says how to hear the audio');
+await ev(()=>{S.tab='map';S.welcomed=false;render()});await W(200);
+ok(await ev(()=>/Start with the 10 Foundation tracks below/.test(document.getElementById('view').textContent)),'Your path step 1 starts with the Foundation');
+await ev(()=>{S.tab='cat';render()});await W(200);
+ok(await ev(()=>/Every Luna Sleep track in one list/.test(document.getElementById('view').textContent)),'Library has an intro line');
 // Discord link is not default blue
 await ev(()=>document.getElementById('set-open').click());await W(300);
 const col=await ev(()=>{const a=[...document.querySelectorAll('#ql-menu a')].find(x=>/Discord/.test(x.textContent));return getComputedStyle(a).color});
