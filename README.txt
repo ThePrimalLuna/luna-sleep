@@ -61,6 +61,9 @@ v59 NOTES
 - Developer docs are in README.md, CLAUDE.md and docs/. Run "npm run check" before releasing.
 - If worker/worker.js changed, paste it into the Cloudflare Worker editor again and Deploy.
 
+v79 NOTES
+- Start here FAQ (faq-start-here, in ALLR) gets a What is the idea? section: purpose, consent-forward, the nine pillars in one line each, which are NSFW. Source of truth for that wording is the owner's own description, so keep edits in her voice.
+
 v78 NOTES
 - Library track cards (tcard) get a heard tick (.fcheck.tcheck), same behaviour as the Foundation list and the Mark as heard button: stampHeard and afterHeard on tick, undo on untick. Hidden while a track is still locked behind the Foundation (the lock pill already says so). Cards that are heard get .heardcard.
 
