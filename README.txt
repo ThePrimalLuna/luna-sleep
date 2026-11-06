@@ -62,6 +62,7 @@ v59 NOTES
 - If worker/worker.js changed, paste it into the Cloudflare Worker editor again and Deploy.
 
 v80 NOTES
+- Archives framing (owner, Nov 6): The Luna Sleep Archives (TLSA) is its OWN free weekly podcast, separate from Luna Sleep (nine pillars, paid), same Patreon page, different RSS feeds. Never call it part of Luna Sleep.
 - Newcomer pass (owner OK'd rearranging): for listeners with nothing heard, Home order is Welcome, Foundation card (now with a how-to-hear line and Patreon link), Tonight, In the Den now; returning listeners keep the old order. Your path step 1 fixed (Foundation first, then pick a path). Library gets an intro line. toast() returns while the Den is open.
 - Clarity pass: #tabhint (one line per tab, set in renderChrome) and the selected tab scrolls into view; new-listener Welcome hero now sits above the Tonight card; Home gets a small Archives card; new Archives page (S.tab='archives', viewArchives, 4th button in bonusNav, counts as the Bonus & Lore tab). Archives facts come from the owner's Luna Life Archives page; the first episode is not out, so the page says so and carries no feed link. Add the feed link on that page when it exists.
 
