@@ -1,0 +1,29 @@
+/* t155: G-01 and R-01 releases: Spotify + Patreon links, Care and Heat manuals */
+const APP='file://'+require('path').resolve(__dirname,'../index.html');const {chromium}=require('playwright');
+let pass=0,bad=0;const ok=(c,m)=>{if(c)pass++;else{bad++;console.log('FAIL',m)}};
+(async()=>{const b=await chromium.launch();try{
+const ctx=await b.newContext({viewport:{width:1100,height:900}});const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
+await p.addInitScript(()=>{try{localStorage.setItem('lunaSleep.denAck','1');localStorage.setItem('lunaSleep.cheevoInit','1');localStorage.setItem('lunaSleep.newSeen','2026-11-06d');localStorage.setItem('lunaSleep.newOptOut','1')}catch(e){}});
+const ev=(f,a)=>p.evaluate(f,a),W=ms=>p.waitForTimeout(ms);
+await p.clock.setFixedTime(new Date('2026-11-07T03:00:00Z'));await p.goto(APP);await W(800);
+const d=await ev(()=>({g:TI['G-01'],r:TI['R-01']}));
+ok(d.g.spotify==='https://open.spotify.com/episode/5PYCcHLBVib4kUzlUT3kjF'&&d.r.spotify==='https://open.spotify.com/episode/0Zmtn2Vduc8NjNZPlGov46','Spotify links set, no tracking params');
+ok(d.g.patreon==='https://www.patreon.com/PrimalLunaSleep/posts/g-01-clearing-174621276'&&d.r.patreon==='https://www.patreon.com/PrimalLunaSleep/posts/r-01-marking-174618271','Patreon links set, no tracking params');
+ok(await ev(()=>released('2026-11-06')===true),'Nov 6 tracks count as out');
+await ev(()=>{S.fullOk=true;S.done={};openTrack('G-01')});await W(300);
+const g=await ev(()=>({pat:[...document.querySelectorAll('#side a')].filter(a=>/View on Patreon/.test(a.textContent)).map(a=>a.href),sp:[...document.querySelectorAll('#side a')].some(a=>/Listen on Spotify/.test(a.textContent)),btn:[...document.querySelectorAll('#side button')].some(b=>b.textContent==='Care manual')}));
+ok(g.pat.length===1&&/g-01-clearing-174621276$/.test(g.pat[0]),'G-01 has View on Patreon');ok(g.sp,'G-01 has Spotify');ok(g.btn,'G-01 has Care manual button');
+await ev(()=>openTrack('R-01'));await W(300);
+const r=await ev(()=>({pat:[...document.querySelectorAll('#side a')].some(a=>/View on Patreon/.test(a.textContent)&&/r-01-marking-174618271$/.test(a.href)),btn:[...document.querySelectorAll('#side button')].some(b=>b.textContent==='Heat manual')}));
+ok(r.pat&&r.btn,'R-01 has Patreon link and Heat manual button (adult on)');
+await ev(()=>{S.fullOk=false;openTrack('R-01')});await W(300);
+ok(!(await ev(()=>[...document.querySelectorAll('#side button')].some(b=>b.textContent==='Heat manual'))),'no Heat manual button with adult off');
+await ev(()=>openTrack('G-02'));await W(300);
+ok(!(await ev(()=>[...document.querySelectorAll('#side a')].some(a=>/View on Patreon/.test(a.textContent)))),'tracks without a post link show none');
+const m=await ev(()=>{const c=ALLR.find(x=>x.id==='care-manual'),h=ALLR.find(x=>x.id==='heat-manual');return{c:!!c&&c.body.length>5000&&/HUMAN/.test(c.body)&&/40 Hz/.test(c.body)&&!c.adult&&!/\n[🟢]/.test(c.body),h:!!h&&h.body.length>5000&&h.adult===true&&/CNC/.test(h.body)&&/sub-drop/i.test(h.body)}});
+ok(m.c,'Care manual present and clean');ok(m.h,'Heat manual present, adult-gated');
+await ev(()=>{S.fullOk=false;goRes('heat-manual')});await W(300);
+ok(!(await ev(()=>/Specimen/.test(document.getElementById('view').innerText))),'Heat manual not shown with adult off');
+await ev(()=>{S.fullOk=true;goRes('care-manual')});await W(400);
+ok(await ev(()=>/The Care Album/.test(document.getElementById('view').innerText)&&/Patreon post/.test(document.getElementById('view').innerText)),'Care manual opens with its Patreon post link');
+ok(!errs.length,'no page errors '+errs);console.log('t155',pass,'pass',bad,'fail');process.exit(bad?1:0)}finally{await b.close()}})();

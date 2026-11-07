@@ -61,6 +61,11 @@ v59 NOTES
 - Developer docs are in README.md, CLAUDE.md and docs/. Run "npm run check" before releasing.
 - If worker/worker.js changed, paste it into the Cloudflare Worker editor again and Deploy.
 
+v82 NOTES
+- G-01 and R-01 are out. Spotify links set in CAT; new optional track field `patreon` (post URL) shows a 'View on Patreon' link via patLink(). Add `"patreon":"https://www.patreon.com/..."` next to `spotify` for later tracks.
+- Resources care-manual (Green) and heat-manual (Red, adult) added; Care/Heat manual buttons on G-0x / R-0x track pages.
+- RELTIME is now empty (the Nov 6 hold is no longer needed); the mechanism stays. t154 re-adds a hold for its own test.
+
 v81 NOTES
 - Newcomer Welcome on Home is now a real pitch (lede, the mask, the nine pillars grouped, consent, how to hear). Written from the owner's own guides; edit it in viewHome (search 'You spend all day').
 
