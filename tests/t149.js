@@ -4,7 +4,7 @@ let pass=0,bad=0;const ok=(c,m)=>{if(c)pass++;else{bad++;console.log('FAIL',m)}}
 (async()=>{const b=await chromium.launch();try{
 const p=await (await b.newContext({viewport:{width:400,height:820}})).newPage();const errs=[],reqs=[];p.on('pageerror',e=>errs.push(e.message));p.on('request',r=>{if(/discord\.com/.test(r.url()))reqs.push(r.url())});
 await p.route(/discord\.com/,r=>r.fulfill({status:200,contentType:'text/html',body:'<p>stub</p>'}));
-await p.addInitScript(()=>{try{localStorage.setItem('lunaSleep.denAck','1');localStorage.setItem('lunaSleep.cheevoInit','1');localStorage.setItem('lunaSleep.newSeen','2026-11-07a');localStorage.setItem('lunaSleep.newOptOut','1')}catch(e){}});
+await p.addInitScript(()=>{try{localStorage.setItem('lunaSleep.denAck','1');localStorage.setItem('lunaSleep.cheevoInit','1');localStorage.setItem('lunaSleep.newSeen','2026-11-07b');localStorage.setItem('lunaSleep.newOptOut','1')}catch(e){}});
 await p.goto(APP);await p.waitForTimeout(800);const ev=(f,a)=>p.evaluate(f,a),W=ms=>p.waitForTimeout(ms);
 ok(await ev(()=>!!document.getElementById('dc-show')&&!document.querySelector('#dc-frame iframe')&&document.getElementById('dc-frame').hidden),'button is in the Menu and no iframe exists yet');
 ok(reqs.length===0,'nothing is requested from discord.com on load: '+reqs);
