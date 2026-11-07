@@ -13,5 +13,5 @@ await ev(()=>{S.done['x']=true;save();render()});await W(400);
 const got=await ev(()=>{try{return JSON.parse(localStorage.getItem('lunaSleep.cheevos')||'{}')}catch(e){return{}}});
 ok(JSON.stringify(got).includes('craytoad'),'secret achievement earned: '+JSON.stringify(got).slice(0,120));
 ok(!(await ev(()=>document.getElementById('new-log').innerText)).match(/Spore print/),'secret achievement not named in What’s new');
-ok(/Craytoad/.test(await ev(()=>document.getElementById('new-log').innerText)),'theme is listed in What’s new');
+ok(/Craytoad/.test(await ev(()=>ALLR.find(x=>x.id==='whats-new-history').body)),'theme is listed in What’s new');
 ok(!errs.length,'no page errors '+errs);console.log('t147',pass,'pass',bad,'fail');process.exit(bad?1:0)}finally{await b.close()}})();

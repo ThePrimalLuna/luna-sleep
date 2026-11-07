@@ -1,0 +1,255 @@
+{
+  "format": "luna-haptic",
+  "version": 1,
+  "track": {
+    "sku": "R-01",
+    "title": "THE MARKING",
+    "label": "Heat Album (Red)",
+    "scoreLength": 900,
+    "note": "Texture cues from the author. The last cue ends at 14:56."
+  },
+  "playback": {
+    "globalOffsetMs": 0,
+    "masterGain": 1.0,
+    "bedCeiling": 0.66,
+    "stopOnSafeword": true
+  },
+  "cues": [
+    {
+      "id": "T-01",
+      "layer": "accent",
+      "kind": "tex",
+      "t": 0,
+      "d": 4,
+      "feel": "thunder"
+    },
+    {
+      "id": "T-02",
+      "layer": "accent",
+      "kind": "tex",
+      "t": 24,
+      "d": 4,
+      "feel": "bellows"
+    },
+    {
+      "id": "T-03",
+      "layer": "accent",
+      "kind": "tex",
+      "t": 54,
+      "d": 4,
+      "feel": "bellows"
+    },
+    {
+      "id": "T-04",
+      "layer": "accent",
+      "kind": "tex",
+      "t": 89,
+      "d": 4,
+      "feel": "bellows"
+    },
+    {
+      "id": "T-05",
+      "layer": "accent",
+      "kind": "tex",
+      "t": 129,
+      "d": 4,
+      "feel": "bellows"
+    },
+    {
+      "id": "T-06",
+      "layer": "accent",
+      "kind": "tex",
+      "t": 150,
+      "d": 6,
+      "feel": "bellows"
+    },
+    {
+      "id": "T-07",
+      "layer": "accent",
+      "kind": "tex",
+      "t": 210,
+      "d": 1,
+      "feel": "swell"
+    },
+    {
+      "id": "T-08",
+      "layer": "accent",
+      "kind": "tex",
+      "t": 247,
+      "d": 6,
+      "feel": "heart",
+      "bpm": 60
+    },
+    {
+      "id": "T-09",
+      "layer": "accent",
+      "kind": "tex",
+      "t": 258,
+      "d": 4,
+      "feel": "bellows"
+    },
+    {
+      "id": "T-10",
+      "layer": "accent",
+      "kind": "tex",
+      "t": 270,
+      "d": 20,
+      "feel": "heart",
+      "bpm": 60
+    },
+    {
+      "id": "T-11",
+      "layer": "accent",
+      "kind": "tex",
+      "t": 360,
+      "d": 5,
+      "feel": "bellows"
+    },
+    {
+      "id": "T-12",
+      "layer": "accent",
+      "kind": "tex",
+      "t": 396,
+      "d": 4,
+      "feel": "bellows"
+    },
+    {
+      "id": "T-13",
+      "layer": "accent",
+      "kind": "tex",
+      "t": 420,
+      "d": 5,
+      "feel": "rock"
+    },
+    {
+      "id": "T-14",
+      "layer": "accent",
+      "kind": "tex",
+      "t": 441,
+      "d": 6,
+      "feel": "bellows"
+    },
+    {
+      "id": "T-15",
+      "layer": "accent",
+      "kind": "tex",
+      "t": 474,
+      "d": 6,
+      "feel": "bellows"
+    },
+    {
+      "id": "T-16",
+      "layer": "accent",
+      "kind": "tex",
+      "t": 525,
+      "d": 1,
+      "feel": "thunder"
+    },
+    {
+      "id": "T-17",
+      "layer": "accent",
+      "kind": "tex",
+      "t": 528,
+      "d": 3,
+      "feel": "purr"
+    },
+    {
+      "id": "T-18",
+      "layer": "accent",
+      "kind": "tex",
+      "t": 531,
+      "d": 1,
+      "feel": "purr"
+    },
+    {
+      "id": "T-19",
+      "layer": "accent",
+      "kind": "tex",
+      "t": 630,
+      "d": 5,
+      "feel": "heart",
+      "bpm": 60
+    },
+    {
+      "id": "T-20",
+      "layer": "accent",
+      "kind": "tex",
+      "t": 659,
+      "d": 6,
+      "feel": "bellows"
+    },
+    {
+      "id": "T-21",
+      "layer": "accent",
+      "kind": "tex",
+      "t": 718,
+      "d": 6,
+      "feel": "bellows"
+    },
+    {
+      "id": "T-22",
+      "layer": "accent",
+      "kind": "tex",
+      "t": 751,
+      "d": 6,
+      "feel": "bellows"
+    },
+    {
+      "id": "T-23",
+      "layer": "accent",
+      "kind": "tex",
+      "t": 780,
+      "d": 1,
+      "feel": "swell"
+    },
+    {
+      "id": "T-24",
+      "layer": "accent",
+      "kind": "tex",
+      "t": 794,
+      "d": 6,
+      "feel": "bellows"
+    },
+    {
+      "id": "T-25",
+      "layer": "accent",
+      "kind": "tex",
+      "t": 819,
+      "d": 6,
+      "feel": "bellows"
+    },
+    {
+      "id": "T-26",
+      "layer": "accent",
+      "kind": "tex",
+      "t": 847,
+      "d": 4,
+      "feel": "bellows"
+    },
+    {
+      "id": "T-27",
+      "layer": "accent",
+      "kind": "tex",
+      "t": 880,
+      "d": 4,
+      "feel": "bellows"
+    },
+    {
+      "id": "T-28",
+      "layer": "accent",
+      "kind": "tex",
+      "t": 884,
+      "d": 6,
+      "feel": "heart",
+      "bpm": 60
+    },
+    {
+      "id": "T-29",
+      "layer": "accent",
+      "kind": "tex",
+      "t": 890,
+      "d": 6,
+      "feel": "purr"
+    }
+  ]
+}

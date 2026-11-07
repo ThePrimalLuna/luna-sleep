@@ -13,7 +13,7 @@ await ev(()=>{S.done['x']=true;save();render()});await W(400);
 const got=await ev(()=>{try{return JSON.parse(localStorage.getItem('lunaSleep.cheevos')||'{}')}catch(e){return{}}});
 ok(JSON.stringify(got).includes('inuit'),'secret achievement earned: '+JSON.stringify(got).slice(0,120));
 ok(!(await ev(()=>document.getElementById('new-log').innerText)).match(/Keeper of the flame/),'secret achievement not named in What’s new');
-ok(/Inuit/.test(await ev(()=>document.getElementById('new-log').innerText)),'theme is listed in What’s new');
+ok(/Inuit/.test(await ev(()=>ALLR.find(x=>x.id==='whats-new-history').body)),'theme is listed in What’s new');
 ok(await ev(()=>!!document.querySelector('#inuit-fx .ridge')&&!!document.querySelector('#inuit-fx .dw')&&document.getElementById('inuit-fx').getAttribute('aria-hidden')==='true'),'night-sky layer with ridge and the figure is present and hidden from screen readers');
 await ev(()=>{const s=document.getElementById('theme-sel');s.value='White';s.dispatchEvent(new Event('change'))});await W(300);
 ok(await ev(()=>!document.getElementById('inuit-fx')),'effects layer removed when the theme changes');

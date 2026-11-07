@@ -3,7 +3,7 @@ const APP='file://'+require('path').resolve(__dirname,'../index.html');const {ch
 let pass=0,bad=0;const ok=(c,m)=>{if(c)pass++;else{bad++;console.log('FAIL',m)}};
 (async()=>{const b=await chromium.launch();try{
 const ctx=await b.newContext({viewport:{width:1100,height:900}});const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
-await p.addInitScript(()=>{try{localStorage.setItem('lunaSleep.denAck','1');localStorage.setItem('lunaSleep.cheevoInit','1');localStorage.setItem('lunaSleep.newSeen','2026-11-06e');localStorage.setItem('lunaSleep.newOptOut','1')}catch(e){}});
+await p.addInitScript(()=>{try{localStorage.setItem('lunaSleep.denAck','1');localStorage.setItem('lunaSleep.cheevoInit','1');localStorage.setItem('lunaSleep.newSeen','2026-11-06f');localStorage.setItem('lunaSleep.newOptOut','1')}catch(e){}});
 const ev=(f,a)=>p.evaluate(f,a),W=ms=>p.waitForTimeout(ms);
 await p.clock.setFixedTime(new Date('2026-11-07T03:00:00Z'));await p.goto(APP);await W(800);
 const d=await ev(()=>({g:TI['G-01'],r:TI['R-01']}));
@@ -26,4 +26,11 @@ await ev(()=>{S.fullOk=false;goRes('heat-manual')});await W(300);
 ok(!(await ev(()=>/Specimen/.test(document.getElementById('view').innerText))),'Heat manual not shown with adult off');
 await ev(()=>{S.fullOk=true;goRes('care-manual')});await W(400);
 ok(await ev(()=>/The Care Album/.test(document.getElementById('view').innerText)&&/Patreon post/.test(document.getElementById('view').innerText)),'Care manual opens with its Patreon post link');
+for(const [ttl,n] of [['THE MARKING',29],['THE CLEARING',29]]){const s=await ev(ttl=>{const sc=LT.scoreFor(ttl),bad=[];if(!sc)return{none:1};for(let l=1;l<=5;l++)for(let t=0;t<905;t+=2.5){const x=LT.scoreRender(sc,t,3.2,l).p;if(x.length>99||x.some((v,i)=>!Number.isInteger(v)||v<0||(v===0&&i!==0)||v>10000))bad.push(l+'@'+t)}return{cues:sc.cues.length,bad:bad.length,feel:LT.feelFor('X',ttl)}},ttl);ok(s.cues===n&&s.bad===0&&s.feel===null,ttl+' score valid '+JSON.stringify(s))}
+const lg=await ev(()=>({h4:document.querySelectorAll('#new-log h4').length,first:document.querySelector('#new-log h4').textContent,more:[...document.querySelectorAll('#new-log button')].some(b=>/See every update/.test(b.textContent))}));
+ok(lg.h4===9&&/^v\d+/.test(lg.first)&&lg.more,'What\'s new shows 9 updates and a link to the rest '+JSON.stringify(lg));
+const hist=await ev(()=>{const r=ALLR.find(x=>x.id==='whats-new-history');return r?{n:(r.body.match(/^\*\*[^*]+\*\*$/gm)||[]).length,inRes:RES.includes(r)}:null});
+ok(hist&&hist.n>=51&&hist.inRes,'full history resource has every update '+JSON.stringify(hist));
+await ev(()=>goRes('whats-new-history'));await W(300);
+ok(await ev(()=>/every update/i.test(document.getElementById('view').innerText)),'history opens in Resources');
 ok(!errs.length,'no page errors '+errs);console.log('t155',pass,'pass',bad,'fail');process.exit(bad?1:0)}finally{await b.close()}})();

@@ -61,6 +61,10 @@ v59 NOTES
 - Developer docs are in README.md, CLAUDE.md and docs/. Run "npm run check" before releasing.
 - If worker/worker.js changed, paste it into the Cloudflare Worker editor again and Deploy.
 
+v84 NOTES
+- Haptic scores for G-01 THE CLEARING and R-01 THE MARKING (scores/the-clearing.json, scores/the-marking.json, then python3 tools/gen-score.py). FEELS entries added too.
+- What's new shows the newest 9 updates only (SHOWN in the LOG block). The full list is the resource whats-new-history, built from LOG at load, so it never needs editing by hand. Keep adding new entries to the top of LOG as before.
+
 v83 NOTES
 - Bug-report Discord link now matches the Menu invite (XsjKJjeYVs).
 

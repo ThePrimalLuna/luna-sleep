@@ -155,6 +155,6 @@ await ev(()=>{[...document.querySelectorAll('#fs button')].find(b=>b.textContent
 await ev(()=>LT.tonightOpen());await p.waitForTimeout(300);ok(/offline copy|airplane/i.test(await body()),'offline row');
 await ev(()=>cxClose());
 // whats new
-ok(await ev(()=>/v48/.test(document.getElementById('new-log').textContent)),'whats new v48');
+ok(await ev(()=>/v48/.test(ALLR.find(x=>x.id==='whats-new-history').body)),'whats new v48');
 ok(errs.length===0,'page errors: '+errs.join('|'));
 console.log('t110 pass='+pass+' bad='+bad);await b.close()})();
