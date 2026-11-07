@@ -3,7 +3,7 @@ const APP='file://'+require('path').resolve(__dirname,'../index.html');const {ch
 let pass=0,bad=0;const ok=(c,m)=>{if(c)pass++;else{bad++;console.log('FAIL',m)}};
 (async()=>{const b=await chromium.launch();try{
 const ctx=await b.newContext({viewport:{width:1100,height:900}});const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
-await p.addInitScript(()=>{try{localStorage.setItem('lunaSleep.denAck','1');localStorage.setItem('lunaSleep.cheevoInit','1');localStorage.setItem('lunaSleep.newSeen','2026-11-06g');localStorage.setItem('lunaSleep.newOptOut','1')}catch(e){}});
+await p.addInitScript(()=>{try{localStorage.setItem('lunaSleep.denAck','1');localStorage.setItem('lunaSleep.cheevoInit','1');localStorage.setItem('lunaSleep.newSeen','2026-11-07a');localStorage.setItem('lunaSleep.newOptOut','1')}catch(e){}});
 const ev=(f,a)=>p.evaluate(f,a),W=ms=>p.waitForTimeout(ms);
 await p.clock.setFixedTime(new Date('2026-11-07T03:00:00Z'));await p.goto(APP);await W(800);
 const d=await ev(()=>({g:TI['G-01'],r:TI['R-01']}));
@@ -35,7 +35,7 @@ await ev(()=>goRes('whats-new-history'));await W(300);
 ok(await ev(()=>/every update/i.test(document.getElementById('view').innerText)),'history opens in Resources');
 await ev(()=>{S.tab='stories';S.storyOpen=null;render()});await W(300);
 const ep=await ev(()=>({u:epUrl('kushtaka'),show:TLSA_SHOW,cards:[...document.querySelectorAll('#view a')].filter(a=>/Listen to the episode/.test(a.textContent)).map(a=>a.href)}));
-ok(ep.u==='https://open.spotify.com/episode/5k4uLcYYqAUpyqUYMlDyIo'&&ep.show==='https://open.spotify.com/show/6rLw0bZOvC1tHHZLUxXhG3','Archives episode 1 and show links set, no tracking params');
+ok(ep.u==='https://open.spotify.com/episode/5k4uLcYYqAUpyqUYMlDyIo'&&ep.show==='https://open.spotify.com/show/4dZQwZXpkAH5bYQO4W9Jjm','Archives episode 1 and show links set, no tracking params');
 ok(ep.cards.length===1&&ep.cards[0]===ep.u,'only the Kushtaka story card has an episode link');
 await ev(()=>{S.tab='stories';S.storyOpen=null;render()});await W(300);
 await ev(()=>{const b=[...document.querySelectorAll('#view button')].find(b=>b.textContent==='Play here');b&&b.click()});await W(500);

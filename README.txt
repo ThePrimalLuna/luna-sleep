@@ -61,6 +61,9 @@ v59 NOTES
 - Developer docs are in README.md, CLAUDE.md and docs/. Run "npm run check" before releasing.
 - If worker/worker.js changed, paste it into the Cloudflare Worker editor again and Deploy.
 
+v86 NOTES
+- TLSA_SHOW updated to the working Spotify show link (4dZQwZXpkAH5bYQO4W9Jjm). The episode link may change once Spotify finishes syncing.
+
 v85 NOTES
 - TLSA episode 1 (kushtaka story) linked in TLSA_EPS; show link in TLSA_SHOW (Archives page button).
 
