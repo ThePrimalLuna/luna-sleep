@@ -61,6 +61,9 @@ v59 NOTES
 - Developer docs are in README.md, CLAUDE.md and docs/. Run "npm run check" before releasing.
 - If worker/worker.js changed, paste it into the Cloudflare Worker editor again and Deploy.
 
+v83 NOTES
+- Bug-report Discord link now matches the Menu invite (XsjKJjeYVs).
+
 v82 NOTES
 - G-01 and R-01 are out. Spotify links set in CAT; new optional track field `patreon` (post URL) shows a 'View on Patreon' link via patLink(). Add `"patreon":"https://www.patreon.com/..."` next to `spotify` for later tracks.
 - Resources care-manual (Green) and heat-manual (Red, adult) added; Care/Heat manual buttons on G-0x / R-0x track pages.

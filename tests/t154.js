@@ -3,7 +3,7 @@ const APP='file://'+require('path').resolve(__dirname,'../index.html');const {ch
 let pass=0,bad=0;const ok=(c,m)=>{if(c)pass++;else{bad++;console.log('FAIL',m)}};
 (async()=>{const b=await chromium.launch();try{
 const mk=async(iso)=>{const ctx=await b.newContext({viewport:{width:390,height:844}});const p=await ctx.newPage();p.__errs=[];p.on('pageerror',e=>p.__errs.push(e.message));
- await p.addInitScript(()=>{try{localStorage.setItem('lunaSleep.denAck','1');localStorage.setItem('lunaSleep.cheevoInit','1');localStorage.setItem('lunaSleep.newSeen','2026-11-06d');localStorage.setItem('lunaSleep.newOptOut','1')}catch(e){}});
+ await p.addInitScript(()=>{try{localStorage.setItem('lunaSleep.denAck','1');localStorage.setItem('lunaSleep.cheevoInit','1');localStorage.setItem('lunaSleep.newSeen','2026-11-06e');localStorage.setItem('lunaSleep.newOptOut','1')}catch(e){}});
  await p.clock.setFixedTime(new Date(iso));await p.goto(APP);await p.waitForTimeout(700);await p.evaluate(()=>{RELTIME['2026-11-06']={at:'2026-11-07T04:00:00Z',say:'9pm Mountain'};render()});await p.waitForTimeout(200);return p};
 // 1. afternoon of Nov 6 Mountain (3pm MST = 22:00Z): not out yet
 let p=await mk('2026-11-06T22:00:00Z');

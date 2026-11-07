@@ -3,7 +3,7 @@ const APP='file://'+require('path').resolve(__dirname,'../index.html');const {ch
 let pass=0,bad=0;const ok=(c,m)=>{if(c)pass++;else{bad++;console.log('FAIL',m)}};
 (async()=>{const b=await chromium.launch();try{
 const p=await (await b.newContext({viewport:{width:400,height:820}})).newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
-await p.addInitScript(()=>{window.__v=[];navigator.vibrate=x=>{window.__v.push(x);return true};try{localStorage.setItem('lunaSleep.denAck','1');localStorage.setItem('lunaSleep.cheevoInit','1');localStorage.setItem('lunaSleep.newSeen','2026-11-06d');localStorage.setItem('lunaSleep.newOptOut','1');localStorage.setItem('lunaSleep.vib',JSON.stringify({on:true,score:true,follow:false}))}catch(e){}});
+await p.addInitScript(()=>{window.__v=[];navigator.vibrate=x=>{window.__v.push(x);return true};try{localStorage.setItem('lunaSleep.denAck','1');localStorage.setItem('lunaSleep.cheevoInit','1');localStorage.setItem('lunaSleep.newSeen','2026-11-06e');localStorage.setItem('lunaSleep.newOptOut','1');localStorage.setItem('lunaSleep.vib',JSON.stringify({on:true,score:true,follow:false}))}catch(e){}});
 await p.route(/open\.spotify\.com/,r=>r.abort());
 await p.goto(APP);await p.waitForTimeout(800);const ev=(f,a)=>p.evaluate(f,a),W=ms=>p.waitForTimeout(ms);
 await ev(()=>{const t=Object.values(TI).find(x=>x.title==='THE COAT');LT.dockPlay(t)});await W(300);
