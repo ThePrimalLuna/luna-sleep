@@ -3,7 +3,7 @@ const APP='file://'+require('path').resolve(__dirname,'../index.html');const {ch
 let pass=0,bad=0;const ok=(c,m)=>{if(c)pass++;else{bad++;console.log('FAIL',m)}};
 (async()=>{const b=await chromium.launch();try{
 const ctx=await b.newContext({viewport:{width:390,height:844}});const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
-await p.addInitScript(()=>{try{localStorage.setItem('lunaSleep.denAck','1');localStorage.setItem('lunaSleep.cheevoInit','1');localStorage.setItem('lunaSleep.newSeen','2026-11-06f');localStorage.setItem('lunaSleep.newOptOut','1')}catch(e){}});
+await p.addInitScript(()=>{try{localStorage.setItem('lunaSleep.denAck','1');localStorage.setItem('lunaSleep.cheevoInit','1');localStorage.setItem('lunaSleep.newSeen','2026-11-06g');localStorage.setItem('lunaSleep.newOptOut','1')}catch(e){}});
 const ev=(f,a)=>p.evaluate(f,a),W=ms=>p.waitForTimeout(ms);
 await p.goto(APP);await W(800);
 await ev(()=>{S.done={};S.tab='home';save();render()});await W(200);
@@ -17,7 +17,7 @@ await ev(()=>[...document.querySelectorAll('#view button')].find(x=>/About the A
 const a=await ev(()=>({tab:S.tab,txt:document.getElementById('view').innerText,sel:document.querySelector('#tabs [aria-selected="true"]').textContent,hint:document.getElementById('tabhint').textContent}));
 ok(a.tab==='archives'&&/The Luna Sleep Archives/.test(a.txt),'Archives page opens');
 ok(/no hypnosis, no trance and no trigger words/.test(a.txt),'says it is not hypnosis');
-ok(/every weekend/i.test(a.txt)&&/first episode is not out yet/i.test(a.txt),'weekend show, first episode not out yet');
+ok(/every weekend/i.test(a.txt)&&/Episodes are listed above/i.test(a.txt)&&/Listen on Spotify/.test(a.txt),'weekend show, episode listed, Spotify button');
 ok(/Bonus & Lore/.test(a.sel),'Bonus & Lore tab stays selected '+a.sel);
 ok(/Archives/.test(a.hint),'tab hint mentions Archives');
 ok(await ev(()=>[...document.querySelectorAll('.bnav button')].map(x=>x.textContent).join('|'))==='Bonus episodes|Lore|Stories|Archives','four buttons in the Bonus nav');
