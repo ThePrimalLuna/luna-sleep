@@ -61,6 +61,9 @@ v59 NOTES
 - Developer docs are in README.md, CLAUDE.md and docs/. Run "npm run check" before releasing.
 - If worker/worker.js changed, paste it into the Cloudflare Worker editor again and Deploy.
 
+v88 NOTES
+- New SECRET theme: Montana night (unlisted in What's new; secret achievement "Big sky"; ported from the Luna Life app). Animated scene is #mtnfx, built only while the theme is active, stopped by reduced motion and calm mode.
+
 v87 NOTES
 - TLSA_EPS kushtaka now points at the synced episode 38M3eju7aPVy5eOMsvs2sU.
 
