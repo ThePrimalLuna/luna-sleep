@@ -1,5 +1,5 @@
 const {chromium}=require('playwright');(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:420,height:860}});let f=0;const ok=(c,m)=>{if(!c){f++;console.log('FAIL',m)}};const errs=[];p.on('pageerror',e=>errs.push(e.message));
-await p.addInitScript(()=>{try{localStorage.setItem('lunaSleep.denAck','1');localStorage.setItem('lunaSleep.cheevoInit','1');localStorage.setItem('lunaSleep.newSeen','2026-11-12')}catch(e){}});
+await p.addInitScript(()=>{try{localStorage.setItem('lunaSleep.denAck','1');localStorage.setItem('lunaSleep.cheevoInit','1');localStorage.setItem('lunaSleep.newSeen','2026-11-12b')}catch(e){}});
 await p.goto('file://'+process.cwd()+'/index.html');await p.waitForTimeout(400);
 ok(await p.evaluate(()=>[...document.querySelectorAll('#theme-sel option')].some(o=>o.value==='Montana'&&/Montana/.test(o.textContent))),'picker lists Montana');
 ok(!(await p.$('#mtnfx')),'no scene before choosing');

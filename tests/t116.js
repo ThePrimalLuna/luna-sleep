@@ -22,9 +22,9 @@ await ev(()=>document.getElementById('set-tuck').click());
 ok(await ev(()=>document.getElementById('adult-btn').textContent.length>0&&document.getElementById('set-off').textContent!=='Checking.'),'adult text/offline text '+await ev(()=>document.getElementById('set-off').textContent));
 // theme select
 const g=await ev(()=>[...document.querySelectorAll('#theme-sel optgroup')].map(x=>x.label+':'+x.children.length));
-ok(g.length===5&&/Album colors:11/.test(g[0])&&/Seasonal:5/.test(g[2])&&/Just for fun:8/.test(g[3]),'groups '+g);
-const more=await ev(()=>[...document.querySelectorAll('#theme-sel optgroup')[4].children].map(x=>x.textContent));
-ok(more.includes('Rainy Day')&&more.join()===[...more].sort((a,b)=>a.localeCompare(b)).join(),'sorted more looks '+more.length);
+ok(g.length===4&&/Album colors:11/.test(g[0])&&/Seasonal:5/.test(g[2])&&/^Other themes:/.test(g[3]),'groups '+g);
+const more=await ev(()=>[...document.querySelectorAll('#theme-sel optgroup')[3].children].map(x=>x.textContent));
+ok(more.includes('Rainy Day')&&more.join()===[...more].sort((a,b)=>a.localeCompare(b)).join(),'sorted other themes '+more.length);
 await ev(()=>{const s=document.getElementById('theme-sel');s.value='Rainy';s.dispatchEvent(new Event('change'))});await p.waitForTimeout(300);
 const r=await ev(()=>({skin:document.documentElement.dataset.skin,bg:getComputedStyle(document.documentElement,'::before').backgroundImage.slice(0,30),an:getComputedStyle(document.documentElement,'::before').animationName,pe:getComputedStyle(document.documentElement,'::after').pointerEvents,ch:JSON.parse(localStorage.getItem('lunaSleep.cheevos')||'{}').rainy}));
 ok(r.skin==='Rainy'&&/svg/.test(r.bg)&&r.an==='rainFar'&&r.pe==='none'&&!!r.ch,'rainy applied '+JSON.stringify(r));

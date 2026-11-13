@@ -61,6 +61,11 @@ v59 NOTES
 - Developer docs are in README.md, CLAUDE.md and docs/. Run "npm run check" before releasing.
 - If worker/worker.js changed, paste it into the Cloudflare Worker editor again and Deploy.
 
+v90 NOTES
+- New SECRET theme: The Pack (ported from Luna Life; unlisted in What's new; secret achievement "Run with the pack"). Scene is themes/pack.js (about 770 KB), fetched only when the theme is chosen, then cached by the service worker. Not in the SW precache on purpose.
+- Montana and Pack on phones: backdrop blur off and panels a touch more solid (Luna Life glitch fix). Fixed Montana's gradient button rule, which used .btn.pri instead of .btn.primary.
+- Theme picker groups are now Album colors, Pride, Seasonal and Other themes (Just for fun and More looks folded into Other themes). Pride, Seasonal and Other themes are alphabetical; Album colors keep the pillar order.
+
 v89 NOTES
 - Whole release schedule (all non-Gold tracks from RO-01 on) moved back one week. Rule used: +7 days, a track that would land in the Station Zero window (Dec 20 to Jan 1) or a 7-day blackout (Apr 20, May 3, Aug 24, Oct 2) waits until the window ends, order and Mon/Wed/Fri kept. 22 tracks moved 14 or 21 days. Gold albums unchanged. Dates updated in CAT, Map rows, combo ready dates, album windows, guide Status lines and prose.
 
