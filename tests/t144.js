@@ -3,7 +3,7 @@ const APP='file://'+require('path').resolve(__dirname,'../index.html');const {ch
 let pass=0,bad=0;const ok=(c,m)=>{if(c)pass++;else{bad++;console.log('FAIL',m)}};
 (async()=>{const b=await chromium.launch();try{
 const run=async(iso,pre)=>{const p=await (await b.newContext({viewport:{width:400,height:820}})).newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
-await p.addInitScript(()=>{try{localStorage.setItem('lunaSleep.denAck','1');localStorage.setItem('lunaSleep.cheevoInit','1');localStorage.setItem('lunaSleep.newSeen','2026-11-08');localStorage.setItem('lunaSleep.newOptOut','1')}catch(e){}});
+await p.addInitScript(()=>{try{localStorage.setItem('lunaSleep.denAck','1');localStorage.setItem('lunaSleep.cheevoInit','1');localStorage.setItem('lunaSleep.newSeen','2026-11-12');localStorage.setItem('lunaSleep.newOptOut','1')}catch(e){}});
 if(pre)await p.addInitScript(pre);
 await p.clock.setFixedTime(new Date(iso));
 await p.goto(APP);await p.waitForTimeout(700);
@@ -25,5 +25,5 @@ ok(r&&r.ids.includes('B-01')&&!r.ids.includes('R-01'),'R-01 hidden from Out now 
 // R-01 was pushed back to Fri Nov 6, the same day as G-01; the rest of the schedule is unchanged
 {const pg=await (await b.newContext()).newPage();await pg.goto(APP);await pg.waitForTimeout(500);
 const d=await pg.evaluate(()=>({r:TI['R-01'].date,g:TI['G-01'].date,ro:TI['RO-01'].date,b2:TI['B-02'].date,row:DATA.rows.find(x=>x.ID==='R-01')['Release Date']}));
-ok(d.r==='2026-11-06'&&d.g==='2026-11-06'&&d.ro==='2026-11-09'&&d.b2==='2026-11-18'&&d.row==='2026-11-06','R-01 and G-01 share Nov 6, later dates unchanged '+JSON.stringify(d))}
+ok(d.r==='2026-11-06'&&d.g==='2026-11-06'&&d.ro==='2026-11-16'&&d.b2==='2026-11-25'&&d.row==='2026-11-06','R-01 and G-01 share Nov 6, later dates moved back one week '+JSON.stringify(d))}
 console.log('t144',pass,'pass',bad,'fail');process.exit(bad?1:0)}finally{await b.close()}})();

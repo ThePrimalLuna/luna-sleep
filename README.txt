@@ -61,6 +61,9 @@ v59 NOTES
 - Developer docs are in README.md, CLAUDE.md and docs/. Run "npm run check" before releasing.
 - If worker/worker.js changed, paste it into the Cloudflare Worker editor again and Deploy.
 
+v89 NOTES
+- Whole release schedule (all non-Gold tracks from RO-01 on) moved back one week. Rule used: +7 days, a track that would land in the Station Zero window (Dec 20 to Jan 1) or a 7-day blackout (Apr 20, May 3, Aug 24, Oct 2) waits until the window ends, order and Mon/Wed/Fri kept. 22 tracks moved 14 or 21 days. Gold albums unchanged. Dates updated in CAT, Map rows, combo ready dates, album windows, guide Status lines and prose.
+
 v88 NOTES
 - New SECRET theme: Montana night (unlisted in What's new; secret achievement "Big sky"; ported from the Luna Life app). Animated scene is #mtnfx, built only while the theme is active, stopped by reduced motion and calm mode.
 
