@@ -61,6 +61,9 @@ v59 NOTES
 - Developer docs are in README.md, CLAUDE.md and docs/. Run "npm run check" before releasing.
 - If worker/worker.js changed, paste it into the Cloudflare Worker editor again and Deploy.
 
+v92 NOTES
+- RO-01 and A-01 both moved to Thu Nov 19, 2026 (a one-day double release, by request). W-01 stays Fri Nov 20. Album window starts for both updated to Nov 19. Nothing else in the schedule moved. What's new note added.
+
 v91 NOTES
 - Search and sharing: new page title and description, canonical link, Open Graph and Twitter card tags, og-image.png (1200x630), JSON-LD (WebApplication, free, 18+), robots meta, font preconnect, a short noscript message, sitemap.xml, and manifest id/lang/description. Unannounced ("Small polish"). Tests in t159.js.
 - Note: GitHub Pages only honors robots.txt at the domain root, so none is shipped; submit sitemap.xml in Search Console instead.

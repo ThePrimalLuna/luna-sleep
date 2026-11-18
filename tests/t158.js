@@ -1,6 +1,6 @@
 /* t158: The Pack secret theme loads its scene on demand, stays behind the app, switches off cleanly, has a secret achievement, and is not announced */
 const {chromium}=require('playwright');const fs=require('fs');(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:420,height:860}});let f=0;const ok=(c,m)=>{if(!c){f++;console.log('FAIL',m)}};const errs=[];p.on('pageerror',e=>errs.push(e.message));
-await p.addInitScript(()=>{try{localStorage.setItem('lunaSleep.denAck','1');localStorage.setItem('lunaSleep.cheevoInit','1');localStorage.setItem('lunaSleep.newSeen','2026-11-17')}catch(e){}});
+await p.addInitScript(()=>{try{localStorage.setItem('lunaSleep.denAck','1');localStorage.setItem('lunaSleep.cheevoInit','1');localStorage.setItem('lunaSleep.newSeen','2026-11-17b')}catch(e){}});
 await p.goto('file://'+process.cwd()+'/index.html');await p.waitForTimeout(400);
 ok(await p.evaluate(()=>[...document.querySelectorAll('#theme-sel option')].some(o=>o.value==='Pack'&&/Pack/.test(o.textContent))),'picker lists The Pack');
 ok(!(await p.$('script[src*="themes/pack.js"]'))&&!(await p.$('#pkfx')),'nothing loaded before the theme is chosen');
