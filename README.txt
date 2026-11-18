@@ -61,6 +61,10 @@ v59 NOTES
 - Developer docs are in README.md, CLAUDE.md and docs/. Run "npm run check" before releasing.
 - If worker/worker.js changed, paste it into the Cloudflare Worker editor again and Deploy.
 
+v91 NOTES
+- Search and sharing: new page title and description, canonical link, Open Graph and Twitter card tags, og-image.png (1200x630), JSON-LD (WebApplication, free, 18+), robots meta, font preconnect, a short noscript message, sitemap.xml, and manifest id/lang/description. Unannounced ("Small polish"). Tests in t159.js.
+- Note: GitHub Pages only honors robots.txt at the domain root, so none is shipped; submit sitemap.xml in Search Console instead.
+
 v90 NOTES
 - New SECRET theme: The Pack (ported from Luna Life; unlisted in What's new; secret achievement "Run with the pack"). Scene is themes/pack.js (about 770 KB), fetched only when the theme is chosen, then cached by the service worker. Not in the SW precache on purpose.
 - Montana and Pack on phones: backdrop blur off and panels a touch more solid (Luna Life glitch fix). Fixed Montana's gradient button rule, which used .btn.pri instead of .btn.primary.

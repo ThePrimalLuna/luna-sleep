@@ -1,7 +1,10 @@
 {
+ "id": "./",
  "name": "Luna Sleep",
  "short_name": "Luna Sleep",
- "description": "Your guide to the whole Luna Sleep catalog.",
+ "description": "Free guide to the Luna Sleep hypnotic audio catalog by The Primal Luna. Adults 18+.",
+ "lang": "en",
+ "dir": "ltr",
  "start_url": "./",
  "scope": "./",
  "display": "standalone",

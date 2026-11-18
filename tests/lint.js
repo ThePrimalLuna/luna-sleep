@@ -4,7 +4,7 @@
 const fs=require('fs'),path=require('path'),os=require('os'),{spawnSync}=require('child_process');
 const root=path.join(__dirname,'..');
 const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
-const js=[...html.matchAll(/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/g)].map(m=>m[1]).join('\n;\n');
+const js=[...html.matchAll(/<script(?![^>]*\bsrc=)(?![^>]*type="application\/ld\+json")[^>]*>([\s\S]*?)<\/script>/g)].map(m=>m[1]).join('\n;\n');
 const tmp=fs.mkdtempSync(path.join(os.tmpdir(),'lunalint-'));
 const f=path.join(tmp,'index-scripts.js');fs.writeFileSync(f,js);
 const cfg=JSON.parse(fs.readFileSync(path.join(root,'.eslintrc.json'),'utf8'));delete cfg.plugins;delete cfg.overrides;
